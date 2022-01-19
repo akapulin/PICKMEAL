@@ -30,6 +30,10 @@
 <script src="${pageContext.request.contextPath}/resources/js/incl/index_map.js" defer></script>
 <script src="${pageContext.request.contextPath}/resources/js/incl/index_map_SJW.js" defer></script>
 
+<!-- 정원식 -->
+<script src="${pageContext.request.contextPath}/resources/js/incl/menu_game_JWS.js" defer></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/incl/index_JWS.css" />
+
 
 
 <title>밥찡코</title>
@@ -46,6 +50,14 @@
 		
 		
 		<div id="mapWindow">
+		
+		<!-- 정원식 메뉴게임 -->
+			<div id="menuGameButtonWrap">
+				<form name="menuGamePopup" method="GET">
+					<input class= "menusubmit" type="submit" value="메뉴골라주기" id="menuchoicebtn">
+				</form>
+			</div>
+			
 			<form id="gameDataForm" name="gameDataForm" method="GET">
 				<c:choose>
 					<c:when test="${not empty cntForRetry}">
@@ -175,10 +187,45 @@
 			<div id="restaurantWindow">
 				<iframe id="restaurantUrl"></iframe>
 				<button id="open" value="open">펼치기</button>
+				
+				<!-- 정원식 쿠폰 발급, 찜버튼 필요한 값 -->
+				<input type="hidden" id="defaultCNJ" value="undefined1"/>
+				<input type="hidden" id="couponIsempty" value=""/>
+				<input type="hidden" id="restaurantRId" name="restaurantIdJWS" value=""/>
+			    <input type="hidden" id="restaurantIsempty" value=""/>
+			    <input type="hidden" id="memberId" name="memberIdJWS" value="${member.getId()}"/>
+				<!-- 정원식 쿠폰 발급 -->
+				<form method="get" id="couponPopupCreatebtn">
+					<div id="couponGenerateWrap" onclick="document.forms['couponPopupCreatebtn'].submit();">
+			     		<p id="couponGenerateName">쿠폰</p>
+			      		<input type="submit" id="couponGenerate"/>
+			    	</div>
+			    </form>
+			    
+			    <!-- 정원식 찜식당 버튼 -->
+			    <form method="get" id="favoriteGo">
+			    	<div class="vrrighttop" id="jjimdiv" onclick="indexFrestaurant()">
+			            <input type="submit" id="jjimbtn"/>
+	            	</div>
+			    </form>
+			    
+				<!-- null 일 경우 true
+					<c:choose>
+						<c:when test="${empty couponCategory}">
+						
+						</c:when>
+						<c:otherwise>
+							<div id="couponGenerateWrap" onclick="document.forms['couponPopupCreatebtn'].submit();">
+			        			<p id="couponGenerateName">쿠폰</p>
+			        			<input type="submit" id="couponGenerate"/>
+			    			</div>
+			    		</c:otherwise>
+					</c:choose>
+				</form> -->
 			</div>
 		</div>
 		<!-- 식당차트정보 시작 - 윤효심 -->
-		<input type="hidden" name="restaurantId" value="${restaurantId }"
+		<input type="hidden" name="restaurantId" value="${restaurantId}"
 		id="restaurantId">
 		<div class="storeSubInfoWrap">
 			<div class="ageAndGenderGraphArea">
