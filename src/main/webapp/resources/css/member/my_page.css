@@ -58,6 +58,7 @@
 
 #mp_nav ul li.on a {
 	color: #f23f3f;
+	font-weight: bold;
 }
 
 #mp_nav ul li.on::after {

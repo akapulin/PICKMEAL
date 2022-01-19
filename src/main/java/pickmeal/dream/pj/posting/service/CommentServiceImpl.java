@@ -85,7 +85,7 @@ public class CommentServiceImpl implements CommentService {
 		// 각 댓글에 대한 posting 셋팅
 		// postId 필요 - 얘는 이미 있다.
 		Member member = ms.findMemberById(memberId);
-		Member enterMember = doSettingMemberForComment(member);		
+		Member enterMember = doSettingMemberForComment(member);
 		// 모든 댓글에 멤버를 셋팅
 		for (Comment c : comments) {
 			c.setMember(enterMember);
