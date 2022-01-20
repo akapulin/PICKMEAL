@@ -1,32 +1,40 @@
 package pickmeal.dream.pj.member.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
+import lombok.extern.java.Log;
 import pickmeal.dream.pj.member.domain.Member;
+import pickmeal.dream.pj.posting.command.CommentCommand;
 import pickmeal.dream.pj.posting.domain.Comment;
+import pickmeal.dream.pj.posting.domain.Posting;
 import pickmeal.dream.pj.posting.service.CommentService;
 
+/**
+ * 마이페이지 네비게이션의 각 페이지를 호출한다.
+ * @author kimjaeik
+ *
+ */
+
+@Log
 @Controller
 public class MyPageController {
 	
 	@Autowired
 	CommentService cs;
 	
-//	@GetMapping("/member/myPage")
-//	public ModelAndView myPage(@SessionAttribute("member") Member member) {
-//		ModelAndView mav = new ModelAndView();
-//		System.out.println(member);
-//		mav.setViewName("member/my_page");
-//		return mav;
-//	}
-	
+	//내 게시글
 	@GetMapping("/member/myPostings")
 	public ModelAndView myPostings(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
@@ -44,6 +52,7 @@ public class MyPageController {
 		return mav;
 	}
 	
+	//내 댓글
 	@GetMapping("member/myComments")
 	public ModelAndView myComments(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
@@ -63,5 +72,18 @@ public class MyPageController {
 		
 		mav.setViewName("member/my_comments");
 		return mav;
+	}
+	//내 댓글 - 삭제
+	@PostMapping("/member/delComment") 
+	public String deleteComment(@ModelAttribute CommentCommand cc, @SessionAttribute("member") Member member) {
+		log.info(cc.toString() + " " + member.toString());
+		Comment comment = new Comment();
+		comment.setId(cc.getId());
+		comment.setPosting(new Posting((cc.getPostId()), cc.getCategory()));
+		comment.setMember(member);
+		
+		cs.deleteComment(comment);
+		
+		return "redirect:/member/myComments";
 	}
 }

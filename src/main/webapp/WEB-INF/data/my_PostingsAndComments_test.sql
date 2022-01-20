@@ -56,13 +56,15 @@ SELECT * FROM TogetherEatingComment;
 INSERT INTO RecommendRestaurantPosting(memberId,restaurantId,title,content)
 VALUES(1,1,"도리집이 가성비 짱","이 집이 문을 잘 열지는 않기는 한데 가성비가 좋아서 미워할 수 없네욤");
 
-INSERT INTO RecommendRestaurantComment(memberId,postId,content)
-VALUES(1,2,"도리집이 가성비 짱");
-
 INSERT INTO TogetherEatingPosting(memberId,restaurantId,title,content,mealTime)
 VALUES(1,1,"돈까스 튀기는 오빠 세트 같이 드실 분!","오늘 돈까스 세트에 쫄면이 땡기는데 저는 1인이라서 혼자 먹을 수가 없네욤. 같이 드실 분 댓글용"
 , "20220115120000");
 
+INSERT INTO RecommendRestaurantComment(memberId,postId,content)
+VALUES(1,2,"도리집이 가성비 짱");
+
 INSERT INTO TogetherEatingComment(memberId,postId,content)
 VALUES(1,1,"돈튀오 맛이가 좋다");
 
+INSERT INTO TogetherEatingComment(memberId,postId,content)
+VALUES(1,1,"돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다");

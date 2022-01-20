@@ -11,13 +11,13 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <!--  가게 부가 정보 - 윤효심-->
 <link href="${pageContext.request.contextPath}/resources/css/incl/chart.css" rel="stylesheet" type="text/css">
+<script src="${pageContext.request.contextPath}/resources/js/incl/chart.js" defer></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/incl/index_map_b.css" />
 
 <!-- 익명채팅방, 날씨 - 김재익 -->
 <link href="${pageContext.request.contextPath}/resources/css/weather/weather.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/resources/css/chat/chat.css" rel="stylesheet" type="text/css">
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/incl/chart.js" defer></script>
 <!-- 현재시간(페이지 켠 순간만) - 김재익 -->
 <c:set var="today" value="<%=new java.util.Date()%>" />
 <c:set var="now"><fmt:formatDate value="${today}" pattern="HH" /></c:set>
