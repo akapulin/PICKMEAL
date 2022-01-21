@@ -17,7 +17,7 @@
 				<div class="comments_wrap">
 					<c:forEach var="comment" items="${rComments }">
 						<div class="commentBox">
-							<span class="nameAndRegDate">${comment.member.nickName } . ${comment.regDate }</span> 
+							<span class="nameAndRegDate">${comment.member.nickName } . ${comment.regDate }</span>
 							<p class="content">${comment.content }</p>
 							<span class="postTitle"><a href="#">게시글제목</a></span>
 							<form action="${pageContext.request.contextPath}/member/delComment" method="post">

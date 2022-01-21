@@ -126,14 +126,22 @@ public class WeatherServiceImpl implements WeatherService {
 	 */
 	@Override
 	public void getShortTermWeather(HashMap<String, String> categoryAndValue, String url, String date, String hour, String minute, String nx, String ny, String... reqCodes) {
+		int cd = Integer.parseInt(date);
+		int ch = Integer.parseInt(hour);
 		int cm = Integer.parseInt(minute);
 		/*
+		 * checkHour 정오면 
+		 * 
 		 * checkMinute 기준시간(현재시간)이 30분 이전이라면 한 시간 전을 측정한다.
 		 * ex) 현재시간 14시24분 : 13시30분 입력 14시 예보 출력
 		 * ex) 현재시간 14시46분 : 14시30분 입력 15시 예보 출력
 		 */
+		
 		if(cm < 30) { 
 			hour = toStringHour(hour, -1);
+			if(ch == 0) {
+				date = Integer.toString(cd-1);
+			}
 		}
 		
 		url = url + "?serviceKey=" + service_key
@@ -162,14 +170,20 @@ public class WeatherServiceImpl implements WeatherService {
 	 */
 	@Override
 	public void getShortTermLiveWeather(HashMap<String, String> categoryAndValue, String url, String date, String hour, String minute, String nx, String ny, String... reqCodes) {
+		int cd = Integer.parseInt(date);
+		int ch = Integer.parseInt(hour);
 		int cm = Integer.parseInt(minute);
 		/*
 		 * checkMinute 기준시간(현재시간)이 30분 이전이라면 한 시간 전을 측정한다.
 		 * ex) 현재시간 14시24분 : 13시00분 입력 13시30분에 측정된 실황 출력
 		 * ex) 현재시간 14시46분 : 14시00분 입력 14시30분에 측정된 실황 출력
 		 */
-		if(cm < 30) { 
+		
+		if(cm < 30) {
 			hour = toStringHour(hour, -1);
+			if(ch == 0) {
+				date = Integer.toString(cd-1);
+			}
 		}
 		
 		url = url + "?serviceKey=" + service_key
