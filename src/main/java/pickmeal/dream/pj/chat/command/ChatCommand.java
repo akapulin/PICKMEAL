@@ -12,5 +12,6 @@ import lombok.ToString;
 public class ChatCommand {
 	private long writerId;
 	private long commenterId;
+	private char readType;
 	private List<String> fileText;
 }

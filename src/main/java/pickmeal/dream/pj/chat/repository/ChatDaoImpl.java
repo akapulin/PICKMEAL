@@ -16,15 +16,21 @@ public class ChatDaoImpl implements ChatDao {
 
 	@Override
 	public void addChat(Chat chat) {
-		String sql = "INSERT INTO Chat(writerId, commenterId, memberId)"
-				+ " VALUES (?, ?, ?)";
-		jt.update(sql, chat.getWriter().getId(), chat.getCommenter().getId(), chat.getMember().getId());
+		String sql = "INSERT INTO Chat(writerId, commenterId, memberId, readType)"
+				+ " VALUES (?, ?, ?, ?)";
+		jt.update(sql, chat.getWriter().getId(), chat.getCommenter().getId(), chat.getMember().getId(), String.valueOf(chat.getReadType()));
 	}
 
 	@Override
 	public void updateChat(Chat chat) {
-		String sql = "UPDATE Chat SET writerId=?, commenterId=?, memberId=?";
-		jt.update(sql, chat.getWriter().getId(), chat.getCommenter().getId(), chat.getMember().getId());
+		String sql = "UPDATE Chat SET readType=?, regDate=NOW() WHERE id=?";
+		jt.update(sql, String.valueOf(chat.getReadType()), chat.getId());
+	}
+
+	@Override
+	public void updateChatType(Chat chat) {
+		String sql = "UPDATE Chat SET readType=? WHERE id=?";
+		jt.update(sql, String.valueOf(chat.getReadType()), chat.getId());
 	}
 
 	@Override
@@ -53,21 +59,21 @@ public class ChatDaoImpl implements ChatDao {
 
 	@Override
 	public Chat findChatByWriterIdAndCommenterId(Chat chat) {
-		String sql = "SELECT id, writerId, commenterId, memberId, regDate"
+		String sql = "SELECT id, writerId, commenterId, memberId, readType, regDate"
 				+ " FROM Chat WHERE writerId=? AND commenterId=? AND memberId=?";
 		return jt.queryForObject(sql, new ChatRowMapper(), chat.getWriter().getId(), chat.getCommenter().getId(), chat.getMember().getId());
 	}
 
 	@Override
 	public List<Chat> findAllChatsByMemberId(long memberId) {
-		String sql = "SELECT id, writerId, commenterId, memberId, regDate"
-				+ " FROM Chat WHERE memberId=?";
+		String sql = "SELECT id, writerId, commenterId, memberId, readType, regDate"
+				+ " FROM Chat WHERE memberId=? ORDER BY regDate DESC";
 		return jt.query(sql, new ChatRowMapper(), memberId);
 	}
 
 	@Override
 	public List<Chat> findLimitedChatsByMemberId(long memberId, long startId, int limit) {
-		String sql = "SELECT id, writerId, commenterId, memberId, regDate"
+		String sql = "SELECT id, writerId, commenterId, memberId, readType, regDate"
 				+ " FROM Chat WHERE memberId=? AND id > ? LIMIT ?";
 		return jt.query(sql, new ChatRowMapper(), memberId, memberId, startId, limit);
 	}
