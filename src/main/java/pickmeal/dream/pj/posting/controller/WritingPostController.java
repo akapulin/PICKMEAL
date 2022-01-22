@@ -1,6 +1,10 @@
 package pickmeal.dream.pj.posting.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -9,7 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import lombok.extern.java.Log;
+import pickmeal.dream.pj.member.domain.Member;
 import pickmeal.dream.pj.posting.command.PostingCommand;
+import pickmeal.dream.pj.posting.domain.Posting;
+import pickmeal.dream.pj.posting.service.PostingService;
+import pickmeal.dream.pj.restaurant.domain.Restaurant;
 /**
  * 
  * @author 윤효심	
@@ -19,6 +27,9 @@ import pickmeal.dream.pj.posting.command.PostingCommand;
 @Controller
 @Log
 public class WritingPostController {
+	@Autowired
+	PostingService ps;
+	
 	
 	/**
 	 * 글쓰기 폼으로 이동
@@ -29,9 +40,10 @@ public class WritingPostController {
 	 * @param request
 	 * @return
 	 */
+
 	@GetMapping("/post_write")
 	public ModelAndView writingPostMain(@RequestParam String type) {
-		
+			
 		ModelAndView mav = new ModelAndView();
 		if(type.equals("NOTICE")) {
 			mav.addObject("postType", "NOTICE");
