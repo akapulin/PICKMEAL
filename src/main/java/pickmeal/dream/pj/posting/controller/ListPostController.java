@@ -1,6 +1,9 @@
 package pickmeal.dream.pj.posting.controller;
 
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -162,6 +165,7 @@ public class ListPostController {
 		//게시판 페이징 처리 클래스 셋팅하기
 		PageMaker pageMaker = new PageMaker(ps.getPostingCountByCategory(criteria.getType()),criteria);
 		log.info("PageMaker type : "+ pageMaker.getCriteria().getType()+" page : "+pageMaker.getCriteria().getPage()+" totalCnt : "+pageMaker.getTotal());
+		log.info("PageStartNum : "+pageMaker.getStartNum()+"PageEndNum : "+pageMaker.getEndNum());
 		mav.addObject("pageMaker", pageMaker);
 		
 		//게시물 불러오기

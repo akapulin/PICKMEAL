@@ -12,6 +12,8 @@ CREATE TABLE Member (															# 사용자
 
 INSERT INTO Member(memberType,email,passwd,nickName,birth,gender,profileImgPath)
 VALUES("M","god@naver.com","1234","godgod","19901201","F","temp");
+INSERT INTO Member(memberType,email,passwd,nickName,birth,gender,profileImgPath)
+VALUES("M","god2@naver.com","1234","godgod2","19901201","F","temp");
 
 CREATE TABLE FoodPowerPoint (													# 식력 포인트
 	id			BIGINT		PRIMARY KEY	AUTO_INCREMENT,							# SQL 아이디
@@ -36,6 +38,10 @@ CREATE TABLE Attendance (														# 출석
 	regDate		TIMESTAMP	NOT NULL	DEFAULT CURRENT_TIMESTAMP,				# 마지막 출석 날짜
 	CONSTRAINT	Attendance_memberId_FK	FOREIGN KEY(memberId)	REFERENCES Member(id) ON DELETE CASCADE
 );
+INSERT INTO MannerTemperature(memberId,temperature) VALUES(1,"36.5");
+INSERT INTO FoodPowerPoint(memberId,point,detail) 
+VALUES(1,100,1);
+INSERT INTO Attendance(memberId,attendance) VALUES(1,1);
 
 SELECT TIMESTAMPDIFF(DAY, a.regDate, CURDATE()) AS DIFF_DAY FROM Attendance AS a WHERE memberId=36;
 SELECT attendance FROM Attendance WHERE memberId=37

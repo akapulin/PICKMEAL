@@ -464,14 +464,35 @@ input:checked+.slider:before {
 .rPostTagStaticWrap>li:first-child {
 	display: flex;
 	align-items: center;
+	justify-content: center;
 }
 
-.rPostTagTogetherIng, .postListConTagTogetherIng {
+/* 모집중 상태 */
+.rPostTagTogetherIng, .postListComTagTogetherIng {
 	margin-left: 5px;
 	width: 10px;
 	height: 10px;
 	border-radius: 50%;
 	background: #50d23f;
+}
+/* 모집완료 상태 */
+.postListComTagTogetherComp {
+	margin-left: 5px;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background: #d51c1c;
+}
+/* 식사완료 상태 */
+.postListComTagTogetherCompMeal{
+	/*background: #f23f3f !important;
+	border: 1px solid #ed7672;*/
+	background:#e7e7e7 !important;
+}
+.postListComTagTogetherCompMeal > p {
+	/*color:#fff !important;
+	color: #ed7672 !important;*/
+	
 }
 
 /*    읽기 헤더 - 모집 태그 - 오른쪽     */
@@ -889,6 +910,8 @@ input:checked+.slider:before {
 .postListContentTitleTagsWrap>li:first-child {
 	display: flex;
 	align-items: center;
+	justify-content: center;
+	width:71px;
 }
 
 .postListConTagTogetherIng {

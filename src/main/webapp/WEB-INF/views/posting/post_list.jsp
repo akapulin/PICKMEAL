@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
 
@@ -63,43 +64,46 @@
             <th>조회</th>
             <th>좋아요</th>
           </tr>
-          <tr>
+          <c:forEach var="post" items="${postings }">
+            <tr>
             <td>
+              <!-- 밥친구 게시판 -->
               <c:if test="${fn:contains(postType,'E') }">
 	              <ul class="postListContentTitleTagsWrap">
+	              <!-- 식사완료 상태이면 -->
+	              <c:if test="${post.mealChk eq true }">
+	              	<li class="postListComTagTogetherCompMeal">
+	                  <p>식사완료</p>
+	              	</li>
+	              </c:if>
+	              <!-- 식사완료 상태가 아니면 -->
+	              <c:if test="${post.mealChk eq false }">
 	                <li>
 	                  <p>모집중</p>
-	                  <div class="postListConTagTogetherIng"></div>
+	                  <!-- 모집중상태 -->
+	                  <c:if test="${post.recruitment eq true }">
+	                  	<div class="postListComTagTogetherIng"></div>
+	                  </c:if>
+	                  <!-- 모집완료상태 -->
+	                  <c:if test="${post.recruitment eq false }">
+	                  	<div class="postListComTagTogetherComp"></div>
+	                  </c:if>
 	                </li>
-	                <li>대구 광역시 중구 중안로</li>
-	                <li>01/02 13:00</li>
+	             </c:if>   
+	                <li>${post.restaurant.address}</li>
+	                <fmt:formatDate var="mealTime" pattern="MM-dd HH:mm" value="${post.mealTime }"/>
+	                <li>${mealTime }</li>
 	              </ul>
               </c:if>
-              <p class="postListContentTitle">화무비도에서 같이 쟁반짜장 먹으실 칭구칭구 구해요~! 1분 </p>
+              <p class="postListContentTitle">${post.title } </p>
             </td>
-            <td>나는뉸뉸</td>
-            <td>22.01.14</td>
-            <td>1001</td>
-            <td>501</td>
+            <td>${post.member.nickName }</td>
+            <fmt:formatDate var="postDate" pattern="yyyy-MM-dd" value="${post.regDate }"/>
+            <td>${postDate }</td>
+            <td>${post.views }</td>
+            <td>${post.likes }</td>
           </tr>
-          <tr>
-            <td>
-              <ul class="postListContentTitleTagsWrap">
-                <li>
-                  <p>모집중</p>
-                  <div class="postListConTagTogetherIng"></div>
-                </li>
-                <li>대구 광역시 중구 중안로</li>
-                <li>01/02 13:00</li>
-              </ul>
-              <p class="postListContentTitle">화무비도에서 같이 쟁반짜장 먹으실 칭구칭구 구해요~! 1분 </p>
-            </td>
-            <td>나는뉸뉸</td>
-            <td>22.01.14</td>
-            <td>1001</td>
-            <td>501</td>
-          </tr>
-
+          </c:forEach>
         </table>
       </div>
       <div id="postListSubInfoContainer">
@@ -129,18 +133,18 @@
       <div id="postListNaviContainer">
         <div class="postListNaviWrap">
           <ul>
-            <li><a href="#">이전</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">6</a></li>
-            <li><a href="#">7</a></li>
-            <li><a href="#">8</a></li>
-            <li><a href="#">9</a></li>
-            <li><a href="#">10</a></li>
-            <li><a href="#">이후</a></li>
+          	<c:if test="${fn:contains(postType,'N') }">
+	          	<c:if test="${pageMaker.prevBtn eq true }">
+	            	<li><a href="${pageContext.request.contextPath}/posting/notice?page=${pageMaker.startNum - 1 }">이전</a></li>
+	            </c:if>
+	            <c:forEach var="i" begin="${pageMaker.startNum }" end="${pageMaker.endNum }">
+						<li><a href="${pageContext.request.contextPath}/posting/notice?page=${i }">${i }</a></li>
+				</c:forEach>
+				<c:if test="${pageMaker.nextBtn eq true }">
+	            	<li><a href="${pageContext.request.contextPath}/posting/notice?page=${pageMaker.endNum + 1 }">이후</a></li>
+	            </c:if>
+            </c:if>
+			
           </ul>
         </div>
       </div>
