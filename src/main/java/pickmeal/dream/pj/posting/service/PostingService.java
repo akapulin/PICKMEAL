@@ -48,6 +48,13 @@ public interface PostingService {
 	 */
 	public List<Posting> findPostingsPerPageByCategory(Criteria criteria);
 	
-	
+
+	/**
+	 * 포스팅 정보 1개 불러오기
+	 * 		- 게시판 목록에서 1개 누르면, 게시판 읽기로 들어가기 위해 필요한 게시물 정보* 
+	 * @param id
+	 * @return
+	 */
+	public Posting findPostingById(char category, long id);
 	
 }

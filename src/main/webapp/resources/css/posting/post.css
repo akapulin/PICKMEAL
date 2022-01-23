@@ -464,14 +464,35 @@ input:checked+.slider:before {
 .rPostTagStaticWrap>li:first-child {
 	display: flex;
 	align-items: center;
+	justify-content: center;
 }
 
-.rPostTagTogetherIng, .postListConTagTogetherIng {
+/* 모집중 상태 */
+.rPostTagTogetherIng, .postListComTagTogetherIng {
 	margin-left: 5px;
 	width: 10px;
 	height: 10px;
 	border-radius: 50%;
 	background: #50d23f;
+}
+/* 모집완료 상태 */
+.postListComTagTogetherComp {
+	margin-left: 5px;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background: #d51c1c;
+}
+/* 식사완료 상태 */
+.postListComTagTogetherCompMeal{
+	/*background: #f23f3f !important;
+	border: 1px solid #ed7672;*/
+	background:#e7e7e7 !important;
+}
+.postListComTagTogetherCompMeal > p {
+	/*color:#fff !important;
+	color: #ed7672 !important;*/
+	
 }
 
 /*    읽기 헤더 - 모집 태그 - 오른쪽     */
@@ -812,6 +833,13 @@ input:checked+.slider:before {
 .postListContentTable tr td {
 	font-size: 0.9em;
 }
+.postListContentTable tr:hover, .postListContentTable tr:focus{
+	background: #fff8f8;
+}
+.postListContentTable tr:first-child:hover, .postListContentTable tr:first-child:focus{
+	background: #fff;
+}
+
 
 /*    게시판 타이틀     */
 .postListContentTable tr th:nth-child(1) {
@@ -869,6 +897,7 @@ input:checked+.slider:before {
 	overflow: hidden;
 }
 
+
 .postListContentTitleTagsWrap {
 	height: 44px;
 	float: left;
@@ -889,6 +918,8 @@ input:checked+.slider:before {
 .postListContentTitleTagsWrap>li:first-child {
 	display: flex;
 	align-items: center;
+	justify-content: center;
+	width:71px;
 }
 
 .postListConTagTogetherIng {
@@ -1014,7 +1045,7 @@ input:checked+.slider:before {
 	font-size: 0.9em;
 }
 
-.postListNaviWrap ul li a:hover::after {
+.postListNaviWrap ul li a:hover::after, .postListNaviSelected::after {
 	content: "";
 	position: absolute;
 	bottom: -5px;
