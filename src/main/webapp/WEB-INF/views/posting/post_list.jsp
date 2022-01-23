@@ -89,7 +89,8 @@
 	                  	<div class="postListComTagTogetherComp"></div>
 	                  </c:if>
 	                </li>
-	             </c:if>   
+	             </c:if> 
+	             	<!-- 주소 잘라주기 --> 
 	                <li>${post.restaurant.address}</li>
 	                <fmt:formatDate var="mealTime" pattern="MM-dd HH:mm" value="${post.mealTime }"/>
 	                <li>${mealTime }</li>

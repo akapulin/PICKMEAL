@@ -37,12 +37,6 @@ public class RestaurantController {
 	@Autowired
 	MessageService ms;
 	
-	@Autowired
-	WeatherService weatherService;
-	
-	@Autowired
-	MenuService menuService;
-	
 	/**
 	 * @author 김보령
 	 */
@@ -72,16 +66,6 @@ public class RestaurantController {
 		mav.addObject("restaurantId",restaurantId);
 		//포춘메세지 추가 - 윤효심 
 		mav.addObject("fortuneMessage",fortuneMessage);
-		
-		//날씨 - 김재익
-		MyLocation ml = new MyLocation("89", "90");
-		Weather weather = weatherService.getWeather(ml);
-		PickMealWeather wc = weatherService.getPickMealTypeWeather(weather);
-		Forecast forecast = weatherService.getForecast(ml);
-		mav.addObject("weather", wc);
-		mav.addObject("forecast", forecast);
-		
-		menuService.findMenuByWeather(wc);
 		
 		//익명채팅방 - 김재익
 		anonymousNumber++;

@@ -27,7 +27,7 @@ public class CouponControllerByMyPage {
 	 * 마이페이지 첫 화면
 	 * @return
 	 */
-	@GetMapping("/mypageCC")
+	@GetMapping("/mypageCoupon")
 	public ModelAndView myPage() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("coupon/nav_by_coupons");

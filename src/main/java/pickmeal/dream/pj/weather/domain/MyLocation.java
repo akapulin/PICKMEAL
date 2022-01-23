@@ -1,5 +1,10 @@
 package pickmeal.dream.pj.weather.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class MyLocation {
 	private String nx;
 	private String ny;
@@ -12,22 +17,4 @@ public class MyLocation {
 		this.nx = nx;
 		this.ny = ny;
 	}
-
-	public String getNx() {
-		return nx;
-	}
-
-	public void setNx(String nx) {
-		this.nx = nx;
-	}
-
-	public String getNy() {
-		return ny;
-	}
-
-	public void setNy(String ny) {
-		this.ny = ny;
-	}
-	
-	
 }

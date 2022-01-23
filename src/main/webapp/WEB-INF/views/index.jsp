@@ -11,16 +11,15 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <!--  가게 부가 정보 - 윤효심-->
 <link href="${pageContext.request.contextPath}/resources/css/incl/chart.css" rel="stylesheet" type="text/css">
+<script src="${pageContext.request.contextPath}/resources/js/incl/chart.js" defer></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/incl/index_map_b.css" />
 
 <!-- 익명채팅방, 날씨 - 김재익 -->
-<link href="${pageContext.request.contextPath}/resources/css/weather/weather.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/resources/css/chat/chat.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/resources/css/weather/weather.css" rel="stylesheet" type="text/css">
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/incl/chart.js" defer></script>
-<!-- 현재시간(페이지 켠 순간만) - 김재익 -->
-<c:set var="today" value="<%=new java.util.Date()%>" />
-<c:set var="now"><fmt:formatDate value="${today}" pattern="HH" /></c:set>
+<script src="${pageContext.request.contextPath}/resources/js/incl/weather.js" defer></script>
+
 
 <!--  포춘쿠키 - 윤효심-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
@@ -95,95 +94,9 @@
 	<section id="restaurantWrap">
 		<h3 class="hidden">식당 정보 표시</h3>
 		<div id="restaurantInfo">
-	<!-- 날씨영역 - 김재익 -->
-			<div id="weatherWrap">
-		        <div id="weather">
-		            <c:choose>
-		        		<c:when test="${weather.sky eq 1 }">
-		        			<c:if test="${now gt 6 && now lt 18}">
-			            		<img src="${pageContext.request.contextPath}/resources/img/weather/icons8_sun.gif"/>
-		        			</c:if>
-		        			<c:if test="${now gt 18 || now lt 6 }">
-			            		<img src="${pageContext.request.contextPath}/resources/img/weather/icons8_moon_and_stars_64.png"/>
-		        			</c:if>
-		        		</c:when>
-		        		<c:when test="${weather.sky eq 2 }">
-		        			<img src="${pageContext.request.contextPath}/resources/img/weather/icons8_cloud_64.png"/>
-		        		</c:when>
-		        		<c:when test="${weather.sky eq 3 }">
-		        			<img src="${pageContext.request.contextPath}/resources/img/weather/icons8_rain.gif"/>
-		        		</c:when>
-		        		<c:when test="${weather.sky eq 4 }">
-		        			<img src="${pageContext.request.contextPath}/resources/img/weather/icons8_snow_64.png"/>
-		        		</c:when>
-		        	</c:choose>
-		            <div class="temperatureWrap"><span class="temperature">${weather.temperature }</span><span class="symbol">&#8451;</span></div>
-		        </div>
-		        <div id="forecast">
-		        	<c:forEach var="forecastItem" items="${forecast.pmwList}" varStatus="timeOrder" >
-		        		<div class="forecastItem">
-		        			<span>
-		        				<c:if test="${timeOrder.index eq 0 }">오전 8시</c:if>
-		        				<c:if test="${timeOrder.index eq 1 }">오후 12시</c:if>
-		        				<c:if test="${timeOrder.index eq 2 }">오후 18시</c:if>
-		        				<c:if test="${timeOrder.index eq 3 }">오후 22시</c:if>
-			                </span>
-			        		<c:if test="${forecastItem.sky eq 1 }">
-		        				<c:if test="${timeOrder.index gt 1 }"> <!-- 1보다 큰 = 오후18시 오후22시 -->
-		        					<img src="${pageContext.request.contextPath}/resources/img/weather/icons8_moon_and_stars_64.png"/>
-		        				</c:if>
-		        				<c:if test="${timeOrder.index lt 2 }"> <!-- 2보다 작은 = 오전8시 오후12시 -->
-			            			<img src="${pageContext.request.contextPath}/resources/img/weather/icons8_sun.gif"/>
-		        				</c:if>
-			        		</c:if>
-			        		<c:if test="${forecastItem.sky eq 2 }">
-			        			<img src="${pageContext.request.contextPath}/resources/img/weather/icons8_cloud_64.png"/>
-			        		</c:if>
-			        		<c:if test="${forecastItem.sky eq 3 }">
-			        			<img src="${pageContext.request.contextPath}/resources/img/weather/icons8_rain.gif"/>
-			        		</c:if>
-			        		<c:if test="${forecastItem.sky eq 4 }">
-			        			<img src="${pageContext.request.contextPath}/resources/img/weather/icons8_snow_64.png"/>
-			        		</c:if>
-			                <div class="temperatureWrap">
-			                	<span class="temperature">${forecastItem.temperature }</span><span class="symbol">&#8451;</span>
-			                </div>
-		            	</div>
-		        	</c:forEach>
-		        </div>
-		        <div id="howAboutThis">
-		        	<c:choose>
-		        		<c:when test="${weather.sky eq 1 }">
-		        			맑고
-		        		</c:when>
-		        		<c:when test="${weather.sky eq 2 }">
-		        			흐리고
-		        		</c:when>
-		        		<c:when test="${weather.sky eq 3 }">
-		        			비오고
-		        		</c:when>
-		        		<c:when test="${weather.sky eq 4 }">
-		        			눈오고
-		        		</c:when>
-		        	</c:choose>
-		        	<c:choose>
-		        		<c:when test="${weather.temperature lt 10 }">
-		        			춥네
-		        		</c:when>
-		        		<c:when test="${weather.temperature gt 25 }">
-		        			덥네
-		        		</c:when>
-		        		<c:otherwise>
-		        			적당하네
-		        		</c:otherwise>
-		        	</c:choose>
-		        	이거 어때?
-		        </div>
-		        <div id="wetherMenu">
-		            <img src="https://img.icons8.com/dusk/64/000000/sun--v2.png"/>
-		            <span class="weatherMenuName">음식이름</span>
-		        </div>
-		    </div>
+			<!-- 날씨정보 - 김재익 -->
+			
+			
 			<div id="restaurantWindow">
 				<iframe id="restaurantUrl"></iframe>
 				<button id="open" value="open">펼치기</button>
@@ -439,5 +352,7 @@ $('#button_send').on('mouseup', function() {
 	    backgroundColor: '#f7e5e5'
 	})
 });
+
+
 </script>
 </html>

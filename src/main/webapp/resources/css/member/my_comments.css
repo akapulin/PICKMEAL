@@ -1,0 +1,76 @@
+@charset "UTF-8";
+
+#comments_area{
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-content: center;
+}
+
+#comments_area .comments {
+	flex:1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#comments_area .comments .comments_wrap {
+	display: flex;
+	width: 100%;
+	height: 630px;
+	overflow: scroll;
+	overflow-x: hidden;
+	flex-direction: column;
+    align-items: center;
+}
+
+#comments_area .comments .comments_wrap::-webkit-scrollbar {
+    width: 10px; /*스크롤바의 너비*/
+}
+
+#comments_area .comments .comments_wrap::-webkit-scrollbar-thumb {
+    background-color: #e4e4e4; /*스크롤바의 색상*/
+    border-radius: 10px; /*스크롤바 라운드*/
+}
+
+#comments_area .comments .comments_wrap::-webkit-scrollbar-track {
+    background-color: #fff; /*스크롤바 트랙 색상*/
+}
+
+#comments_area .comments h3 {
+	margin: 20px 0;
+	font-size: 2rem;
+}
+
+#comments_area .comments .commentBox {
+	width: 90%;
+	padding: 10px 20px;
+	margin-bottom: 20px;
+	border: #e4e4e4 1px solid;
+	box-sizing: border-box;
+	position: relative;
+}
+
+#comments_area .comments .commentBox .nameAndRegDate{
+	font-size: 0.8rem;
+	margin-bottom: 2px;
+}
+
+#comments_area .comments .commentBox .content{
+	width: 90%;
+	word-break: break-all;
+	font-size: 1rem;
+}
+
+#comments_area .comments .commentBox .postTitle{
+	font-size: 0.7rem;
+}
+
+#comments_area .comments .commentBox form .myCmtDelBtn {
+	position: absolute;
+	top: 50%;
+	right: 20px;
+	transform: translateY(-50%);
+}

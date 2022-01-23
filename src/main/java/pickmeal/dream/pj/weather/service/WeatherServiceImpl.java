@@ -44,10 +44,6 @@ import pickmeal.dream.pj.weather.domain.Weather;
 @Log4j
 @Service("weatherService")
 public class WeatherServiceImpl implements WeatherService {
-	
-	@Autowired
-	private MenuDaoImpl menudao;
-
 	private String Short_term_weather_url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst";	// 초단기예보 : 매시간 30분 생성, 하늘상태
 	private String Short_term_live_weather_url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst"; // 초단기실황 : 매시간 30분 생성, 기온, 강수형태
 	private String Short_term_forecast_weather_url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst"; // 단기예보 : 3시간단위 측정(02:00~23:00)
@@ -126,14 +122,22 @@ public class WeatherServiceImpl implements WeatherService {
 	 */
 	@Override
 	public void getShortTermWeather(HashMap<String, String> categoryAndValue, String url, String date, String hour, String minute, String nx, String ny, String... reqCodes) {
+		int cd = Integer.parseInt(date);
+		int ch = Integer.parseInt(hour);
 		int cm = Integer.parseInt(minute);
 		/*
+		 * checkHour 정오면 
+		 * 
 		 * checkMinute 기준시간(현재시간)이 30분 이전이라면 한 시간 전을 측정한다.
 		 * ex) 현재시간 14시24분 : 13시30분 입력 14시 예보 출력
 		 * ex) 현재시간 14시46분 : 14시30분 입력 15시 예보 출력
 		 */
+		
 		if(cm < 30) { 
 			hour = toStringHour(hour, -1);
+			if(ch == 0) {
+				date = Integer.toString(cd-1);
+			}
 		}
 		
 		url = url + "?serviceKey=" + service_key
@@ -162,14 +166,20 @@ public class WeatherServiceImpl implements WeatherService {
 	 */
 	@Override
 	public void getShortTermLiveWeather(HashMap<String, String> categoryAndValue, String url, String date, String hour, String minute, String nx, String ny, String... reqCodes) {
+		int cd = Integer.parseInt(date);
+		int ch = Integer.parseInt(hour);
 		int cm = Integer.parseInt(minute);
 		/*
 		 * checkMinute 기준시간(현재시간)이 30분 이전이라면 한 시간 전을 측정한다.
 		 * ex) 현재시간 14시24분 : 13시00분 입력 13시30분에 측정된 실황 출력
 		 * ex) 현재시간 14시46분 : 14시00분 입력 14시30분에 측정된 실황 출력
 		 */
-		if(cm < 30) { 
+		
+		if(cm < 30) {
 			hour = toStringHour(hour, -1);
+			if(ch == 0) {
+				date = Integer.toString(cd-1);
+			}
 		}
 		
 		url = url + "?serviceKey=" + service_key
@@ -208,7 +218,8 @@ public class WeatherServiceImpl implements WeatherService {
 		return forecast;
 	}
 	
-	private List<PickMealWeather> getForecast(String url, String date, String hour, String nx, String ny) {
+	@Override
+	public List<PickMealWeather> getForecast(String url, String date, String hour, String nx, String ny) {
 		int ch = Integer.parseInt(hour);
 		
 		if(ch < 5) {
@@ -270,7 +281,8 @@ public class WeatherServiceImpl implements WeatherService {
 		return pmwList;
 	}
 	
-	private void addPmw(List<PickMealWeather> pmwList, HashMap<String, String> categoryAndValue) {
+	@Override
+	public void addPmw(List<PickMealWeather> pmwList, HashMap<String, String> categoryAndValue) {
 		double tmp = -999;
 		int sky = -1;
 		int pty = -1;

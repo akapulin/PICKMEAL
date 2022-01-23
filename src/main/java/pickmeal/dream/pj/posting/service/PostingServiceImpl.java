@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 import pickmeal.dream.pj.member.domain.Member;
 import pickmeal.dream.pj.member.service.MemberService;
 import pickmeal.dream.pj.posting.domain.Posting;
@@ -20,7 +21,7 @@ import pickmeal.dream.pj.restaurant.repository.RestaurantDao;
  *
  */
 @Service("postingService")
-@Log
+@Slf4j
 public class PostingServiceImpl implements PostingService {
 
 	@Autowired
@@ -57,7 +58,10 @@ public class PostingServiceImpl implements PostingService {
 	
 	@Override
 	public Posting findPostingById(char category, long id) {
-		return null;
+		Posting post = pd.findPostingById(category, id);
+		post = setMemberForPosting(post);
+		post = setCommentCntAndRestaurantForPosting(post);
+		return post;
 	}
 	
 	@Override
@@ -89,6 +93,35 @@ public class PostingServiceImpl implements PostingService {
 		return postings;
 	}
 	
+	@Override
+	public List<Posting> findPostingsPerPageByMemberId(long memberId, Criteria criteria) {
+		
+		/*
+		 * (공통)
+		 * 페이지별로 12개씩 들고온다
+		 * 1page / 0-11
+		 * 2page / 12-23
+		 * 3page / 24-35
+		 * 4page / 36-47
+		 * 5page / 48-59
+		 */
+		int pageStart = (criteria.getPage()-1)*criteria.getCntPerPage();		//0, 12, 24, 36, 48...
+		int pageReadCnt = criteria.getCntPerPage();
+		log.info("pageStart : "+pageStart);
+		
+		List<Posting> postings = pd.findPostingsPerPageByMemberId(memberId, criteria.getType(),pageStart,pageReadCnt);
+		log.info("postingCount(default:12) : "+postings.size());
+		
+		
+		//코멘트 갯수 & 레스토랑정보 가져오기
+		postings = setCommentCntAndRestaurantForPostings(postings);
+		//멤버정보 가져오기
+		postings = setMemberForPostings(postings);
+
+		
+		return postings;
+	}
+	
 	/**
 	 * (공통)
 	 * 게시글별 사용자 정보 불러오기
@@ -106,21 +139,28 @@ public class PostingServiceImpl implements PostingService {
 	 */
 	private List<Posting> setMemberForPostings(List<Posting> postings){
 		for(Posting post : postings) {
-			Member member = ms.findMemberById(post.getMember().getId());
-			
-			//멤버는 필요한 정보들만 들고간다.
-			Member getM = new Member();
-			getM.setId(member.getId());
-			getM.setMemberType(member.getMemberType());
-			getM.setNickName(member.getNickName());
-			getM.setMannerTemperature(member.getMannerTemperature());
-			getM.setProfileImgPath(member.getProfileImgPath());
-			
-			//멤버셋팅
-			post.setMember(getM);
-			
+			post = setMemberForPosting(post);	
 		}
 		return postings;
+	}
+	/**
+	 *	재사용 위해서 따로 빼준 함수 
+	 */
+	private Posting setMemberForPosting(Posting post) {
+		Member member = ms.findMemberById(post.getMember().getId());
+		
+		//멤버는 필요한 정보들만 들고간다.
+		Member getM = new Member();
+		getM.setId(member.getId());
+		getM.setMemberType(member.getMemberType());
+		getM.setNickName(member.getNickName());
+		getM.setMannerTemperature(member.getMannerTemperature());
+		getM.setProfileImgPath(member.getProfileImgPath());
+		
+		//멤버셋팅
+		post.setMember(getM);
+		
+		return post;
 	}
 	
 	/**
@@ -141,19 +181,39 @@ public class PostingServiceImpl implements PostingService {
 	 */
 	private List<Posting> setCommentCntAndRestaurantForPostings(List<Posting> postings) {
 		
-		if(!(postings.get(0).getCategory()=='N')) {
+		if(postings.get(0).getCategory()!='N') {
 			for(Posting post : postings) {
-				//댓글 갯수
-				post.setCommentsNumber(cs.countCommentByPostId(post.getId(),post.getCategory()));
-				//레스토랑정보
-				post.setRestaurant(rd.findRestaurantById(post.getRestaurant().getId()));
+				setCommentCntAndRestaurantForPosting(post);
 			}
 		}
 		return postings;
 	}
+	/**
+	 *	재사용 위해서 따로 빼준 함수 
+	 */
+	private Posting setCommentCntAndRestaurantForPosting(Posting post) {
+		
+		if(post.getCategory()!='N') {
+			//댓글 갯수
+			post.setCommentsNumber(cs.countCommentByPostId(post.getId(),post.getCategory()));
+			//레스토랑정보
+			post.setRestaurant(rd.findRestaurantById(post.getRestaurant().getId()));
+		}
+		
+		return post;
+	}
 	
-
-
+	/**
+	 * 게시판 목록에 주소값을 띄어주기 위해서
+	 * @param postings
+	 * @return
+	 
+	public List<Posting> setAddressShortForListPost(List<Posting> postings){
+		
+		
+		return postings;
+	}
+	*/
 
 	
 
