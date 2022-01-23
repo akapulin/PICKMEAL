@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
 
@@ -16,40 +19,51 @@
         <div id="rwPostContainer">
             <div id="rwPostTitleContainer">
                 <div class="rwPostTitleWrap">
-                    <h3>밥찡코</h3>
+               		<c:if test="${fn:contains(post.category,'N')}"><h3>공지사항</h3></c:if>
+                    <c:if test="${fn:contains(post.category,'R')}"><h3>식당추천</h3></c:if>
+                    <c:if test="${fn:contains(post.category,'E')}"><h3>밥친구</h3></c:if>
                 </div>
             </div>
             <div id="rPostContentContainer">
                 <div id="rPostHeaderWrap">
-                    <div class="rPostTagListWrap">
-                        <ul class="rPostTagStaticWrap">
-                            <li>
-                                <p>모집중</p>
-                                <div class="rPostTagTogetherIng rPostTagTogetherComp"></div>
-                            </li>
-                            <li>대구광역시 중구 중앙로</li>
-                            <li>1월 14일 13:00</li>
-                        </ul>
-                        <ul class="rPostTagDynamicWrap">
-                            <li>
-                                <p class="rPostCheckOn rPostCheck">모집중</p>
-                                <p class="rPostCheckOFF rPostCheck" style="display:none;">모집완료</p>
-                                <label class="switch">
-                                    <input type="checkbox" class="rPostCheckbox">
-                                    <span class="slider round"></span>
-                                </label>
-                            </li>
-                            <li><a href="#">식사완료</a></li>
-                        </ul>
-                    </div>
+                	<!-- 밥친구 게시판일 경우 태그 보여주기 -->
+                	<c:if test="${fn:contains(post.category,'E')}">
+	                    <div class="rPostTagListWrap">
+	                        <ul class="rPostTagStaticWrap">
+	                            <li>
+	                                <p>모집중</p>
+	                                	 <div class="rPostTagTogetherIng rPostTagTogetherComp"></div>
+	                             		<input type="hidden" value="${post.recruitment }">
+	                            </li>
+	                            <li>${post.restaurant.address }</li>
+	                            <fmt:formatDate var="mealTime" pattern="MM월dd일 HH:mm" value="${post.mealTime }"/>
+	                            <li>${mealTime }</li>
+	                        </ul>
+	                        <ul class="rPostTagDynamicWrap">
+	                        	
+		                            <li>
+		                                <p class="rPostCheckOn rPostCheck">모집중</p>
+		                                <p class="rPostCheckOFF rPostCheck">모집완료</p>
+		                                <label class="switch">
+		                                    <input type="checkbox" class="rPostCheckbox">
+		                                    <span class="slider round"></span>
+		                                </label>
+		                                
+		                            </li>
+	                            
+	                            	<li><a href="#">식사완료</a></li>
+	                            
+	                        </ul>
+	                    </div>
+                    </c:if>
                     <div class="rPostTitleWrap">
-                        <p class="rPostTitle">같이 쟁반짜장 먹으실 칭구칭구 구해요 1명!</p>
+                        <p class="rPostTitle">${post.title }</p>
                     </div>
                     <div class="rPostProfileWrap">
                         <ul>
-                            <li><img class="rPostProfileImg" src="../nonUser.png" alt="회원프로필아이콘"></li>
+                            <li><img class="rPostProfileImg" src="${post.member.profileImgPath }" alt="회원프로필아이콘"></li>
                             <li class="rPostProfileNickName">
-                                나는뉴뉸
+                                ${post.member.nickName }
                             </li>
                             <li class="rPostProfileTempArea">
                                 <div class="rPostProfileTempAreaSub1">
@@ -58,13 +72,15 @@
                                 
                             </li>
                             <li class="rPostProfileTempText">
-                                36.5˚
+                                ${post.member.mannerTemperature }˚
                             </li>
+                            <fmt:formatDate var="regDate" pattern="yyyy.MM.dd" value="${post.regDate }"/>
+                            <fmt:formatDate var="regTime" pattern="HH:mm" value="${post.regDate }"/>
                             <li class="rPostContentRegDate">
-                                2022.01.14 <span>11:00</span>
+                                ${regDate } <span>${regTime }</span>
                             </li>
                             <li class="rPostContenHitCount">
-                                조회<span>501</span>
+                                조회<span>${post.views }</span>
                             </li>
                         </ul>
                     </div>

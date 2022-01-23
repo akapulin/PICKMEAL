@@ -215,6 +215,7 @@ public class GameController {
 		restaurant.setRType(rc.isRtype());
 		
 		Member member = (Member)session.getAttribute("member");
+		HashMap<String,String> map = new HashMap<String, String>();
 		
 		if(validator.isEmpty(member)) {
 			// 비회원 일 때.
@@ -229,9 +230,10 @@ public class GameController {
 			cntForRetry++;
 			System.out.println("게임 다시하기 Cnt : " + cntForRetry);
 			session.setAttribute("cntForRetry", cntForRetry);
+			map.put("cntForRetry", String.valueOf(cntForRetry));
 		}
 		session.setAttribute("restaurant", restaurant);
-		HashMap<String,String> map = new HashMap<String, String>();
+		//HashMap<String,String> map = new HashMap<String, String>();
 		map.put("rid", Long.toString(restaurant.getId()));
 		/**
 		 * 정원식

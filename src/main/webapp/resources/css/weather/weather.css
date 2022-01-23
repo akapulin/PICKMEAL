@@ -1,11 +1,5 @@
 @charset "UTF-8";
 /* 김재익 */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 #weatherWrap {
     display: flex;
     flex-direction: column;

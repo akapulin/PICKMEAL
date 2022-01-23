@@ -27,6 +27,15 @@ public class ChattingHandler extends TextWebSocketHandler {
 		
 //		session.getRemoteAddress() + 
 		log.info(session.getId() + "님이 입장하셨습니다.");
+		/*
+		 * session.getRemoteAddress() 가 클라이언트 고유 주소를 준다고 가정
+		 * blackAddress 테이블을 만들어서 신고가되거나 개발자가 직접 걸러낸 주소를 저장하고 불러온다 가정
+		 * session.getRemoteAddress() 로 불러온 주소가 blackAddress 안에 있다면
+		 * session.sendMessage(new TextMessage("blackAddress")) 로 메세지를 날린다
+		 * 스크립트 onMessage 에서 blackAddress와 완전히일치하는 문장이 들어왔을 경우 바로 onclose를 실행시킬 수 있을까?
+		 * 
+		 * 시간없어서 못해봄 ㅋ
+		 */
 	}
 	
 	/**

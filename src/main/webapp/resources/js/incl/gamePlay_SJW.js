@@ -5,7 +5,8 @@ let ranNum;
 let ranNumArr= [];
 let categorySwitch;
 let lengthOfTotalArr;
-let cntForRetry = window.opener.$('#cntForRetry').val();
+let cntForRetry; 
+//window.opener.$('#cntForRetry').val();
 
 let gameWrap = document.getElementById("gameWrap");
 //let cardUl = document.getElementById("cardUl");
@@ -343,17 +344,18 @@ $('.gameBtn').on('click', function(e){
 							var data0 = data.rid;
 							var data1 = data.couponCategory+"1";
 							var data2 = data.restaurant+"1";
-								
+														
 							opener.parent.setrestaurantId(data0);
 							opener.parent.setcouponIsempty(data1);
 							opener.parent.setrestaurantIsempty(data2);
 							opener.parent.couponAndFavoriteShow();
 							
-							/*
-							cntForRetry = cntForRetry + 1;
-							console.log(cntForRetry);
-							console.log(window.opener.$('#cntForRetry').val());
-							*/
+							if(!data.cntForRetry){
+								
+							}else{
+								makeRetryMsgToIndex(data.cntForRetry);	
+							}
+							
 						}
 					})
 				}
@@ -487,7 +489,12 @@ $('.gameBtn').on('click', function(e){
 								console.log(window.opener.$('#cntForRetry').val());
 								*/
 							}
-						})						
+						})	
+						if(!data.cntForRetry){
+								
+						}else{
+							makeRetryMsgToIndex(data.cntForRetry);	
+						}					
 					}
 					ladderPick = 1;
 				}
@@ -731,6 +738,12 @@ function extractFiveIndex(number){
 		console.log(ranNumArr);
 //	return ranNumArr;
 			
+}
+
+
+function makeRetryMsgToIndex(cnt){
+	console.log("makeRetryMsgToIndex : " + cnt);
+	window.opener.makeRetryMsg(cnt);
 }
 
 /*

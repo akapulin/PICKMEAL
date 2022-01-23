@@ -476,7 +476,7 @@ input:checked+.slider:before {
 	background: #50d23f;
 }
 /* 모집완료 상태 */
-.postListComTagTogetherComp {
+.rPostTagTogetherComp, .postListComTagTogetherComp {
 	margin-left: 5px;
 	width: 10px;
 	height: 10px;
