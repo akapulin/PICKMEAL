@@ -27,8 +27,8 @@ public class MessageDaoImpl implements MessageDao{
 	}
 	@Override
 	public String bringFirstMsg(char msgType) {
-		String sql = "SELECT content FROM Message WHERE messageType = ? ORDER BY rand() limit 1";
-		Message msg = jt.queryForObject(sql, new MessageRowMapper(), msgType);
+		String sql = "SELECT id, messageType, content FROM Message WHERE messageType = ? ORDER BY rand() limit 1";
+		Message msg = jt.queryForObject(sql, new MessageRowMapper(), String.valueOf(msgType));
 		
 		return msg.getContent();
 	}

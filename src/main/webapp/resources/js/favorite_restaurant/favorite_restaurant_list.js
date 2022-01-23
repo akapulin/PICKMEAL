@@ -72,7 +72,6 @@ function goMapRestaurant(){
 		$("input[id='detailName']").val(frNameInfo);
 		console.log($("input[id='detailAddress']").val());
 		
-		
 		var geocoder = new kakao.maps.services.Geocoder();
 
 		// 주소로 좌표를 검색합니다

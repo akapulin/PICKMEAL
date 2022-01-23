@@ -272,7 +272,6 @@
 				if (participation == false) {
 					readType = 'N';
 				}
-				console.log(readType)
 				$.ajax({
 					url: "uploadFile",
 					type: "post",
