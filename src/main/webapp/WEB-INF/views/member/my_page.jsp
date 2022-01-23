@@ -23,10 +23,10 @@
 	    </ul>
 	</nav>
 </body>
-
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#${here}').addClass('on');
 	})
 </script>
 </html>
+

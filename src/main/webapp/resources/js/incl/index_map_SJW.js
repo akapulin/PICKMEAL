@@ -32,6 +32,7 @@ $('.gamePlayBtn').on('click', function(e){
 	var inputForLat = document.createElement('input');
 	div.createTextNode('This is div');
 	*/
+
 	createLatLng(nowLat, input1, "nowLat");
 	createLatLng(nowLng, input2, "nowLng");
 	
@@ -64,6 +65,8 @@ $('.gamePlayBtn').on('click', function(e){
 })
 
 function createLatLng(data, input, name){
+	$('input').remove('#'+name+'');
+	gameDataForm.remove
 	input = document.createElement('input');
 	input.type = 'hidden';
 	input.name = name;

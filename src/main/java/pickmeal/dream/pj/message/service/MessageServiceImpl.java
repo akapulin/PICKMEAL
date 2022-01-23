@@ -29,6 +29,7 @@ public class MessageServiceImpl implements MessageService{
 		
 		String firstMsg = md.bringFirstMsg('O');
 		System.out.println(firstMsg);
+
 		return firstMsg;
 	}
 	
