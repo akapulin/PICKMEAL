@@ -36,13 +36,13 @@
 						<button type="button" name="goChatting" class="choiceChatter" 
 						data-writernick="${c.writer.nickName}" data-commenternick="${c.commenter.nickName}"
 						 data-writer="${c.writer.id}" data-commenter="${c.commenter.id}" data-member="${member.id}" 
-						 id="choiceChatter_${c.id}" value="${c.id}" onclick="downloadFile(this); removeAlarm(this)">채팅</button>
+						 id="choiceChatter_${c.id}" value="${c.id}" onclick="downloadFile(this); removeChatListAlarm(this);">채팅</button>
 					</c:when>
 					<c:otherwise>
 						<button type="button" name="goChatting" class="choiceChatter" 
 						data-writernick="${c.writer.nickName}" data-commenternick="${c.commenter.nickName}"
 						 data-writer="${c.writer.id}" data-commenter="${c.commenter.id}" data-member="${member.id}" 
-						 id="choiceChatter_${c.id}" value="${c.id}" onclick="downloadFile(this); removeAlarm(this)" disabled>채팅</button>
+						 id="choiceChatter_${c.id}" value="${c.id}" onclick="downloadFile(this); removeChatListAlarm(this);" disabled>채팅</button>
 					</c:otherwise>
 				</c:choose>
 				</div>
@@ -67,14 +67,23 @@
 			
 			<script type="text/javascript">
 			
-			function removeAlarm(a) {
+			function removeChatListAlarm(a) {
 				$(a).parent().children(".non_read").remove();
+				writerId = $(a).data("writer")
+				commenterId = $(a).data("commenter")
 				$.ajax({
 					url: "updateChatType",
 					type: "get",
 					data: {
 						"id": $(a).val(),
-						"readType": "R"
+						"readType": "R",
+						"writerId" : writerId,
+						"commenterId": commenterId
+					}, success: function(data) {
+						// 읽지 않은 채팅이 없을 경우 아이콘의 알람 표시를 지워준다
+						if ($(".non_read").length == 0) {
+							$(".chatAlarmMark").hide();
+						}
 					}
 				})
 			}

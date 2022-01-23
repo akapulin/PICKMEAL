@@ -117,11 +117,16 @@ public class ChatController {
 
 	@GetMapping("/chat/updateChatType")
 	@ResponseBody
-	public void updateChatType(char readType, long id) {
-		log.info(readType + " " + id);
+	public void updateChatType(char readType, long id
+			, @ModelAttribute ChatCommand chatCommand, HttpSession session) {
+		Member writer = ms.findMemberById(chatCommand.getWriterId());
+		Member commenter = ms.findMemberById(chatCommand.getCommenterId());
 		Chat chat = new Chat();
 		chat.setId(id);
 		chat.setReadType(readType);
+		chat.setWriter(writer);
+		chat.setCommenter(commenter);
+		chat.setMember((Member)session.getAttribute("member"));
 		cs.updateChatType(chat);
 	}
 	

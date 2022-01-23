@@ -13,6 +13,8 @@ VALUES
 ('O',"안녀엉엉2"),
 ('O',"안녀엉엉3")
 
+INSERT INTO Message(messageType, content)
+VALUES
 ('O',"안녀엉엉"),
 ('F',"오늘은 당신에게 날씨의 행운이 깃들까?"),
 ('F',"길가다가 넘어 질 듯"),

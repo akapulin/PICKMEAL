@@ -17,6 +17,8 @@ import pickmeal.dream.pj.chat.domain.Chat;
 import pickmeal.dream.pj.chat.repository.ChatDao;
 import pickmeal.dream.pj.member.domain.Member;
 import pickmeal.dream.pj.member.service.MemberService;
+import pickmeal.dream.pj.message.domain.Alarm;
+import pickmeal.dream.pj.message.service.AlarmService;
 
 @Service("chatService")
 @Log
@@ -28,8 +30,28 @@ public class ChatServiceImpl implements ChatService {
 	@Autowired
 	MemberService ms;
 	
+	@Autowired
+	AlarmService as;
+	
 	@Override
 	public void addChat(Chat chat) {
+		// 현재 읽지 않는 경우라면 무조건 alarm 추가
+		if (chat.getReadType() =='N') {
+			Alarm alarm = new Alarm();
+			if (chat.getWriter().getId() == chat.getMember().getId()) {
+				// 채팅의 경우 내가 보냈는데 상대방이 못 보는 것이기 때문에 상대방 기준으로 셋팅해준다.
+				alarm.setMember(chat.getCommenter());
+				alarm.setFriend(chat.getWriter());
+				alarm.setContent(chat.getWriter().getNickName());
+			} else {
+				alarm.setMember(chat.getWriter()); // 상대 : 게시글 작성자
+				alarm.setFriend(chat.getCommenter()); // 나 : 댓글 작성자
+				alarm.setContent(chat.getCommenter().getNickName()); // 나의 닉네임을 넣어준다.
+			}
+			alarm.setAlarmType('C'); // 채팅이기 대문에 C
+			as.addAlarm(alarm);
+			
+		}
 		if (!cd.isChatByWriterIdAndCommenterId(chat)) { // 처음 넣는 거라면 추가
 			// 상대방이 읽지 않았다면
 			// 나는 R로 넣고 상대방은 N으로 넣어야한다.
@@ -37,6 +59,9 @@ public class ChatServiceImpl implements ChatService {
 				chat.setReadType('R');
 				cd.addChat(chat);
 				chat.setReadType('N');
+				
+				// 상대방이 읽지 않는다면 알람 레코드에 넣어줘야한다.
+				
 				// 현재 사용자가 게시글 작성자인 경우
 				if (chat.getWriter().getId() == chat.getMember().getId()) {
 					chat.setMember(chat.getCommenter());
@@ -52,31 +77,39 @@ public class ChatServiceImpl implements ChatService {
 
 	@Override
 	public void updateChat(Chat chat) {
-		log.info("readType : " + chat.getReadType());
 		// 업데이트의 경우도 타입을 지속적으로 봐야한다.
 		if (chat.getReadType() == 'N') {
-			chat.setReadType('R');
 			chat = findChatByWriterIdAndCommenterId(chat);
-			log.info(chat.toString());
+			chat.setReadType('R');
 			cd.updateChat(chat);
 			// 현재 사용자가 게시글 작성자인 경우
 			if (chat.getWriter().getId() == chat.getMember().getId()) {
-				log.info("작성자");
 				chat.setMember(chat.getCommenter());
 			} else { // 현재 사용자가 댓글 작성자인 경우
-				log.info("댓글자");
 				chat.setMember(chat.getWriter());
 			}
 		}
 		chat = findChatByWriterIdAndCommenterId(chat);
 		chat.setReadType('N');
-		log.info(chat.toString());
 		cd.updateChat(chat);
 	}
 
 	@Override
 	public void updateChatType(Chat chat) {
 		cd.updateChatType(chat);
+		// 해당 메소드는 원래 안읽은 채팅을 읽어서 type 을 변경해주는 것이기 때문에 alarm record 내 해당하는 값이 있다면 삭제해줘야한다.
+		// 읽어서 삭제하는 경우에는 member 가 내가되어야하고 friend 가 상대방이 된다.
+		Alarm alarm = new Alarm();
+		alarm.setAlarmType('C');
+		// 현재 사용자가 게시글 작성자인 경우
+		if (chat.getWriter().getId() == chat.getMember().getId()) {
+			alarm.setMember(chat.getWriter());
+			alarm.setFriend(chat.getCommenter());
+		} else { // 현재 사용자가 댓글 작성자인 경우
+			alarm.setMember(chat.getCommenter());
+			alarm.setFriend(chat.getWriter());
+		}
+		as.deleteAlarm(alarm);		
 	}
 
 	@Override
