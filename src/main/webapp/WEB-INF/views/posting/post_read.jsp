@@ -95,13 +95,11 @@
                 	<c:if test="${fn:contains(post.category,'E') or fn:contains(post.category,'R')}">
 	                    <div class="rPostContentMapWrap">
 	                        <div id="rPostContentMap"></div>
-	                        <input type="hidden" value="${post.restaurant.lat }" id="addressLat">
-	                        <input type="hidden" value="${post.restaurant.lng }" id="addressLng">
 	                        <div class="rPostContentMapDetails">
 	                            <table>
 	                                <tr>
 	                                    <th>식사장소</th>
-	                                    <td>${post.restaurant.address }</td>
+	                                    <td id="rAddress">${post.restaurant.address }</td>
 	                                    
 	                                </tr>
 	                                <c:if test="${fn:contains(post.category,'E')}">

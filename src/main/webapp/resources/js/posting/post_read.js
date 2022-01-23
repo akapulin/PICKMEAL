@@ -77,27 +77,52 @@ function recruitmentON(){
 	1. 수정불가능하게 하기
 */
 function setMap(){
-	// 식당 좌표 받아오기
-	let lat = $('#addressLat').val();
-	let lng = $('#addressLng').val();
-    let currentPos = new kakao.maps.LatLng(lat, lng);
+	// 식당 좌표 받아오기(좌표로)
+	//let lat = $('#addressLat').val();
+	//let lng = $('#addressLng').val();
+    //let currentPos = new kakao.maps.LatLng(lat, lng);
 
-    let mapContainer = document.getElementById('rPostContentMap'), // 지도를 표시할 div
+    var mapContainer = document.getElementById('rPostContentMap'), // 지도를 표시할 div
         mapOption = {
-            center: new daum.maps.LatLng(lat, lng), // 지도의 중심좌표
-            level: 3 // 지도의 확대 레벨
+            //enter: new daum.maps.LatLng(lat, lng), // 지도의 중심좌표
+             center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+			level: 3 // 지도의 확대 레벨
         };
 
     //지도를 미리 생성
-    let map = new daum.maps.Map(mapContainer, mapOption);
+    var map = new daum.maps.Map(mapContainer, mapOption);
 
-    // 마커 생성
-    let marker = new kakao.maps.Marker({
-        position: currentPos
-    });
+    // 마커 생성(좌표로)
+    //let marker = new kakao.maps.Marker({
+    //    position: currentPos
+    //});
 
-    // 마커표시
-    marker.setMap(map);
+    // 마커표시(좌표로)
+    //marker.setMap(map);
+
+	// 주소-좌표 변환 객체를 생성합니다
+	var geocoder = new kakao.maps.services.Geocoder();
+	
+	//맵의 주소값
+	//let address = $('#rAddress').text();
+	let address="경북 경산시 펜타힐즈4로 1";
+	// 주소로 좌표를 검색합니다
+	geocoder.addressSearch(address, function(result, status) {
+
+	    // 정상적으로 검색이 완료됐으면 
+	     if (status === kakao.maps.services.Status.OK) {
+	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+	
+	        // 결과값으로 받은 위치를 마커로 표시합니다
+	        var marker = new kakao.maps.Marker({
+	            position: coords
+	        });
+			marker.setMap(map);
+			
+	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+	        map.setCenter(coords);
+	    } 
+	})
 	
 }
 

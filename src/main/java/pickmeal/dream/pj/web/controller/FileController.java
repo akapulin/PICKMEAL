@@ -38,7 +38,7 @@ public class FileController {
 	 * @return
 	 * @throws Exception
 	 */
-	@PostMapping("saveImgToNoticeBoard")
+	@PostMapping("/saveImgToNoticeBoard")
 	@ResponseBody
 	public ResponseEntity<?> saveImgToNoticeBoard(List<MultipartFile> files) throws Exception{
 		//추후변경
@@ -59,7 +59,7 @@ public class FileController {
 	 * @return
 	 * @throws Exception
 	 */
-	@PostMapping("saveImgToReviewBoard")
+	@PostMapping("/saveImgToReviewBoard")
 	@ResponseBody
 	public ResponseEntity<?> saveImgToReviewBoard(List<MultipartFile> files) throws Exception{
 		//추후변경

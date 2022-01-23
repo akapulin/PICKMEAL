@@ -14,13 +14,15 @@ import pickmeal.dream.pj.member.domain.Member;
 @Setter
 @ToString
 public class PostingCommand {
-	private Member member;
+
 	private String address;
-	private String category;
+	private char category;
 	private String title;
 	private String content;	
 	private String date;
 	private String time;
-	private char postType;
+	private double lat;
+	private double lng;
+
 	
 }

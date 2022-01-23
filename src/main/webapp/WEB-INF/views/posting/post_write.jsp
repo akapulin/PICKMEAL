@@ -34,8 +34,8 @@
                     <c:if test="${fn:contains(postType,'E') }"><h3>밥친구 글쓰기</h3></c:if>
                 </div>
             </div>
-           <form action="completeWritingPost" method="post" id="wPostForm">
-            <input type="hidden" id="postType" value="${postType }"/>
+           <form action="${pageContext.request.contextPath}/completeWritingPost" method="post" id="wPostForm">
+            <input type="hidden" id="postType" value="${postType }" name="category"/>
             <div id="wPostContentContainer">
                 <div class="wPostSubTitleWrap wPostLineCommon">
                     <p class="wPostLeftSideSubTitle">제목</p>
@@ -62,7 +62,6 @@
 	                            <!-- <a href="#" class="wPostAttachBtn postBtnCom">첨부하기</a> -->
 	                            <p class="wPostAttachBtnRefer">(지원 포맷 : jpg, jpeg, png / 최대 20개까지 첨부 가능)</p>
 	                        </div>
-	
 	                        <div class="wPostAttachedImgListWrap postInputTCom" >
 	                            <ul class="wPostAttachedImgList">
 	                            	<!--  임시 
@@ -76,7 +75,7 @@
 	                        </div>
 	                    </div>
 	                </div>
-                </c:if><!-- 보
+                </c:if><!-- 보류
                 <div class="wPostCateWrap wPostLineCommon">
                     <p class="wPostLeftSideSubTitle">카테고리</p>
                     <div class="wPostCateInputWrap wPostComInputArea">
@@ -118,6 +117,8 @@
 	                            <a href="#" class="wPostMapCurrentPlaceBtn postBtnCom">현재 위치에서 찾기</a>
 	                        </div>
 	                        <input type="text" id="wPostDetailAddress" name="address" class="wPostMapDetailAddressInput postInputTCom" readonly placeholder="상세주소가 입력됩니다.">
+	                        <input type="hidden" id="wPostDetailAddressLat" name="lat">
+	                        <input type="hidden" id="wPostDetailAddressLng" name="lng">
 	                        <div class="wPostMapArea postInputTCom">
 	                            <div id="wPostMap"></div>
 	                        </div>
@@ -134,14 +135,14 @@
             </div>
 			</form>
         </div>
-	<form action="saveImgToNoticeBoard" method="post" enctype="multipart/form-data" id="noticeBoard">
+	<form action="${pageContext.request.contextPath}/saveImgToNoticeBoard" method="post" enctype="multipart/form-data" id="noticeBoard">
 		<!-- 멀티파일 form으로 넘겼을 때 test -->
 		<!-- 
 		<label for="multifileInput">하이</label>
 		  <input multiple="multiple"  type="file" name="picFile" required="required" id="multifileInput">
 		  --> 
 	</form>
-	<form action="saveImgToReviewBoard" method="post" enctype="multipart/form-data" id="reviewBoard">
+	<form action="${pageContext.request.contextPath}/saveImgToReviewBoard" method="post" enctype="multipart/form-data" id="reviewBoard">
 	</form>
 
 	
