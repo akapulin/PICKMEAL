@@ -12,6 +12,7 @@
 	color: #f23f3f; font-size: 12px; font-weight: bold;
 }
 /* 댓글 목록 영역 */
+.commentWrap:first-of-type {clear: both;}
 .commentWrap {
 	display: flex; flex-flow: row nowrap; justify-content: space-between; align-items: center;
 	border-bottom: 1px solid #ffecec; font-size: 14px; padding: 5px 15px;

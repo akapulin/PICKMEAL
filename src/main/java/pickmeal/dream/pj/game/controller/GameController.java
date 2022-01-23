@@ -95,9 +95,11 @@ public class GameController {
 			// 마지막 게임이 언제였는지를 오늘 날짜와 차이로 나타내준다.
 			// LastGameRecord 테이블 안에 로그인한 Id의 게임 기록이 없을 때. 어떻게 할 것인가. 
 			diffOfDate = gs.checkLastGameRecord(member.getId());
+			System.out.println("회원일 경우 DIFFOFDATE : " + diffOfDate);
 			//차이가 0이 아니면 => 즉, 오늘 첫게임이면 first msg 보낸다.
 			if(diffOfDate != 0) {
 				firstGameMsg = msgs.bringFirstMsg();
+				System.out.println("gameCotroller : "+firstGameMsg);
 				mav.addObject("firstGameMsg", firstGameMsg); //첫 게임일 경우 안내 메세지 보냄.
 			} else {}
 		}
