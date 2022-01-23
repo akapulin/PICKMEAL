@@ -41,7 +41,7 @@
 						<ul class="alarmArea">
 							<c:forEach var="alarm" items="${alarms}">
 							<c:if test="${alarm.alarmType ne 'C'.charAt(0)}">
-								<li data-friend="${alarm.friendId}" data-alarmType="${alarm.alarmType}" id="${alarm.id}">
+								<li data-friend="${alarm.friendId}" data-alarmType="${alarm.alarmType }" id="${alarm.id}">
 									<c:choose>
 										<c:when test="${alarm.alarmType eq 'E'.charAt(0)}">
 											<img src="${pageContext.request.contextPath}/resources/img/header/store.png" alt="프로필사진" class="alarmProfileImg">
