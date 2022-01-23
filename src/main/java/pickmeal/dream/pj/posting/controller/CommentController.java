@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import lombok.extern.java.Log;
@@ -74,15 +75,17 @@ public class CommentController {
 		return mav;
 	}
 	
+	// 댓글 쓰기
 	@PostMapping("/posting/addComment")
-	public ResponseEntity<?> addComment(@ModelAttribute CommentCommand cc) {
+	public ResponseEntity<?> addComment(@ModelAttribute CommentCommand cc, 
+			@SessionAttribute("member") Member member) {
 		// 빈 문자열일 경우 그냥 돌려보냄
 		if (v.isEmpty(cc.getContent())) {
 			return ResponseEntity.ok("empty");
 		}
 		// comment 객체 셋팅
 		Comment comment = new Comment();
-		comment.setMember(new Member(cc.getMemberId()));
+		comment.setMember(member); // 현재 사용자 셋팅
 		comment.setPosting(new Posting(cc.getPostId(), cc.getCategory()));
 		comment.setContent(cc.getContent());
 		log.info(comment.toString());

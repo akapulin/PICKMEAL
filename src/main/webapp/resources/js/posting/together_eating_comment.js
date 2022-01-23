@@ -56,7 +56,7 @@ function writeComment() {
 						moreHtml = "";
 					}
 																					//  && postMemberId != data.member.id
-					if (postMemberId == memberId && memberId != 0 && postCategory == 'E' && postMemberId != data[i].member.id) {
+					if (postMemberId == memberId && memberId != 0 && postCategory == 'E' && postMemberId != data[i].member.id && data[i].member.memberType != 'D') {
 						chatHtml = '<button type="submit" class="chat" onclick="goChat(this)" value="' + data.member.id + '">채팅하기</button>';
 					} else {
 						chatHtml = "";
@@ -259,7 +259,7 @@ function moveCommentPage(a) {
 						moreHtml = "";
 					}
 																					//  && postMemberId != data[i].member.id
-					if (postMemberId == memberId && memberId != 0 && category == 'E' && postMemberId != data[i].member.id) {
+					if (postMemberId == memberId && memberId != 0 && category == 'E' && postMemberId != data[i].member.id && data[i].member.memberType != 'D') {
 						chatHtml = '<button type="button" class="chat"  onclick="goChat(this)" value="' + data[i].member.id + '">채팅하기</button>';
 					} else {
 						chatHtml = "";

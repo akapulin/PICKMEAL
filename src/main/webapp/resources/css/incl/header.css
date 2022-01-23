@@ -213,7 +213,7 @@ header{
 }
 .alarmTitle::before{
   content: "";
-  position: absolute; z-index: -1;
+  position: absolute; z-index: 4999;
   top:-15px; left: 0;
   width: 100%; height: 50px;
   background: #f23f3f;
@@ -237,7 +237,7 @@ header{
   border-right: 10px solid transparent;
   border-bottom: 10px solid #f23f3f;
   content:"";
-  position:absolute;z-index: -1;
+  position:absolute;z-index: 4999;
   top:-7px;
   right:10px;
 }

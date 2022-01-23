@@ -140,6 +140,7 @@ public class ChatServiceImpl implements ChatService {
 		enterChatter.setNickName(chatter.getNickName());
 		enterChatter.setMannerTemperature(chatter.getMannerTemperature());
 		enterChatter.setProfileImgPath(chatter.getProfileImgPath());
+		enterChatter.setMemberType(chatter.getMemberType());
 		
 		return enterChatter;
 	}
