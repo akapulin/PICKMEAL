@@ -1,5 +1,6 @@
 package pickmeal.dream.pj.chat.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -50,7 +51,12 @@ public class ChatController {
 		ModelAndView mav = new ModelAndView();
 		// 좌측에 해당 사용자의 채팅 목록을 불러온다.
 		Member member = (Member)session.getAttribute("member");
-		List<Chat> chats = cs.findAllChatsByMemberId(member.getId());
+		List<Chat> chats = new ArrayList<>();
+		try {
+			chats = cs.findAllChatsByMemberId(member.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
 		mav.addObject("chats", chats);
 		// 우측에 이번에 새롭게 시작할 채팅 화면을 띄워야한다.
 		// writer와 commenter 모두를 session 에 넣어줘야한다.
@@ -108,6 +114,16 @@ public class ChatController {
 		
 		return ResponseEntity.ok("time done");
 	}
+
+	@GetMapping("/chat/updateChatType")
+	@ResponseBody
+	public void updateChatType(char readType, long id) {
+		log.info(readType + " " + id);
+		Chat chat = new Chat();
+		chat.setId(id);
+		chat.setReadType(readType);
+		cs.updateChatType(chat);
+	}
 	
 	/**
 	 * 파일 업로드 시에 채팅 추가를 같이 해준다.
@@ -122,6 +138,7 @@ public class ChatController {
 		chat.setWriter(ms.findMemberById(chatCommand.getWriterId()));
 		chat.setCommenter(ms.findMemberById(chatCommand.getCommenterId()));
 		chat.setMember(member);
+		chat.setReadType(chatCommand.getReadType());
 		cs.uploadChatContent(fileText, chat);
 		cs.addChat(chat);
 	}

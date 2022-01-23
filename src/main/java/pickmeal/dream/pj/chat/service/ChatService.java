@@ -22,6 +22,12 @@ public interface ChatService {
 	public void updateChat(Chat chat);
 	
 	/**
+	 * 해당 채팅 타입 업데이트
+	 * @param chat
+	 */
+	public void updateChatType(Chat chat);
+	
+	/**
 	 * 해당 채팅을 지운다.
 	 * 일정 기간 후 자동 삭제
 	 * 리스너에서 최초 한번 돌려주자

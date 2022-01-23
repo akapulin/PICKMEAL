@@ -19,6 +19,12 @@ public interface ChatDao {
 	public void updateChat(Chat chat);
 	
 	/**
+	 * 해당 채팅 타입 업데이트
+	 * @param chat
+	 */
+	public void updateChatType(Chat chat);
+	
+	/**
 	 * 해당 채팅을 지운다.
 	 * 일정 기간이 지나면 자동 삭제
 	 * @param chat

@@ -18,6 +18,7 @@ public class ChatRowMapper implements RowMapper<Chat> {
 		chat.setWriter(new Member(rs.getLong("writerId")));
 		chat.setCommenter(new Member(rs.getLong("commenterId")));
 		chat.setMember(new Member(rs.getLong("memberId")));
+		chat.setReadType(rs.getString("readType").charAt(0));
 		chat.setRegDate(new Date(rs.getTimestamp("regDate").getTime()));
 
 		return chat;

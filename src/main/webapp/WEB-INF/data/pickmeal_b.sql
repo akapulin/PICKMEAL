@@ -229,14 +229,16 @@ SELECT * FROM NoticePosting;
 drop table chat
 
 CREATE TABLE Chat(
-	id			BIGINT			PRIMARY KEY	AUTO_INCREMENT,
-	writerId	BIGINT			NOT NULL,
-	commenterId	BIGINT			NOT NULL,
-	memberId	BIGINT			NOT NULL,
-	regDate		TIMESTAMP		NOT NULL	DEFAULT CURRENT_TIMESTAMP,
+	id			BIGINT			PRIMARY KEY	AUTO_INCREMENT,					# sql 아이디
+	writerId	BIGINT			NOT NULL,									# 게시글 작성자 아이디
+	commenterId	BIGINT			NOT NULL,									# 댓글 작성자 아이디
+	memberId	BIGINT			NOT NULL,									# 사용자 아이디
+	readType	CHAR(1)			NOT NULL,									# R: 읽음 / N: 읽지 않은 메시지 있음
+	regDate		TIMESTAMP		NOT NULL	DEFAULT CURRENT_TIMESTAMP,		# 마지막 채팅 날짜
 	CONSTRAINT	Chat_writerId_FK	FOREIGN KEY(writerId)	REFERENCES Member(id) ON DELETE CASCADE,
 	CONSTRAINT	Chat_commenterId_FK	FOREIGN KEY(commenterId)	REFERENCES Member(id) ON DELETE CASCADE,
 	CONSTRAINT	Chat_memberId_FK	FOREIGN KEY(memberId)	REFERENCES Member(id) ON DELETE CASCADE
 )
 select * from Chat;
 
+delete from chat;
