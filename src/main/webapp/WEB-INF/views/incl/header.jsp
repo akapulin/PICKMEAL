@@ -2,7 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <header> 
-	<form action="index" method="get" class="logoWrap"><h1 class="logo">밥찡코</h1></form>
+	<h1><a class="logo" href="${pageContext.request.contextPath}/index">밥찡코</a></h1>
 	<nav id="gnb">
 		<h2 class="hidden">게시판메뉴</h2>
 		<ul>
@@ -39,10 +39,17 @@
 					<div class="alarmAreaWrap navAlarmTextCom">
 						<div class="alarmTitle">알림내역</div>
 						<ul class="alarmArea">
-							<c:forEach var="alarm" items="${alarmRecord}">
+							<c:forEach var="alarm" items="${alarms}">
 							<c:if test="${alarm.alarmType ne 'C'.charAt(0)}">
-								<li>
-									<img src="/pickmeal/resources/img/header/store.png" alt="프로필사진" class="alarmProfileImg">
+								<li data-friend="${alarm.friendId}" data-alarmType="${alarm.alarmType}" data-alarmId="${alarm.id}">
+									<c:choose>
+										<c:when test="${alarm.alarmType eq 'E'.charAt(0)}">
+											<img src="${pageContext.request.contextPath}/resources/img/header/store.png" alt="프로필사진" class="alarmProfileImg">
+										</c:when>
+										<c:otherwise>
+											<img src="${pageContext.request.contextPath}/resources/img/header/store.png" alt="프로필사진" class="alarmProfileImg">
+										</c:otherwise>
+									</c:choose>
 									<span class="alarmTextBold">[${alarm.content}] </span>
 									<c:choose>
 										<c:when test="${alarm.alarmType eq 'E'.charAt(0)}">
