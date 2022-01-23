@@ -1,4 +1,4 @@
-package pickmeal.dream.pj.posting.controller;
+	package pickmeal.dream.pj.posting.controller;
 
 import java.util.List;
 

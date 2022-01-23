@@ -140,6 +140,22 @@ public class PostingDaoImpl implements PostingDao {
 			return jt.queryForObject(sql, new TogetherEatingPostingRowMapper(),id);
 		}
 	}
+	
+	
+	@Override
+	public int getPostingCountByCategoryAndMemberId(long memberId, char category) {
+		if (category == 'N') {
+			String sql = "SELECT COUNT(id) as NoticeCnt FROM NoticePosting WHERE memberId = ?";
+			return jt.queryForObject(sql, Integer.class,memberId);
+		} else if (category == 'R') {
+			String sql = "SELECT COUNT(id) as RecommendRestaurantCnt FROM RecommendRestaurantPosting WHERE memberId = ?";
+			return jt.queryForObject(sql, Integer.class,memberId);
+		} else {
+			String sql = "SELECT COUNT(id) as TogetherEatingCnt FROM TogetherEatingPosting WHERE memberId = ?";
+			return jt.queryForObject(sql, Integer.class,memberId);
+		}
+		
+	}
 
 	
 	@Override
