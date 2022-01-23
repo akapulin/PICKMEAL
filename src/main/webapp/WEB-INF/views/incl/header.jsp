@@ -26,7 +26,7 @@
 						<ul class="profileArea">
 							<li><a href="${pageContext.request.contextPath}/member/signOutMember">로그아웃</a></li>
 							<li><form action="" method="">마이페이지</form></li>
-							<li><a href="${pageContext.request.contextPath}/member/myPostings">마이페이지</a></li>
+							<li><a href="${pageContext.request.contextPath}/member/myPage">마이페이지</a></li>
 						</ul>
 					</div>
 				</li>
@@ -39,14 +39,23 @@
 					<div class="alarmAreaWrap navAlarmTextCom">
 						<div class="alarmTitle">알림내역</div>
 						<ul class="alarmArea">
-							<li><img src="/pickmeal/resources/img/header/store.png"
-								alt="프로필사진" class="alarmProfileImg"> <span
-								class="alarmTextBold">화무비도</span>에서 이러쿵저러쿵 먹으셨나요?<span
-								class="alarmTextClock">2시간전</span></li>
-							<li><img src="/pickmeal/resources/img/profile/nonUser.png"
-								alt="프로필사진" class="alarmProfileImg"> <span
-								class="alarmTextBold">보보님</span>과나요? 식사매너는 쩔었나요?<span
-								class="alarmTextClock">18시간전</span></li>
+							<c:forEach var="alarm" items="${alarmRecord}">
+							<c:if test="${alarm.alarmType ne 'C'.charAt(0)}">
+								<li>
+									<img src="/pickmeal/resources/img/header/store.png" alt="프로필사진" class="alarmProfileImg">
+									<span class="alarmTextBold">[${alarm.content}] </span>
+									<c:choose>
+										<c:when test="${alarm.alarmType eq 'E'.charAt(0)}">
+											식당에서 식사는 맛있으셨나요?
+										</c:when>
+										<c:otherwise>
+											님과의 식사는 어떠셨나요?
+										</c:otherwise>
+									</c:choose>
+									<span class="alarmTextClock">2시간전</span>
+								</li>
+							</c:if>
+							</c:forEach>
 						</ul>
 					</div>
 				</li>
