@@ -64,7 +64,7 @@ public class MyPageController {
 		return mav;
 	}
 	//내 댓글 - 삭제
-	@PostMapping("/member/delComment") 
+	@PostMapping("/member/delComment")
 	public String deleteComment(@ModelAttribute CommentCommand cc, @SessionAttribute("member") Member member) {
 		log.info(cc.toString() + " " + member.toString());
 		Comment comment = new Comment();
@@ -92,7 +92,7 @@ public class MyPageController {
 		mav.setViewName("member/my_postings");
 		return mav;
 	}
-	
+	//내 게시글 - 분류
 	@GetMapping("/member/myPostings/{type}")
 	public ModelAndView myPostings(HttpSession session, @PathVariable String type, Criteria criteria) {
 		ModelAndView mav = new ModelAndView();
@@ -104,7 +104,7 @@ public class MyPageController {
 
 		criteria.setType(type);
 
-		PageMaker pageMaker = new PageMaker(ps.getPostingCountByCategory(criteria.getType()),criteria);
+		PageMaker pageMaker = new PageMaker(ps.getPostingCountByCategoryAndMemberId(member.getId(), criteria.getType()),criteria);
 		log.info("PageMaker type : "+ pageMaker.getCriteria().getType()+" page : "+pageMaker.getCriteria().getPage()+" totalCnt : "+pageMaker.getTotal());
 		mav.addObject("pageMaker", pageMaker);
 
@@ -116,33 +116,4 @@ public class MyPageController {
 		mav.setViewName("member/my_postings");
 		return mav;
 	}
-	
-//	@GetMapping("/posting/{type}")
-//	public ModelAndView listPostView(Criteria criteria, @PathVariable String type ) {
-//		ModelAndView mav = new ModelAndView();
-//		
-//		//게시판 카테고리별 셋팅 1줄로 가능!
-//		criteria.setType(type);
-//		
-//		//게시판 페이징 처리 클래스 셋팅하기
-//		PageMaker pageMaker = new PageMaker(ps.getPostingCountByCategory(criteria.getType()),criteria);
-//		log.info("PageMaker type : "+ pageMaker.getCriteria().getType()+" page : "+pageMaker.getCriteria().getPage()+" totalCnt : "+pageMaker.getTotal());
-//		mav.addObject("pageMaker", pageMaker);
-//		
-//		//게시물 불러오기
-//		List<Posting> postings = ps.findPostingsPerPageByCategory(pageMaker.getCriteria());
-//		mav.addObject("postings", postings);
-//		
-//		//게시판이 밥친구일 경우, 업캐스팅 해준다
-//		if(pageMaker.getCriteria().getType()=='E') {
-//			@SuppressWarnings("unchecked")
-//			List<TogetherEatingPosting> togetherPostings = (List<TogetherEatingPosting>)(Object)postings;
-//			mav.addObject("postings", togetherPostings);
-//		}
-//		
-//		mav.setViewName("/posting/post_list");
-//		return mav;
-//		
-//		
-//	}
 }
