@@ -10,6 +10,13 @@ CREATE TABLE Member (															# 사용자
 	regDate			TIMESTAMP		NOT NULL	DEFAULT CURRENT_TIMESTAMP		# 회원가입 날짜
 );
 
+ALTER TABLE Member MODIFY COLUMN passwd VARCHAR(60) NOT NULL;
+
+INSERT INTO Member(memberType,email,passwd,nickName,birth,gender,profileImgPath)
+VALUES("M","god@naver.com","1234","godgod","19901201","F","temp");
+INSERT INTO Member(memberType,email,passwd,nickName,birth,gender,profileImgPath)
+VALUES("M","god2@naver.com","1234","godgod2","19901201","F","temp");
+
 CREATE TABLE FoodPowerPoint (													# 식력 포인트
 	id			BIGINT		PRIMARY KEY	AUTO_INCREMENT,							# SQL 아이디
 	memberId	BIGINT		NOT NULL,											# 사용자 아이디
@@ -33,6 +40,10 @@ CREATE TABLE Attendance (														# 출석
 	regDate		TIMESTAMP	NOT NULL	DEFAULT CURRENT_TIMESTAMP,				# 마지막 출석 날짜
 	CONSTRAINT	Attendance_memberId_FK	FOREIGN KEY(memberId)	REFERENCES Member(id) ON DELETE CASCADE
 );
+INSERT INTO MannerTemperature(memberId,temperature) VALUES(1,"36.5");
+INSERT INTO FoodPowerPoint(memberId,point,detail) 
+VALUES(1,100,1);
+INSERT INTO Attendance(memberId,attendance) VALUES(1,1);
 
 SELECT TIMESTAMPDIFF(DAY, a.regDate, CURDATE()) AS DIFF_DAY FROM Attendance AS a WHERE memberId=36;
 SELECT attendance FROM Attendance WHERE memberId=37
@@ -199,3 +210,35 @@ SELECT * FROM TogetherEatingComment;
 
 INSERT INTO TogetherEatingComment(memberId,postId,content)
 VALUES(40,1,"저랑 드시면 밥을 더 드실 수 있습니당.");
+
+
+CREATE TABLE NoticePosting (									# 식당 추천 게시판
+	id				BIGINT			PRIMARY KEY	AUTO_INCREMENT,				# SQL 아이디
+	memberId		BIGINT			NOT NULL,								# 사용자 아이디							# 식당 아이디
+	title			VARCHAR(100)	NOT NULL,								# 제목
+	content			MEDIUMTEXT		NOT NULL,								# 내용				# 좋아요 수
+	views			INT				NOT NULL	DEFAULT 0,					# 조회 수
+	regDate			TIMESTAMP		NOT NULL	DEFAULT CURRENT_TIMESTAMP,	# 글 등록 날짜
+	CONSTRAINT		NoticePosting_memberId_FK	FOREIGN KEY(memberId)	REFERENCES Member(id) ON DELETE CASCADE
+	
+);
+DROP TABLE NoticePosting;
+SELECT * FROM NoticePosting;
+
+
+drop table chat
+
+CREATE TABLE Chat(
+	id			BIGINT			PRIMARY KEY	AUTO_INCREMENT,					# sql 아이디
+	writerId	BIGINT			NOT NULL,									# 게시글 작성자 아이디
+	commenterId	BIGINT			NOT NULL,									# 댓글 작성자 아이디
+	memberId	BIGINT			NOT NULL,									# 사용자 아이디
+	readType	CHAR(1)			NOT NULL,									# R: 읽음 / N: 읽지 않은 메시지 있음
+	regDate		TIMESTAMP		NOT NULL	DEFAULT CURRENT_TIMESTAMP,		# 마지막 채팅 날짜
+	CONSTRAINT	Chat_writerId_FK	FOREIGN KEY(writerId)	REFERENCES Member(id) ON DELETE CASCADE,
+	CONSTRAINT	Chat_commenterId_FK	FOREIGN KEY(commenterId)	REFERENCES Member(id) ON DELETE CASCADE,
+	CONSTRAINT	Chat_memberId_FK	FOREIGN KEY(memberId)	REFERENCES Member(id) ON DELETE CASCADE
+)
+select * from Chat;
+
+delete from chat;

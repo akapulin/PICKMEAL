@@ -92,9 +92,7 @@ public class MemberServiceImpl implements MemberService {
 
    @Override
    public void deleteMember(Member member) {
-      md.deleteMember(member);
-      // 해당 멤버가 있는지 확인
-     
+      md.deleteMember(member);     
    }
 
    @Override
@@ -150,7 +148,5 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void updatePasswd(Member member) {
 		md.updatePasswd(member);
-		
-}
-
+	}
 }

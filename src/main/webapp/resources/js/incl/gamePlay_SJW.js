@@ -968,6 +968,3 @@ function displayMarker(locPosition, message) {
     infowindow.open(map, marker);
 }
 */
-
-
-

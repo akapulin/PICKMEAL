@@ -1,19 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<header>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<header> 
 	<form action="index" method="get" class="logoWrap"><h1 class="logo">밥찡코</h1></form>
 	<nav id="gnb">
 		<h2 class="hidden">게시판메뉴</h2>
 		<ul>
-			<li><form action="" method="">공지사항</form></li>
-			<li><form action="" method="">식당추천</form></li>
-			<li>
-            <form name="indexView" action="${pageContext.request.contextPath}/posting/viewTogetherEatingComment" method="get">
-            	<button type="submit" name="pageNum" value="1">밥친구</button>
-            	밥친구
-            </form></li>
-		</ul>
+         <li><a href="${pageContext.request.contextPath}/posting/notice">공지사항</a></li>
+         <li><a href="${pageContext.request.contextPath}/posting/recommend">식당추천</a></li>
+         <!--  -->
+         <li><a href="${pageContext.request.contextPath}/posting/together">밥친구</a></li>
+      </ul>
 	</nav>
 	<nav id="snb">
 		<h2 class="hidden">유저메뉴</h2>
@@ -27,7 +24,7 @@
 					</div>
 					<div class="profileAreaWrap navAlarmTextCom">
 						<ul class="profileArea">
-							<li><form action="" method="">로그아웃</form></li>
+							<li><a href="${pageContext.request.contextPath}/member/signOutMember">로그아웃</a></li>
 							<li><form action="" method="">마이페이지</form></li>
 							<li><a href="${pageContext.request.contextPath}/member/myPage_SJW">마이페이지</a></li>
 							<!-- myPage 로 바꿔야 함. -->
@@ -56,8 +53,10 @@
 				</li>
 				<li>
 					<div class="chatIconWrap comIconWrap">
-						<img src="/pickmeal/resources/img/header/chat_alarm.png"
-							alt="알림아이콘" class="chatImg comIconImg">
+						<a href="${pageContext.request.contextPath}/chat/chatListByIcon">
+							<img src="/pickmeal/resources/img/header/chat_alarm.png"
+								alt="알림아이콘" class="chatImg comIconImg">
+						</a>
 						<div class="chatAlarmMark comIconMark">1</div>
 					</div>
 				</li>
@@ -73,12 +72,8 @@
 					</div>
 					<div class="profileAreaWrap navAlarmTextCom">
 						<ul class="profileArea">
-							<li>
-            <form name="indexView" action="${pageContext.request.contextPath}/member/viewSignIn" method="get">
-            	<input type="submit" value="로그인"/>
-            	로그인
-            </form></li>
-							<li><form action="" method="">회원가입</form></li>
+							<li><a href="${pageContext.request.contextPath}/member/viewSignIn">로그인</a></li>
+							<li><a href="${pageContext.request.contextPath}/member/viewSignUp">회원가입</a></li>
 						</ul>
 					</div>
 				</li>
@@ -86,3 +81,4 @@
 		</c:if>
 	</nav>
 </header>
+<%@ include file="/WEB-INF/views/chat/chat_alarm.jsp"%>
