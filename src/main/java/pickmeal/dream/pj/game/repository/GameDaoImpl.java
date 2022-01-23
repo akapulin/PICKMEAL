@@ -29,7 +29,7 @@ public class GameDaoImpl implements GameDao{
 	public int checkLastGameRecord(long memberId) {
 		// if는(a, b, c) a조건이 참이면 b 거짓이면 c의 결과를 반환한다. / exists 는 조건이 부합하면 1 아니면 0 이 반환된다.(확인할 것)  
 		// 아래 쿼리문은 exists 구문이 0이면 참으로 0 을 반환, 거짓이면 select 이하 구문 고
-		String sql = "SELECT IF((select EXISTS (select memberID from LastGameRecord where memberId = ?)) = 0 , 0, "
+		String sql = "SELECT IF((select EXISTS (select memberID from LastGameRecord where memberId = ?)) = 0 , 9999, "
 				+ "(SELECT TIMESTAMPDIFF(DAY, regDate, CURDATE()) AS DIFF_DAY FROM LastGameRecord WHERE memberId = ?))";
 				//"SELECT TIMESTAMPDIFF(DAY, regDate, CURDATE() AS DIFF_DAY FROM LastGameRecord WHERE memberId = ?";
 		//String sql2 = "Select count(regdate) from table group by memberId having regdate = curdate();" 

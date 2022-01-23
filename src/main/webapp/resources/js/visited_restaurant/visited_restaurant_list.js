@@ -11,6 +11,9 @@ function reviewClick(){
 	console.log("내간식 id"+reviewradio);
 	console.log("찐식 id"+restaurantTableId);
 	console.log("레스토랑 명 : " + restaurantName);
+	$('#explainWrap').hide();
+	$('#Reviewcheck').show();
+	$('#reviewButtonWrap').show();
 	$("#reviewRName").val(restaurantName+" 식당리뷰!");
 	$("#submititem").val(restaurantTableId);
 	$("#visitedRestaurantId").val(reviewradio);
@@ -50,6 +53,26 @@ function removeClick(){
 		}
 	});
 }
+/*버튼 호버시 변경 */
+$(".removeInlabel").hover(function(){
+	$(this).parent().css({'backgroundColor' : '#ffecec'});
+	$(this).prev().prev().css({'backgroundColor' : '#ffecec'})
+},function(){
+	$(this).parent().css({'backgroundColor' : 'white'});
+	$(this).prev().prev().css({'backgroundColor' : 'white'})
+})
+$(".reviewInlabel").hover(function(){
+	$(this).parent().css({'backgroundColor' : '#ffecec'});
+	$(this).prev().prev().css({'backgroundColor' : '#ffecec'})
+},function(){
+	$(this).parent().css({'backgroundColor' : 'white'});
+	$(this).prev().prev().css({'backgroundColor' : 'white'})
+})
+$(".favoriteInlabel").hover(function(){
+	$(this).parent().css({'backgroundColor' : '#ffecec'});
+},function(){
+	$(this).parent().css({'backgroundColor' : 'white'});
+})
 
 //체크박스 5개 까지만 고르고 값 변경 해주기 완료
 $(document).ready(function() {
@@ -62,8 +85,8 @@ $(document).ready(function() {
 		}else{
 			if ( $(this).prop('checked') ){
 				$(this).val(1);
-				$(this).next().next().css('color','red');
-				$(this).parent().css({'backgroundColor' : '#f5f5f5', 'border' : '3px solid ##f23f3f'});
+				$(this).next().next().css('color','#f23f3f');
+				$(this).parent().css({'backgroundColor' : '#fff', 'border-bottom' : '3px solid #000'});
 	 		}else{
 				$(this).val(0);
 				$(this).css('border','0px');
@@ -72,7 +95,13 @@ $(document).ready(function() {
 			}
 		}
 		
-	}); 
+	});
+	 
 });
+
+var reviewradio = $("input[name='vrreviewradio']:checked").val();
+$('#reviewlabel'+reviewradio).on('click', function(){
+	$('#Reviewcheck').css({'display' : ''})
+})
 
 
