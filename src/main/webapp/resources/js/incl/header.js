@@ -206,9 +206,11 @@ function createAlarm(data) {
 			if (timeHD > 3600000) { // 1시간 보다 클 경우
 				let hourHD = parseInt(timeHD / 3600000); // 시간으로 나누기
 				timeTag = hourHD + " 시간 전"
-			} else {
-				let minuteHD = parseInt(timeHD / 60000); // 분
+			} else if (timeHD > 60000) { // 1분 보다 클 경우
+				let minuteHD = parseInt(timeHD / 60000); // 분으로 나누기
 				timeTag = minuteHD + " 분 전"
+			} else {
+				timeTag = "방금 전"
 			}
 			
 			if (data[i].alarmType == 'L') {
@@ -232,11 +234,6 @@ function createAlarm(data) {
 }
 
 function removeAlarm(a) {
-	
-}
-
-function removeChatAlarmMark(a) {
-	$(".chatAlarmmark").hide(); // 알람 표시가 되어있을 경우 숨긴다.
 	
 }
 
