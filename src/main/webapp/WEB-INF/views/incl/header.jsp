@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<header> 
+<header>
 	<h1><a class="logo" href="${pageContext.request.contextPath}/index">밥찡코</a></h1>
 	<nav id="gnb">
 		<h2 class="hidden">게시판메뉴</h2>
@@ -14,6 +14,7 @@
 	</nav>
 	<nav id="snb">
 		<h2 class="hidden">유저메뉴</h2>
+		<input type="hidden" id="headerMember" value="${member.id}"/>
 		<c:if test="${not empty member }">
 			<ul>
 				<li><span class="navi_nickname">${member.nickName }님 맛점하세요:)</span></li>
@@ -25,9 +26,18 @@
 					<div class="profileAreaWrap navAlarmTextCom">
 						<ul class="profileArea">
 							<li><a href="${pageContext.request.contextPath}/member/signOutMember">로그아웃</a></li>
+<<<<<<< HEAD
 							<li><form action="" method="">마이페이지</form></li>
 							<li><a href="${pageContext.request.contextPath}/member/myPage_SJW">마이페이지</a></li>
 							<!-- myPage 로 바꿔야 함. -->
+=======
+<<<<<<< HEAD
+							<li><a href="${pageContext.request.contextPath}/member/myPage">마이페이지</a></li>
+=======
+							<li><form action="" method="">마이페이지</form></li>
+							<li><a href="${pageContext.request.contextPath}/member/myPostings">마이페이지</a></li>
+>>>>>>> branch 'developer' of https://github.com/akapulin/PICKMEAL.git
+>>>>>>> branch 'developer' of https://github.com/akapulin/PICKMEAL.git
 						</ul>
 					</div>
 				</li>
@@ -35,14 +45,14 @@
 					<div class="alarmIconWrap comIconWrap">
 						<img src="/pickmeal/resources/img/header/bell_alarm.png"
 							alt="알림아이콘" class="alarmImg comIconImg">
-						<div class="alarmMark comIconMark">1</div>
+						<div class="alarmMark comIconMark">!</div>
 					</div>
 					<div class="alarmAreaWrap navAlarmTextCom">
 						<div class="alarmTitle">알림내역</div>
 						<ul class="alarmArea">
 							<c:forEach var="alarm" items="${alarms}">
 							<c:if test="${alarm.alarmType ne 'C'.charAt(0)}">
-								<li data-friend="${alarm.friendId}" data-alarmType="${alarm.alarmType}" data-alarmId="${alarm.id}">
+								<li data-friend="${alarm.friendId}" data-alarmType="${alarm.alarmType}" id="${alarm.id}">
 									<c:choose>
 										<c:when test="${alarm.alarmType eq 'E'.charAt(0)}">
 											<img src="${pageContext.request.contextPath}/resources/img/header/store.png" alt="프로필사진" class="alarmProfileImg">
@@ -73,7 +83,7 @@
 							<img src="/pickmeal/resources/img/header/chat_alarm.png"
 								alt="알림아이콘" class="chatImg comIconImg">
 						</a>
-						<div class="chatAlarmMark comIconMark">1</div>
+						<div class="chatAlarmMark comIconMark">!</div>
 					</div>
 				</li>
 			</ul>
