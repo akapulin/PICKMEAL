@@ -93,6 +93,35 @@ public class PostingServiceImpl implements PostingService {
 		return postings;
 	}
 	
+	@Override
+	public List<Posting> findPostingsPerPageByMemberId(long memberId, Criteria criteria) {
+		
+		/*
+		 * (공통)
+		 * 페이지별로 12개씩 들고온다
+		 * 1page / 0-11
+		 * 2page / 12-23
+		 * 3page / 24-35
+		 * 4page / 36-47
+		 * 5page / 48-59
+		 */
+		int pageStart = (criteria.getPage()-1)*criteria.getCntPerPage();		//0, 12, 24, 36, 48...
+		int pageReadCnt = criteria.getCntPerPage();
+		log.info("pageStart : "+pageStart);
+		
+		List<Posting> postings = pd.findPostingsPerPageByMemberId(memberId, criteria.getType(),pageStart,pageReadCnt);
+		log.info("postingCount(default:12) : "+postings.size());
+		
+		
+		//코멘트 갯수 & 레스토랑정보 가져오기
+		postings = setCommentCntAndRestaurantForPostings(postings);
+		//멤버정보 가져오기
+		postings = setMemberForPostings(postings);
+
+		
+		return postings;
+	}
+	
 	/**
 	 * (공통)
 	 * 게시글별 사용자 정보 불러오기

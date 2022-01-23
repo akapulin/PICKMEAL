@@ -93,20 +93,29 @@ public class MyPageController {
 		return mav;
 	}
 	
-//	@GetMapping("/member/myPostings/{type}")
-//	public ModelAndView myPostings(HttpSession session, @PathVariable String type, Criteria criteria) {
-//		ModelAndView mav = new ModelAndView();
-//		Member member = (Member) session.getAttribute("member");
-//		if(member == null) {
-//			mav.setViewName("redirect:/member/viewSignIn");
-//			return mav;
-//		}
-//		
-//		mav.addObject("here", "myPostings");
-//		
-//		mav.setViewName("member/my_postings");
-//		return mav;
-//	}
+	@GetMapping("/member/myPostings/{type}")
+	public ModelAndView myPostings(HttpSession session, @PathVariable String type, Criteria criteria) {
+		ModelAndView mav = new ModelAndView();
+		Member member = (Member) session.getAttribute("member");
+		if(member == null) {
+			mav.setViewName("redirect:/member/viewSignIn");
+			return mav;
+		}
+
+		criteria.setType(type);
+
+		PageMaker pageMaker = new PageMaker(ps.getPostingCountByCategory(criteria.getType()),criteria);
+		log.info("PageMaker type : "+ pageMaker.getCriteria().getType()+" page : "+pageMaker.getCriteria().getPage()+" totalCnt : "+pageMaker.getTotal());
+		mav.addObject("pageMaker", pageMaker);
+
+		List<Posting> myPostings = ps.findPostingsPerPageByMemberId(member.getId(), pageMaker.getCriteria());
+		mav.addObject("myPostings", myPostings);
+		
+		mav.addObject("here", "myPostings");
+		
+		mav.setViewName("member/my_postings");
+		return mav;
+	}
 	
 //	@GetMapping("/posting/{type}")
 //	public ModelAndView listPostView(Criteria criteria, @PathVariable String type ) {

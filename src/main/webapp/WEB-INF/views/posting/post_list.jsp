@@ -91,7 +91,6 @@
 	                </li>
 	             </c:if> 
 	             	<!-- 주소 잘라주기 --> 
-	             	<c:set var="addressList" value=${post.restaurant.address } />
 	                <li>${post.restaurant.address}</li>
 	                <fmt:formatDate var="mealTime" pattern="MM-dd HH:mm" value="${post.mealTime }"/>
 	                <li>${mealTime }</li>

@@ -141,6 +141,8 @@ public class PostingDaoImpl implements PostingDao {
 		}
 	}
 
+	
+	@Override
 	public List<Posting> findPostingsPerPageByMemberId(long memberId, char category, int pageStart, int pageReadCnt) {
 		if (category == 'R') {
 			String sql ="SELECT id, memberId, restaurantId, title, content, likes, views, regDate "
@@ -148,14 +150,14 @@ public class PostingDaoImpl implements PostingDao {
 					+" WHERE memberId = ?"
 					+" ORDER BY id DESC "
 					+" LIMIT ?,?";
-			return jt.query(sql, new RecommendRestaurantPostingRowMapper(),pageStart,pageReadCnt);
+			return jt.query(sql, new RecommendRestaurantPostingRowMapper(),memberId,pageStart,pageReadCnt);
 		} else {
 			String sql ="SELECT id, memberId, restaurantId, title, content, likes, views, mealTime, recruitment, mealChk, regDate "
 					+" FROM TogetherEatingPosting"
 					+" WHERE memberId = ?"
 					+" ORDER BY id DESC "
 					+" LIMIT ?,?";
-			return jt.query(sql, new TogetherEatingPostingRowMapper(),pageStart,pageReadCnt);
+			return jt.query(sql, new TogetherEatingPostingRowMapper(),memberId,pageStart,pageReadCnt);
 		}
 	}
 

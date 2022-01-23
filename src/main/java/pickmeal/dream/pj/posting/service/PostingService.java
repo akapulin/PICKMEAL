@@ -57,4 +57,7 @@ public interface PostingService {
 	 */
 	public Posting findPostingById(char category, long id);
 	
+	
+	public List<Posting> findPostingsPerPageByMemberId(long memberId, Criteria criteria);
+	
 }
