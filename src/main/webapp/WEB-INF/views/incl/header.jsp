@@ -29,7 +29,8 @@
 						<ul class="profileArea">
 							<li><form action="" method="">로그아웃</form></li>
 							<li><form action="" method="">마이페이지</form></li>
-							<li><a href="${pageContext.request.contextPath}/member/myPage">마이페이지</a></li>
+							<li><a href="${pageContext.request.contextPath}/member/myPage_SJW">마이페이지</a></li>
+							<!-- myPage 로 바꿔야 함. -->
 						</ul>
 					</div>
 				</li>

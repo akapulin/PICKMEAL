@@ -185,9 +185,6 @@ public class GameController {
 		sendMap.put("setOfRoute", setOfRoute);
 		sendMap.put("resList", resList); // 레스토랑 5개 리스트도 보낸다. 
 		
-		
-		
-		
 		//resList 를 가지고 게임서비스로 고고. 
 		return sendMap;
 	}

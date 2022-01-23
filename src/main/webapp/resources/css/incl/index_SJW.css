@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+.retryMsg{
+	position:absolute; 
+	/* 사이즈, 폰트 등 지정해줘야 함. */
+	background-image: url("/pickmeal/resources/img/game/retryBackground.png");
+	background-size: contain;
+	background-position: center center;
+	background-repeat: no-repeat;
+		
+}

@@ -21,13 +21,32 @@
 <section id="mapContent">
 	<h2>사용자 위치 표시</h2>
 	<form id="gameDataForm" name="gameDataForm" method="GET">
-	
-		<c:choose>
-			<c:when test="${not empty cntForRetry}">
-				<input type="hidden" id="cntForRetry" name="cntForRetry" value="${cntForRetry}">	
-				<span id="retryMsg" name="retryMsg">${retryMsg}</span>
-			</c:when>
-		</c:choose>
+		
+		<c:if test="${not empty cntForRetry}">
+			<input type="hidden" id="cntForRetry" name="cntForRetry" value="${cntForRetry}">
+			<c:choose>
+					<c:when test="${cntForRetry eq 0}"></c:when>
+					<c:when test="${cntForRetry eq 1}"></c:when>					
+					<c:when test="${cntForRetry eq 2}">
+						<div class="retryMsg">한 번 더~</div>
+					</c:when>
+					<c:when test="${cntForRetry eq 3}">
+						<div class="retryMsg">한 번 더어~?</div>
+					</c:when>
+					<c:when test="${cntForRetry eq 4}">
+						<div class="retryMsg">또..?</div>
+					</c:when>
+					<c:when test="${cntForRetry eq 5}">
+						<div class="retryMsg">입맛이 까다로우시네</div>
+					</c:when>
+					<c:when test="${cntForRetry eq 6}">
+						<div class="retryMsg">그만 하고 먹으러 가라</div>
+					</c:when>
+					<c:otherwise>
+						<div class="retryMsg">그냥 라면 먹어</div>
+					</c:otherwise>
+			</c:choose>	
+		</c:if>
 	
 	 <!-- action="viewOrderRecordByMenu" id="periodForm" method="GET" -->
 		<div id="mapRadius">

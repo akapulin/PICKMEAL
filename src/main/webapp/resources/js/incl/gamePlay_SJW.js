@@ -1,10 +1,11 @@
-var nowLat, nowLng, map, geocoder, ps, nowAddress, infowindow, 
+var map, geocoder, ps, nowAddress, infowindow, 
 	locPosition;
 let arrLength;
 let ranNum;
 let ranNumArr= [];
 let categorySwitch;
 let lengthOfTotalArr;
+let cntForRetry = window.opener.$('#cntForRetry').val();
 
 let gameWrap = document.getElementById("gameWrap");
 //let cardUl = document.getElementById("cardUl");
@@ -48,8 +49,12 @@ let finalArr = [];
 
 	var keyword = document.getElementById('keyword').value;
 	var radius = document.getElementById('hRadius').value;
-	nowLat = document.getElementById('nowLat').value; 
-	nowLng = document.getElementById('nowLng').value;
+	let nowLat = document.getElementById('nowLat').value; 
+	let nowLng = document.getElementById('nowLng').value;
+	console.log(nowLat);
+	console.log(nowLng);
+	console.log(keyword);
+	console.log(radius);
 	
 	if(keyword == "밥집"){
 		for(var j=0; j< categoryArr.length; j++){
@@ -119,6 +124,8 @@ function searchResList(radius, keyword, lat, lng){
 	console.log(radius);		
 	console.log(lat);
 	console.log(lng);
+	console.log(radius);
+	console.log(keyword);
 	$.ajax({
 		url: "https://dapi.kakao.com/v2/local/search/keyword.json?query="
 		 + keyword + "&x=" + lng + "&y=" + lat + "&radius=" + radius,
@@ -342,6 +349,9 @@ $('.gameBtn').on('click', function(e){
 							opener.parent.setrestaurantIsempty(data2);
 							opener.parent.couponAndFavoriteShow();
 							
+							cntForRetry = cntForRetry + 1;
+							console.log(cntForRetry);
+							console.log(window.opener.$('#cntForRetry').val());
 						}
 					})
 				}
@@ -452,7 +462,7 @@ $('.gameBtn').on('click', function(e){
 							data: resultResOfLadder,
 							// contentType 있으면 안된다고 했는데 언제 였지 객체를 보낼때였나.
 							//contentType: 'application/x-www-form-urlencoded; charset=euc-kr', 
-							success: function(){
+							success: function(data){
 								console.log("됐다.");
 								console.log(resultResOfLadder);
 								console.log(resultResOfLadder.lat, resultResOfLadder.lng);
@@ -468,6 +478,10 @@ $('.gameBtn').on('click', function(e){
 								opener.parent.couponAndFavoriteShow();
 								// 식당 정보를 띄우기 위해서 결과 식당의 좌표를 부모 함수에 넣고 호출.
 								opener.parent.displayRestaurantInfo(resultResOfLadder.lat, resultResOfLadder.lng, resultResOfLadder.rname);
+								
+								cntForRetry = cntForRetry + 1;
+								console.log(cntForRetry);
+								console.log(window.opener.$('#cntForRetry').val());
 							}
 						})						
 					}

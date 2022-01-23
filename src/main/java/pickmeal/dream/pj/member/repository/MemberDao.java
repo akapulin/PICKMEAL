@@ -53,16 +53,22 @@ public interface MemberDao {
 	
 	/**
 	 * 멤버 삭제
-	 * @param id
+	 * @param member
 	 * @return
 	 */
-	public void deleteMember(long id);
+	public void deleteMember(Member member);
 	
 	/**
 	 * 마지막으로 추가된 member 가져오기
 	 * @return
 	 */
 	public Member findLastAddMember();
+	
+	/**
+	 * 비밀번호 변경하기
+	 * @param member
+	 */
+	public void updatePasswd(Member member);
 	
 	
 }

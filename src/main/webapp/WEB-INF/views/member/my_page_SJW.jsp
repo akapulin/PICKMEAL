@@ -14,13 +14,13 @@
     </div>
 	<nav id="nav">
 	    <ul>
-	        <li><a href="#">내 정보</a></li>
+	        <li><a href="${pageContext.request.contextPath}/member/myInformation">내 정보</a></li>
 	        <li><a href="#">내 게시글</a></li>
 	        <li><a href="#">내 댓글</a></li>
 	        <li><a href="#">찜 식당</a></li>
 	        <li><a href="#">내가 간 식당</a></li>
 	        <li><a href="#">쿠폰</a></li>
-	        <li><a href="#">업적</a></li>
+	        <li><a href="${pageContext.request.contextPath}/member/updateAchievementInfo">업적</a></li>
 	    </ul>
 	</nav>
 </body>

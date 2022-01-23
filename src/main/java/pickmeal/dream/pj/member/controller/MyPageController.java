@@ -17,4 +17,5 @@ public class MyPageController {
 		mav.setViewName("member/my_page");
 		return mav;
 	}
+	
 }
