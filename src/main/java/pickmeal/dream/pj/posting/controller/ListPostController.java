@@ -173,8 +173,8 @@ public class ListPostController {
 			@SuppressWarnings("unchecked")
 			List<TogetherEatingPosting> togetherPostings = (List<TogetherEatingPosting>)(Object)postings;
 			mav.addObject("postings", togetherPostings);
-		}	
-			
+		}
+		
 		mav.setViewName("/posting/post_list");
 		return mav;
 		
@@ -183,8 +183,4 @@ public class ListPostController {
 
 	
 
-	
-	
-	
-	
 }

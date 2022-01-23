@@ -120,7 +120,23 @@ public class PostingDaoImpl implements PostingDao {
 
 	}
 
-	
+	public List<Posting> findPostingsPerPageByMemberId(long memberId, char category, int pageStart, int pageReadCnt) {
+		if (category == 'R') {
+			String sql ="SELECT id, memberId, restaurantId, title, content, likes, views, regDate "
+					+" FROM RecommendRestaurantPosting"
+					+" WHERE memberId = ?"
+					+" ORDER BY id DESC "
+					+" LIMIT ?,?";
+			return jt.query(sql, new RecommendRestaurantPostingRowMapper(),pageStart,pageReadCnt);
+		} else {
+			String sql ="SELECT id, memberId, restaurantId, title, content, likes, views, mealTime, recruitment, mealChk, regDate "
+					+" FROM TogetherEatingPosting"
+					+" WHERE memberId = ?"
+					+" ORDER BY id DESC "
+					+" LIMIT ?,?";
+			return jt.query(sql, new TogetherEatingPostingRowMapper(),pageStart,pageReadCnt);
+		}
+	}
 
 	
 	

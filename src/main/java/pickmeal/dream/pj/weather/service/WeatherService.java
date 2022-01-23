@@ -2,6 +2,7 @@ package pickmeal.dream.pj.weather.service;
 
 import java.net.HttpURLConnection;
 import java.util.HashMap;
+import java.util.List;
 
 import pickmeal.dream.pj.weather.domain.Forecast;
 import pickmeal.dream.pj.weather.domain.MyLocation;
@@ -28,4 +29,8 @@ public interface WeatherService {
 	HttpURLConnection connect(String apiUrl);
 
 	Forecast getForecast(MyLocation ml);
+	
+	List<PickMealWeather> getForecast(String url, String date, String hour, String nx, String ny);
+	
+	void addPmw(List<PickMealWeather> pmwList, HashMap<String, String> categoryAndValue);
 }

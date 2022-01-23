@@ -44,10 +44,6 @@ import pickmeal.dream.pj.weather.domain.Weather;
 @Log4j
 @Service("weatherService")
 public class WeatherServiceImpl implements WeatherService {
-	
-	@Autowired
-	private MenuDaoImpl menudao;
-
 	private String Short_term_weather_url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst";	// 초단기예보 : 매시간 30분 생성, 하늘상태
 	private String Short_term_live_weather_url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst"; // 초단기실황 : 매시간 30분 생성, 기온, 강수형태
 	private String Short_term_forecast_weather_url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst"; // 단기예보 : 3시간단위 측정(02:00~23:00)
@@ -222,7 +218,8 @@ public class WeatherServiceImpl implements WeatherService {
 		return forecast;
 	}
 	
-	private List<PickMealWeather> getForecast(String url, String date, String hour, String nx, String ny) {
+	@Override
+	public List<PickMealWeather> getForecast(String url, String date, String hour, String nx, String ny) {
 		int ch = Integer.parseInt(hour);
 		
 		if(ch < 5) {
@@ -284,7 +281,8 @@ public class WeatherServiceImpl implements WeatherService {
 		return pmwList;
 	}
 	
-	private void addPmw(List<PickMealWeather> pmwList, HashMap<String, String> categoryAndValue) {
+	@Override
+	public void addPmw(List<PickMealWeather> pmwList, HashMap<String, String> categoryAndValue) {
 		double tmp = -999;
 		int sky = -1;
 		int pty = -1;
