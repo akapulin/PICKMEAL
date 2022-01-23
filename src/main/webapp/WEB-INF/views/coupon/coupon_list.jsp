@@ -30,8 +30,9 @@
             font-style: normal;
         }
                 /*상단 유저명*/
+        #CouponList{width: 70%; height: 100%; margin: 180px auto 0; }
         #nickName{width: 90%; height: 50px; font-size: 35px; margin-left: 40px;}
-        #CouponList{width: 70%; height: 100%; margin: 0 auto;}
+        
         /*라디오버튼*/
         .hiddenclass{display: none;}
 
@@ -75,45 +76,52 @@
     </style>
 </head>
 <body>
-	<section id="CouponList">
-            <h2>${member.nickName}회원님 쿠폰</h2>
-            	<div id="unusedCouponsWrap">
-            		<form method ="get" name="usedCouponPopup">
-                	<h3>미사용 쿠폰</h3>
-                        <c:forEach var="unusedcoupons" items="${unusedcoupons}">
-                            <div class="couponWrap">
-                        		<p class="rName">"${unusedcoupons.getRestaurant().getRName()}"</p>
-                        		<p class="cName">${unusedcoupons.getCouponCategory().getCouponName()} 쿠폰</p>
-                        		<p class="cNumber">${unusedcoupons.getCouponNumber()}</p>
-                        		<p class="cLimit">${unusedcoupons.getCouponCategory().getLimitPrice()} 이상 사용가능</p>
-                        		<p class="cregDate">${unusedcoupons.getRegDate()}</p>
-                        		<label id="inlabel${unusedcoupons.id}" for="label${unusedcoupons.id}" class="couponIncubate"></label>
-                        		<input id="label${unusedcoupons.id}" class="hiddenclass" type="radio" name="couponId" value="${unusedcoupons.id}" />
-                    		</div>
-                    		
-                        </c:forEach>
-                	</form>
-            	</div>
-            <div id="usedCouponsWrap">
-                <h3>사용 쿠폰</h3>
-                <table id="userSaleslisttable">
-                    <tr class="ColumnWrap">
-	                    <th class="Column CouponName">쿠폰명</th>
-	                    <th class="Column RestaurantName">식당명</th>
-	                    <th class="Column CouponNumber">쿠폰번호</th>
-	                    <th class="Column CouponregDate">사용가능일자</th>
-                    </tr>
-                    <c:forEach var="usedcoupons" items="${usedcoupons}">
-                        <tr class="ColumnInWrap">
-                            <td class="CouponNameIn ColumnIn">${usedcoupons.getCouponCategory().getCouponName()}</td>
-                            <td class="RestaurantNameIn ColumnIn">${usedcoupons.getRestaurant().getRName()}</td>
-                            <td class="CouponNumberIn ColumnIn">${usedcoupons.getCouponNumber()}</td>
-                            <td class="CouponregDateIn ColumnIn">${usedcoupons.getRegDate()}</td>
-                        </tr>
-                    </c:forEach>
-                </table>
-            </div>
-        </section>
+	<header>
+	<jsp:include page="/WEB-INF/views/member/my_page.jsp"/>
+	</header>
+	<main>
+		<section id="CouponList">
+	            <h2 id="nickName">${member.nickName}회원님 쿠폰</h2>
+	            	<div id="unusedCouponsWrap">
+	            		<form method ="get" name="usedCouponPopup">
+	                	<h3>미사용 쿠폰</h3>
+	                        <c:forEach var="unusedcoupons" items="${unusedcoupons}">
+	                            <div class="couponWrap">
+	                        		<p class="rName">"${unusedcoupons.getRestaurant().getRName()}"</p>
+	                        		<p class="cName">${unusedcoupons.getCouponCategory().getCouponName()} 쿠폰</p>
+	                        		<p class="cNumber">${unusedcoupons.getCouponNumber()}</p>
+	                        		<p class="cLimit">${unusedcoupons.getCouponCategory().getLimitPrice()} 이상 사용가능</p>
+	                        		<p class="cregDate">${unusedcoupons.getRegDate()}</p>
+	                        		<label id="inlabel${unusedcoupons.id}" for="label${unusedcoupons.id}" class="couponIncubate"></label>
+	                        		<input id="label${unusedcoupons.id}" class="hiddenclass" type="radio" name="couponId" value="${unusedcoupons.id}" />
+	                    		</div>
+	                    		
+	                        </c:forEach>
+	                	</form>
+	            	</div>
+	            <div id="usedCouponsWrap">
+	                <h3>사용 쿠폰</h3>
+	                <table id="userSaleslisttable">
+	                    <tr class="ColumnWrap">
+		                    <th class="Column CouponName">쿠폰명</th>
+		                    <th class="Column RestaurantName">식당명</th>
+		                    <th class="Column CouponNumber">쿠폰번호</th>
+		                    <th class="Column CouponregDate">사용가능일자</th>
+	                    </tr>
+	                    <c:forEach var="usedcoupons" items="${usedcoupons}">
+	                        <tr class="ColumnInWrap">
+	                            <td class="CouponNameIn ColumnIn">${usedcoupons.getCouponCategory().getCouponName()}</td>
+	                            <td class="RestaurantNameIn ColumnIn">${usedcoupons.getRestaurant().getRName()}</td>
+	                            <td class="CouponNumberIn ColumnIn">${usedcoupons.getCouponNumber()}</td>
+	                            <td class="CouponregDateIn ColumnIn">${usedcoupons.getRegDate()}</td>
+	                        </tr>
+	                    </c:forEach>
+	                </table>
+	            </div>
+	        </section>
+        </main>
+        <footer>
+        </footer>
 </body>
 </html>
 
