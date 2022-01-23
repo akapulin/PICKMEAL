@@ -1,43 +1,47 @@
 package pickmeal.dream.pj.game.controller;
-	
+
+import static pickmeal.dream.pj.web.constant.SavingPointConstants.*;
 import java.util.ArrayList;
+
 import java.util.Collections;
 import java.util.HashMap;
-	import java.util.List;
-	import java.util.Map;
+import java.util.List;
+import java.util.Map;
 
-	import javax.servlet.http.HttpServletRequest;
-	import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
-	import net.sf.json.*;
+import net.sf.json.*;
 
-	import org.springframework.beans.factory.annotation.Autowired;
-	import org.springframework.http.ResponseEntity;
-	import org.springframework.stereotype.Controller;
-	import org.springframework.ui.Model;
-	import org.springframework.web.bind.annotation.GetMapping;
-	import org.springframework.web.bind.annotation.ModelAttribute;
-	import org.springframework.web.bind.annotation.PostMapping;
-	import org.springframework.web.bind.annotation.RequestBody;
-	import org.springframework.web.bind.annotation.RequestMapping;
-	import org.springframework.web.bind.annotation.RequestParam;
-	import org.springframework.web.bind.annotation.ResponseBody;
-	import org.springframework.web.servlet.ModelAndView;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
-	import com.mysql.cj.xdevapi.JsonArray;
+import com.mysql.cj.xdevapi.JsonArray;
 
-	import lombok.extern.java.Log;
+import lombok.extern.java.Log;
 import pickmeal.dream.pj.coupon.domain.CouponCategory;
 import pickmeal.dream.pj.coupon.service.CouponService;
 import pickmeal.dream.pj.game.service.GameService;
-	import pickmeal.dream.pj.member.domain.Member;
-	import pickmeal.dream.pj.message.service.MessageService;
-	import pickmeal.dream.pj.restaurant.command.RestaurantCommand;
-	import pickmeal.dream.pj.restaurant.domain.Restaurant;
+import pickmeal.dream.pj.member.domain.Member;
+import pickmeal.dream.pj.member.service.MemberAchievementService;
+import pickmeal.dream.pj.message.service.MessageService;
+import pickmeal.dream.pj.restaurant.command.RestaurantCommand;
+import pickmeal.dream.pj.restaurant.domain.Restaurant;
 import pickmeal.dream.pj.restaurant.service.FavoriteRestaurantSerivce;
 import pickmeal.dream.pj.restaurant.service.RestaurantCheckService;
-	import pickmeal.dream.pj.web.controller.MapController_SJW;
-	import pickmeal.dream.pj.web.util.Validator;
+import pickmeal.dream.pj.web.controller.MapController_SJW;
+import pickmeal.dream.pj.web.util.Validator;
+
 
 @Controller
 @Log
@@ -67,6 +71,9 @@ public class GameController {
 	@Autowired
 	FavoriteRestaurantSerivce frs;
 	
+	@Autowired
+	MemberAchievementService mas;
+	
 	@GetMapping("/openGamePopUp")
 	public String openGamePopUp() {
 		return "gamePlay_SJW";
@@ -95,9 +102,11 @@ public class GameController {
 			// 마지막 게임이 언제였는지를 오늘 날짜와 차이로 나타내준다.
 			// LastGameRecord 테이블 안에 로그인한 Id의 게임 기록이 없을 때. 어떻게 할 것인가. 
 			diffOfDate = gs.checkLastGameRecord(member.getId());
+			System.out.println("회원일 경우 DIFFOFDATE : " + diffOfDate);
 			//차이가 0이 아니면 => 즉, 오늘 첫게임이면 first msg 보낸다.
 			if(diffOfDate != 0) {
 				firstGameMsg = msgs.bringFirstMsg();
+				System.out.println("gameCotroller : "+firstGameMsg);
 				mav.addObject("firstGameMsg", firstGameMsg); //첫 게임일 경우 안내 메세지 보냄.
 			} else {}
 		}
@@ -194,6 +203,7 @@ public class GameController {
 	public ResponseEntity<?> bringResResultOfGame(@ModelAttribute RestaurantCommand rc, HttpSession session) {
 		
 		Restaurant restaurant = new Restaurant();
+		int cntForRetry = 0;
 		
 		log.info("뜨니? : " + rc.toString());
 		restaurant.setId(rc.getId());
@@ -213,6 +223,12 @@ public class GameController {
 			//회원일 때 가장 최근 게임을 테이블에 넣기.
 			System.out.println("");
 			gs.insertLastGameRecord(member.getId(), restaurant.getId());
+			member = mas.addFoodPowerPointItem(member, PLAY_GAME);
+			System.out.println(member);
+			cntForRetry = (int)session.getAttribute("cntForRetry");
+			cntForRetry++;
+			System.out.println("게임 다시하기 Cnt : " + cntForRetry);
+			session.setAttribute("cntForRetry", cntForRetry);
 		}
 		session.setAttribute("restaurant", restaurant);
 		HashMap<String,String> map = new HashMap<String, String>();

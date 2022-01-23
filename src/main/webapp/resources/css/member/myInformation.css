@@ -2,9 +2,11 @@
 
 #content {
 	width: 90%; height: calc(100% - 80px);
-	display: flex; justify-content: center; align-items: center;
+	display: flex; justify-content: center; 
+	/* align-items: center; */
 	margin: 0 auto;
 }
+#informationWrap{ margin-top: 80px; }
 .info {
 	text-indent: 20px;
 	height: 40px; width: 400px; 

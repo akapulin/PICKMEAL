@@ -60,11 +60,12 @@
                         <th class="thCategory">적립 구분</th>
                         <th class="thDate">적립 날짜</th>
                     </tr>
-                    
                     <c:forEach var="f" items="${fppList}">
-                    	<td class="tdPoint tdMid td">+${f.getPoint()}</td>
-                        <td class="tdCategory td">${f.getDetail().getKor()}</td>
-                        <td class="tdDate tdMid td">${f.getRegDate()}</td>
+	                    <tr>
+	                    	<td class="tdPoint tdMid td">+${f.getPoint()}</td>
+	                        <td class="tdCategory td">${f.getDetail().getKor()}</td>
+	                        <td class="tdDate tdMid td">${f.getRegDate()}</td>
+						</tr>
                     </c:forEach>
                     <tr>
                    		<td class="tdPoint tdMid td">1</td>

@@ -7,6 +7,9 @@ $(window).ready(function(){
 $('#changePasswdBtn').on('click', function(){
 	console.log("울랄라...");
 	$(this).hide();
+	$('#originPw').val('');
+	$("#newPw").val('');
+	$("#checkNewPw").val('');
 	$("#checkOriginPwWrap").show();
 })
 
@@ -36,7 +39,17 @@ $(document).on('click', "#checkOriginPasswdBtn", function(e){
 					console.log(newPw);
 					console.log(checkNewPw);
 					
-					if(newPw != checkNewPw){
+					if(newPw.length < 4 || newPw.length > 20){
+						Swal.fire({
+							icon: 'error',
+							title: '입력 오류',
+							text: '4글자 이상 20글자 이내로 입력해주세요',
+							confirmButtonColor: '#b7cae1',
+						})	
+						$("#newPw").val('');
+						$("#checkNewPw").val('');
+					}
+					else if(newPw != checkNewPw){
 						//alert("입력한 비밀번호가 같지 않습니다. 다시 입력해주세요");
 						Swal.fire({
 							icon: 'error',
@@ -66,7 +79,6 @@ $(document).on('click', "#checkOriginPasswdBtn", function(e){
 							dataType: 'text',
 							success: function(){
 								Swal.fire({
-									position: 'top-end',
 									icon: 'success',
 									title: '비밀번호 변경이 완료되었습니다',
 									showConfirmButton: false,
@@ -108,11 +120,11 @@ $("#deleteBtn").on('click', function(){
 	cancelButtonText: '아니요'
 }).then((result) => {
   if (result.isConfirmed) {
-    /*Swal.fire(
+    Swal.fire(
       '회원 탈퇴 되었습니다.',
-      '감사합니다.',
+      '그간 밥찡코를 이용해주셔서 감사합니다',
       'success'
-    )*/ 
+    )
 
 	$.ajax({
 		url: getContextPath() + "/deleteMember",
@@ -121,6 +133,17 @@ $("#deleteBtn").on('click', function(){
 		dataType: 'text',*/
 		success: function(){
 			console.log("delete success");
+					
+			let deleteForm = document.deleteForm;
+			deleteForm.submit();
+			/*
+			$.ajax({
+				url: "signOutMember",
+				type: "GET",
+				success: function(){
+					console.log("회원 탈퇴 후 자동 로그아웃 되기");
+				}
+			})*/
 		},
 		error: function(){
 			console.log("delete fail");	

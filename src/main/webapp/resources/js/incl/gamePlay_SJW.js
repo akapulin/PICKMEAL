@@ -349,9 +349,11 @@ $('.gameBtn').on('click', function(e){
 							opener.parent.setrestaurantIsempty(data2);
 							opener.parent.couponAndFavoriteShow();
 							
+							/*
 							cntForRetry = cntForRetry + 1;
 							console.log(cntForRetry);
 							console.log(window.opener.$('#cntForRetry').val());
+							*/
 						}
 					})
 				}
@@ -479,9 +481,11 @@ $('.gameBtn').on('click', function(e){
 								// 식당 정보를 띄우기 위해서 결과 식당의 좌표를 부모 함수에 넣고 호출.
 								opener.parent.displayRestaurantInfo(resultResOfLadder.lat, resultResOfLadder.lng, resultResOfLadder.rname);
 								
+								/*
 								cntForRetry = cntForRetry + 1;
 								console.log(cntForRetry);
 								console.log(window.opener.$('#cntForRetry').val());
+								*/
 							}
 						})						
 					}

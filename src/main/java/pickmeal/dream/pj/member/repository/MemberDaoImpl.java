@@ -72,7 +72,7 @@ public class MemberDaoImpl implements MemberDao {
    @Override
    public void deleteMember(Member member) {
       String sql = "UPDATE Member SET memberType=? WHERE id=?";
-      jt.update(sql, member.getMemberType(), member.getId());
+      jt.update(sql, String.valueOf(member.getMemberType()), member.getId());
    }
 
    /**

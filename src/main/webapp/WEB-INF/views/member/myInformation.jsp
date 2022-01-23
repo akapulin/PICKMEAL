@@ -15,7 +15,7 @@
 <jsp:include page="/WEB-INF/views/member/my_page_SJW.jsp"/>
 <section id="content">
 	<!-- <h2>내 정보</h2> -->
-	<section id="InformationWrap">
+	<section id="informationWrap">
 		<div class="eachInfoWrap">
 			<div class="infoTab">이메일</div>
 			<div class="info emailTab">${member.getEmail()}</div>
@@ -58,7 +58,9 @@
 			
 		</div>
 		<div class="eachInfoWrap">
-			<button id="deleteBtn">탈퇴하기</button>
+			<form id="deleteForm" name="deleteForm" action="signOutMember" method="GET">
+				<button type="button" id="deleteBtn">탈퇴하기</button>
+			</form>
 		</div>
 	</section>
 </section>

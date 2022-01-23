@@ -1,0 +1,108 @@
+@charset "utf-8";
+
+		/*기본 설정*/
+		input[type=radio]{display: none;}
+        input[type=text]{border:0px; font-size:24px; background-color: white; color: black;}
+        
+        /*페이지*/
+        section{ width: 80%; height: 800px; background-color: #fff; margin: 180px auto 0; min-width: 1215px;}
+        #divName{text-indent:30px; width: 100%; height: 30px; font-size: 35px; line-height: 40px; margin: 20px 0 20px; font-weight: 900;}
+        /*왼쪽*/
+        #leftdiv{width: 450px; height: 730px; box-sizing:border-box; border:5px solid #ffecec; margin-left:40px; margin-top: 20px; float: left; overflow:scroll; overflow-x: hidden;
+        		border-radius: 30px; }
+        #leftdiv h3{ padding: 10px 0; font-size: 30px; line-height: 35px; text-indent: 30px; border-bottom: 2px solid #000;}
+        
+        /*왼쪽 메인 div*/
+        .vrdiv{margin-left: 60px; margin-top: 30px; width: 320px; height: 180px; border: 2px solid #000;}
+        
+        /* 스크롤바 설정*/
+		#leftdiv::-webkit-scrollbar{
+		    width: 6px;
+		}
+		
+		/* 스크롤바 막대 설정*/
+		#leftdiv::-webkit-scrollbar-thumb{
+		    height: 5px;
+		    background-color: white;
+		    /* 스크롤바 둥글게 설정    */
+		    border-radius: 10px;    
+		}
+		
+		/* 스크롤바 뒷 배경 설정*/
+		#leftdiv::-webkit-scrollbar-track{
+		    background-color: rgba(0,0,0,0);
+		}
+		
+        /*왼쪽 중 식당정보*/
+        .vrmain{position: relative; width: 320px; height: 130px; float: left; background-color: white;}
+        .mainInlabel{position: absolute; top: 0; left: 0; width: 100%; height: 100%;}
+        .vrName{font-weight:600; font-size:18px; margin-left:15px; margin-top : 20px; width: 260px; height:30px; text-align: left;}
+        .vrRegDate{font-weight:600; font-size:18px; margin-left:40px; margin-top:40px; width: 260px; height:30px; text-align: right;}
+        /*버튼 Wrap*/
+        .buttonWrap{ width: 320px;height: 50px; background-color: white; float: left;}
+        
+        /*찜버튼*/
+        .favoritebuttonWrap{box-sizing:border-box; border-top: 1px solid #000; position: relative; width: 106px; height: 50px; float: left; text-align: center; line-height: 40px; overflow: hidden; }
+        .favoriteInlabel{position: absolute; top: 0; left: 0; width: 100%; height: 100%;}
+        .heart {
+			    width: 18px;
+			    height: 18px;
+			    top:18px; left:43px;
+			    background: #ea2027;
+			    position: relative;
+			    transform: rotate(45deg);
+			  }
+		.heart:hover{}
+		.heart::before,
+		.heart::after {
+			    content: "";
+			    width: 18px;
+			    height: 18px;
+			    position: absolute;
+			    border-radius: 50%;
+			    background: #ea2027;
+			  }
+		.heart::before {
+			    left: -50%;
+			  }
+		.heart::after {
+			    top: -50%; right: 0px
+			  }
+        
+        /*리뷰버튼*/
+        .reviewbuttonWrap{box-sizing:border-box; border-top: 1px solid #000; position: relative; width: 107px; height: 50px; background-color: white;
+        line-height: 50px; float: left; text-align: center; overflow: hidden;}
+        .reviewInlabel{ position: absolute; top: 0; left: 0; width: 100%; height: 100%;}
+        .goreview{width: 106px; text-align: center;}
+        /*삭제버튼*/
+        .removebuttonWrap{box-sizing:border-box; border-top: 1px solid #000; position: relative; width: 107px; height: 50px; 
+        background-color: white; float: left; text-align: center; overflow: hidden;
+        line-height: 50px;}
+        .removeInlabel{position: absolute; top: 0; left: 0; width: 100%; height: 100%;}
+        .goremove{width: 106px; text-align: center;}
+        /*.removebuttonWrap:hover{background-color: white;}*/
+        
+        
+        /*오른쪽 화면*/
+        #rightdiv{width: 820px; height: 730px; margin-top: 20px; margin-left:30px; float: left;}
+        #rightdiv h3{ padding: 10px 0; font-size: 30px; line-height: 35px;
+        			text-indent: 30px; }
+        /*리뷰하기 내부*/
+        #Reviewcheck{width: 100%; height: 525px; border-top:2px solid #000; display: none;}
+        #reviewRName{margin-top: 20px; text-align: center; width: 100%; height: 50px; font-family: 'DungGeunMo';}
+        /*리뷰 한개 한개*/
+        .checkboxWrap{position: relative; margin : 0 auto; width: 330px; margin-top: 10px; height: 50px; 
+                background-color: white; margin-left: 45px; margin-top: 30px; float: left;
+                box-sizing: border-box;}
+        /*리뷰 이모티콘*/
+        .reviewImg{height: 40px; width: 40px; margin-top: 5px; margin-left: 10px; float: left;}
+        /*체크박스*/
+        .reviewCheckbox{display: none;}
+        /*체크박스 외부 라벨*/
+        .checklabel{position: absolute; top: 0; left: 0; width: 330px; height: 50px;}
+        .reviewMessage{width: 250px; height: 50px; line-height: 50px; float: left; margin-left: 10px; font-size: 15px;
+        			}
+        #reviewButtonWrap{width: 100px; height: 50px; margin:0 auto; display: none;}
+        #reviewButton { width: 104px; height: 40px; background-color: #fff; cursor: pointer; outline: none;} 
+        #explainWrap{width: 500px; height: 100px; margin: 200px auto; text-align: center;}
+        .p1 {font-size: 30px;}

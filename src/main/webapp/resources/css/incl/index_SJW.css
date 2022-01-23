@@ -2,6 +2,7 @@
 
 .retryMsg{
 	position:absolute; 
+	top:100px; height: 100px;
 	/* 사이즈, 폰트 등 지정해줘야 함. */
 	background-image: url("/pickmeal/resources/img/game/retryBackground.png");
 	background-size: contain;
