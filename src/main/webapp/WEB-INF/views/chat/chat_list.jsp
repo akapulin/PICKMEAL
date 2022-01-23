@@ -31,7 +31,7 @@
 					</c:otherwise>
 				</c:choose>
 					<time datetime="${c.regDate}"><fmt:formatDate value="${c.regDate}" pattern="yyyy년 MM월 dd일" /></time>
-					<c:if test="${c.memberType ne 'D'.charAt(0)}">
+					<c:if test="${c.member.memberType ne 'D'.charAt(0)}">
 						<button type="button" name="goChatting" class="choiceChatter" 
 						data-writernick="${c.writer.nickName}" data-commenternick="${c.commenter.nickName}"
 						 data-writer="${c.writer.id}" data-commenter="${c.commenter.id}" data-member="${member.id}" 
