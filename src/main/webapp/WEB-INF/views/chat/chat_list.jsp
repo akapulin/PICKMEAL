@@ -31,12 +31,20 @@
 					</c:otherwise>
 				</c:choose>
 					<time datetime="${c.regDate}"><fmt:formatDate value="${c.regDate}" pattern="yyyy년 MM월 dd일" /></time>
-					<c:if test="${c.member.memberType ne 'D'.charAt(0)}">
+				<c:choose>
+					<c:when test="${c.member.memberType ne 'D'.charAt(0)}">
 						<button type="button" name="goChatting" class="choiceChatter" 
 						data-writernick="${c.writer.nickName}" data-commenternick="${c.commenter.nickName}"
 						 data-writer="${c.writer.id}" data-commenter="${c.commenter.id}" data-member="${member.id}" 
 						 id="choiceChatter_${c.id}" value="${c.id}" onclick="downloadFile(this); removeAlarm(this)">채팅</button>
-					</c:if>
+					</c:when>
+					<c:otherwise>
+						<button type="button" name="goChatting" class="choiceChatter" 
+						data-writernick="${c.writer.nickName}" data-commenternick="${c.commenter.nickName}"
+						 data-writer="${c.writer.id}" data-commenter="${c.commenter.id}" data-member="${member.id}" 
+						 id="choiceChatter_${c.id}" value="${c.id}" onclick="downloadFile(this); removeAlarm(this)" disabled>채팅</button>
+					</c:otherwise>
+				</c:choose>
 				</div>
 			</c:forEach>
 		</section>
