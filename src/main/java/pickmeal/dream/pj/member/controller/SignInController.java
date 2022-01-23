@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import lombok.extern.java.Log;
+import pickmeal.dream.pj.chat.handler.WebSocketHandler;
 import pickmeal.dream.pj.coupon.domain.Coupon;
 import pickmeal.dream.pj.coupon.domain.CouponCategory;
 import pickmeal.dream.pj.coupon.service.CouponService;
@@ -21,7 +22,6 @@ import pickmeal.dream.pj.member.domain.Member;
 import pickmeal.dream.pj.member.service.MemberService;
 import pickmeal.dream.pj.member.util.PasswordDecoding;
 import pickmeal.dream.pj.restaurant.domain.Restaurant;
-import pickmeal.dream.pj.web.handler.WebSocketHandler;
 
 @Controller
 @Log

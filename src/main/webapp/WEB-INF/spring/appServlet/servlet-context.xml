@@ -49,7 +49,7 @@
 		</websocket:handshake-interceptors>
 		<websocket:sockjs></websocket:sockjs>
    </websocket:handlers>
-   <beans:bean id="chatHandler" class="pickmeal.dream.pj.web.handler.WebSocketHandler"></beans:bean>
+   <beans:bean id="chatHandler" class="pickmeal.dream.pj.chat.handler.WebSocketHandler"></beans:bean>
   
    
    

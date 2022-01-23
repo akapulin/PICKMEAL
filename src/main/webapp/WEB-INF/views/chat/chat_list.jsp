@@ -17,6 +17,7 @@
 			<h3 class="hidden">채팅 목록</h3>
 			<c:forEach var="c" items="${chats}"> 
 				<div class="chatterWrap" id="chatterWrap${c.id}">
+				<c:if test="${c.readType eq 'N'.charAt(0)}"><p class="non_read">!</p></c:if>
 				<c:choose>
 					<c:when test="${member.id eq c.writer.id}">
 						<img alt="${c.commenter.profileImgPath}님의 프로필 이미지" src="${pageContext.request.contextPath}${c.commenter.profileImgPath}">
@@ -30,8 +31,10 @@
 					</c:otherwise>
 				</c:choose>
 					<time datetime="${c.regDate}"><fmt:formatDate value="${c.regDate}" pattern="yyyy년 MM월 dd일" /></time>
-					<button type="button" name="goChatting" class="choiceChatter" data-writernick="${c.writer.nickName}" data-commenternick="${c.commenter.nickName}"
-					 data-writer="${c.writer.id}" data-commenter="${c.commenter.id}" data-member="${member.id}" id="choiceChatter_${c.id}" value="${c.id}" onclick="downloadFile(this)">채팅</button>
+					<button type="button" name="goChatting" class="choiceChatter" 
+					data-writernick="${c.writer.nickName}" data-commenternick="${c.commenter.nickName}"
+					 data-writer="${c.writer.id}" data-commenter="${c.commenter.id}" data-member="${member.id}" 
+					 id="choiceChatter_${c.id}" value="${c.id}" onclick="downloadFile(this); removeAlarm(this)">채팅</button>
 				</div>
 			</c:forEach>
 		</section>
@@ -54,6 +57,18 @@
 			
 			<script type="text/javascript">
 			
+			function removeAlarm(a) {
+				$(a).parent().children(".non_read").remove();
+				$.ajax({
+					url: "updateChatType",
+					type: "get",
+					data: {
+						"id": $(a).val(),
+						"readType": "R"
+					}
+				})
+			}
+			
 			// 페이지가 로드될 때 목록에 이미 있는 상대와 채팅이라면 해당 채팅방을 클릭한다
 			$(document).ready(function() {
 				let chatId = "${chat.id}";
@@ -67,6 +82,8 @@
 			
 			let writerId = "${writer.id}";
 			let commenterId = "${commenter.id}";
+			// 상대방이 채팅에 참가했는지 표시
+			let participation = false;
 			
 			// 기존의 파일 다운로드 해서 태그 생성
 			function downloadFile(a) {
@@ -199,24 +216,21 @@
 				var name = data.substring(0, data.indexOf(":"));
 				message = data.substring(data.indexOf(":")+1, data.length);
 				
-				console.log("name : " + name)
-				console.log("message : " + message)
-				
 				message = message.replace(/\s+$/,'').replace(/\s/g, "&nbsp;");
 				
 				var cur_session = '${member.nickName}'; //현재 세션에 로그인 한 사람
-				console.log("cur_session : " + cur_session);
 				
 				sessionId = name;
-				
 				//현재시간 ex) 오전 10:50
 				var today = new Date();	
 				var time = today.nowHour() + ":" + today.nowMinute();
-				
-				// 댓글 작성자가 로그인 상태인지 표시
-				if (message.includes("댓글&nbsp;작성자&nbsp;로그인&nbsp;중") || message.includes("댓글&nbsp;작성자&nbsp;비로그인&nbsp;중")) {
+				// 상대방이 들어올 건지 표시
+				if (message.includes("님&nbsp;로그인&nbsp;중") || message.includes("님&nbsp;비로그인&nbsp;중")) {
 					$("#msgWrap").append("<p class='removeMsg'>" + message + "</p>");
 					$('#msgArea').scrollTop($('#msgArea').prop('scrollHeight'));
+					if (message.includes("님&nbsp;비로그인&nbsp;중")) {
+						participation = false;
+					}
 					return;
 				}
 				//로그인 한(본인) 클라이언트와 타 클라이언트를 분류하기 위함
@@ -232,13 +246,16 @@
 				if (message.includes("]님이&nbsp;입장했습니다.")) {
 					$("#msgWrap").append("<p class='removeMsg'>" + message + "</p>");
 					$('#msgArea').scrollTop($('#msgArea').prop('scrollHeight'));
+					participation = true;
 					return;
 				}
 				
 				// 메세지 시작
+				
 				$(".removeMsg").remove();
 				if (message.includes("]님은&nbsp;시간이&nbsp;부족하네요ㅠㅠ")){
 					makeOpponentTag(commenterNick, time, message);
+					participation = false;
 					return;
 				}
 				if(sessionId == cur_session){
@@ -247,8 +264,15 @@
 					makeOpponentTag(sessionId, time, message);
 				}
 				
+				
 				let fileText = tagToFileText();
+				let readType = 'R'; // 상대방이 있을 경우
 
+				// 시작 전 현재 상대방이 비로인일 경우 내역을 남겨야한다.
+				if (participation == false) {
+					readType = 'N';
+				}
+				console.log(readType)
 				$.ajax({
 					url: "uploadFile",
 					type: "post",
@@ -256,6 +280,7 @@
 					data: {
 						"writerId" : writerId,
 						"commenterId": commenterId,
+						"readType": readType,
 						"fileText": fileText
 					}, success: function(data) {
 						console.log("success")
@@ -295,14 +320,20 @@
 				var user = '${member.nickName}';
 				var str = '채팅창에 입장했습니다 [' + user + ']';
 				
-				let writerNick = $(".choiceChatter.on").data("writernick");
-				let commenterNick = $(".choiceChatter.on").data("commenternick");
 				let memberNick = "${member.nickName}";
 				
 				if (writerNick == memberNick) {
-					sock.send("first send:" + commenterNick);
+					if (writerNick == memberNick) {
+						sock.send("first send:" + commenterNick);
+					} else if (commenterNick == memberNick) {
+						sock.send("${member.nickName}:[${member.nickName}]님이 입장했습니다.")
+					}
 				} else if (commenterNick == memberNick) {
-					sock.send("${member.nickName}:[${member.nickName}]님이 입장했습니다.")
+					if (commenterNick == memberNick) {
+						sock.send("first send:" + writerNick);
+					} else if (writerNick == memberNick) {
+						sock.send("${member.nickName}:[${member.nickName}]님이 입장했습니다.")
+					}
 				}
 				
 				$("#msgWrap").append("<p class='removeMsg'>" + str + "</p>");

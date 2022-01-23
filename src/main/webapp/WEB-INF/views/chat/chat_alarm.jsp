@@ -26,14 +26,20 @@
 	let pageName = urlArr[urlArr.length - 1];
 	let sockChat = null;
 	
-	sockChat = new SockJS("<c:url value="/oneChatting"/>");
-	sockChat.onmessage = onMessage;
+	if (check != "") {
+		sockChat = new SockJS("<c:url value="/oneChatting"/>");
+		sockChat.onmessage = onMessage;
+	}
 	
 
 	function closeChatAlarm() {
 		$("#chatCount").val("false")
 		$("#chatAlarmWrap").fadeOut();
-		sockChat.send($("#writer").data("nickname") + ":[${member.nickName}]님은 시간이 부족하네요ㅠㅠ");
+		if ($("#writer").data("nickname") == "${member.nickName}") {
+			sockChat.send($("#commenter").data("nickname") + ":[${member.nickName}]님은 시간이 부족하네요ㅠㅠ");
+		} else if ($("#commenter").data("nickname") == "${member.nickName}") {
+			sockChat.send($("#writer").data("nickname") + ":[${member.nickName}]님은 시간이 부족하네요ㅠㅠ");
+		}
 		$.ajax({
 			url: "${pageContext.request.contextPath}/chat/chatAlarm",
 			type: "get",

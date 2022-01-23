@@ -1,4 +1,4 @@
-package pickmeal.dream.pj.web.handler;
+package pickmeal.dream.pj.chat.handler;
 
 
 import java.util.ArrayList;
@@ -53,49 +53,57 @@ public class WebSocketHandler extends TextWebSocketHandler {
 		// 현재 로그인 중인 클라이언트의 세션 내 정보
 		Member commenter = (Member)map.get("commenter");
 		Member writer = (Member)map.get("writer");
+		Member member = (Member)map.get("member");
+		
+		log.info(line);
 		
 		// 화면에 처음 들어왔다면
 		// 글쓴이와 댓글 작성자 구분
 		if (line.contains("first send")) {
 			String[] lines = line.split(":");
-			WebSocketSession commenterS = loginMemberMap.get(lines[1]);
-			if (v.isEmpty(commenterS)) {
-				session.sendMessage(new TextMessage("댓글 작성자 비로그인 중"));
+			WebSocketSession recipient = loginMemberMap.get(lines[1]);
+			if (v.isEmpty(recipient)) {
+				session.sendMessage(new TextMessage(lines[1] + "님 비로그인 중"));
 			} else {
-				session.sendMessage(new TextMessage("댓글 작성자 로그인 중"));
-				String msg = writer.getNickName() + "와 채팅이 시작되었습니다."
+				session.sendMessage(new TextMessage(lines[1] + "님 로그인 중"));
+				String msg = member.getNickName() + "와 채팅이 시작되었습니다."
 						+ "<br>채팅에 참석을 원한다면 아래의 채팅 바로가기 버튼을 눌러주세요."
 						+ "<br>참석을 원하지 않을 시 창을 닫아주세요.//" + writer.getId() + "//" + writer.getNickName()
 						+ "//" + commenter.getId() + "//" + commenter.getNickName();
 				// commenter의 session scope 에 writer 랑 commenter 를 넣어준다.
 				
-				commenterS.sendMessage(new TextMessage(msg));
+				recipient.sendMessage(new TextMessage(msg));
 				
 			}
 			return;
 		}
 
-		String name = line.substring(0, line.indexOf(":")); // 보낸 사람 닉네임
+		String name = line.substring(0, line.indexOf(":")); // 닉네임
 		String message = line.substring(line.indexOf(":")+1); // 내용
 		
 		
 		// 채팅 거절 시
 		if (message.contains("님은 시간이 부족하네요ㅠㅠ")) {
-			WebSocketSession writerS = loginMemberMap.get(name);
-			writerS.sendMessage(new TextMessage(name + ":" + message));
+			WebSocketSession recipient = loginMemberMap.get(name);
+			recipient.sendMessage(new TextMessage(name + ":" + message));
 			return;
 		}
 		// 채팅 수락 시
 		if (message.contains("님이 입장했습니다.")) {
-			WebSocketSession writerS = loginMemberMap.get(writer.getNickName());
-			writerS.sendMessage(new TextMessage(name + ":" + message));
+			WebSocketSession recipient = loginMemberMap.get(name);
+			if (!v.isEmpty(recipient)) {
+				recipient.sendMessage(new TextMessage(name + ":" + message));
+			}
 			return;
 		}
 		
 		// 작성자와 댓글을 적은 사람에게만 보낸다.
-		for (String email : loginMemberMap.keySet()) {
-			if (email.equals(writer.getNickName()) || email.equals(commenter.getNickName())) {
-				WebSocketSession s = loginMemberMap.get(email);
+		for (String nickName : loginMemberMap.keySet()) {
+			log.info("nickName : " + nickName);
+			log.info("writer nickName : " + writer.getNickName());
+			log.info("commenter nickName : " + commenter.getNickName());
+			if (nickName.equals(writer.getNickName()) || nickName.equals(commenter.getNickName())) {
+				WebSocketSession s = loginMemberMap.get(nickName);
 				s.sendMessage(new TextMessage(name + ":" + message));
 			}
 		}
