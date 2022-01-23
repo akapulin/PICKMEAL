@@ -15,7 +15,6 @@
             <h3>내 게시글</h3>
             <div class="postings_wrap">
                 <div class="postBtnWrap">
-                    <a href="#" class="postBtn">전체</a>
                     <a href="#" class="postBtn">같이먹자</a>    
                     <a href="#" class="postBtn">식당추천</a>
                 </div>
