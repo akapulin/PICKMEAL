@@ -16,10 +16,6 @@ header{
 /*
     로고
 */
-.logoWrap{
-	/*position: absolute;*/
-	 
-}
 .logo{
   position: absolute;
   left: 20px;
@@ -199,6 +195,7 @@ header{
   color:#fff;
   font-size: 0.5em;
   text-align: center;
+  display: none;
 }
 
 /* 알림내역 서브네비게이션 */
@@ -220,7 +217,7 @@ header{
   border-radius: 7px 7px 0 0;
 }
 .alarmAreaWrap{
-  position: absolute; top:70px; right:35px;
+  position: absolute; top:70px; right:35px; z-index: 5000;
   background: #fffafa;
   /* width: 300px; */
   
@@ -247,7 +244,8 @@ header{
 }
 .alarmAreaWrap > ul > li {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-left: 15px;
   align-items: center;
   border-bottom: 1px solid #fff;
 }

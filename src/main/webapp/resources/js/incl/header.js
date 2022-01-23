@@ -163,13 +163,79 @@ $('#gnb ul li a').on('click',function(){
 
 })
 
+// 처음에 한번 실행
+setTimeout(function() {
+	let checkMember = $("#headerMember").val();
+	if (checkMember != "") {
+		$.ajax({
+			url: getContextPath() + "/chat/viewAlarmRecord",
+			type: "get",
+			success: function(data) {
+				createAlarm(data);
+			}
+		})
+	}
+}, 1)
+// 알람 레코드 불러서 있으면 추가해야한다.
+let alarmTimer = setInterval(function() {
+	let checkMember = $("#headerMember").val();
+	if (checkMember != "") {
+		$.ajax({
+			url: getContextPath() + "/chat/viewAlarmRecord",
+			type: "get",
+			success: function(data) {
+				createAlarm(data);
+			}
+		})
+	}
+}, 5000) // 60000 : 1분
 
-/*
+function createAlarm(data) {
+	if (data.length == 0) {
+		return;
+	}
+	for(let i=0; i<data.length; i++) {
+		let type = data[i].alarmType;
+		if (type == 'C') { // type 이 C 인 경우 채팅
+			$(".chatAlarmMark").show();
+		} else {
+			$(".alarmMark").show();
+			let imgTag;
+			let contentTag;
+			let timeTag;
+			let timeHD = Date.parse(new Date()) - Date.parse(data[i].regDate);
+			
+			if (timeHD > 3600000) { // 1시간 보다 클 경우
+				let hourHD = parseInt(timeHD / 3600000); // 시간으로 나누기
+				timeTag = hourHD + " 시간 전"
+			} else {
+				let minuteHD = parseInt(timeHD / 60000); // 분
+				timeTag = minuteHD + " 분 전"
+			}
+			
+			if (data[i].alarmType == 'L') {
+				imgTag = '<img src="' + getContextPath() + '/resources/img/header/store.png" alt="프로필사진" class="alarmProfileImg">';
+				contentTag = '식당에서 식사는 맛있으셨나요?';
+			} else {
+				imgTag = '<img src="' + getContextPath() + '/resources/img/header/store.png" alt="프로필사진" class="alarmProfileImg">';
+				contentTag = '님과의 식사는 어떠셨나요?';
+			}
+			// 알람 메시지를 넣어줘야한다.
+			if ($("#alarm" + data[i].id).length == 0) { // 해당 알람이 없을 경우
+				$("ul.alarmArea").append(
+						'<li onclick="removeAlarm(this)" data-friend="' + data[i].friendId + '" data-alarmType="' + data[i].alarmType + '" id="alarm' + data[i].id + '">' + imgTag + 
+							'<span class="alarmTextBold">[' + data[i].content + '] </span>' + contentTag + 
+							'<span class="alarmTextClock">' + timeTag + '</span>' + 
+						'</li>'
+				)
+			}
+		}
+	}
+}
 
-	폼 전송하기
-
-*/
-
+function removeAlarm(a) {
+	
+}
 
 
 

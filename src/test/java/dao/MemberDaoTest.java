@@ -83,9 +83,9 @@ public class MemberDaoTest {
 	}
 	
 //	@Test
-	@Transactional
+//	@Transactional
 //	@Commit
-	public void deleteMember() {
-		md.deleteMember(4);
-	}
+//	public void deleteMember() {
+//		md.deleteMember(4);
+//	}
 }

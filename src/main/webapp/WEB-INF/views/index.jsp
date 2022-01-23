@@ -13,6 +13,7 @@
 <link href="${pageContext.request.contextPath}/resources/css/incl/chart.css" rel="stylesheet" type="text/css">
 <script src="${pageContext.request.contextPath}/resources/js/incl/chart.js" defer></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/incl/index_map_b.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/incl/index_SJW.css" />
 
 <!-- 익명채팅방, 날씨 - 김재익 -->
 <link href="${pageContext.request.contextPath}/resources/css/chat/chat.css" rel="stylesheet" type="text/css">
@@ -33,11 +34,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/incl/menu_game_JWS.js" defer></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/incl/index_JWS.css" />
 
-
-
 <title>밥찡코</title>
-
-
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/incl/header.jsp"%>
@@ -57,13 +54,9 @@
 				</form>
 			</div>
 			
+			<div id="retryMsg" class="retryMsg"></div>
+			
 			<form id="gameDataForm" name="gameDataForm" method="GET">
-				<c:choose>
-					<c:when test="${not empty cntForRetry}">
-						<input type="hidden" id="cntForRetry" name="cntForRetry" value="${cntForRetry}">	
-						<span id="retryMsg" name="retryMsg">${retryMsg}</span>
-					</c:when>
-				</c:choose>
 			
 			 <!-- action="viewOrderRecordByMenu" id="periodForm" method="GET" -->
 				<div id="mapRadius">

@@ -30,7 +30,7 @@ public class FavoriteRestaurantController {
 	@Autowired
 	MemberService ms;
 	
-	@GetMapping("/findAllFavoriteRestaurant")
+	@GetMapping("/member/findAllFavoriteRestaurant")
 	public ModelAndView findAllFavoriteRestaurant(HttpSession session) {
 		List<FavoriteRestaurant> frlist = new ArrayList<FavoriteRestaurant>();
 		
@@ -41,10 +41,10 @@ public class FavoriteRestaurantController {
 			Restaurant restaurant = frs.findRestaurantById(fr.getRestaurant().getId());
 			fr.setRestaurant(restaurant);
 		}
-		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("frlist",frlist);
 		mav.addObject("member",member);
+		mav.addObject("here","myFavorite");
 		mav.setViewName("restaurant/favorite_restaurant_list");
 		
 		return mav;

@@ -1,0 +1,136 @@
+@charset "UTF-8";
+
+h4{ font-size: 1.3em; color: #5a5a5a;}
+#achieveWrap{ 
+	width: 80%; height: 600px; 
+	/* background-color: beige; */
+	overflow: auto;
+	margin:0 auto;
+}
+#achieveWrap h2{
+	color: #5a5a5a;
+	font-size: 1.8em;
+	margin: 20px 0 0 20px;	
+}
+#firstLineWrap { 
+	width: 100%; 
+	height: 100px; 
+	/* background-color: skyblue; */ 
+	display: flex;
+	justify-content: space-around;
+	margin-top: 20px;
+}
+#attendWrap{
+	width: 120px; height: 100px;
+	/* background-color: cadetblue; */
+}
+#spanAtdWrap { 
+	width: 80%;
+	margin:0 auto;
+	text-align: center;
+	/* background-color: springgreen; */
+}
+#attendWrap .spanAtd{
+	text-align: center;
+	font-size: 35px;
+	font-weight: bold
+}
+#attendWrap #presentAtd {color: green;}
+#mannerWrap { 
+	position:relative;
+	width: 70%;
+	/* background-color: slateblue; */
+}
+#mannerWrap #maxTemp{
+	text-align: right;
+	margin-bottom: 3px;
+	padding-right: 10px;
+}
+#progressMWrap { width: 90%; height: 35px; position: relative;}
+#presentTemp{
+	position: absolute;
+	bottom: 0%;
+	transform: translateX(-50%);
+}
+#progressForM[value]::-webkit-progress-bar{
+	box-shadow: 0 2px 5px rgba(0,0,0, 0.25) inset;
+	background-color: #d9dee2; 
+}
+#progressForM[value]{
+	margin: 0 auto;
+	appearance: none;
+	border-radius: 10px;
+	overflow: hidden;
+	position:relative;
+	display: flex;
+	align-items: center;
+	width: 100%; height: 15px;
+}  
+#progressForM[value]::-webkit-progress-value{
+	background-image: linear-gradient(to left, #c4505e, #f5be4f);
+}
+      
+#pointWrap { 
+	margin: 20px auto 0;
+	position: relative; 
+	width: 92%;
+	height: 300px;
+	/* background-color: coral; */
+}
+#borderWrap { width: 60px; border: 1px solid #000;}
+#pointProgressWrap{ 
+	width: 100%; 
+	height: 70px;
+	margin-top: 20px;
+	/* background-color:crimson; */
+	display: flex;
+	justify-content: space-around;
+}
+#pointProgressWrap p { text-align: center; margin-top: 5px;}
+#progressPWrap { width: 75%; height: 100%; position: relative;}
+#progressForP[value]::-webkit-progress-bar{
+	box-shadow: 0 2px 5px rgba(0,0,0, 0.25) inset;
+	background-color: #d9dee2; 
+}
+#progressForP[value]{
+	appearance: none;
+	border-radius: 5px;
+	overflow: hidden;
+	position:relative;
+	top: 27px;
+	/* display: flex; */
+	width: 100%; height: 15px;
+}  
+#progressForP[value]::-webkit-progress-value{
+	background-image: linear-gradient(to left, #2ecc71, #3498db);
+}
+#presentP{
+	width:20px;
+	height: 20px;
+	/* left의 %는 소수점 첫째자리까지. */
+	position:absolute; bottom: 5%; 
+	transform: translateX(-50%);
+	text-align: center;
+}
+
+#pointRecordWrap{ 
+	width: 100%; height: 200px; margin-top: 20px;
+	overflow: auto;
+}
+#recordTable{
+	width: 98%;
+	margin: 0 auto;
+}
+#recordTable th{
+	padding: 15px;
+	border-bottom: 1px solid darkgrey;
+}
+#recordTable .td { 
+	padding: 15px;
+	border-bottom: 1px solid lightgrey;
+}
+#recordTable .thPoint { width: 15%;}
+#recordTable .thCategory { width: 60%;}
+#recordTable .thDate { width: 25%;}
+#recordTable .tdMid { text-align: center;}
+#recordTable .tdCategory { text-align: right;}
