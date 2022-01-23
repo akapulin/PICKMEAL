@@ -132,9 +132,9 @@ CREATE TABLE Message (
 	messageType		CHAR(1)			NOT NULL,
 	content			VARCHAR(200)	NOT NULL
 )
-INSERT INTO Message(messageType, content) VALUES('F', "점심 맛있게 먹어");
-INSERT INTO Message(messageType, content) VALUES('F', "또 왔네~");
-INSERT INTO Message(messageType, content) VALUES('F', "좋은 하루 보내");
+INSERT INTO Message(messageType, content) VALUES('O', "점심 맛있게 먹어");
+INSERT INTO Message(messageType, content) VALUES('O', "또 왔네~");
+INSERT INTO Message(messageType, content) VALUES('O', "좋은 하루 보내");
 
 SELECT * FROM Message;
 SELECT * FROM LastGameRecord;

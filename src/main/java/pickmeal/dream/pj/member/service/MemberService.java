@@ -53,10 +53,10 @@ public interface MemberService {
 	
 	/**
 	 * 멤버 삭제
-	 * @param id
+	 * @param member
 	 * @return
 	 */
-	public boolean deleteMember(Member member);
+	public void deleteMember(Member member);
 	
 	/**
 	 * 마지막으로 추가된 member 가져오기
@@ -70,4 +70,10 @@ public interface MemberService {
 	 * @return
 	 */
 	public Member signInMember(Member member);
+	
+	/**
+	 * 비밀번호 변경
+	 * @param member
+	 */
+	public void updatePasswd(Member member);
 }

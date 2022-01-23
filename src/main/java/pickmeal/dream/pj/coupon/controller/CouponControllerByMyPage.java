@@ -27,7 +27,7 @@ public class CouponControllerByMyPage {
 	 * 마이페이지 첫 화면
 	 * @return
 	 */
-	@GetMapping("/mypageCC")
+	@GetMapping("/mypageCoupon")
 	public ModelAndView myPage() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("coupon/nav_by_coupons");
@@ -38,7 +38,7 @@ public class CouponControllerByMyPage {
 	 * @param session
 	 * @return
 	 */
-	@GetMapping("/findAllCoupon")
+	@GetMapping("/member/findAllCoupon")
 	public ModelAndView findAllCoupon(HttpSession session) {
 		List<Coupon> unusedcoupons = new ArrayList<Coupon>();
 		List<Coupon> usedcoupons = new ArrayList<Coupon>();
@@ -68,6 +68,7 @@ public class CouponControllerByMyPage {
         //unusedcoupons.get(${Status.index}).getCouponNumber(); 쿠폰번호
 		//unusedcoupons.get(${Status.index}).getCouponCategory().getLimitPrice(); 쿠폰 제약사항
 		//unusedcoupons.get(0).getRegDate(); 쿠폰 레그데이트
+		mav.addObject("here","myCoupon");
 		mav.addObject("member",member);
 		mav.addObject("unusedcoupons",unusedcoupons);
 		mav.addObject("usedcoupons",usedcoupons);

@@ -2,6 +2,8 @@ package pickmeal.dream.pj.message.domain;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,5 +20,6 @@ public class Alarm {
 	private Member friend;
 	private char alarmType;
 	private String content;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd hh:mm:ss", timezone="Asia/Seoul")
 	private Date regDate;
 }

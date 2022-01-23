@@ -49,6 +49,7 @@ public class SignInController {
 		session.removeAttribute("member");
 		session.removeAttribute("writer");
 		session.removeAttribute("commenter");
+		session.removeAttribute("cntForRetry");
 		return "redirect:/index";
 	}
 	
@@ -99,6 +100,10 @@ public class SignInController {
 
 		// 업데이트 후 session 에 담아서 메인 화면으로 보낸다.
 		session.setAttribute("member", enterMember);
+		
+		int cntForRetry = 0;
+		session.setAttribute("cntForRetry", cntForRetry);
+		// 로그아웃할 때 얘도 세션에서 지워줘야 한다.
 		
 		/*쿠폰 서비스 추가*/	
 

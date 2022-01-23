@@ -1,5 +1,6 @@
 package pickmeal.dream.pj.game.service;
 
+import static pickmeal.dream.pj.web.constant.SavingPointConstants.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import lombok.extern.java.Log;
 import pickmeal.dream.pj.game.repository.GameDao;
+import pickmeal.dream.pj.member.domain.Member;
+import pickmeal.dream.pj.member.service.MemberAchievementService;
 import pickmeal.dream.pj.restaurant.domain.Restaurant;
 import pickmeal.dream.pj.web.util.PresentTime;
 
@@ -23,6 +26,9 @@ public class GameServiceImpl implements GameService{
 	
 	@Autowired
 	PresentTime pt;
+	
+	@Autowired
+	MemberAchievementService mas;
 
 	public void insertLastGameRecord(long memberId, long resId) {
 		// TODO Auto-generated method stub
@@ -178,6 +184,5 @@ public class GameServiceImpl implements GameService{
 		}
 		 // 컨트롤러에서 맵 객체를 생성하여 인자로 넣는거면 void로 해도 됨.
 	}
-	
 	
 }

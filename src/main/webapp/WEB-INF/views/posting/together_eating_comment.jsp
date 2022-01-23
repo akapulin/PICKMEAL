@@ -48,7 +48,9 @@
 							<c:if test="${not empty member}">
 								<c:if test="${posting.category eq 'E'.charAt(0) }">
 									<c:if test="${posting.member.id ne c.member.id}">
-										<button type="button" class="chat" onclick="goChat(this)" value="${c.member.id}">채팅하기</button>
+										<c:if test="${c.member.memberType ne 'D'.charAt(0)}">
+											<button type="button" class="chat" onclick="goChat(this)" value="${c.member.id}">채팅하기</button>
+										</c:if>
 									</c:if>
 								</c:if>
 							</c:if>

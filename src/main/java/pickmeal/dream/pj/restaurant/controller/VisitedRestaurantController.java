@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import pickmeal.dream.pj.member.command.MemberCommand;
 import pickmeal.dream.pj.member.domain.Member;
+import pickmeal.dream.pj.member.service.MemberAchievementService;
 import pickmeal.dream.pj.member.service.MemberService;
 import pickmeal.dream.pj.restaurant.command.ReviewCommand;
 import pickmeal.dream.pj.restaurant.domain.FavoriteRestaurant;
@@ -30,6 +31,7 @@ import pickmeal.dream.pj.restaurant.repository.VisitedRestaurantDao;
 import pickmeal.dream.pj.restaurant.service.FavoriteRestaurantSerivce;
 import pickmeal.dream.pj.restaurant.service.ReviewService;
 import pickmeal.dream.pj.restaurant.service.VisitedRestaurantService;
+import pickmeal.dream.pj.web.constant.SavingPointConstants;
 import pickmeal.dream.pj.web.util.Validator;
 
 @Controller
@@ -53,13 +55,15 @@ public class VisitedRestaurantController {
 	@Autowired
 	ReviewService reviewService;
 	
+	@Autowired
+	MemberAchievementService memberAchievementService;
 	
 	/**
 	 * 회원이 내가 간 식당의 리스트를 받아 올 경우 사용
 	 * @param session
 	 * @return
 	 */
-	@GetMapping("/findAllVisitedRestaurant")
+	@GetMapping("/member/findAllVisitedRestaurant")
 	public ModelAndView findAllVisitedRestaurant(HttpSession session) {
 		List<VisitedRestaurant> vrlist = new ArrayList<VisitedRestaurant>();
 		Member member = (Member) session.getAttribute("member");
@@ -80,11 +84,11 @@ public class VisitedRestaurantController {
 			v.setRestaurant(r);
 			
 			flist.add(f);
-			
 		}
 		ModelAndView mav = new ModelAndView();
 			mav.addObject("vrlist",vrlist);
 			mav.addObject("flist",flist);
+			mav.addObject("here","myVisited");
 			mav.setViewName("restaurant/visited_restaurant_list");
 			return mav;
 		}
@@ -164,12 +168,13 @@ public class VisitedRestaurantController {
 	 * @param visitedRestaurantId
 	 * @return
 	 */
-	@PostMapping("/reviewSeccess")
+	@PostMapping("/member/reviewSeccess")
 	public ModelAndView writeReview(ReviewCommand rc, HttpSession session, @RequestParam("visitedRestaurantId") long visitedRestaurantId ) {
 		List<VisitedRestaurant> vrlist = new ArrayList<VisitedRestaurant>();
 		Member member = (Member) session.getAttribute("member");
 		reviewService.setReview(rc);
 		vrd.writeVisitedRestaurantReviewById(visitedRestaurantId);
+		
 		/*멤버가 없으면 로그인 화면으로 이동*/
 		if(member == null) {
 			ModelAndView mav = new ModelAndView();
@@ -179,7 +184,10 @@ public class VisitedRestaurantController {
 		}
 		/*멤버가 있으면 동작*/
 		else {
-		List<Boolean> flist = new ArrayList<Boolean>();	
+			 
+			memberAchievementService.addFoodPowerPointItem(member, SavingPointConstants.REVIEW);
+			 
+		List<Boolean> flist = new ArrayList<Boolean>();
 		vrlist = vrs.findAllVisitedRestaurantByMemberId(member.getId());
 		for(VisitedRestaurant v : vrlist) {
 			Restaurant restaurant = frs.findRestaurantById(v.getRestaurant().getId());
@@ -192,6 +200,7 @@ public class VisitedRestaurantController {
 		ModelAndView mav = new ModelAndView();
 			mav.addObject("vrlist",vrlist);
 			mav.addObject("flist",flist);
+			mav.addObject("here","myVisited");
 			mav.setViewName("restaurant/visited_restaurant_list");
 			return mav;
 		}

@@ -1,0 +1,71 @@
+@charset "UTF-8";
+#postings {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#postings h3{
+    font-size: 2rem;
+}
+
+.postings_wrap {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 90%;
+    margin-top: 30px;
+    border: #000 1px solid;
+	align-items: center;
+}
+
+.postings_wrap .postBtnWrap {
+    position: absolute;
+    top: -30px;
+    left: 0;
+    display: flex;
+    width: 300px;
+    justify-content: space-evenly;
+}
+
+.postings_wrap .postBtnWrap .postBtn {
+    height: 20px;
+}
+
+.postings_wrap .postBox {
+    display: flex;
+    width: 100%;
+    min-height: 130px;
+    border-bottom: #000 1px solid;
+    align-items: center;
+    position: relative;
+    padding: 20px 0;
+}
+
+.postings_wrap .postBox:hover {
+    background-color: #f5f5f5;
+}
+
+.postings_wrap .postBox:last-child {
+    border: 0;
+}
+
+.postings_wrap .postBox .postType {
+    width: 200px;
+    padding: 10px;
+    text-align: center;
+    font-size: 1.3rem;
+}
+
+.postings_wrap .postBox .post .postTitle {
+    width: 90%;
+    font-size: 1.3rem;
+}
+
+.postings_wrap .postBox .postDelBtn {
+    position: absolute; right: 2rem; top: 50%; transform: translateY(-50%);
+    font-size: 1.1rem; padding: 2px;
+}
+
+.pageNumBox {
+    margin-top: 20px;
+}

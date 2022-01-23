@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/visited_restaurant/visited_restaurant_list.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/restaurant/visited_restaurant_list.css" />
 </head>
 <body>
@@ -61,7 +62,7 @@
             </div>
             <div id="rightdiv">
             	<h3 >리뷰 하기</h3>
-                <form action="reviewSeccess" method="post">
+                <form action="	reviewSeccess" method="post" name="reviewinform" onsubmit="return false">
                     <div id="Reviewcheck">
                     	<input type="hidden" id="visitedRestaurantId" name="visitedRestaurantId" value=""/>
                     	<input type="hidden" id="submititem" name="restaurantId" value=""/>

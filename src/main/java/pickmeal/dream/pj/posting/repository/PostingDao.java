@@ -55,5 +55,9 @@ public interface PostingDao {
 	public Posting findPostingById(char category, long id);
 	
 	
-	
+	/**
+	 * 카테고리별 해당 유저의 게시글 불러오기
+	 * 
+	 */
+	public List<Posting> findPostingsPerPageByMemberId(long memberId, char category, int pageStart, int pageReadCnt);
 }

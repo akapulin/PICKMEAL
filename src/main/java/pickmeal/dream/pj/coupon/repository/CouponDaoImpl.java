@@ -128,6 +128,9 @@ public class CouponDaoImpl implements CouponDao{
 		return jt.queryForObject(sql, new CouponRowMapper(), id);
 	}
 
+	/**
+	 * 쿠폰번호 중복체크
+	 */
 	@Override
 	public Coupon findCouponByCouponNumber(String couponNumber) {
 		String sql = "SELECT id, memberId, couponId, restaurantId, couponNumber, used, regDate FROM Coupon"

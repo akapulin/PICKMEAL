@@ -21,10 +21,6 @@
     width: 5px; /*스크롤바의 너비*/
 }
 
-#msgArea::-webkit-scrollbar:hover {
-    width: 10px;
-}
-
 #msgArea::-webkit-scrollbar-thumb {
     background-color: #fdd0d0; /*스크롤바의 색상*/
     border-radius: 10px; /*스크롤바 라운드*/

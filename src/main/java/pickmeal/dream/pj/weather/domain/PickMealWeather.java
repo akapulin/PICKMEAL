@@ -12,11 +12,10 @@ public class PickMealWeather {
 	public PickMealWeather() {
 		
 	}
-
+	
 	public PickMealWeather(int temperature, int sky) {
 		super();
 		this.temperature = temperature;
 		this.sky = sky;
 	}
-	
 }
