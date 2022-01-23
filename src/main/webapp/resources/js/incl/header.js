@@ -164,9 +164,10 @@ $('#gnb ul li a').on('click',function(){
 })
 
 // 처음에 한번 실행
-setTimeout(function() {
-	let checkMember = $("#headerMember").val();
-	if (checkMember != "") {
+let checkMember = $("#headerMember").val();
+let alarmTimer;
+if (checkMember != "") {
+	setTimeout(function() {
 		$.ajax({
 			url: getContextPath() + "/chat/viewAlarmRecord",
 			type: "get",
@@ -174,12 +175,9 @@ setTimeout(function() {
 				createAlarm(data);
 			}
 		})
-	}
-}, 1)
-// 알람 레코드 불러서 있으면 추가해야한다.
-let alarmTimer = setInterval(function() {
-	let checkMember = $("#headerMember").val();
-	if (checkMember != "") {
+	}, 1)
+	// 알람 레코드 불러서 있으면 추가해야한다.
+	alarmTimer = setInterval(function() {
 		$.ajax({
 			url: getContextPath() + "/chat/viewAlarmRecord",
 			type: "get",
@@ -187,8 +185,8 @@ let alarmTimer = setInterval(function() {
 				createAlarm(data);
 			}
 		})
-	}
-}, 5000) // 60000 : 1분
+	}, 5000) // 60000 : 1분
+}
 
 function createAlarm(data) {
 	if (data.length == 0) {
@@ -237,7 +235,10 @@ function removeAlarm(a) {
 	
 }
 
-
+function removeChatAlarmMark(a) {
+	$(".chatAlarmmark").hide(); // 알람 표시가 되어있을 경우 숨긴다.
+	
+}
 
 
 

@@ -93,6 +93,12 @@ public class PostingServiceImpl implements PostingService {
 		return postings;
 	}
 	
+	
+	@Override
+	public int getPostingCountByCategoryAndMemberId(long memberId, char category) {
+		return pd.getPostingCountByCategoryAndMemberId(memberId, category);
+	}
+	
 	@Override
 	public List<Posting> findPostingsPerPageByMemberId(long memberId, Criteria criteria) {
 		

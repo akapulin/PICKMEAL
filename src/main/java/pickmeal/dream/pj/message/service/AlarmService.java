@@ -24,5 +24,5 @@ public interface AlarmService {
 	 * @param id
 	 * @return
 	 */
-	public boolean deleteAlarm(long id);
+	public boolean deleteAlarm(Alarm alarm);
 }

@@ -22,6 +22,12 @@ public class AlarmDaoImpl implements AlarmDao {
 	}
 
 	@Override
+	public void updateChatAlarm(Alarm alarm) {
+		String sql = "UPDATE AlarmRecord SET regDate=NOW() WHERE memberId=? AND friendId=? AND alarmType=?";
+		jt.update(sql, alarm.getMember().getId(), alarm.getFriend().getId(), String.valueOf(alarm.getAlarmType()));
+	}
+
+	@Override
 	public List<Alarm> findAllAlarmByMemberId(long memberId) {
 		String sql = "SELECT id, memberId, friendId, alarmType, content, regDate"
 				+ " FROM AlarmRecord WHERE memberId=?";
@@ -32,6 +38,12 @@ public class AlarmDaoImpl implements AlarmDao {
 	public void deleteAlarm(long id) {
 		String sql = "DELETE FROM AlarmRecord WHERE id=?";
 		jt.update(sql, id);
+	}
+
+	@Override
+	public void deleteChatAlarm(Alarm alarm) {
+		String sql = "DELETE FROM AlarmRecord WHERE memberId=? AND friendId=? AND alarmType=?";
+		jt.update(sql, alarm.getMember().getId(), alarm.getFriend().getId(), String.valueOf(alarm.getAlarmType()));
 	}
 
 	@Override
@@ -46,4 +58,9 @@ public class AlarmDaoImpl implements AlarmDao {
 		return jt.queryForObject(sql, Boolean.class, memberId);
 	}
 
+	@Override
+	public boolean isChatAlarmByMemberIdFriendId(Alarm alarm) {
+		String sql = "SELECT EXISTS (SELECT id FROM AlarmRecord WHERE memberId=? AND friendId=? AND alarmType=?)";
+		return jt.queryForObject(sql, Boolean.class, alarm.getMember().getId(), alarm.getFriend().getId(), String.valueOf(alarm.getAlarmType()));
+	}
 }

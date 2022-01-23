@@ -61,13 +61,13 @@ VALUES(1,1,"돈까스 튀기는 오빠 세트 같이 드실 분!","오늘 돈까
 , "20220115120000");
 
 INSERT INTO RecommendRestaurantComment(memberId,postId,content)
-VALUES(1,2,"도리집이 가성비 짱");
+VALUES(3,2,"도리집이 가성비 짱");
 
 INSERT INTO TogetherEatingComment(memberId,postId,content)
-VALUES(1,1,"돈튀오 맛이가 좋다");
+VALUES(3,1,"돈튀오 맛이가 좋다");
 
 INSERT INTO TogetherEatingComment(memberId,postId,content)
-VALUES(1,1,"돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다");
+VALUES(3,1,"돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다");
 
 INSERT INTO RecommendRestaurantPosting(memberId, restaurantId, title, content, likes, views)
 VALUES (3,1,"제목2","본문2",10,20),
