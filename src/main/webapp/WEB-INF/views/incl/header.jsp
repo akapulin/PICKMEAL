@@ -26,7 +26,12 @@
 					<div class="profileAreaWrap navAlarmTextCom">
 						<ul class="profileArea">
 							<li><a href="${pageContext.request.contextPath}/member/signOutMember">로그아웃</a></li>
+<<<<<<< HEAD
 							<li><a href="${pageContext.request.contextPath}/member/myPage">마이페이지</a></li>
+=======
+							<li><form action="" method="">마이페이지</form></li>
+							<li><a href="${pageContext.request.contextPath}/member/myPostings">마이페이지</a></li>
+>>>>>>> branch 'developer' of https://github.com/akapulin/PICKMEAL.git
 						</ul>
 					</div>
 				</li>

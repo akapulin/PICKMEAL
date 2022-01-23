@@ -16,9 +16,9 @@
 	        <li id="myInfo"><a href="#">내 정보</a></li>
 	        <li id="myPostings"><a href="${pageContext.request.contextPath}/member/myPostings">내 게시글</a></li>
 	        <li id="myComments"><a href="${pageContext.request.contextPath}/member/myComments">내 댓글</a></li>
-	        <li id=""><a href="#">찜 식당</a></li>
-	        <li id=""><a href="#">내가 간 식당</a></li>
-	        <li id="myCoupon"><a href="#">쿠폰</a></li>
+	        <li id="myFavorite"><a href="${pageContext.request.contextPath}/member/findAllFavoriteRestaurant">찜 식당</a></li>
+	        <li id="myVisited"><a href="${pageContext.request.contextPath}/member/findAllVisitedRestaurant">내가 간 식당</a></li>
+	        <li id="myCoupon"><a href="${pageContext.request.contextPath}/member/findAllCoupon">쿠폰</a></li>
 	        <li id=""><a href="#">업적</a></li>
 	    </ul>
 	</nav>

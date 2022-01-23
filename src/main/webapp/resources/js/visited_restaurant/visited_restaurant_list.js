@@ -81,7 +81,13 @@ $(document).ready(function() {
 		
 		if(count>5){
 			$(this).prop("checked",false);
-			alert("5개 까지만 선택 할 수 있습니다.");
+			Swal.fire({
+  			title: '리뷰 과선택',
+  				text: "식당리뷰는 최대 5개 선택 할 수 있습니다.",
+  				icon: 'warning',
+			  	confirmButtonColor: '#3085d6',
+			  	confirmButtonText: '확인'
+				})
 		}else{
 			if ( $(this).prop('checked') ){
 				$(this).val(1);
@@ -102,6 +108,21 @@ $(document).ready(function() {
 var reviewradio = $("input[name='vrreviewradio']:checked").val();
 $('#reviewlabel'+reviewradio).on('click', function(){
 	$('#Reviewcheck').css({'display' : ''})
+})
+
+$('#reviewButton').on('click', function(e){
+	let count = $("input:checked[type='checkbox']").length;
+	if(count == 0){
+		Swal.fire({
+  			title: '리뷰미선택',
+  				text: "식당 리뷰는 1~5개 선택해야 합니다.",
+  				icon: 'warning',
+			  	confirmButtonColor: '#3085d6',
+			  	confirmButtonText: '확인'
+				})
+	}else{
+		reviewinform.submit()
+	}
 })
 
 
