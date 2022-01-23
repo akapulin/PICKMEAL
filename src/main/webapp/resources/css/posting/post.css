@@ -833,6 +833,13 @@ input:checked+.slider:before {
 .postListContentTable tr td {
 	font-size: 0.9em;
 }
+.postListContentTable tr:hover, .postListContentTable tr:focus{
+	background: #fff8f8;
+}
+.postListContentTable tr:first-child:hover, .postListContentTable tr:first-child:focus{
+	background: #fff;
+}
+
 
 /*    게시판 타이틀     */
 .postListContentTable tr th:nth-child(1) {
@@ -889,6 +896,7 @@ input:checked+.slider:before {
 	white-space: nowrap;
 	overflow: hidden;
 }
+
 
 .postListContentTitleTagsWrap {
 	height: 44px;
@@ -1037,7 +1045,7 @@ input:checked+.slider:before {
 	font-size: 0.9em;
 }
 
-.postListNaviWrap ul li a:hover::after {
+.postListNaviWrap ul li a:hover::after, .postListNaviSelected::after {
 	content: "";
 	position: absolute;
 	bottom: -5px;

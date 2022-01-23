@@ -56,6 +56,11 @@ public class PostingServiceImpl implements PostingService {
 	}
 	
 	@Override
+	public Posting findPostingById(char category, long id) {
+		
+	}
+	
+	@Override
 	public List<Posting> findPostingsPerPageByCategory(Criteria criteria) {
 		
 		/*
@@ -76,9 +81,9 @@ public class PostingServiceImpl implements PostingService {
 		
 		
 		//코멘트 갯수 & 레스토랑정보 가져오기
-		postings = setCommentCntAndRestaurantForPosting(postings);
+		postings = setCommentCntAndRestaurantForPostings(postings);
 		//멤버정보 가져오기
-		postings = setMemberForPosting(postings);
+		postings = setMemberForPostings(postings);
 
 		
 		return postings;
@@ -99,7 +104,7 @@ public class PostingServiceImpl implements PostingService {
 	 * @return
 	 * @author 윤효심
 	 */
-	private List<Posting> setMemberForPosting(List<Posting> postings){
+	private List<Posting> setMemberForPostings(List<Posting> postings){
 		for(Posting post : postings) {
 			Member member = ms.findMemberById(post.getMember().getId());
 			
@@ -134,7 +139,7 @@ public class PostingServiceImpl implements PostingService {
 	 * @param postings
 	 * @return
 	 */
-	private List<Posting> setCommentCntAndRestaurantForPosting(List<Posting> postings) {
+	private List<Posting> setCommentCntAndRestaurantForPostings(List<Posting> postings) {
 		
 		if(!(postings.get(0).getCategory()=='N')) {
 			for(Posting post : postings) {

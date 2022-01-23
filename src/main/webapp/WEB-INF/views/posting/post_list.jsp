@@ -95,7 +95,8 @@
 	                <li>${mealTime }</li>
 	              </ul>
               </c:if>
-              <p class="postListContentTitle">${post.title } </p>
+              <!-- 제목 & 댓글 수-->
+              <a href="${pageContext.request.contextPath}/posting/notice/${post.id}" class="postListContentTitle">${post.title } (${post.commentsNumber})</a>
             </td>
             <td>${post.member.nickName }</td>
             <fmt:formatDate var="postDate" pattern="yyyy-MM-dd" value="${post.regDate }"/>
@@ -133,15 +134,26 @@
       <div id="postListNaviContainer">
         <div class="postListNaviWrap">
           <ul>
+            <!-- 공지사항게시판 페이징 -->
           	<c:if test="${fn:contains(postType,'N') }">
+          		<!-- 이전버튼 여부 -->
 	          	<c:if test="${pageMaker.prevBtn eq true }">
-	            	<li><a href="${pageContext.request.contextPath}/posting/notice?page=${pageMaker.startNum - 1 }">이전</a></li>
+	            	<li><a href="${pageContext.request.contextPath}/posting/notice?page=${pageMaker.startNum - 1 }">&lt;</a></li>
 	            </c:if>
+	            <!-- 페이징 숫자 -->
 	            <c:forEach var="i" begin="${pageMaker.startNum }" end="${pageMaker.endNum }">
-						<li><a href="${pageContext.request.contextPath}/posting/notice?page=${i }">${i }</a></li>
+	 					<!-- 현재 선택된 페이지 색찐하게 표현 -->
+	 					<c:if test="${pageMaker.criteria.page eq i }">
+	 						<li><a href="${pageContext.request.contextPath}/posting/notice?page=${i }" class="postListNaviSelected">${i }</a></li>
+	 					</c:if>
+	 					<!-- 현재 비선택된 페이지들 -->
+						<c:if test="${pageMaker.criteria.page ne i }">
+	 						<li><a href="${pageContext.request.contextPath}/posting/notice?page=${i }">${i }</a></li>
+	 					</c:if>
 				</c:forEach>
+				<!-- 이후버튼 여부ㅡ -->
 				<c:if test="${pageMaker.nextBtn eq true }">
-	            	<li><a href="${pageContext.request.contextPath}/posting/notice?page=${pageMaker.endNum + 1 }">이후</a></li>
+	            	<li><a href="${pageContext.request.contextPath}/posting/notice?page=${pageMaker.endNum + 1 }">&gt;</a></li>
 	            </c:if>
             </c:if>
 			
