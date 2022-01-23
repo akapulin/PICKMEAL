@@ -10,6 +10,8 @@ CREATE TABLE Member (															# 사용자
 	regDate			TIMESTAMP		NOT NULL	DEFAULT CURRENT_TIMESTAMP		# 회원가입 날짜
 );
 
+ALTER TABLE Member MODIFY COLUMN passwd VARCHAR(60) NOT NULL;
+
 INSERT INTO Member(memberType,email,passwd,nickName,birth,gender,profileImgPath)
 VALUES("M","god@naver.com","1234","godgod","19901201","F","temp");
 INSERT INTO Member(memberType,email,passwd,nickName,birth,gender,profileImgPath)

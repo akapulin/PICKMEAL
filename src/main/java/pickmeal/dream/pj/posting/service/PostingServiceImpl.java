@@ -57,7 +57,7 @@ public class PostingServiceImpl implements PostingService {
 	
 	@Override
 	public Posting findPostingById(char category, long id) {
-		
+		return null;
 	}
 	
 	@Override

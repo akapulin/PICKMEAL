@@ -96,7 +96,16 @@
 	              </ul>
               </c:if>
               <!-- 제목 & 댓글 수-->
-              <a href="${pageContext.request.contextPath}/posting/notice/${post.id}" class="postListContentTitle">${post.title } (${post.commentsNumber})</a>
+              <c:if test="${fn:contains(postType,'N') }">
+              	  <a href="${pageContext.request.contextPath}/posting/notice/${post.id}" class="postListContentTitle">${post.title } (${post.commentsNumber})</a>
+              </c:if>
+              <c:if test="${fn:contains(postType,'R') }">
+              	  <a href="${pageContext.request.contextPath}/posting/recommend/${post.id}" class="postListContentTitle">${post.title } (${post.commentsNumber})</a>
+              </c:if>
+              <c:if test="${fn:contains(postType,'E') }">
+              	  <a href="${pageContext.request.contextPath}/posting/together/${post.id}" class="postListContentTitle">${post.title } (${post.commentsNumber})</a>
+              </c:if>
+              
             </td>
             <td>${post.member.nickName }</td>
             <fmt:formatDate var="postDate" pattern="yyyy-MM-dd" value="${post.regDate }"/>
@@ -154,6 +163,40 @@
 				<!-- 이후버튼 여부ㅡ -->
 				<c:if test="${pageMaker.nextBtn eq true }">
 	            	<li><a href="${pageContext.request.contextPath}/posting/notice?page=${pageMaker.endNum + 1 }">&gt;</a></li>
+	            </c:if>
+            </c:if>
+            <!-- 식당추천 게시판 페이징 -->
+          	<c:if test="${fn:contains(postType,'R') }">
+	          	<c:if test="${pageMaker.prevBtn eq true }">
+	            	<li><a href="${pageContext.request.contextPath}/posting/recommend?page=${pageMaker.startNum - 1 }">&lt;</a></li>
+	            </c:if>
+	            <c:forEach var="i" begin="${pageMaker.startNum }" end="${pageMaker.endNum }">
+	 					<c:if test="${pageMaker.criteria.page eq i }">
+	 						<li><a href="${pageContext.request.contextPath}/posting/recommend?page=${i }" class="postListNaviSelected">${i }</a></li>
+	 					</c:if>
+						<c:if test="${pageMaker.criteria.page ne i }">
+	 						<li><a href="${pageContext.request.contextPath}/posting/recommend?page=${i }">${i }</a></li>
+	 					</c:if>
+				</c:forEach>
+				<c:if test="${pageMaker.nextBtn eq true }">
+	            	<li><a href="${pageContext.request.contextPath}/posting/recommend?page=${pageMaker.endNum + 1 }">&gt;</a></li>
+	            </c:if>
+            </c:if>
+            <!-- 밥친구 게시판 페이징 -->
+          	<c:if test="${fn:contains(postType,'E') }">
+	          	<c:if test="${pageMaker.prevBtn eq true }">
+	            	<li><a href="${pageContext.request.contextPath}/posting/together?page=${pageMaker.startNum - 1 }">&lt;</a></li>
+	            </c:if>
+	            <c:forEach var="i" begin="${pageMaker.startNum }" end="${pageMaker.endNum }">	 					
+	 					<c:if test="${pageMaker.criteria.page eq i }">
+	 						<li><a href="${pageContext.request.contextPath}/posting/together?page=${i }" class="postListNaviSelected">${i }</a></li>
+	 					</c:if>	 				
+						<c:if test="${pageMaker.criteria.page ne i }">
+	 						<li><a href="${pageContext.request.contextPath}/posting/together?page=${i }">${i }</a></li>
+	 					</c:if>
+				</c:forEach>
+				<c:if test="${pageMaker.nextBtn eq true }">
+	            	<li><a href="${pageContext.request.contextPath}/posting/together?page=${pageMaker.endNum + 1 }">&gt;</a></li>
 	            </c:if>
             </c:if>
 			

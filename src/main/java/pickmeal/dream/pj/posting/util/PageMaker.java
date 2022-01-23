@@ -53,7 +53,7 @@ public class PageMaker {
 		 * 총 게시물이 4이고, 현패 페이지가 1이면, Math.ceil(4/5) = 1, 1*5 = 5			//초과값
 		 */
 		endNum = (int)Math.ceil(criteria.getPage()/(double)maxPage)*maxPage;
-		System.out.println("endNum is "+endNum);
+
 		
 		//초과값일 때 처리
 		//총 게시물이 121일 때, 실제 맨 끝 페이지는 11이 되어야 함으로, Math.ceil(121/12)= 11 
@@ -67,6 +67,9 @@ public class PageMaker {
 		
 		//endNum 기준으로 startNum을 구할 수 있다.
 		startNum = (endNum - maxPage) +1;
+		if(endNum < maxPage) {
+			startNum =1;
+		}
 		
 		
 		/*
