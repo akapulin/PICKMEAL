@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -34,40 +35,27 @@ public class WritingPostController {
 	/**
 	 * 글쓰기 폼으로 이동
 	 * 		- 각 게시판에서 글쓰기 버튼을 누를때, 
-	 * 			redirect:/post_write?type=NOTICE 이렇게 불러주면
-	 * 			게시판별로 다른 글쓰기 폼을 열어 줄 수 있다
+	 * 		  게시판에 해당하는 글쓰기 폼으로 간
 	 * 	
 	 * @param request
 	 * @return
 	 */
 
-	@GetMapping("/post_write")
-	public ModelAndView writingPostMain(@RequestParam String type) {
+	@GetMapping("/posting/{type}/write")
+	public ModelAndView writingPostMain(@PathVariable String type) {
 			
 		ModelAndView mav = new ModelAndView();
-		if(type.equals("NOTICE")) {
-			mav.addObject("postType", "NOTICE");
-		}else if(type.equals("REVIEW")){
-			mav.addObject("postType", "REVIEW");
+		if(type.equals("notice")) {
+			mav.addObject("postType",'N');
+		}else if(type.equals("recommend")) {
+			mav.addObject("postType",'R');
 		}else {
-			mav.addObject("postType", "TOGETHER");
+			mav.addObject("postType",'E');
 		}
+		
 		mav.setViewName("posting/post_write");
 		return mav;
 	}
-
-	/**
-	 * 지울 예정
-	 * @param request
-	 * @return
-	 */
-	@GetMapping("post_writeT")
-	public ModelAndView writingPostMain2(HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("posting/writingPost_temp");
-		return mav;
-	}
-
 	
 	/**
 	 * 글쓰기 완료

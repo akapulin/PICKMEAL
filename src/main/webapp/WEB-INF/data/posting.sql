@@ -30,8 +30,8 @@ SELECT * FROM RecommendRestaurantPosting;
 
 
 INSERT INTO TogetherEatingPosting(memberId, restaurantId, title, content, likes, views, mealTime, recruitment, mealChk )
-VALUES (1,1,"제목3","본문3",11,22,'2022-01-21 00:02:11',false,false),
-(1,1,"제목5","본문3",11,22,'2022-01-30 12:02:11',false,true),
+VALUES (1,3,"제목3","본문3",11,22,'2022-01-21 00:02:11',false,false),
+(1,3,"제목5","본문3",11,22,'2022-01-30 12:02:11',false,true),
 (1,1,"제목5","본문3",11,22,'2022-01-25 18:55:11',true,false),
 (1,1,"제목3","본문3",11,22,'2022-01-21 00:02:11',true,false),
 (1,1,"제목3","본문3",11,22,'2022-01-21 00:02:11',true,false),

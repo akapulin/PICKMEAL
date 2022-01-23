@@ -17,6 +17,8 @@ VALUES("M","god@naver.com","1234","godgod","19901201","F","temp");
 INSERT INTO Member(memberType,email,passwd,nickName,birth,gender,profileImgPath)
 VALUES("M","god2@naver.com","1234","godgod2","19901201","F","temp");
 
+update Member set profileImgPath="/pickmeal/resources/img/profile/nonUser.png" where id=1;
+
 CREATE TABLE FoodPowerPoint (													# 식력 포인트
 	id			BIGINT		PRIMARY KEY	AUTO_INCREMENT,							# SQL 아이디
 	memberId	BIGINT		NOT NULL,											# 사용자 아이디
@@ -93,7 +95,9 @@ CREATE TABLE Restaurant (
 DROP TABLE Restaurant;
 SELECT * FROM Restaurant;
 
-INSERT INTO Restaurant(apiId,rType,lat,lng,address,rName) VALUES(1,true,31.0000,24.0000,"대구 중구","코리아IT식당");
+INSERT INTO Restaurant(apiId,rType,lat,lng,address,rName) VALUES(1,true,31.0000,24.0000,"대구 중구 중앙로 멋진1구 101","코리아IT식당");
+UPDATE Restaurant SET lat="33.450701", lng="126.570667" WHERE id=1;
+
 
 CREATE TABLE CouponCategory (
 	id			BIGINT			PRIMARY KEY AUTO_INCREMENT,

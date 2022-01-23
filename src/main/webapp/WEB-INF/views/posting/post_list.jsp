@@ -30,6 +30,16 @@
     <h2 class="hidden">게시판목록</h2>
     <c:if test="${not empty postType }">
     <div id="postListContainer">
+    <c:if test="${fn:contains(postType,'N')}">
+    	<a href="${pageContext.request.contextPath}/posting/notice/write" class="postListWriteBtn">글쓰기</a>
+    </c:if>
+   <c:if test="${fn:contains(postType,'R')}">
+    	<a href="${pageContext.request.contextPath}/posting/recommend/write" class="postListWriteBtn">글쓰기</a>
+    </c:if>
+    <c:if test="${fn:contains(postType,'E')}">
+    	<a href="${pageContext.request.contextPath}/posting/together/write" class="postListWriteBtn">글쓰기</a>
+    </c:if>
+    
       <div id="postListTitleContainer">
         <div class="postListTitleWrap">
           <c:if test="${fn:contains(postType,'N')}">
@@ -45,7 +55,7 @@
           	<p>우리는 칭구칭구 밥칭구~ 혼자라도 2인세트 먹을 수 있지!</p>
           </c:if>
         </div>
-		<c:if test="${fn:contains(postType,'R') || fn:contains(postType,'E')}">
+		<!--<c:if test="${fn:contains(postType,'R') || fn:contains(postType,'E')}">
 	        <div class="postListTitleBtnWrap">
 	          <ul>
 	            <li><a href="#" class="postListTitleBtnOn">식당</a></li>
@@ -53,7 +63,7 @@
 	            <li><a href="#">술집</a></li>
 	          </ul>
 	        </div>
-        </c:if>
+        </c:if>-->
       </div>
       <div id="postListContentContainer">
         <table class="postListContentTable">
@@ -91,8 +101,8 @@
 	                </li>
 	             </c:if> 
 	             	<!-- 주소 잘라주기 --> 
-	             	<c:set var="addressList" value=${post.restaurant.address } />
-	                <li>${post.restaurant.address}</li>
+	             	<c:set var="addressList" value="${fn:split(post.restaurant.address,' ') }" />
+	                <li>${addressList[0]} ${addressList[1]} ${addressList[2]}</li>
 	                <fmt:formatDate var="mealTime" pattern="MM-dd HH:mm" value="${post.mealTime }"/>
 	                <li>${mealTime }</li>
 	              </ul>
@@ -110,7 +120,7 @@
               
             </td>
             <td>${post.member.nickName }</td>
-            <fmt:formatDate var="postDate" pattern="yyyy-MM-dd" value="${post.regDate }"/>
+            <fmt:formatDate var="postDate" pattern="yy-MM-dd" value="${post.regDate }"/>
             <td>${postDate }</td>
             <td>${post.views }</td>
             <td>${post.likes }</td>

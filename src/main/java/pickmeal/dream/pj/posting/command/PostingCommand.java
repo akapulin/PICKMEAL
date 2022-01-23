@@ -21,5 +21,6 @@ public class PostingCommand {
 	private String content;	
 	private String date;
 	private String time;
+	private char postType;
 	
 }
