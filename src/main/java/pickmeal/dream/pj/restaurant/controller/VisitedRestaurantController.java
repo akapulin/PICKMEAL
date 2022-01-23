@@ -53,13 +53,12 @@ public class VisitedRestaurantController {
 	@Autowired
 	ReviewService reviewService;
 	
-	
 	/**
 	 * 회원이 내가 간 식당의 리스트를 받아 올 경우 사용
 	 * @param session
 	 * @return
 	 */
-	@GetMapping("/findAllVisitedRestaurant")
+	@GetMapping("/member/findAllVisitedRestaurant")
 	public ModelAndView findAllVisitedRestaurant(HttpSession session) {
 		List<VisitedRestaurant> vrlist = new ArrayList<VisitedRestaurant>();
 		Member member = (Member) session.getAttribute("member");
@@ -80,11 +79,11 @@ public class VisitedRestaurantController {
 			v.setRestaurant(r);
 			
 			flist.add(f);
-			
 		}
 		ModelAndView mav = new ModelAndView();
 			mav.addObject("vrlist",vrlist);
 			mav.addObject("flist",flist);
+			mav.addObject("here","myVisited");
 			mav.setViewName("restaurant/visited_restaurant_list");
 			return mav;
 		}
@@ -164,7 +163,7 @@ public class VisitedRestaurantController {
 	 * @param visitedRestaurantId
 	 * @return
 	 */
-	@PostMapping("/reviewSeccess")
+	@PostMapping("/member/reviewSeccess")
 	public ModelAndView writeReview(ReviewCommand rc, HttpSession session, @RequestParam("visitedRestaurantId") long visitedRestaurantId ) {
 		List<VisitedRestaurant> vrlist = new ArrayList<VisitedRestaurant>();
 		Member member = (Member) session.getAttribute("member");

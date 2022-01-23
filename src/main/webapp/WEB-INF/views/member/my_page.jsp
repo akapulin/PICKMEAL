@@ -17,10 +17,24 @@
 	        <li><a href="#">내 정보</a></li>
 	        <li><a href="#">내 게시글</a></li>
 	        <li><a href="#">내 댓글</a></li>
-	        <li><a href="#">찜 식당</a></li>
-	        <li><a href="#">내가 간 식당</a></li>
-	        <li><a href="#">쿠폰</a></li>
-	        <li><a href="#">업적</a></li>
+	        <li>
+	        	<form action="findAllFavoriteRestaurant" method="GET">
+		        	<input type="submit" class="FavoriteList" value="찜 식당"/>
+		        </form>
+		    </li>
+	        <li>
+	        	<form action="findAllVisitedRestaurant" method="GET">
+		        	<input type="submit" class="VisitedList" value="내가 간 식당"/>
+		        </form>
+		    </li>
+	        <li>
+		        <form action="findAllCoupon" method="GET">
+		        	<input type="submit" class="CouponList" value="쿠폰"/>
+		        </form>
+	        </li>
+	        <li>
+	        <a href="#">업적</a>
+	        </li>
 	    </ul>
 	</nav>
 </body>

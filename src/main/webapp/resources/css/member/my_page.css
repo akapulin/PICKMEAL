@@ -34,24 +34,21 @@
 
 #nav ul li {
     position: relative;
+    height: 100%; line-height: 50px;
+    box-sizing: border-box;
 }
 
-/* #nav ul li:hover {
-    border-bottom: #f23f3f 2px solid;
-} */
-
-#nav ul li:hover::after {
-    position: absolute;
-    content: "";
-    width: 100%;
-    bottom: -18px;
-    left: 0;
+#nav ul li:hover {
     border-bottom: #f23f3f 2px solid;
 }
 
-#nav ul li:hover a{
-    width: 100%;
-    height: 100%;
-    display: block;
-    color: #f23f3f;
-}
+
+
+
+
+#nav li:hover::after {width: 100%;}
+#nav li:hover::before {width: 100%;}
+#nav li.on::after {width: 100%;}
+#nav li.on::before {width: 100%;}
+input[type="submit"]{ background-color: #fff; border: 0px;}
+.on{border-bottom: 2px solid #f23f3f; height: 100%; line-height: 50px; box-sizing: border-box;}
