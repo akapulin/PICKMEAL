@@ -34,7 +34,7 @@
                     <c:if test="${fn:contains(postType,'E') }"><h3>밥친구 글쓰기</h3></c:if>
                 </div>
             </div>
-           <form action="${pageContext.request.contextPath}/completeWritingPost" method="post" id="wPostForm">
+           <form action="${pageContext.request.contextPath}/posting/completeWritingPost" method="post" id="wPostForm">
             <input type="hidden" id="postType" value="${postType }" name="category"/>
             <div id="wPostContentContainer">
                 <div class="wPostSubTitleWrap wPostLineCommon">

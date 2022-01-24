@@ -16,20 +16,20 @@ public interface PostingService {
 	 * 포스팅 추가
 	 * @param posting
 	 */
-	public void addPosting(Posting posting);
+	public Posting addPosting(Posting posting);
 	
 	/**
 	 * 포스팅 업데이트
 	 * @param posting
 	 */
-	public void updatePosting(Posting posting);
+	public int updatePosting(Posting posting);
 	
 	/**
 	 * 포스팅 삭제
 	 * @param posting
 	 * @return
 	 */
-	public void deletePosting(Posting posting);
+	public int deletePosting(Posting posting);
 	
 	/**
 	 * 카테고리별 포스팅 갯수 불러오기
@@ -62,4 +62,23 @@ public interface PostingService {
 	
 	public List<Posting> findPostingsPerPageByMemberId(long memberId, Criteria criteria);
 	
+	/**
+	 * 게시물 조회수 업데이트
+	 * @param category
+	 * @param postId
+	 */
+	public int updatePostingViews(char category, long postId);
+	
+	/**
+	 * 게시물 좋아요 업데이트
+	 * @param category
+	 * @param postId
+	 */
+	public int updatePostingLikes(char category, long postId);
+	
+	/**
+	 * 밥친구 게시판 모집중 상태 변경
+	 * @param postId
+	 */
+	public boolean convertRecruitmentState(long postId);
 }
