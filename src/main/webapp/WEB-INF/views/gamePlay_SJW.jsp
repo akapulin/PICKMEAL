@@ -19,12 +19,14 @@
 			<div class="firstMsgContent">${firstGameMsg}</div>
 		</c:when>
 		<c:otherwise>
+			
 			<div class="firstMsgContent">하이?!</div>
 		</c:otherwise>
 	</c:choose>
 	<input type="hidden" id="hRadius" value="${radius}">
 	<input type="hidden" id="nowLat" value="${nowLat}">
 	<input type="hidden" id="nowLng" value="${nowLng}">
+	
 	<input type="hidden" id="diffOfDate" value="${diffOfDate}">
 	<!-- 얘를 가지고 0이면 암것도 안하고 1이면 화면 띄우기. -->
 	

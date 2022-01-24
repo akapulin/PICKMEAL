@@ -9,16 +9,16 @@ import org.springframework.stereotype.Service;
 
 import lombok.extern.java.Log;
 import pickmeal.dream.pj.restaurant.domain.Restaurant;
-import pickmeal.dream.pj.restaurant.repository.RestaurantCheckDao;
+import pickmeal.dream.pj.restaurant.repository.RestaurantDao;
 
-@Service("RestaurantCheckService")
+@Service("RestaurantService")
 @Log
-public class RestaurantCheckServiceImpl implements RestaurantCheckService {
+public class RestaurantServiceImpl implements RestaurantService {
 	
 	@Autowired
-	RestaurantCheckDao rcd;
-	
-	
+	RestaurantDao rd;
+
+	@Override
 	public List<Restaurant> bringResList(List<Map<String, Object>> resultMap) {
 		List<Restaurant> rList = new ArrayList<Restaurant>();
 		
@@ -39,17 +39,13 @@ public class RestaurantCheckServiceImpl implements RestaurantCheckService {
 			// id는 디비의 값을 가져와서 세팅
 			// rType은 만약 디비에 값이 있으면 그대로, insert면 false.
 			
-			rcd.insertResaurant(res);
+			rd.insertRestaurant(res);
 			System.out.println("test1 : " + res.getRName());
 			
 //			rList.add(rcd.selectRestaurant(res));
-			tempRes = rcd.selectRestaurant(res);
-			res.setId(tempRes.getId());
-			res.setRType(tempRes.isRType());
-			System.out.println("test2 : " + res.getRName());
-			log.info("test2 =  " + res.getRName());
-			
-			rList.add(res);
+			tempRes = rd.findRestaurantbyApiId(res.getApiId());
+					
+			rList.add(tempRes);
 		}
 //		rList.add(res);
 //		rcd.checkResEntityByApiID(rList);
@@ -60,4 +56,25 @@ public class RestaurantCheckServiceImpl implements RestaurantCheckService {
 		}
 		return rList;
 	}
+
+	@Override
+	public Restaurant findRestaurantByAddress(Restaurant restaurant) {
+		return rd.findRestaurantByAddress(restaurant);
+	}
+
+	@Override
+	public Restaurant findRestaurantByrType(Restaurant restaurant) {
+		return rd.findRestaurantByrType(restaurant);
+	}
+
+	@Override
+	public Restaurant findRestaurantById(long id) {
+		return rd.findRestaurantById(id);
+	}
+
+	@Override
+	public Restaurant findRestaurantbyApiId(long apiId) {
+		return rd.findRestaurantbyApiId(apiId); 
+	}
+
 }

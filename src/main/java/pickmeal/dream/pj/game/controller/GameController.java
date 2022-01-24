@@ -39,6 +39,7 @@ import pickmeal.dream.pj.restaurant.command.RestaurantCommand;
 import pickmeal.dream.pj.restaurant.domain.Restaurant;
 import pickmeal.dream.pj.restaurant.service.FavoriteRestaurantSerivce;
 import pickmeal.dream.pj.restaurant.service.RestaurantCheckService;
+import pickmeal.dream.pj.restaurant.service.RestaurantService;
 import pickmeal.dream.pj.web.controller.MapController_SJW;
 import pickmeal.dream.pj.web.util.Validator;
 
@@ -74,6 +75,9 @@ public class GameController {
 	@Autowired
 	MemberAchievementService mas;
 	
+	@Autowired
+	RestaurantService rs;
+	
 	@GetMapping("/openGamePopUp")
 	public String openGamePopUp() {
 		return "gamePlay_SJW";
@@ -87,8 +91,11 @@ public class GameController {
 		System.out.println("test");
 		System.out.println("radius : " + radius + " / category : " + category);
 		System.out.println("nowLat : " + nowLat + " / nowLng : " + nowLng);
+		int cntForRetry;
 		
 		Member member = (Member)session.getAttribute("member");
+		cntForRetry = (int)session.getAttribute("cntForRetry");
+		
 		int diffOfDate = 0;
 		
 		if(validator.isEmpty(member)) {
@@ -147,7 +154,8 @@ public class GameController {
 		System.out.println("test name : " + resultMap.get(0).get("place_name"));
 		System.out.println("=========================================");
 		
-		resList = rcs.bringResList(resultMap); // 이미 객체가 생성되어 있어서 이렇게
+		//resList = rcs.bringResList(resultMap); // 이미 객체가 생성되어 있어서 이렇게
+		resList = rs.bringResList(resultMap);
 		
 		log.info("gameType is : " + gameType);
 		log.info("resList is : " + resList.get(0).getRName());
@@ -176,7 +184,8 @@ public class GameController {
 		System.out.println("test name : " + resultMap.get(0).get("place_name"));
 		System.out.println("=========================================");
 		
-		resList = rcs.bringResList(resultMap); // 이미 객체가 생성되어 있어서 이렇게
+		//resList = rcs.bringResList(resultMap); // 이미 객체가 생성되어 있어서 이렇게
+		resList = rs.bringResList(resultMap);
 		
 		log.info("gameType is : " + gameType);
 		log.info("resList is : " + resList.get(0).getRName());

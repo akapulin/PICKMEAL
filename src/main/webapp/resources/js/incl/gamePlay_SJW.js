@@ -350,13 +350,13 @@ $('.gameBtn').on('click', function(e){
 							opener.parent.setcouponIsempty(data1);
 							opener.parent.setrestaurantIsempty(data2);
 							opener.parent.couponAndFavoriteShow();
-							
+							/*
 							if(!data.cntForRetry){
-								
-							}else{
+								$('.firstMsgContent').text('하이이이이이이이이이');
+							}else if(data.cntForRetry == 1){
 								makeRetryMsgToIndex(data.cntForRetry);	
 							}
-							
+							*/
 						}
 					})
 				}
