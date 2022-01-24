@@ -60,7 +60,7 @@ public class PostingServiceImpl implements PostingService {
 	public Posting findPostingById(char category, long id) {
 		Posting post = pd.findPostingById(category, id);
 		post = setMemberForPosting(post);
-		post = setCommentCntAndRestaurantForPosting(post);
+		post = setCommentCntForPosting(post);
 		return post;
 	}
 	
@@ -85,7 +85,7 @@ public class PostingServiceImpl implements PostingService {
 		
 		
 		//코멘트 갯수 & 레스토랑정보 가져오기
-		postings = setCommentCntAndRestaurantForPostings(postings);
+		postings = setCommentCntForPostings(postings);
 		//멤버정보 가져오기
 		postings = setMemberForPostings(postings);
 
@@ -120,7 +120,7 @@ public class PostingServiceImpl implements PostingService {
 		
 		
 		//코멘트 갯수 & 레스토랑정보 가져오기
-		postings = setCommentCntAndRestaurantForPostings(postings);
+		postings = setCommentCntForPostings(postings);
 		//멤버정보 가져오기
 		postings = setMemberForPostings(postings);
 
@@ -185,11 +185,11 @@ public class PostingServiceImpl implements PostingService {
 	 * @param postings
 	 * @return
 	 */
-	private List<Posting> setCommentCntAndRestaurantForPostings(List<Posting> postings) {
+	private List<Posting> setCommentCntForPostings(List<Posting> postings) {
 		
 		if(postings.get(0).getCategory()!='N') {
 			for(Posting post : postings) {
-				setCommentCntAndRestaurantForPosting(post);
+				setCommentCntForPosting(post);
 			}
 		}
 		return postings;
@@ -197,13 +197,13 @@ public class PostingServiceImpl implements PostingService {
 	/**
 	 *	재사용 위해서 따로 빼준 함수 
 	 */
-	private Posting setCommentCntAndRestaurantForPosting(Posting post) {
+	private Posting setCommentCntForPosting(Posting post) {
 		
 		if(post.getCategory()!='N') {
 			//댓글 갯수
 			post.setCommentsNumber(cs.countCommentByPostId(post.getId(),post.getCategory()));
-			//레스토랑정보
-			post.setRestaurant(rd.findRestaurantById(post.getRestaurant().getId()));
+			//레스토랑정보(없어짐)
+			//post.setRestaurant(rd.findRestaurantById(post.getRestaurant().getId()));
 		}
 		
 		return post;

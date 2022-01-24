@@ -28,6 +28,9 @@ public class CommonImgConfig {
 		} catch (ConfigurationException e) {
 			e.printStackTrace();
 		}
+		
+				
+				
 		return propertyConfig;
 	}
 }

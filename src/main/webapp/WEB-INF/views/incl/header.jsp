@@ -39,36 +39,13 @@
 					<div class="alarmAreaWrap navAlarmTextCom">
 						<div class="alarmTitle">알림내역</div>
 						<ul class="alarmArea">
-							<c:forEach var="alarm" items="${alarms}">
-							<c:if test="${alarm.alarmType ne 'C'.charAt(0)}">
-								<li data-friend="${alarm.friendId}" data-alarmType="${alarm.alarmType }" id="${alarm.id}">
-									<c:choose>
-										<c:when test="${alarm.alarmType eq 'E'.charAt(0)}">
-											<img src="${pageContext.request.contextPath}/resources/img/header/store.png" alt="프로필사진" class="alarmProfileImg">
-										</c:when>
-										<c:otherwise>
-											<img src="${pageContext.request.contextPath}/resources/img/header/store.png" alt="프로필사진" class="alarmProfileImg">
-										</c:otherwise>
-									</c:choose>
-									<span class="alarmTextBold">[${alarm.content}] </span>
-									<c:choose>
-										<c:when test="${alarm.alarmType eq 'E'.charAt(0)}">
-											식당에서 식사는 맛있으셨나요?
-										</c:when>
-										<c:otherwise>
-											님과의 식사는 어떠셨나요?
-										</c:otherwise>
-									</c:choose>
-									<span class="alarmTextClock">2시간전</span>
-								</li>
-							</c:if>
-							</c:forEach>
+						<!-- 알람 리스트가 들어갈 자리 -->
 						</ul>
 					</div>
 				</li>
 				<li>
 					<div class="chatIconWrap comIconWrap">
-						<a href="${pageContext.request.contextPath}/chat/chatListByIcon">
+						<a href="${pageContext.request.contextPath}/chat/chatListByIcon" onclick="removeChatAlarmMark(this);">
 							<img src="/pickmeal/resources/img/header/chat_alarm.png"
 								alt="알림아이콘" class="chatImg comIconImg">
 						</a>
@@ -96,4 +73,28 @@
 		</c:if>
 	</nav>
 </header>
+
+<section id="checkAlarmContent">
+	<h2 class="hidden">알람 팝업</h2>
+	<section class="questionWrap questionTypeL">
+		<h3 class="hidden">식사 여부 질문</h3>
+		<h4 class="question">혹시 [<span class="alarmContentInputL"><!-- content --></span>]에서 식사를 하셨나요?</h4>
+		<section class="chkAlarmBtnWrap">
+			<h4 class="hidden">선택</h4>
+			<input type="button" onclick="removeAlarm(this);" class="chkAlarmBtn" name="chkAlarmBtnL" value="yes">
+			<input type="button" onclick="removeAlarm(this);" class="chkAlarmBtn" name="chkAlarmBtnL" value="no">
+		</section>
+	</section>
+	<section class="questionWrap questionTypeM">
+		<h3 class="hidden">신뢰 온도 체크</h3>
+		<h4 class="question">[<span class="alarmContentInputM"><!-- content --></span>]님과의 식사는 어떠셨나요?</h4>
+		<section class="chkAlarmBtnWrap">
+			<h4 class="hidden">선택</h4>
+			<input type="button" onclick="removeAlarm(this);" class="chkAlarmBtn" name="chkAlarmBtnM" value="good">
+			<input type="button" onclick="removeAlarm(this);" class="chkAlarmBtn" name="chkAlarmBtnM" value="so so">
+			<input type="button" onclick="removeAlarm(this);" class="chkAlarmBtn" name="chkAlarmBtnM" value="bad">
+		</section>
+	</section>
+</section>
+
 <%@ include file="/WEB-INF/views/chat/chat_alarm.jsp"%>
