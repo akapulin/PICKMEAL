@@ -27,9 +27,14 @@ public interface MemberAchievementDao {
 	public List<FoodPowerPointItem> findFoodPowerPointRecordByMemberId(long memberId);
 	
 	/**
-	 * 해당 멤버의 신뢰 온도 업데이트
+	 * 해당 멤버 회원가입 시 신뢰 온도 36.5도 셋팅
 	 */
 	public void addMannerTemperature(Member member);
+	
+	/**
+	 * 해당 멤버 신뢰 온도 업데이트
+	 */
+	public void updateMannerTemperature(Member member);
 	
 	/**
 	 * 해당 사용자의 매너 온도 찾기

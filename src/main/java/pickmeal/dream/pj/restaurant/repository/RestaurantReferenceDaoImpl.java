@@ -35,7 +35,7 @@ public class RestaurantReferenceDaoImpl implements RestaurantReferenceDao{
 	public void addRestaurantReference(RestaurantGraph rg) {
 		String sql = "INSERT INTO RestaurantPreference(restaurantId, gender, age)"
 				+ " VALUE (?, ?, ?)";
-		jt.update(sql, rg.getRestaurant().getId(), rg.getMember().getGender(), rg.getAge());
+		jt.update(sql, rg.getRestaurant().getId(), String.valueOf(rg.getMember().getGender()), rg.getAge());
 	}
 	
 	

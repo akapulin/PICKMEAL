@@ -35,12 +35,12 @@ public class AlarmController {
 	}
 
 	/**
-	 * 먹?안먹? 알람 제거
+	 * 먹?안먹? / 신뢰 온도 알람 제거
 	 * @param alarmCommand
 	 * @return
 	 */
-	@PostMapping("/chat/removeAlarmTypeL")
-	public ResponseEntity<?> removeAlarmTypeL(@ModelAttribute AlarmCommand alarmCommand, 
+	@PostMapping("/chat/removeAlarmType")
+	public ResponseEntity<?> removeAlarmType(@ModelAttribute AlarmCommand alarmCommand, 
 			@SessionAttribute("member") Member member) {
 		Alarm alarm = new Alarm();
 		alarm.setAlarmType(alarmCommand.getAlarmType()); // 알람 타입
@@ -49,16 +49,5 @@ public class AlarmController {
 		alarm.setFriend(new Member(alarmCommand.getFriendId())); // 상대방은 누구인지
 		
 		return ResponseEntity.ok(as.deleteAlarm(alarm, alarmCommand.getAnswer()));
-	}
-
-	/**
-	 * 신뢰 온도 알람 제거
-	 * @param alarmCommand
-	 * @return
-	 */
-	@PostMapping("/chat/removeAlarmTypeM")
-	public ResponseEntity<?> removeAlarmTypeM(@ModelAttribute AlarmCommand alarmCommand	) {
-		
-		return ResponseEntity.ok(null);
 	}
 }

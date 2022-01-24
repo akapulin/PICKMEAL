@@ -259,15 +259,8 @@ function removeAlarm(a) {
 	let alarmFriend = $(a).data("alarmmember");
 	let alarmContent = $(a).data("alarmcontent");
 	
-	let goUrl;
-	if (alarmType == 'L') {
-		goUrl = "chat/removeAlarmTypeL";
-	} else if (alarmType == 'M') {
-		goUrl = "chat/removeAlarmTypeM"; 
-	}
-	
 	$.ajax({
-		url: goUrl,
+		url: "chat/removeAlarmType",
 		type: "post",
 		data: {
 			"id": alarmId,
