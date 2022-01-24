@@ -14,7 +14,7 @@ import pickmeal.dream.pj.restaurant.domain.Restaurant;
 public class Posting {
 	private long id;
 	private Member member;
-	private Restaurant restaurant;
+	private String address;
 	private char category; // N : 공지사항, R : 식당 추천, E : 밥친구
 	private String title;
 	private String content;
@@ -26,8 +26,17 @@ public class Posting {
 	//생성자는 롬복보다는 필요한것만 만들어서 이유있게 쓸 것!
 	public Posting() {}
 
-	public Posting(long id, Member member, Restaurant restaurant, char category, String title, String content, int commentsNumber, int likes, int views, Date regDate) {
-		
+	public Posting(long id, Member member, String address, char category, String title, String content, int commentsNumber, int likes, int views, Date regDate) {
+		this.id = id;
+		this.member = member;
+		this.address = address;
+		this.category = category;
+		this.title = title;
+		this.content = content;
+		this.commentsNumber = commentsNumber;
+		this.likes = likes;
+		this.views = views;
+		this.regDate = regDate;
 	}
 	public Posting(long id) {
 		super();
