@@ -98,9 +98,18 @@ public class MenuServiceImpl implements MenuService{
 			temperature = 0;
 		}
 		
-//		List<Menu> menuList = menudao.findMenuByWeather(temperature, wc.getSky());
-//		Random rand = new Random();
-//		wc.setMenuName(menuList.get(rand.nextInt(menuList.size())).getMenuName());
-		return null;
+		List<Menu> menuList = md.findMenuByWeather(temperature, wc.getSky());
+		Random rand = new Random();
+		Menu menu = new Menu();
+		
+		if(menuList.size() == 0) {
+			menu.setMenuName("DB에..추천메뉴가..없어..");
+		} else {
+			menu = menuList.get(rand.nextInt(menuList.size()));			
+		}
+		if(menu.getImgPath() == null) {
+			menu.setImgPath("icons8_not_found_64.png");
+		}
+		return menu;
 	}
 }

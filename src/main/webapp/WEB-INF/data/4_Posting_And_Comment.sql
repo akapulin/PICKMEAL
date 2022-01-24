@@ -1,3 +1,4 @@
+#식당추천 - 게시글
 CREATE TABLE RecommendRestaurantPosting (									# 식당 추천 게시판
 	id				BIGINT			PRIMARY KEY	AUTO_INCREMENT,				# SQL 아이디
 	memberId		BIGINT			NOT NULL,								# 사용자 아이디
@@ -11,6 +12,7 @@ CREATE TABLE RecommendRestaurantPosting (									# 식당 추천 게시판
 	CONSTRAINT		RecommendRestaurantPosting_restaurantId_FK	FOREIGN KEY(restaurantId)	REFERENCES Restaurant(id) ON DELETE CASCADE
 );
 
+#식당추천 - 댓글
 CREATE TABLE RecommendRestaurantComment (									# 식당 추천 댓글
 	id			BIGINT			PRIMARY KEY	AUTO_INCREMENT,					# SQL 아이디
 	memberId	BIGINT			NOT NULL,									# 사용자 아이디
@@ -21,6 +23,7 @@ CREATE TABLE RecommendRestaurantComment (									# 식당 추천 댓글
 	CONSTRAINT	RecommendRestaurantComment_postId_FK	FOREIGN KEY(postId)	REFERENCES RecommendRestaurantPosting(id) ON DELETE CASCADE
 );
 
+#밥친구 - 게시글
 CREATE TABLE TogetherEatingPosting (										# 밥친구 게시판
 	id				BIGINT			PRIMARY KEY	AUTO_INCREMENT,				# SQL 아이디
 	memberId		BIGINT			NOT NULL,								# 사용자 아이디
@@ -37,6 +40,7 @@ CREATE TABLE TogetherEatingPosting (										# 밥친구 게시판
 	CONSTRAINT		TogetherEatingPosting_restaurantId_FK	FOREIGN KEY(restaurantId)	REFERENCES Restaurant(id) ON DELETE CASCADE
 );
 
+#밥친구 - 댓글
 CREATE TABLE TogetherEatingComment (										# 밥친구 댓글
 	id			BIGINT			PRIMARY KEY	AUTO_INCREMENT,					# SQL 아이디
 	memberId	BIGINT			NOT NULL,									# 사용자 아이디
@@ -47,53 +51,14 @@ CREATE TABLE TogetherEatingComment (										# 밥친구 댓글
 	CONSTRAINT	TogetherEatingComment_postId_FK	FOREIGN KEY(postId)	REFERENCES TogetherEatingPosting(id) ON DELETE CASCADE
 );
 
-drop table RecommendRestaurantComment;
-drop table RecommendRestaurantPosting;
-drop table TogetherEatingComment;
-drop table TogetherEatingPosting;
-
-SELECT * FROM RecommendRestaurantPosting;
-SELECT * FROM RecommendRestaurantComment;
-
-SELECT * FROM TogetherEatingPosting;
-SELECT * FROM TogetherEatingComment;
-
-INSERT INTO RecommendRestaurantPosting(memberId,restaurantId,title,content)
-VALUES(1,1,"도리집이 가성비 짱","이 집이 문을 잘 열지는 않기는 한데 가성비가 좋아서 미워할 수 없네욤");
-
-INSERT INTO TogetherEatingPosting(memberId,restaurantId,title,content,mealTime)
-VALUES(1,1,"돈까스 튀기는 오빠 세트 같이 드실 분!","오늘 돈까스 세트에 쫄면이 땡기는데 저는 1인이라서 혼자 먹을 수가 없네욤. 같이 드실 분 댓글용"
-, "20220115120000");
-
-INSERT INTO RecommendRestaurantComment(memberId,postId,content)
-VALUES(3,2,"도리집이 가성비 짱");
-
-INSERT INTO TogetherEatingComment(memberId,postId,content)
-VALUES(3,1,"돈튀오 맛이가 좋다");
-
-INSERT INTO TogetherEatingComment(memberId,postId,content)
-VALUES(3,1,"돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다");
-
-INSERT INTO RecommendRestaurantPosting(memberId, restaurantId, title, content, likes, views)
-VALUES (3,1,"제목2","본문2",10,20),
-(3,1,"제목2","본문2",10,20),
-(3,1,"제목2","본문2",10,20),
-(3,1,"제목2","본문2",10,20),
-(3,1,"제목2","본문2",10,20),
-(3,1,"제목2","본문2",10,20),
-(3,1,"제목2","본문2",10,20),
-(3,1,"제목2","본문2",10,20),
-(3,1,"제목2","본문2",10,20),
-(3,1,"제목2","본문2",10,20);
-
-INSERT INTO TogetherEatingPosting(memberId, restaurantId, title, content, likes, views, mealTime, recruitment, mealChk )
-VALUES (3,1,"제목3","본문3",11,22,'2022-01-21 00:02:11',false,false),
-(3,1,"제목5","본문3",11,22,'2022-01-30 12:02:11',false,true),
-(3,1,"제목5","본문3",11,22,'2022-01-25 18:55:11',true,false),
-(3,1,"제목3","본문3",11,22,'2022-01-21 00:02:11',true,false),
-(3,1,"제목3","본문3",11,22,'2022-01-21 00:02:11',true,false),
-(3,1,"제목3","본문3",11,22,'2022-01-21 00:02:11',false,true),
-(3,1,"제목3","본문3",11,22,'2022-01-21 00:02:11',false,true),
-(3,1,"제목3","본문3",11,22,'2022-01-21 00:02:11',false,false),
-(3,1,"제목3","본문3",11,22,'2022-01-21 00:02:11',false,false),
-(3,1,"제목3","본문3",11,22,'2022-01-21 13:02:11',false,false);
+#공지사항
+CREATE TABLE NoticePosting (									# 식당 추천 게시판
+	id				BIGINT			PRIMARY KEY	AUTO_INCREMENT,				# SQL 아이디
+	memberId		BIGINT			NOT NULL,								# 사용자 아이디							# 식당 아이디
+	title			VARCHAR(100)	NOT NULL,								# 제목
+	content			MEDIUMTEXT		NOT NULL,								# 내용				# 좋아요 수
+	views			INT				NOT NULL	DEFAULT 0,					# 조회 수
+	regDate			TIMESTAMP		NOT NULL	DEFAULT CURRENT_TIMESTAMP,	# 글 등록 날짜
+	CONSTRAINT		NoticePosting_memberId_FK	FOREIGN KEY(memberId)	REFERENCES Member(id) ON DELETE CASCADE
+	
+);

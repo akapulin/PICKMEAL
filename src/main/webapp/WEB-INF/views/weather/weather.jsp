@@ -91,8 +91,8 @@
         	이거 어때?
         </div>
         <div id="wetherMenu">
-            <img src="https://img.icons8.com/dusk/64/000000/sun--v2.png"/>
-            <span class="weatherMenuName">음식이름</span>
+            <img src="${pageContext.request.contextPath}/resources/img/menu/${weatherMenu.imgPath }"/>
+            <span class="weatherMenuName">${weatherMenu.menuName }</span>
         </div>
     </div>
 </body>
