@@ -14,8 +14,6 @@ CREATE TABLE Menu (
 drop table Menu;
 SELECT * FROM Menu;
 
-INSERT INTO TogetherEatingPosting(memberId, restaurantId, title, content, likes, views, mealTime, recruitment, mealChk )
-
 INSERT INTO Menu(menuName, weather, temperature, soupy, hot_ice, carbohydrate, mainFood, spicy)
 VALUES ("웨더1템퍼0",1,0,1,1,1,1,1),
 ("웨더1템퍼1",1,1,1,1,1,1,1),
@@ -31,4 +29,4 @@ VALUES ("웨더1템퍼0",1,0,1,1,1,1,1),
 ("웨더4템퍼2",4,2,1,1,1,1,1);
 
 INSERT INTO Menu(menuName, weather, temperature, imgPath, soupy, hot_ice, carbohydrate, mainFood, spicy)
-VALUES ("웨더2템퍼2이미지O",2,2,"/pickmeal/resources/img/menu/찜닭.jpg",1,1,1,1,1);
+VALUES ("웨더2템퍼2이미지O",2,2,"찜닭.jpg",1,1,1,1,1);

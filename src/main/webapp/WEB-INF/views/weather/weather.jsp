@@ -91,7 +91,7 @@
         	이거 어때?
         </div>
         <div id="wetherMenu">
-            <img src="${weatherMenu.imgPath }"/>
+            <img src="${pageContext.request.contextPath}/resources/img/menu/${weatherMenu.imgPath }"/>
             <span class="weatherMenuName">${weatherMenu.menuName }</span>
         </div>
     </div>

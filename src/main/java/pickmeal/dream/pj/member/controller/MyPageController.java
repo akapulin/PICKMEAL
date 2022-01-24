@@ -1,7 +1,6 @@
 package pickmeal.dream.pj.member.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -77,6 +76,7 @@ public class MyPageController {
 		return "redirect:/member/myComments";
 	}
 	
+	
 	//내 게시글
 	@GetMapping("/member/myPostings")
 	public ModelAndView myPostings(HttpSession session) {
@@ -103,16 +103,22 @@ public class MyPageController {
 		}
 
 		criteria.setType(type);
+		int postTotalCnt = ps.getPostingCountByCategoryAndMemberId(member.getId(), criteria.getType());
+		if(postTotalCnt > 0) {
+			int pageTotal = postTotalCnt%12 > 0 ? (postTotalCnt/12)+1 : postTotalCnt/12;
+			if(postTotalCnt > 10 && pageTotal < criteria.getPage()) {
+				mav.setViewName("redirect:/member/myPostings/"+ type +"?page="+pageTotal);
+				return mav;
+			}
+			
+			PageMaker pageMaker = new PageMaker(postTotalCnt,criteria);
+			log.info("PageMaker type : "+ pageMaker.getCriteria().getType()+" page : "+pageMaker.getCriteria().getPage()+" totalCnt : "+pageMaker.getTotal());
+			mav.addObject("pageMaker", pageMaker);
 
-		PageMaker pageMaker = new PageMaker(ps.getPostingCountByCategoryAndMemberId(member.getId(), criteria.getType()),criteria);
-		log.info("PageMaker type : "+ pageMaker.getCriteria().getType()+" page : "+pageMaker.getCriteria().getPage()+" totalCnt : "+pageMaker.getTotal());
-		mav.addObject("pageMaker", pageMaker);
-
-		List<Posting> myPostings = ps.findPostingsPerPageByMemberId(member.getId(), pageMaker.getCriteria());
-		mav.addObject("myPostings", myPostings);
-		
+			List<Posting> myPostings = ps.findPostingsPerPageByMemberId(member.getId(), pageMaker.getCriteria());
+			mav.addObject("myPostings", myPostings);	
+		}
 		mav.addObject("here", "myPostings");
-		
 		mav.setViewName("member/my_postings");
 		return mav;
 	}
