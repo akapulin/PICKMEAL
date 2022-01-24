@@ -20,7 +20,7 @@ function reviewClick(){
 	$("#visitedRestaurantId").val(reviewradio);
 	
 }
-
+/*찜 하기 */
 function jjimrestaurant(){
 	var radiojjim = $("input[name='vrfavoriteradio']:checked").val();
 	

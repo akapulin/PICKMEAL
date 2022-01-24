@@ -33,7 +33,7 @@
 		                            <label id="mainInlabel${vrlist.getId()}" for="mainlabel${vrlist.getId()}" class="mainInlabel"></label>
 		                        </div>
 		                        <div class="buttonWrap">
-			                        <div class="favoritebuttonWrap" id="jjimdiv${vrlist.getId()}">
+			                        <div class="favoritebuttonWrap" id="jjimdiv${vrlist.getId()}" data-restaurantid="${vrlist.getRestaurant().getId()}">
 				                        <c:choose>
 				                        	<c:when test="${flist.get(status.index) eq 'false'}">
 					                        	<input type="hidden" value="${flist.get(status.index)}">
