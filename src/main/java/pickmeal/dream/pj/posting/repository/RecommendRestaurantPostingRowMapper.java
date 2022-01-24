@@ -18,7 +18,7 @@ public class RecommendRestaurantPostingRowMapper implements RowMapper<Posting>{
 		Posting posting = new Posting();
 		posting.setId(rs.getLong("id"));
 		posting.setMember(new Member(rs.getLong("memberId")));
-		posting.setRestaurant(new Restaurant(rs.getLong("restaurantId")));
+		posting.setAddress(rs.getString("address"));
 		posting.setCategory('R');
 		posting.setTitle(rs.getString("title"));
 		posting.setContent(rs.getString("content"));

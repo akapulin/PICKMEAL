@@ -13,7 +13,6 @@
 <link href="${pageContext.request.contextPath}/resources/css/incl/chart.css" rel="stylesheet" type="text/css">
 <script src="${pageContext.request.contextPath}/resources/js/incl/chart.js" defer></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/incl/index_map_b.css" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/incl/index_SJW.css" />
 
 <!-- 익명채팅방, 날씨 - 김재익 -->
 <link href="${pageContext.request.contextPath}/resources/css/chat/chat.css" rel="stylesheet" type="text/css">
@@ -28,11 +27,14 @@
 <!-- 김보령  -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=001358587c4d106ce5a3702588b8ce85&libraries=services"></script>
 <script src="${pageContext.request.contextPath}/resources/js/incl/index_map.js" defer></script>
-<script src="${pageContext.request.contextPath}/resources/js/incl/index_map_SJW.js" defer></script>
 
 <!-- 정원식 -->
 <script src="${pageContext.request.contextPath}/resources/js/incl/menu_game_JWS.js" defer></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/incl/index_JWS.css" />
+
+<!-- 성지원 -->
+<script src="${pageContext.request.contextPath}/resources/js/incl/index_map_SJW.js" defer></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/incl/index_SJW.css" />
 
 <title>밥찡코</title>
 </head>
@@ -43,44 +45,35 @@
 	<h2 class="hidden">게임하기</h2>
 	<section id="mapWrap">
 		<h3 class="hidden">지도 표시</h3>
-		
-		
-		<div id="mapWindow">
-		
 		<!-- 정원식 메뉴게임 -->
-			<div id="menuGameButtonWrap">
-				<form name="menuGamePopup" method="GET">
-					<input class= "menusubmit" type="submit" value="메뉴골라주기" id="menuchoicebtn">
-				</form>
-			</div>
-			
-			<div id="retryMsg" class="retryMsg"></div>
-			
+		<div id="menuGameButtonWrap">
+			<form name="menuGamePopup" method="GET">
+				<input class= "menuSubmit" type="submit" value="메뉴골라주기" id="menuchoicebtn">
+			</form>
+		</div>
+		
+		<div id="retryMsg" class="retryMsg"></div>
+		<div>
 			<form id="gameDataForm" name="gameDataForm" method="GET">
-			
-			 <!-- action="viewOrderRecordByMenu" id="periodForm" method="GET" -->
 				<div id="mapRadius">
-					<input type="radio" class="radius" name="radius" value="300">300m
-					<input type="radio" class="radius" name="radius" value="600">600m
-					<input type="radio" class="radius" name="radius" value="1000">1000m
-					 
+					<label class="radiusLabel"><input type="radio" class="radius" name="radius" value="300"/>300m</label>
+					<label class="radiusLabel"><input type="radio" class="radius" name="radius" value="600"/>600m</label>
+					<label class="radiusLabel"><input type="radio" class="radius" name="radius" value="1000"/>1000m</label>
 				</div>
 				<div id="resCategory">
-					<input type="radio" class="category" name="category" value="혼밥">혼밥
-					<input type="radio" class="category" name="category" value="카페">카페
-					<input type="radio" class="category" name="category" value="술집">술집
-					<input type="radio" class="category" name="category" value="밥집">밥집
+					<label class="categoryLabel"><input type="radio" class="category" name="category" value="혼밥"/>혼밥</label>
+					<label class="categoryLabel"><input type="radio" class="category" name="category" value="카페"/>카페</label>
+					<label class="categoryLabel"><input type="radio" class="category" name="category" value="술집"/>술집</label>
+					<label class="categoryLabel"><input type="radio" class="category" name="category" value="밥집"/>밥집</label>
 					
+				</div>
+				<div id="submitWrapForGame">
 					<input type="submit" class="gamePlayBtn" value="게임하기">
 				</div>
 			</form>
-			<!-- <div id="buttonWrap">
-				<button name="radius" class="radius" value="300">300m</button>
-				<button name="radius" class="radius" value="600">600m</button>
-				<button name="radius" class="radius" value="900">900m</button>
-				<button id="gameDone">게임끝</button>
-			</div> -->
-			
+		</div>
+		
+		<div id="mapWindow">
 			<div id="map"></div>
 		</div>
 	</section>

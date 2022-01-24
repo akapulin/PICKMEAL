@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.java.Log;
+import pickmeal.dream.pj.game.domain.LastGame;
 import pickmeal.dream.pj.game.repository.GameDao;
 import pickmeal.dream.pj.member.domain.Member;
 import pickmeal.dream.pj.member.service.MemberAchievementService;
@@ -183,6 +184,11 @@ public class GameServiceImpl implements GameService{
 			setOfRoute.put(j, sList);
 		}
 		 // 컨트롤러에서 맵 객체를 생성하여 인자로 넣는거면 void로 해도 됨.
+	}
+
+	@Override
+	public LastGame findLastGameByMemberId(long memberId) {
+		return gd.findLastGameByMemberId(memberId);
 	}
 	
 }

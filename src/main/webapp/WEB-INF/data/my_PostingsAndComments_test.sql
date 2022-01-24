@@ -35,7 +35,7 @@ CREATE TABLE TogetherEatingPosting (										# 밥친구 게시판
 	regDate			TIMESTAMP		NOT NULL	DEFAULT CURRENT_TIMESTAMP,	# 게시글 등록 날짜
 	CONSTRAINT		TogetherEatingPosting_memberId_FK	FOREIGN KEY(memberId)	REFERENCES Member(id) ON DELETE CASCADE,
 	CONSTRAINT		TogetherEatingPosting_restaurantId_FK	FOREIGN KEY(restaurantId)	REFERENCES Restaurant(id) ON DELETE CASCADE
-)
+);
 
 CREATE TABLE TogetherEatingComment (										# 밥친구 댓글
 	id			BIGINT			PRIMARY KEY	AUTO_INCREMENT,					# SQL 아이디
@@ -45,7 +45,12 @@ CREATE TABLE TogetherEatingComment (										# 밥친구 댓글
 	regDate		TIMESTAMP		NOT NULL	DEFAULT CURRENT_TIMESTAMP,		# 등록 날짜
 	CONSTRAINT	TogetherEatingComment_memberId_FK	FOREIGN KEY(memberId)	REFERENCES Member(id) ON DELETE CASCADE,
 	CONSTRAINT	TogetherEatingComment_postId_FK	FOREIGN KEY(postId)	REFERENCES TogetherEatingPosting(id) ON DELETE CASCADE
-)
+);
+
+drop table RecommendRestaurantComment;
+drop table RecommendRestaurantPosting;
+drop table TogetherEatingComment;
+drop table TogetherEatingPosting;
 
 SELECT * FROM RecommendRestaurantPosting;
 SELECT * FROM RecommendRestaurantComment;
