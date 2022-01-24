@@ -185,7 +185,7 @@ SELECT * FROM VisitedRestaurant;
 DROP TABLE VisitedRestaurant;
 SELECT id, memberId, restaurantId, Review, regDate FROM VisitedRestaurant WHERE memberId = 4 ORDER BY regDate DESC;
 
-
+/* age 리팩토링 필요 */
 CREATE TABLE RestaurantPreference (
 	id				BIGINT			PRIMARY KEY	AUTO_INCREMENT,
 	restaurantId	BIGINT,
