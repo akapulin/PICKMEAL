@@ -11,4 +11,79 @@
 	background-size: contain;
 	background-position: center center;
 	background-repeat: no-repeat;
+	display: none;
+}
+
+#mapRadius{	
+	margin-left: 10px;
+    width: 190px;
+    height: 35px;
+}
+.radiusLabel{
+	display: inline-block;
+    width: 60px;
+    height: 35px;
+    border: 1px solid #000;
+    text-align: center;
+    line-height: 35px;
+    border: none;
+    background: lightgrey;
+}
+
+#resCategory{
+	margin: 15px 0 0 10px;
+	width: 260px;
+    height: 35px;	
+    display:inline-block;
+}
+.categoryLabel{
+	display: inline-block;
+    width: 60px;
+    height: 35px;
+    border: 1px solid #000;
+    text-align: center;
+    line-height: 35px;
+    border: none;
+    background: lightgrey;
+    display: inline-block;
+}
+.categoryLabel:hover, .radiusLabel:hover{
+	background: darkslateblue;
+	color:#fff;
+}
+.categoryOn, .radiusOn{
+	background: darkslateblue;
+	color:#fff;	
+}
+.radius, .category{
+	display: none;
+}
+#submitWrapForGame{
+	display: inline-block;
+}
+#submitWrapForGame .gamePlayBtn{
+	width: 70px;
+    height: 40px;
+    text-align: center;
+    line-height: 35px;
+    border: none;
+    background: #f23f3f;
+    color: #fff;   
+}
+
+#menuGameButtonWrap {
+	position: absolute;
+    top: 0%;
+    left: 85%;
+    width: 80px;
+    height: 35px;;
+}
+#menuGameButtonWrap .menuSubmit{
+	width: 80px;
+    height: 35px;
+    border: none;
+    background-color: burlywood;
+    color: #fff;
+    text-align: center;
+    line-height: 35px;
 }
