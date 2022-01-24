@@ -116,4 +116,24 @@ public class MyPageController {
 		mav.setViewName("member/my_postings");
 		return mav;
 	}
+	//내 게시글 - 삭제
+	@PostMapping("/member/delPost/{type}")
+	public ModelAndView delPost(@PathVariable String type, @RequestParam("postId") long postId) {
+		ModelAndView mav = new ModelAndView();
+		Posting post = null;
+		
+		if(type.equals("recommend")) {
+			post = new Posting(postId,'R');
+		} else if(type.equals("together")) {
+			post = new TogetherEatingPosting();
+			post.setId(postId);
+			post.setCategory('E');
+		}
+		ps.deletePosting(post);
+		log.info("postId: " + post.getId() + " category: " + post.getCategory());
+		log.info("post has been deleted.");
+		
+		mav.setViewName("redirect:/member/myPostings/"+type);
+		return mav;
+	}
 }

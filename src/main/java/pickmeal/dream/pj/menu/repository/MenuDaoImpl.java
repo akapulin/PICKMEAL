@@ -64,8 +64,10 @@ public class MenuDaoImpl implements MenuDao{
 
 	@Override
 	public List<Menu> findMenuByWeather(int temperature, int sky) {
-		
-		return null;
+		String sql = "SELECT *"
+				+ " FROM Menu WHERE weather = ? and temperature = ?";
+		List<Menu> menulist = jt.query(sql, new MenuRowMapper(), sky, temperature);
+		return menulist;
 	}
 
 }

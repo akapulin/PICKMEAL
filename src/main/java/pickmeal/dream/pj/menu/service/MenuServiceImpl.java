@@ -7,11 +7,13 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.java.Log;
 import pickmeal.dream.pj.menu.domain.Menu;
 import pickmeal.dream.pj.menu.domain.Menuclassify;
 import pickmeal.dream.pj.menu.repository.MenuDao;
 import pickmeal.dream.pj.weather.domain.PickMealWeather;
 
+@Log
 @Service("menuService")
 public class MenuServiceImpl implements MenuService{
 	
@@ -98,9 +100,19 @@ public class MenuServiceImpl implements MenuService{
 			temperature = 0;
 		}
 		
-//		List<Menu> menuList = menudao.findMenuByWeather(temperature, wc.getSky());
-//		Random rand = new Random();
-//		wc.setMenuName(menuList.get(rand.nextInt(menuList.size())).getMenuName());
-		return null;
+		List<Menu> menuList = md.findMenuByWeather(temperature, wc.getSky());
+		Random rand = new Random();
+		Menu menu = new Menu();
+		
+		if(menuList.size() == 0) {
+			menu.setMenuName("DB에..추천메뉴가..없어..");
+		} else {
+			log.info(menuList.size()+"");
+			menu = menuList.get(rand.nextInt(menuList.size()));			
+		}
+		if(menu.getImgPath() == null) {
+			menu.setImgPath("");
+		}
+		return menu;
 	}
 }

@@ -16,12 +16,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.java.Log;
-import lombok.extern.log4j.Log4j;
-import pickmeal.dream.pj.menu.repository.MenuDaoImpl;
 import pickmeal.dream.pj.weather.domain.Forecast;
 import pickmeal.dream.pj.weather.domain.MyLocation;
 import pickmeal.dream.pj.weather.domain.PickMealWeather;
@@ -41,7 +38,6 @@ import pickmeal.dream.pj.weather.domain.Weather;
  */
 
 @Log
-@Log4j
 @Service("weatherService")
 public class WeatherServiceImpl implements WeatherService {
 	private String Short_term_weather_url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst";	// 초단기예보 : 매시간 30분 생성, 하늘상태
@@ -73,7 +69,6 @@ public class WeatherServiceImpl implements WeatherService {
 		getShortTermLiveWeather(categoryAndValue, Short_term_live_weather_url, date, hour, minute, nx, ny, "T1H", "PTY");
 		
 		for(Entry<String, String> cav : categoryAndValue.entrySet()) {
-			log.info(cav.getKey() + " " + cav.getValue());
 			if(cav.getKey().equals("T1H")) {
 				weather.setT1h(Double.parseDouble(cav.getValue()));
 			} else if(cav.getKey().equals("SKY")) {
@@ -288,7 +283,6 @@ public class WeatherServiceImpl implements WeatherService {
 		int pty = -1;
 		
 		for(Entry<String, String> cav : categoryAndValue.entrySet()) {
-			log.info(cav.getKey() + " " + cav.getValue());
 			
 			if(cav.getKey().equals("TMP")) {
 				double tmpp = Double.parseDouble(cav.getValue());
