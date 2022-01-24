@@ -107,12 +107,7 @@ CREATE TABLE RestaurantPreference (
 	age CHAR(3)
 )
 
-CREATE TABLE LastGameRecord (
-	id				BIGINT			PRIMARY KEY AUTO_INCREMENT,
-	restaurantId	BIGINT			NOT NULL,
-	memberID		BIGINT			UNIQUE KEY,
-	regDate			TIMESTAMP		DEFAULT CURRENT_TIMESTAMP	
-)
+
 SELECT * FROM LastGameRecord;
 
 INSERT INTO LastGameRecord(restaurantId, memberId) VALUES(1, 1);

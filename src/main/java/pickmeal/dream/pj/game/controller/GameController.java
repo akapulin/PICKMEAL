@@ -226,11 +226,11 @@ public class GameController {
 			gs.insertLastGameRecord(member.getId(), restaurant.getId());
 			member = mas.addFoodPowerPointItem(member, PLAY_GAME);
 			System.out.println(member);
-			cntForRetry = (int)session.getAttribute("cntForRetry");
-			cntForRetry++;
-			System.out.println("게임 다시하기 Cnt : " + cntForRetry);
-			session.setAttribute("cntForRetry", cntForRetry);
-			map.put("cntForRetry", String.valueOf(cntForRetry));
+//			cntForRetry = (int)session.getAttribute("cntForRetry");
+//			cntForRetry++;
+//			System.out.println("게임 다시하기 Cnt : " + cntForRetry);
+//			session.setAttribute("cntForRetry", cntForRetry);
+//			map.put("cntForRetry", String.valueOf(cntForRetry));
 		}
 		session.setAttribute("restaurant", restaurant);
 		//HashMap<String,String> map = new HashMap<String, String>();

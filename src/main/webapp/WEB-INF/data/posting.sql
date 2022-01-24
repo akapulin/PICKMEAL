@@ -24,6 +24,7 @@ CREATE TABLE RecommendRestaurantPosting (									# 식당 추천 게시판
 	
 );
 
+
 CREATE TABLE TogetherEatingPosting (										# 밥친구 게시판
 	id				BIGINT			PRIMARY KEY	AUTO_INCREMENT,				# SQL 아이디
 	memberId		BIGINT			NOT NULL,								# 사용자 아이디
