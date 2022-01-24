@@ -73,4 +73,28 @@
 		</c:if>
 	</nav>
 </header>
+
+<section id="checkAlarmContent">
+	<h2 class="hidden">알람 팝업</h2>
+	<section class="questionWrap questionTypeL">
+		<h3 class="hidden">식사 여부 질문</h3>
+		<h4 class="question">혹시 [<span class="alarmContentInputL"><!-- content --></span>]에서 식사를 하셨나요?</h4>
+		<section class="chkAlarmBtnWrap">
+			<h4 class="hidden">선택</h4>
+			<input type="button" onclick="removeAlarm(this);" class="chkAlarmBtn" name="chkAlarmBtnL" value="yes">
+			<input type="button" onclick="removeAlarm(this);" class="chkAlarmBtn" name="chkAlarmBtnL" value="no">
+		</section>
+	</section>
+	<section class="questionWrap questionTypeM">
+		<h3 class="hidden">신뢰 온도 체크</h3>
+		<h4 class="question">[<span class="alarmContentInputM"><!-- content --></span>]님과의 식사는 어떠셨나요?</h4>
+		<section class="chkAlarmBtnWrap">
+			<h4 class="hidden">선택</h4>
+			<input type="button" onclick="removeAlarm(this);" class="chkAlarmBtn" name="chkAlarmBtnM" value="good">
+			<input type="button" onclick="removeAlarm(this);" class="chkAlarmBtn" name="chkAlarmBtnM" value="so so">
+			<input type="button" onclick="removeAlarm(this);" class="chkAlarmBtn" name="chkAlarmBtnM" value="bad">
+		</section>
+	</section>
+</section>
+
 <%@ include file="/WEB-INF/views/chat/chat_alarm.jsp"%>

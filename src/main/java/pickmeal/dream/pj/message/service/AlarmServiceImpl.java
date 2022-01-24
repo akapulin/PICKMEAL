@@ -40,7 +40,7 @@ public class AlarmServiceImpl implements AlarmService {
 	}
 
 	@Override
-	public boolean deleteAlarm(Alarm alarm) {
+	public boolean deleteAlarm(Alarm alarm, String answer) {
 		// 채팅의 경우 id 가 아닌 memberId, friendId 를 이용해서 삭제
 		if (alarm.getAlarmType() == 'C') {
 			ad.deleteChatAlarm(alarm);
