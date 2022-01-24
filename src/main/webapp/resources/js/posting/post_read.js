@@ -177,7 +177,23 @@ function getContextPath() {
 /*
 	게시글 수정
 */
-
+$('#rPostModifyBtn').on('click',function(){
+	console.log('in modify?');
+	
+	let postId = $('#postId').val();
+	let category = $('.rwPostTitleWrap > h3').data('category');
+	let modifyForm = document.goModifyBoard;
+	console.log('modi>'+modifyForm)
+	if(category=='N'){
+		modifyForm.action=getContextPath()+"/posting/notice/modify/"+postId;
+	}else if(category=='R'){
+		modifyForm.action=getContextPath()+"/posting/recommend/modify/"+postId;
+	}else if(category=='E'){
+		modifyForm.action=getContextPath()+"/posting/together/modify/"+postId;
+	}
+	modifyForm.method="get";
+	modifyForm.submit();
+})
 
 
 /*

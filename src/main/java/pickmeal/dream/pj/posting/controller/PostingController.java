@@ -243,6 +243,7 @@ public class PostingController {
 		ModelAndView mav = new ModelAndView();
 		char category = getPostCategory(type);
 		
+		mav.addObject("modifyState", false);		//수정,글쓰기가 같은 view를 이용하기 때문에 
 		mav.addObject("postType",category);
 		mav.setViewName("posting/post_write");
 		return mav;
@@ -290,6 +291,7 @@ public class PostingController {
 	 */
 	private Posting setNoticePosting(PostingCommand pc, long memberId){
 		Posting post = new Posting();
+		post.setCategory('N');
 		post.setMember(new Member(memberId));
 		post.setTitle(pc.getTitle());
 		post.setContent(pc.getContent());
@@ -299,6 +301,7 @@ public class PostingController {
 	
 	private Posting setRecommendPosting(PostingCommand pc, long memberId) {
 		Posting post = new Posting();
+		post.setCategory('R');
 		post.setMember(new Member(memberId));
 		post.setAddress(pc.getAddress());
 		post.setTitle(pc.getTitle());
@@ -311,6 +314,7 @@ public class PostingController {
 	
 	private Posting setTogetherPosting(PostingCommand pc, long memberId) {
 		TogetherEatingPosting post = new TogetherEatingPosting();
+		post.setCategory('E');
 		post.setMember(new Member(memberId));
 		post.setAddress(pc.getAddress());
 		post.setTitle(pc.getTitle());
@@ -395,8 +399,8 @@ public class PostingController {
 		
 		mav.addObject("modifyState", true);
 		mav.addObject("postType",category);
+		mav.addObject("post",posting);
 		mav.setViewName("posting/post_write");
-		
 		return mav;
 	}
 	

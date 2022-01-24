@@ -16,6 +16,7 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/incl/header.jsp"/>
+
 <input type="hidden" value="${post.id }" id="postId"/>
 <section id="totalPostContainer">
         <h2 class="hidden">글읽기</h2>
@@ -153,6 +154,7 @@
             </div>
 
         </div>
+    <form action="" method="get" name="goModifyBoard"></form>   
 	<form action="${pageContext.request.contextPath}/posting/notice" method="get" id="goNoticeBoard"></form>
     <form action="${pageContext.request.contextPath}/posting/recommend" method="get" id="goRecommendBoard"></form>
     <form action="${pageContext.request.contextPath}/posting/together" method="get" id="goTogetherBoard"></form>
