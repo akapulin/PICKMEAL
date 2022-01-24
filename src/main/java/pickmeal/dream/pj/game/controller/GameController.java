@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import net.sf.json.*;
@@ -16,17 +15,12 @@ import net.sf.json.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.mysql.cj.xdevapi.JsonArray;
 
 import lombok.extern.java.Log;
 import pickmeal.dream.pj.coupon.domain.CouponCategory;
@@ -38,9 +32,8 @@ import pickmeal.dream.pj.message.service.MessageService;
 import pickmeal.dream.pj.restaurant.command.RestaurantCommand;
 import pickmeal.dream.pj.restaurant.domain.Restaurant;
 import pickmeal.dream.pj.restaurant.service.FavoriteRestaurantSerivce;
-import pickmeal.dream.pj.restaurant.service.RestaurantCheckService;
+
 import pickmeal.dream.pj.restaurant.service.RestaurantService;
-import pickmeal.dream.pj.web.controller.MapController_SJW;
 import pickmeal.dream.pj.web.util.Validator;
 
 
@@ -53,8 +46,6 @@ public class GameController {
 //			return "gamePlay_SJW";
 //		}
 //	
-	@Autowired
-	RestaurantCheckService rcs;
 	
 	@Autowired
 	GameService gs;
@@ -94,7 +85,7 @@ public class GameController {
 		int cntForRetry;
 		
 		Member member = (Member)session.getAttribute("member");
-		cntForRetry = (int)session.getAttribute("cntForRetry");
+		//cntForRetry = (int)session.getAttribute("cntForRetry");
 		
 		int diffOfDate = 0;
 		

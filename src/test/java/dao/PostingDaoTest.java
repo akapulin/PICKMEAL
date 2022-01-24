@@ -26,7 +26,7 @@ class PostingDaoTest {
 	void test() {
 		Posting posting= new Posting();
 		posting.setMember(new Member(1));
-		posting.setRestaurant(new Restaurant(1));
+		//posting.setRestaurant(new Restaurant(1));
 		posting.setCategory('R');
 		posting.setTitle("this is title2");
 		posting.setContent("this is content2");
