@@ -167,31 +167,6 @@ $('#gnb ul li a').on('click',function(){
 
 })
 
-// 처음에 한번 실행
-let checkMember = $("#headerMember").val();
-let alarmTimer;
-if (checkMember != "") {
-	setTimeout(function() {
-		$.ajax({
-			url: getContextPath() + "/chat/viewAlarmRecord",
-			type: "get",
-			success: function(data) {
-				createAlarm(data);
-			}
-		})
-	}, 1)
-	// 알람 레코드 불러서 있으면 추가해야한다.
-	alarmTimer = setInterval(function() {
-		$.ajax({
-			url: getContextPath() + "/chat/viewAlarmRecord",
-			type: "get",
-			success: function(data) {
-				createAlarm(data);
-			}
-		})
-	}, 5000) // 60000 : 1분
-}
-
 function createAlarm(data) {
 	if (data.length == 0) {
 		return;
