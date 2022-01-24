@@ -21,8 +21,17 @@ public interface AlarmService {
 	
 	/**
 	 * 확인했을 경우 해당 알람 지우기
+	 * 먹안먹, 신뢰온도
 	 * @param id
 	 * @return
 	 */
 	public boolean deleteAlarm(Alarm alarm, String answer);
+	
+	/**
+	 * 확인했을 경우 채팅 알람 지우기
+	 * 채팅에서만 사용
+	 * @param id
+	 * @return
+	 */
+	public boolean deleteAlarm(Alarm alarm);
 }

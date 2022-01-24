@@ -1,7 +1,6 @@
 package pickmeal.dream.pj.game.repository;
 
-import java.sql.Date;
-import java.sql.Timestamp;
+import pickmeal.dream.pj.game.domain.LastGame;
 
 public interface GameDao{
 	
@@ -11,4 +10,12 @@ public interface GameDao{
 	
 	public int checkLastGameRecord(long memberId);
 
+	/**
+	 * 해당 사용자의 마지막 게임 찾기
+	 * 식당을 찾기 위해 사용된다
+	 * @param memberId
+	 * @return
+	 * @author qhfud
+	 */
+	public LastGame findLastGameByMemberId(long memberId);
 }

@@ -5,6 +5,7 @@ import javax.annotation.Resource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import pickmeal.dream.pj.restaurant.domain.RestaurantGraph;
 import pickmeal.dream.pj.restaurant.domain.RestaurantReference;
 
 @Repository("restaurantReferenceDao")
@@ -28,6 +29,13 @@ public class RestaurantReferenceDaoImpl implements RestaurantReferenceDao{
 				+" GROUP BY restaurantId HAVING restaurantId=? ";
 
 		return jt.queryForObject(sql, new RestaurantReferenceRowMapper(), restaurantId);
+	}
+
+	@Override
+	public void addRestaurantReference(RestaurantGraph rg) {
+		String sql = "INSERT INTO RestaurantPreference(restaurantId, gender, age)"
+				+ " VALUE (?, ?, ?)";
+		jt.update(sql, rg.getRestaurant().getId(), rg.getMember().getGender(), rg.getAge());
 	}
 	
 	
