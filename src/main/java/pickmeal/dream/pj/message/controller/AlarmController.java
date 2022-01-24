@@ -40,11 +40,12 @@ public class AlarmController {
 	 * @return
 	 */
 	@PostMapping("/chat/removeAlarmTypeL")
-	public ResponseEntity<?> removeAlarmTypeL(@ModelAttribute AlarmCommand alarmCommand) {
+	public ResponseEntity<?> removeAlarmTypeL(@ModelAttribute AlarmCommand alarmCommand, 
+			@SessionAttribute("member") Member member) {
 		Alarm alarm = new Alarm();
 		alarm.setAlarmType(alarmCommand.getAlarmType()); // 알람 타입
 		alarm.setId(alarmCommand.getId()); // 알람 sql 아이디
-		alarm.setMember(new Member(alarmCommand.getMemberId())); // 누구의 알람인지
+		alarm.setMember(member); // 누구의 알람인지
 		alarm.setFriend(new Member(alarmCommand.getFriendId())); // 상대방은 누구인지
 		
 		return ResponseEntity.ok(as.deleteAlarm(alarm, alarmCommand.getAnswer()));
