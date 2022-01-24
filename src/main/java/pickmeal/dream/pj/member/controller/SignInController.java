@@ -71,9 +71,9 @@ public class SignInController {
 			if (!memberCommand.getPasswd().equals(member.getPasswd())) { // 비밀번호 불일치 시
 				chkInfo = false;
 			}
+			if (member.getMemberType() == 'D') { // 탈퇴한 회원
+				chkInfo = false;
 		}
-		if (member.getMemberType() == 'D') { // 탈퇴한 회원
-			chkInfo = false;
 		}
 		if (!chkInfo) { // 유효성 검사에서 걸릴 경우 다시 로그인 화면으로 보낸다
 			mav.addObject("memberCommand", memberCommand);
