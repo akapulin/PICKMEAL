@@ -13,6 +13,10 @@ CREATE TABLE AlarmRecord (
 
 select * from AlarmRecord;
 
+SELECT EXISTS (SELECT id FROM AlarmRecord WHERE memberId=1, friendId=2, alarmType='C')
+
+delete from AlarmRecord;
+
 insert into AlarmRecord(memberId, friendId, alarmType, content) values (1, 2, 'M', '향기언니')
 insert into AlarmRecord(memberId, friendId, alarmType, content) values (1, 2, 'C', '향기언니')
 insert into AlarmRecord(memberId, alarmType, content) values (1, 'L', '화무비도')

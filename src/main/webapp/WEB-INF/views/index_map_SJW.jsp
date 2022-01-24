@@ -22,9 +22,6 @@
 <section id="mapContent">
 	<h2>사용자 위치 표시</h2>
 	<form id="gameDataForm" name="gameDataForm" method="GET">
-		
-	
-	 <!-- action="viewOrderRecordByMenu" id="periodForm" method="GET" -->
 		<div id="mapRadius">
 			<input type="radio" class="radius" name="radius" value="300">300m
 			<input type="radio" class="radius" name="radius" value="600">600m

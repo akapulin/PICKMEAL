@@ -1,11 +1,10 @@
 package pickmeal.dream.pj.game.repository;
 
-import java.sql.Date;
-import java.sql.Timestamp;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import pickmeal.dream.pj.game.domain.LastGame;
 
 @Repository("GameDao")
 public class GameDaoImpl implements GameDao{
@@ -35,6 +34,13 @@ public class GameDaoImpl implements GameDao{
 		//String sql2 = "Select count(regdate) from table group by memberId having regdate = curdate();" 
 		
 		return jt.queryForObject(sql, Integer.class, memberId, memberId);
+	}
+
+	@Override
+	public LastGame findLastGameByMemberId(long memberId) {
+		String sql = "SELECT id, restaurantId, memberId, regDate"
+				+ " FROM LastGameRecord WHERE memberId=?";
+		return jt.queryForObject(sql, new LastGameRowMapper(), memberId);
 	}
 
 }

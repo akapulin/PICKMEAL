@@ -23,15 +23,15 @@ public class PostingDaoImpl implements PostingDao {
 			jt.update(sql, posting.getMember().getId(), posting.getTitle(), posting.getContent(), posting.getViews());
 			
 		} else if (posting.getCategory() == 'R') {
-			String sql ="INSERT INTO RecommendRestaurantPosting(memberId, restaurantId, title, content, likes, views) "
+			String sql ="INSERT INTO RecommendRestaurantPosting(memberId, address, title, content, likes, views) "
 					+" VALUES(?,?,?,?,?,?)";
-			jt.update(sql, posting.getMember().getId(), posting.getRestaurant().getId(), posting.getTitle(), posting.getContent(), posting.getLikes(), posting.getViews());
+			jt.update(sql, posting.getMember().getId(), posting.getAddress(), posting.getTitle(), posting.getContent(), posting.getLikes(), posting.getViews());
 					
 		} else {
 			TogetherEatingPosting tep = (TogetherEatingPosting)posting;
-			String sql ="INSERT INTO TogetherEatingPosting(memberId, restaurantId, title, content, likes, views, mealTime, recruitment, mealChk ) "
+			String sql ="INSERT INTO TogetherEatingPosting(memberId, address, title, content, likes, views, mealTime, recruitment, mealChk ) "
 					+" VALUES(?,?,?,?,?,?,?,?,?)";
-			jt.update(sql, tep.getMember().getId(), tep.getRestaurant().getId(), tep.getTitle(), tep.getContent(), tep.getLikes(), tep.getViews(), tep.getMealTime(), tep.isRecruitment(), tep.isMealChk());
+			jt.update(sql, tep.getMember().getId(), tep.getAddress(), tep.getTitle(), tep.getContent(), tep.getLikes(), tep.getViews(), tep.getMealTime(), tep.isRecruitment(), tep.isMealChk());
 			
 		}
 
@@ -44,14 +44,14 @@ public class PostingDaoImpl implements PostingDao {
 					+" WHERE id=?";
 			jt.update(sql, posting.getTitle(), posting.getContent(), posting.getViews(), posting.getId());
 		} else if (posting.getCategory() == 'R') {
-			String sql ="UPDATE RecommendRestaurantPosting SET restaurantId=?, title=?, content=?, likes=?, views=?"
+			String sql ="UPDATE RecommendRestaurantPosting SET address=?, title=?, content=?, likes=?, views=?"
 					+" WHERE id=?";
-			jt.update(sql, posting.getRestaurant().getId(), posting.getTitle(), posting.getContent(), posting.getLikes(), posting.getViews(), posting.getId());
+			jt.update(sql, posting.getAddress(), posting.getTitle(), posting.getContent(), posting.getLikes(), posting.getViews(), posting.getId());
 		} else {
 			TogetherEatingPosting tep = (TogetherEatingPosting) posting;
-			String sql ="UPDATE TogetherEatingPosting SET restaurantId=?, title=?, content=?, likes=?, views=?, mealTime=?, recruitment=?, mealChk=?"
+			String sql ="UPDATE TogetherEatingPosting SET address=?, title=?, content=?, likes=?, views=?, mealTime=?, recruitment=?, mealChk=?"
 					+" WHERE id=?";
-			jt.update(sql, tep.getRestaurant().getId(), tep.getTitle(), tep.getContent(), tep.getLikes(), tep.getViews(), tep.getMealTime(), tep.isRecruitment(), tep.isMealChk(), tep.getId());
+			jt.update(sql, tep.getAddress(), tep.getTitle(), tep.getContent(), tep.getLikes(), tep.getViews(), tep.getMealTime(), tep.isRecruitment(), tep.isMealChk(), tep.getId());
 		}
 
 	}
@@ -105,13 +105,13 @@ public class PostingDaoImpl implements PostingDao {
 			return jt.query(sql, new NoticePostingRowMapper(),pageStart,pageReadCnt);
 			
 		} else if (category == 'R') {
-			String sql ="SELECT id, memberId, restaurantId, title, content, likes, views, regDate "
+			String sql ="SELECT id, memberId, address, title, content, likes, views, regDate "
 					+" FROM RecommendRestaurantPosting"
 					+" ORDER BY id DESC "
 					+" LIMIT ?,?";
 			return jt.query(sql, new RecommendRestaurantPostingRowMapper(),pageStart,pageReadCnt);
 		} else {
-			String sql ="SELECT id, memberId, restaurantId, title, content, likes, views, mealTime, recruitment, mealChk, regDate "
+			String sql ="SELECT id, memberId, address, title, content, likes, views, mealTime, recruitment, mealChk, regDate "
 					+" FROM TogetherEatingPosting"
 					+" ORDER BY id DESC "
 					+" LIMIT ?,?";
@@ -129,12 +129,12 @@ public class PostingDaoImpl implements PostingDao {
 			return jt.queryForObject(sql, new NoticePostingRowMapper(),id);
 			
 		} else if (category == 'R') {
-			String sql ="SELECT id, memberId, restaurantId, title, content, likes, views, regDate "
+			String sql ="SELECT id, memberId, address, title, content, likes, views, regDate "
 					+" FROM RecommendRestaurantPosting"
 					+" WHERE id=? ";
 			return jt.queryForObject(sql, new RecommendRestaurantPostingRowMapper(),id);
 		} else {
-			String sql ="SELECT id, memberId, restaurantId, title, content, likes, views, mealTime, recruitment, mealChk, regDate "
+			String sql ="SELECT id, memberId, address, title, content, likes, views, mealTime, recruitment, mealChk, regDate "
 					+" FROM TogetherEatingPosting"
 					+" WHERE id=? ";
 			return jt.queryForObject(sql, new TogetherEatingPostingRowMapper(),id);
@@ -161,14 +161,14 @@ public class PostingDaoImpl implements PostingDao {
 	@Override
 	public List<Posting> findPostingsPerPageByMemberId(long memberId, char category, int pageStart, int pageReadCnt) {
 		if (category == 'R') {
-			String sql ="SELECT id, memberId, restaurantId, title, content, likes, views, regDate "
+			String sql ="SELECT id, memberId, address, title, content, likes, views, regDate "
 					+" FROM RecommendRestaurantPosting"
 					+" WHERE memberId = ?"
 					+" ORDER BY id DESC "
 					+" LIMIT ?,?";
 			return jt.query(sql, new RecommendRestaurantPostingRowMapper(),memberId,pageStart,pageReadCnt);
 		} else {
-			String sql ="SELECT id, memberId, restaurantId, title, content, likes, views, mealTime, recruitment, mealChk, regDate "
+			String sql ="SELECT id, memberId, address, title, content, likes, views, mealTime, recruitment, mealChk, regDate "
 					+" FROM TogetherEatingPosting"
 					+" WHERE memberId = ?"
 					+" ORDER BY id DESC "

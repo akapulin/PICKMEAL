@@ -1,7 +1,7 @@
 SELECT * FROM RestaurantPreference;
 DELETE FROM RestaurantPreference;
 
-INSERT INTO RestaurantPreference(restaurantId,gender,age) 
+INSERT INTO RestaurantPreference(restaurantId, gender, age) 
 VALUES 
 (1,'F',20),(1,'F',20),(1,'F',22),(1,'F',19),(1,'M',11),
 (2,'M',22),(2,'M',23),(2,'M',14),(2,'M',15),(2,'M',11),
