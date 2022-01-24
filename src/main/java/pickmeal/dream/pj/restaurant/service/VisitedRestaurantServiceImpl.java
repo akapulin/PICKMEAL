@@ -19,8 +19,7 @@ public class VisitedRestaurantServiceImpl implements VisitedRestaurantService{
 
 	@Override
 	public void addVisitedRestaurant(VisitedRestaurant visitedRestaurant) {
-		
-		
+		vrd.addVisitedRestaurant(visitedRestaurant);
 	}
 
 	@Override

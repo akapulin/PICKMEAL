@@ -17,6 +17,14 @@ function searchResList(radius, keword){
 		}
 	})
 }
+$('.radiusLabel').on('click',function(){
+	$(this).siblings().removeClass('radiusOn');
+	$(this).addClass('radiusOn');
+})
+$('.categoryLabel').on('click', function(){
+	$(this).siblings().removeClass('categoryOn');
+	$(this).addClass('categoryOn');	
+})
 
 //button[name=radius]
 $('.gamePlayBtn').on('click', function(e){

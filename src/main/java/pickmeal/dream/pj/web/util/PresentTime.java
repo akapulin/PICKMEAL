@@ -2,6 +2,7 @@ package pickmeal.dream.pj.web.util;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -31,4 +32,9 @@ public class PresentTime {
 		return nowTime; 
 	}
 	
+	public String convertFromDateToString(java.util.Date date) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		String strDate = format.format(date);
+		return strDate;
+	}
 }

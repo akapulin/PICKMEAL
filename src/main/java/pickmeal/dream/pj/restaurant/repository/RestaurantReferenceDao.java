@@ -1,5 +1,6 @@
 package pickmeal.dream.pj.restaurant.repository;
 
+import pickmeal.dream.pj.restaurant.domain.RestaurantGraph;
 import pickmeal.dream.pj.restaurant.domain.RestaurantReference;
 
 /**
@@ -17,4 +18,9 @@ public interface RestaurantReferenceDao {
 	 */
 	public RestaurantReference getRestaurantReference(long restaurantId);
 
+	/**
+	 * 레스토랑 성별 정보 추가
+	 * @param rg
+	 */
+	public void addRestaurantReference(RestaurantGraph rg);
 }

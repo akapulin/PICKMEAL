@@ -1,8 +1,9 @@
 package pickmeal.dream.pj.member.service;
 
+import static pickmeal.dream.pj.web.constant.Constants.*;
+
 import java.util.List;
 
-import static pickmeal.dream.pj.web.constant.Constants.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pickmeal.dream.pj.member.domain.FoodPowerPointItem;
 import pickmeal.dream.pj.member.domain.Member;
 import pickmeal.dream.pj.member.repository.MemberAchievementDao;
+import pickmeal.dream.pj.web.constant.Constants;
 import pickmeal.dream.pj.web.constant.SavingPointConstants;
 
 @Service("memberAchievementService")
@@ -48,6 +50,15 @@ public class MemberAchievementServiceImpl implements MemberAchievementService {
 		member.saveMannerTemperature(SIGN_UP_MANNER);
 		// 테이블에 신뢰 온도 넣기
 		mad.addMannerTemperature(member);
+	}
+
+	@Override
+	public Member updateMannerTemperature(Member member, Constants c) {
+		// 해당 멤버에게 먼저 셋팅한 이후에 테이블에 업데이트한다.
+		member.saveMannerTemperature(c);
+		mad.updateMannerTemperature(member);
+		
+		return member;
 	}
 
 	@Override

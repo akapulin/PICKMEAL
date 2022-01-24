@@ -11,9 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.java.Log;
+import pickmeal.dream.pj.game.domain.LastGame;
 import pickmeal.dream.pj.game.repository.GameDao;
 import pickmeal.dream.pj.member.domain.Member;
 import pickmeal.dream.pj.member.service.MemberAchievementService;
+import pickmeal.dream.pj.member.service.MemberService;
 import pickmeal.dream.pj.restaurant.domain.Restaurant;
 import pickmeal.dream.pj.web.util.PresentTime;
 
@@ -29,6 +31,9 @@ public class GameServiceImpl implements GameService{
 	
 	@Autowired
 	MemberAchievementService mas;
+	
+	@Autowired
+	MemberService ms;
 
 	public void insertLastGameRecord(long memberId, long resId) {
 		// TODO Auto-generated method stub
@@ -183,6 +188,13 @@ public class GameServiceImpl implements GameService{
 			setOfRoute.put(j, sList);
 		}
 		 // 컨트롤러에서 맵 객체를 생성하여 인자로 넣는거면 void로 해도 됨.
+	}
+
+	@Override
+	public LastGame findLastGameByMemberId(long memberId) {
+		LastGame lg = gd.findLastGameByMemberId(memberId);
+		lg.setMember(ms.findMemberById(memberId));
+		return lg;
 	}
 	
 }

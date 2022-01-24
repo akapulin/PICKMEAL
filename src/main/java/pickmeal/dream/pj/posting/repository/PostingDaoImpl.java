@@ -176,7 +176,7 @@ public class PostingDaoImpl implements PostingDao {
 					+" FROM TogetherEatingPosting"
 					+" WHERE memberId = ?"
 					+" ORDER BY id DESC "
-					+" LIMIT ?,?";
+					+" LIMIT ?,? ";
 			return jt.query(sql, new TogetherEatingPostingRowMapper(),memberId,pageStart,pageReadCnt);
 		}
 	}
