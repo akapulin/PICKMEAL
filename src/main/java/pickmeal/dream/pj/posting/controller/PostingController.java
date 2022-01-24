@@ -281,6 +281,8 @@ public class PostingController {
 		Posting post = new Posting();
 		post.setMember(new Member(memberId));
 		
+		return post;
+		
 	}
 	
 	

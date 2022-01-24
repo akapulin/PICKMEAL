@@ -104,8 +104,8 @@ function setMap(){
 	var geocoder = new kakao.maps.services.Geocoder();
 	
 	//맵의 주소값
-	//let address = $('#rAddress').text();
-	let address="경북 경산시 펜타힐즈4로 1";
+	let address = $('#rAddress').text();
+	//let address="경북 경산시 펜타힐즈4로 1";
 	// 주소로 좌표를 검색합니다
 	geocoder.addressSearch(address, function(result, status) {
 

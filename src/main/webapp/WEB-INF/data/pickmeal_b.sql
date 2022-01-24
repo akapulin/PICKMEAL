@@ -130,23 +130,12 @@ CREATE TABLE RestaurantPreference (
 	gender CHAR(1),
 	age CHAR(3)
 );
-
+DROP TABLE RestaurantPreference;
 SELECT * FROM RestaurantPreference;
 SELECT * FROM Menu;
 
 
-CREATE TABLE RecommendRestaurantPosting (									# 식당 추천 게시판
-	id				BIGINT			PRIMARY KEY	AUTO_INCREMENT,				# SQL 아이디
-	memberId		BIGINT			NOT NULL,								# 사용자 아이디
-	restaurantId	BIGINT			NOT NULL,								# 식당 아이디
-	title			VARCHAR(100)	NOT NULL,								# 제목
-	content			MEDIUMTEXT		NOT NULL,								# 내용
-	likes			INT				NOT NULL	DEFAULT 0,					# 좋아요 수
-	views			INT				NOT NULL	DEFAULT 0,					# 조회 수
-	regDate			TIMESTAMP		NOT NULL	DEFAULT CURRENT_TIMESTAMP,	# 글 등록 날짜
-	CONSTRAINT		RecommendRestaurantPosting_memberId_FK	FOREIGN KEY(memberId)	REFERENCES Member(id) ON DELETE CASCADE,
-	CONSTRAINT		RecommendRestaurantPosting_restaurantId_FK	FOREIGN KEY(restaurantId)	REFERENCES Restaurant(id) ON DELETE CASCADE
-);
+
 
 DROP TABLE RecommendRestaurantPosting;
 SELECT * FROM RecommendRestaurantPosting;
@@ -176,24 +165,6 @@ SELECT * FROM RecommendRestaurantComment WHERE postId=1 LIMIT 15 OFFSET 29;
 INSERT INTO RecommendRestaurantComment(memberId,postId,content)
 VALUES(1,1,"마자요!! 이 집 일요일에만 닫는다구 하더니 월요일에 가보니깐 안열었더라구요!!");
 
-CREATE TABLE TogetherEatingPosting (										# 밥친구 게시판
-	id				BIGINT			PRIMARY KEY	AUTO_INCREMENT,				# SQL 아이디
-	memberId		BIGINT			NOT NULL,								# 사용자 아이디
-	restaurantId	BIGINT			NOT NULL,								# 식당 아이디
-	title			VARCHAR(100)	NOT NULL,								# 제목
-	content			MEDIUMTEXT		NOT NULL,								# 내용
-	likes			INT				NOT NULL	DEFAULT 0,					# 좋아요 수
-	views			INT				NOT NULL	DEFAULT 0,					# 조회 수
-	mealTime		TIMESTAMP		NOT NULL,								# 식사 시간
-	recruitment		BOOLEAN			NOT NULL	DEFAULT	FALSE,				# 모집 완료
-	mealChk			BOOLEAN			NOT NULL	DEFAULT	FALSE,				# 식사 완료
-	regDate			TIMESTAMP		NOT NULL	DEFAULT CURRENT_TIMESTAMP,	# 게시글 등록 날짜
-	CONSTRAINT		TogetherEatingPosting_memberId_FK	FOREIGN KEY(memberId)	REFERENCES Member(id) ON DELETE CASCADE,
-	CONSTRAINT		TogetherEatingPosting_restaurantId_FK	FOREIGN KEY(restaurantId)	REFERENCES Restaurant(id) ON DELETE CASCADE
-)
-
-DROP TABLE TogetherEatingPosting;
-SELECT * FROM TogetherEatingPosting;
 
 INSERT INTO TogetherEatingPosting(memberId,restaurantId,title,content,mealTime)
 VALUES(1,1,"돈까스 튀기는 오빠 세트 같이 드실 분!","오늘 돈까스 세트에 쫄면이 땡기는데 저는 1인이라서 혼자 먹을 수가 없네욤. 같이 드실 분 댓글용"
@@ -216,18 +187,7 @@ INSERT INTO TogetherEatingComment(memberId,postId,content)
 VALUES(40,1,"저랑 드시면 밥을 더 드실 수 있습니당.");
 
 
-CREATE TABLE NoticePosting (									# 식당 추천 게시판
-	id				BIGINT			PRIMARY KEY	AUTO_INCREMENT,				# SQL 아이디
-	memberId		BIGINT			NOT NULL,								# 사용자 아이디							# 식당 아이디
-	title			VARCHAR(100)	NOT NULL,								# 제목
-	content			MEDIUMTEXT		NOT NULL,								# 내용				# 좋아요 수
-	views			INT				NOT NULL	DEFAULT 0,					# 조회 수
-	regDate			TIMESTAMP		NOT NULL	DEFAULT CURRENT_TIMESTAMP,	# 글 등록 날짜
-	CONSTRAINT		NoticePosting_memberId_FK	FOREIGN KEY(memberId)	REFERENCES Member(id) ON DELETE CASCADE
-	
-);
-DROP TABLE NoticePosting;
-SELECT * FROM NoticePosting;
+
 
 
 drop table chat

@@ -38,7 +38,7 @@
 	                                	 <div class="rPostTagTogetherIng"></div>
 	                             		<input type="hidden" value="${post.recruitment }" id="postRecruitment">
 	                            </li>
-	                            <c:set var="addressList" value="${fn:split(post.restaurant.address,' ') }" />
+	                            <c:set var="addressList" value="${fn:split(post.address,' ') }" />
 	                			<li>${addressList[0]} ${addressList[1]} ${addressList[2]}</li>
 	                            <fmt:formatDate var="mealTime" pattern="MM월dd일 HH:mm" value="${post.mealTime }"/>
 	                            <li>${mealTime }</li>
@@ -99,7 +99,7 @@
 	                            <table>
 	                                <tr>
 	                                    <th>식사장소</th>
-	                                    <td id="rAddress">${post.restaurant.address }</td>
+	                                    <td id="rAddress">${post.address }</td>
 	                                    
 	                                </tr>
 	                                <c:if test="${fn:contains(post.category,'E')}">

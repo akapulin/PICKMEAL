@@ -19,7 +19,7 @@ public class TogetherEatingPostingRowMapper implements RowMapper<Posting>{
 		TogetherEatingPosting tep = new TogetherEatingPosting();
 		tep.setId(rs.getLong("id"));
 		tep.setMember(new Member(rs.getLong("memberId")));
-		tep.setRestaurant(new Restaurant(rs.getLong("restaurantId")));
+		tep.setAddress(rs.getString("address"));
 		tep.setCategory('E');
 		tep.setTitle(rs.getString("title"));
 		tep.setContent(rs.getString("content"));
