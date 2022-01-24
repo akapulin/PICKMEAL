@@ -41,6 +41,13 @@ public class MemberAchievementDaoImpl implements MemberAchievementDao {
 	}
 
 	@Override
+	public void updateMannerTemperature(Member member) {
+		String sql = "UPDATE MannerTemperature SET temperature=?"
+				+ " WHERE memberId=?";
+		jt.update(sql, member.getMannerTemperature(), member.getId());
+	}
+
+	@Override
 	public double findMannerTemperatureByMemberId(long memberId) {
 		String sql = "SELECT temperature FROM MannerTemperature WHERE memberId=?";
 		
