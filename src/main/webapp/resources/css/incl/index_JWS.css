@@ -3,16 +3,16 @@
 #couponGenerateWrap {
 	width: 45px; height: 45px; outline: none; border: 0;  font-weight: bold;
 	background-color: #f23f3f; color: #fff; border-radius: 45px; cursor: pointer;
-	position: absolute; right: 80px; top: 0px; transition-duration: 0.3s; text-align: center;
-	line-height: 45px; display: none;
+	position: absolute; right: 80px; top: 10px; transition-duration: 0.3s; text-align: center;
+	line-height: 45px; display: none; 
 }
 
-#couponGenerate{display: none;}
+#couponGenerate{display: none; }
 
 
 #jjimdiv{width: 25px; height: 25px; outline: none; border: 0;  font-weight: bold;
 	background-color: #f23f3f; color: #fff; cursor: pointer;
-	position: absolute; right: 28px; top: 11px; transition-duration: 0.3s; text-align: center;
+	position: absolute; right: 28px; top: 21px; transition-duration: 0.3s; text-align: center;
 	line-height: 50px; transform: rotate(45deg); display: none;
 }
 

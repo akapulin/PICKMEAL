@@ -95,7 +95,7 @@ public class CouponDaoImpl implements CouponDao{
 	@Override
 	public List<Coupon> findUsedCouponsBymemberId(long memberId) {
 		String sql = "SELECT id, memberId, couponId, restaurantId, couponNumber, used, regDate FROM Coupon"
-				+ " WHERE memberId = ? AND used = true";
+				+ " WHERE memberId = ? AND used = true ORDER BY id DESC";
 		return jt.query(sql, new CouponRowMapper(), memberId);
 	}
 	

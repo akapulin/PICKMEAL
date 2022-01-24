@@ -105,10 +105,10 @@ function couponAndFavoriteShow(){
 }
 
 function removeGenerisCoupon(){
-	$("#couponGenerateWrap").remove();
+	$("#couponGenerateWrap").css({'display' : 'none'});
 }
 
-/*쿠폰을 발급받기 버튼을 눌러서 넘길때 */
+/*찜 버튼을 눌러서 버튼을 눌러서 넘길때 */
 function indexFrestaurant(){
 	var restaurantId = $("input[name='restaurantIdJWS']").val();
 	var memberId = $("input[name='memberIdJWS']").val();
@@ -121,7 +121,7 @@ function indexFrestaurant(){
 		contentType:'application/json; charset=utf-8',
 		
 		success: function(data){
-			$("#jjimdiv").remove();
+			$("#jjimdiv").css({'display' : 'none'});
 			}
 	})
 }

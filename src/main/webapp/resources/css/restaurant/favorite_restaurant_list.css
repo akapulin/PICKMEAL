@@ -4,7 +4,8 @@
         /*전체 목록*/
         #favoritelistWrap{width: 80%; height: 750px; margin: 180px auto 0px; min-width: 1215px;}
         /*전체중에 왼쪽 리스트 목록Wrap*/
-        #favoritelist{width: 370px; height: 750px; border:4px solid #ffecec; float:left; display: scroll; overflow: scroll; overflow-x: hidden; box-sizing: border-box;}
+        #favoritelist{width: 370px; height: 750px; border:4px solid #ffecec; float:left; display: scroll; overflow: scroll; overflow-x: hidden; box-sizing: border-box;
+        		border-radius: 10px; padding : 30px; box-sizing: border-box;}
        /* 스크롤바 설정*/
 		#favoritelist::-webkit-scrollbar{
 		    width: 6px;
@@ -22,31 +23,31 @@
 		#favoritelist::-webkit-scrollbar-track{
 		    background-color: rgba(0,0,0,0);
 		}
-        #favoritelistMName{margin-top: 30px; padding-bottom:20px; border-bottom:2px solid #f23f3f; font-size: 40px; text-indent: 30px; font-family: 'DungGeunMo';}
+        #favoritelistMName{padding-bottom:20px; border-bottom:2px solid #f23f3f; font-size: 40px; text-indent: 30px; font-family: 'DungGeunMo';}
         /*찜 식당 하나하나 목록*/
-        .restaurantWrap{width: 300px; height: 100px; margin-top:20px; margin-left:30px; margin-top: 20px; border: 1px solid #000;}
+        .restaurantWrap{width: 302px; height: 100px; margin-top:20px; border: 3px solid #f23f3f; border-radius: 5px;}
         /*찜 식당 한개 중 식당 정보*/
-        .restaurantInfoWrap{overflow: hidden; text-overflow: ellipsis; position: relative; width: 220px; height: 100px; float: left;}
+        .restaurantInfoWrap{overflow: hidden; text-overflow: ellipsis; position: relative; width: 215px; height: 100px; float: left;}
         .frRadio{display: none;}
-        .frIncubate{position: absolute; top: 0; left: 0; width: 220px; height: 100px;}
-        .frName{overflow: hidden; text-overflow: ellipsis; font-size: 20px; width: 220px; height: 100px; line-height: 100px; text-align: left; font-family: 'DungGeunMo';}       
+        .frIncubate{position: absolute; top: 0; left: 0; width: 215px; height: 100px;}
+        .frName{overflow: hidden; text-overflow: ellipsis; font-size: 20px; width: 215px; height: 100px; line-height: 100px; text-align: left; font-family: 'DungGeunMo';}       
         /*삭제버튼*/
         .deleteBtnWrap{position:relative; width: 80px; height: 100px; float: left; }
         .fredeleteIncubate{position:absolute; width: 80px; height: 100px;}
         .frdeleteradioBtn{display: none;}
-        .fredeleteIncubate:hover{cursor: pointer; border-left: 1px solid #000;}
-        .favoriteremoveimg{width: 60px; height: 40px; margin-top:30px; margin-left:8px;}
+        .fredeleteIncubate:hover{cursor: pointer; border-left: 2px dashed #f23f3f; box-sizing: border-box; height: 97px;}
+        .favoriteremoveimg{width: 35px; height: 35px; margin-top:30px; margin-left:23px;}
 
         /*kakaoMapWrap*/
-        #kakaoMapWrap{width: 67%; height: 750px;  margin-left: 30px; float:left; border: 2px solid #ffecec; box-sizing: border-box;}
+        #kakaoMapWrap{width: 67%; height: 750px;  margin-left: 30px; float:left; border: 5px solid #ffecec; box-sizing: border-box; border-radius: 20px; padding: 0 30px;}
         /*카카오 맵*/
-        #kakaoMap{width: 500px; height: 500px; border-radius: 50%; margin: 30px auto 30px;}
-        #detailMName{margin-top: 30px; padding-bottom:20px; border-bottom:2px solid #f23f3f;  font-size: 40px; text-indent: 100px; font-family: 'DungGeunMo';}
+        #kakaoMap{width: 100%; height: 450px; margin-top: 30px;}
+        #detailMName{margin-top: 30px; padding-bottom:20px; border-bottom:2px solid #f23f3f;  font-size: 40px; text-indent: 40px; font-family: 'DungGeunMo';}
         /*식당 디테일*/
         #restaurantDetail{width: 800px; height: 200px; margin: 0 auto;}
 
         /*식당 디테일 식당 이름*/
-        #detailName{text-align: center; font-size: 30px; border: 0; width: 800px; height: 30px; right: 100px; background-color: #fff;}
+        #detailName{text-align: center; font-size: 30px; border: 0; width: 800px; height: 50px; line-height:50px; right: 100px; background-color: #fff; }
         /*식당 디테일 식당 주소*/
-        #detailAddress{text-align: center; font-size: 25px; border: 0; width: 800px; height: 26px; margin-top: 10px; background-color: #fff;}
+        #detailAddress{text-align: center; font-size: 25px; border: 0; width: 800px; height: 30px; line-height:30px; margin-top: 10px; background-color: #fff; top: 20px;}
         

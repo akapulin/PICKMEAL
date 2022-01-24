@@ -124,7 +124,9 @@ DROP TABLE Coupon;
 SELECT IF(exists(select COUNT(regDate)  FROM  Coupon WHERE TIMESTAMPDIFF(DAY, regDate, CURDATE())=0 GROUP BY memberId HAVING memberId = 3),1,2) FROM Coupon
 
 /*모든 쿠폰 확인*/
-SELECT * FROM Coupon;
+SELECT * FROM Coupon ORDER BY id DESC;
+/*회원 사용쿠폰 최신순*/
+SELECT id, memberId, couponId, restaurantId, couponNumber, used, regDate FROM Coupon WHERE memberId = 4 AND used = true ORDER BY id DESC
 /*쿠폰 오늘 발급한적 있냐 없냐 확인*/
 SELECT exists(select COUNT(regDate)  FROM  Coupon WHERE TIMESTAMPDIFF(DAY, regDate, CURDATE())=0 GROUP BY memberId HAVING memberId = 3);
 /*오늘 하루 발급 개수=?*/
@@ -173,7 +175,7 @@ CREATE TABLE VisitedRestaurant(
 	FOREIGN KEY (memberId) REFERENCES Member (id),								#아래 쭉 포링키
 	FOREIGN KEY (restaurantId) REFERENCES Restaurant (id)
 )
-INSERT INTO VisitedRestaurant(memberId, restaurantId, Review) VALUES(6,7,false);
+INSERT INTO VisitedRestaurant(memberId, restaurantId, Review) VALUES(4,7,false);
 INSERT INTO VisitedRestaurant(memberId, restaurantId, Review) VALUES(6,52,false);
 SELECT EXISTS (SELECT id FROM VisitedRestaurant WHERE id = 2);
 UPDATE VisitedRestaurant SET Review = true WHERE id = 1;
