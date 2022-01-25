@@ -70,8 +70,6 @@ DROP TABLE RecommendRestaurantPosting;
 DROP TABLE TogetherEatingPosting;
 DROP TABLE NoticePosting;
 
-
-
 SELECT * FROM RecommendRestaurantComment;
 SELECT * FROM TogetherEatingComment;
 SELECT * FROM RecommendRestaurantPosting;
