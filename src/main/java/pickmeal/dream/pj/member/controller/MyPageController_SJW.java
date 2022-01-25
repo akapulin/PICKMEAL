@@ -43,6 +43,11 @@ public class MyPageController_SJW {
 		
 		Member member = (Member)session.getAttribute("member");
 		
+		if(member == null) {
+			mav.setViewName("redirect:/member/viewSignIn");
+			return mav;
+		}
+		
 		member = ms.findMemberById(member.getId());
 		member.setPasswd("");
 		

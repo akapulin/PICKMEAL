@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import net.sf.json.*;
@@ -16,17 +15,12 @@ import net.sf.json.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.mysql.cj.xdevapi.JsonArray;
 
 import lombok.extern.java.Log;
 import pickmeal.dream.pj.coupon.domain.CouponCategory;
@@ -38,8 +32,8 @@ import pickmeal.dream.pj.message.service.MessageService;
 import pickmeal.dream.pj.restaurant.command.RestaurantCommand;
 import pickmeal.dream.pj.restaurant.domain.Restaurant;
 import pickmeal.dream.pj.restaurant.service.FavoriteRestaurantSerivce;
-import pickmeal.dream.pj.restaurant.service.RestaurantCheckService;
-import pickmeal.dream.pj.web.controller.MapController_SJW;
+
+import pickmeal.dream.pj.restaurant.service.RestaurantService;
 import pickmeal.dream.pj.web.util.Validator;
 
 
@@ -52,8 +46,6 @@ public class GameController {
 //			return "gamePlay_SJW";
 //		}
 //	
-	@Autowired
-	RestaurantCheckService rcs;
 	
 	@Autowired
 	GameService gs;
@@ -74,6 +66,9 @@ public class GameController {
 	@Autowired
 	MemberAchievementService mas;
 	
+	@Autowired
+	RestaurantService rs;
+	
 	@GetMapping("/openGamePopUp")
 	public String openGamePopUp() {
 		return "gamePlay_SJW";
@@ -88,13 +83,20 @@ public class GameController {
 		System.out.println("radius : " + radius + " / category : " + category);
 		System.out.println("nowLat : " + nowLat + " / nowLng : " + nowLng);
 		
+		
 		Member member = (Member)session.getAttribute("member");
+		
+		
 		int diffOfDate = 0;
 		
 		if(validator.isEmpty(member)) {
 			// 비회원 일 때.
 		} else {
-			// 회원일 때.
+			// 회원일 때. cntForRetry도 무조건 있다는 말이긴 함.
+			int cntForRetry = (int)session.getAttribute("cntForRetry");
+			System.out.println("cntForRetry11 : " + cntForRetry);
+			cntForRetry++;
+			System.out.println("cntForRetry22 : " + cntForRetry);
 
 			String firstGameMsg;
 			
@@ -109,6 +111,7 @@ public class GameController {
 				System.out.println("gameCotroller : "+firstGameMsg);
 				mav.addObject("firstGameMsg", firstGameMsg); //첫 게임일 경우 안내 메세지 보냄.
 			} else {}
+			mav.addObject("cntForRetry", cntForRetry);
 		}
 		// 얘네는 로그인이 되어있을 때 실행되어야 하는데 아래 한 줄로 되나? 
 //			diffOfDate = gs.checkLastGameRecord(member.getId());
@@ -147,7 +150,8 @@ public class GameController {
 		System.out.println("test name : " + resultMap.get(0).get("place_name"));
 		System.out.println("=========================================");
 		
-		resList = rcs.bringResList(resultMap); // 이미 객체가 생성되어 있어서 이렇게
+		//resList = rcs.bringResList(resultMap); // 이미 객체가 생성되어 있어서 이렇게
+		resList = rs.bringResList(resultMap);
 		
 		log.info("gameType is : " + gameType);
 		log.info("resList is : " + resList.get(0).getRName());
@@ -176,7 +180,8 @@ public class GameController {
 		System.out.println("test name : " + resultMap.get(0).get("place_name"));
 		System.out.println("=========================================");
 		
-		resList = rcs.bringResList(resultMap); // 이미 객체가 생성되어 있어서 이렇게
+		//resList = rcs.bringResList(resultMap); // 이미 객체가 생성되어 있어서 이렇게
+		resList = rs.bringResList(resultMap);
 		
 		log.info("gameType is : " + gameType);
 		log.info("resList is : " + resList.get(0).getRName());
@@ -226,11 +231,11 @@ public class GameController {
 			gs.insertLastGameRecord(member.getId(), restaurant.getId());
 			member = mas.addFoodPowerPointItem(member, PLAY_GAME);
 			System.out.println(member);
-			cntForRetry = (int)session.getAttribute("cntForRetry");
-			cntForRetry++;
-			System.out.println("게임 다시하기 Cnt : " + cntForRetry);
-			session.setAttribute("cntForRetry", cntForRetry);
-			map.put("cntForRetry", String.valueOf(cntForRetry));
+//			cntForRetry = (int)session.getAttribute("cntForRetry");
+//			cntForRetry++;
+//			System.out.println("게임 다시하기 Cnt : " + cntForRetry);
+//			session.setAttribute("cntForRetry", cntForRetry);
+//			map.put("cntForRetry", String.valueOf(cntForRetry));
 		}
 		session.setAttribute("restaurant", restaurant);
 		//HashMap<String,String> map = new HashMap<String, String>();

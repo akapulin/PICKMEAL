@@ -9,16 +9,16 @@ import org.springframework.stereotype.Service;
 
 import lombok.extern.java.Log;
 import pickmeal.dream.pj.restaurant.domain.Restaurant;
-import pickmeal.dream.pj.restaurant.repository.RestaurantCheckDao;
+import pickmeal.dream.pj.restaurant.repository.RestaurantDao;
 
-@Service("RestaurantCheckService")
+@Service("RestaurantService")
 @Log
-public class RestaurantCheckServiceImpl implements RestaurantCheckService {
+public class RestaurantServiceImpl implements RestaurantService {
 	
 	@Autowired
-	RestaurantCheckDao rcd;
-	
-	
+	RestaurantDao rd;
+
+	@Override
 	public List<Restaurant> bringResList(List<Map<String, Object>> resultMap) {
 		List<Restaurant> rList = new ArrayList<Restaurant>();
 		
@@ -39,17 +39,13 @@ public class RestaurantCheckServiceImpl implements RestaurantCheckService {
 			// id는 디비의 값을 가져와서 세팅
 			// rType은 만약 디비에 값이 있으면 그대로, insert면 false.
 			
-			rcd.insertResaurant(res);
+			rd.insertRestaurant(res);
 			System.out.println("test1 : " + res.getRName());
 			
 //			rList.add(rcd.selectRestaurant(res));
-			tempRes = rcd.selectRestaurant(res);
-			res.setId(tempRes.getId());
-			res.setRType(tempRes.isRType());
-			System.out.println("test2 : " + res.getRName());
-			log.info("test2 =  " + res.getRName());
-			
-			rList.add(res);
+			tempRes = rd.findRestaurantbyApiId(res.getApiId());
+					
+			rList.add(tempRes);
 		}
 //		rList.add(res);
 //		rcd.checkResEntityByApiID(rList);
@@ -60,27 +56,25 @@ public class RestaurantCheckServiceImpl implements RestaurantCheckService {
 		}
 		return rList;
 	}
-	
-	public void convertMaptoResObject(List<Map<String, Object>> resultMap) {
-		List<Restaurant> rList = new ArrayList<Restaurant>();
-		
-		for(int i=0; i<resultMap.size();i++) {
-			Restaurant res = new Restaurant();
-			
-			long apiId = Long.valueOf(String.valueOf(resultMap.get(i).get("id")));
-			double lat = Double.valueOf(String.valueOf(resultMap.get(i).get("y")));
-			double lng = Double.valueOf(String.valueOf(resultMap.get(i).get("x")));
-			String address = String.valueOf(resultMap.get(i).get("address_name"));
-			String rName = String.valueOf(resultMap.get(i).get("place_name"));
-			
-			res.setApiId(apiId);
-			res.setRName(rName);
-			res.setAddress(address);
-			res.setLat(lat);
-			res.setLng(lng);
-			
-			// if apiId를 DB가서 비교하고 없으면은 insert하고 res객체에 세팅하고 리스트에 담아야함. 
-			// 있으면은 DB의 레코드 가져와서 res 객체에 세팅하고 리스트에 담아야 함.
-		}
+
+	@Override
+	public Restaurant findRestaurantByAddress(Restaurant restaurant) {
+		return rd.findRestaurantByAddress(restaurant);
 	}
+
+	@Override
+	public Restaurant findRestaurantByrType(Restaurant restaurant) {
+		return rd.findRestaurantByrType(restaurant);
+	}
+
+	@Override
+	public Restaurant findRestaurantById(long id) {
+		return rd.findRestaurantById(id);
+	}
+
+	@Override
+	public Restaurant findRestaurantbyApiId(long apiId) {
+		return rd.findRestaurantbyApiId(apiId); 
+	}
+
 }

@@ -12,6 +12,7 @@ DROP TABLE NoticePosting;
 SELECT * FROM NoticePosting;
 DELETE FROM NoticePosting;
 
+ALTER TABLE RecommendRestaurantPosting ADD COLUMN adress VARCHAR(100) NOT NULL;
 CREATE TABLE RecommendRestaurantPosting (									# 식당 추천 게시판
 	id				BIGINT			PRIMARY KEY	AUTO_INCREMENT,				# SQL 아이디
 	memberId		BIGINT			NOT NULL,								# 사용자 아이디
@@ -26,7 +27,6 @@ CREATE TABLE RecommendRestaurantPosting (									# 식당 추천 게시판
 );
 DROP TABLE RecommendRestaurantPosting;
 SELECT * FROM RecommendRestaurantPosting;
-DELETE FROM RecommendRestaurantPosting;
 
 CREATE TABLE TogetherEatingPosting (										# 밥친구 게시판
 	id				BIGINT			PRIMARY KEY	AUTO_INCREMENT,				# SQL 아이디

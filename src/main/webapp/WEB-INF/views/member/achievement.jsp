@@ -11,8 +11,8 @@
 <script src="${pageContext.request.contextPath}/resources/js/member/achievement.js" defer></script>
 </head>
 <body>
-	<%-- <jsp:include page="/WEB-INF/views/incl/header.jsp"/> --%>
-	<jsp:include page="/WEB-INF/views/member/my_page_SJW.jsp"/>
+	<jsp:include page="/WEB-INF/views/incl/header.jsp"/>
+	<jsp:include page="/WEB-INF/views/member/my_page.jsp"/>
 	
 	<div id="achieveWrap">
 		<h2>업적</h2>
@@ -62,62 +62,11 @@
                     </tr>
                     <c:forEach var="f" items="${fppList}">
 	                    <tr>
-	                    	<td class="tdPoint tdMid td">+${f.getPoint()}</td>
+	                    	<td data-fpp="${f.id}" class="tdPoint tdMid td">+${f.getPoint()}</td>
 	                        <td class="tdCategory td">${f.getDetail().getKor()}</td>
 	                        <td class="tdDate tdMid td">${f.getRegDate()}</td>
 						</tr>
                     </c:forEach>
-                    <tr>
-                   		<td class="tdPoint tdMid td">1</td>
-                        <td class="tdCategory td">2</td>
-                        <td class="tdDate tdMid td">3</td>
-                    </tr>
-                    <tr>
-                   		<td class="tdPoint tdMid td">1</td>
-                        <td class="tdCategory td">2</td>
-                        <td class="tdDate tdMid td">3</td>
-                    </tr>
-                    <tr>
-                   		<td class="tdPoint tdMid td">1</td>
-                        <td class="tdCategory td">2</td>
-                        <td class="tdDate tdMid td">3</td>
-                    </tr>
-                    <tr>
-                   		<td class="tdPoint tdMid td">1</td>
-                        <td class="tdCategory td">2</td>
-                        <td class="tdDate tdMid td">3</td>
-                    </tr>
-                    <tr>
-                   		<td class="tdPoint tdMid td">1</td>
-                        <td class="tdCategory td">2</td>
-                        <td class="tdDate tdMid td">3</td>
-                    </tr>
-                    <tr>
-                   		<td class="tdPoint tdMid td">1</td>
-                        <td class="tdCategory td">2</td>
-                        <td class="tdDate tdMid td">3</td>
-                    </tr>
-                    <tr>
-                   		<td class="tdPoint tdMid td">1</td>
-                        <td class="tdCategory td">2</td>
-                        <td class="tdDate tdMid td">3</td>
-                    </tr>
-                    <tr>
-                   		<td class="tdPoint tdMid td">1</td>
-                        <td class="tdCategory td">2</td>
-                        <td class="tdDate tdMid td">3</td>
-                    </tr>
-                    <tr>
-                   		<td class="tdPoint tdMid td">1</td>
-                        <td class="tdCategory td">2</td>
-                        <td class="tdDate tdMid td">3</td>
-                    </tr>
-                   
-                   <!--  <tr> 얘네는 동적으로 만들어야 함 
-                        <td class="tdPoint tdMid">+100</td>
-                        <td class="tdCategory">게시글 작성</td>
-                        <td class="tdDate tdMid">2021.01.20</td> 
-                    </tr> -->
                 </table>
             </div>
         </div>

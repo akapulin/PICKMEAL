@@ -14,3 +14,10 @@ CREATE TABLE Message(
 	messageType		CHAR(1)			NOT NULL,
 	content			VARCHAR(200)	
 );
+
+CREATE TABLE LastGameRecord (
+	id				BIGINT			PRIMARY KEY AUTO_INCREMENT,
+	restaurantId	BIGINT			NOT NULL,
+	memberID		BIGINT			UNIQUE KEY,
+	regDate			TIMESTAMP		DEFAULT CURRENT_TIMESTAMP	
+);

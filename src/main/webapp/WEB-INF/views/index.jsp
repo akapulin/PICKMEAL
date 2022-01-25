@@ -52,7 +52,6 @@
 			</form>
 		</div>
 		
-		<div id="retryMsg" class="retryMsg"></div>
 		<div>
 			<form id="gameDataForm" name="gameDataForm" method="GET">
 				<div id="mapRadius">
