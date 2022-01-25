@@ -202,6 +202,9 @@ $('#rPostModifyBtn').on('click',function(){
 		2) 게시판 목록으로 이동
 */
 $('#rPostRemoveBtn').on('click',function(){
+	//게시글 안에 외부파일에 저장되어진 이미지파일들 삭제해주기
+	removeImg();
+	
 	let postId = $('#postId').val();
 	let category = $('.rwPostTitleWrap > h3').data('category');
 	let json ={"postId":postId,"category":category };
@@ -232,9 +235,39 @@ $('#rPostRemoveBtn').on('click',function(){
 })	
 	
 	
+let maxFileCnt =10;	
 	
+function removeImg(){
+	/*
 	
+		RequestParam List로 받기 위해 2차원 배열생성
+		array[maxFileCnt][0]
+		=> List.getIndex(0).val() = src;
+	*/
 	
+	let rmFileBuffer = new Array(maxFileCnt);
+
+	console.log('removeImgList');
+	
+	//이미지 파일이 존재하면 
+	if($('.wPostContentInput').find($('.imgList0'))){
+		for(let i=0;i<maxFileCnt;i++){
+		rmFileBuffer[i] = new Array(1);
+		rmFileBuffer[i]=$('.imgList'+i).attr('src');
+		}
+	}
+
+	$.ajax({
+		url: getContextPath()+"/removeImg",
+		type: "post",
+		data:{imgSrc:rmFileBuffer},
+		success: function(data) {
+			},
+			error:function(){
+			
+			}
+		})
+}
 	
 	
 	
