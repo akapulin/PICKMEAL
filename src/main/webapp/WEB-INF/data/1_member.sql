@@ -10,6 +10,8 @@ CREATE TABLE Member (															# 사용자
 	regDate			TIMESTAMP		NOT NULL	DEFAULT CURRENT_TIMESTAMP		# 회원가입 날짜
 );
 
+
+
 CREATE TABLE FoodPowerPoint (													# 식력 포인트
 	id			BIGINT		PRIMARY KEY	AUTO_INCREMENT,							# SQL 아이디
 	memberId	BIGINT		NOT NULL,											# 사용자 아이디
@@ -65,3 +67,18 @@ CREATE TABLE Chat(
 	CONSTRAINT	Chat_commenterId_FK	FOREIGN KEY(commenterId)	REFERENCES Member(id) ON DELETE CASCADE,
 	CONSTRAINT	Chat_memberId_FK	FOREIGN KEY(memberId)	REFERENCES Member(id) ON DELETE CASCADE
 );
+
+DROP TABLE Coupon;
+DROP TABLE CouponCategory;
+DROP TABLE Attendance;
+DROP TABLE MannerTemperature;
+DROP TABLE FoodPowerPoint;
+DROP TABLE Member;
+
+SELECT * FROM Coupon;
+SELECT * FROM CouponCategory;
+SELECT * FROM Attendance;
+SELECT * FROM MannerTemperature;
+SELECT * FROM FoodPowerPoint;
+SELECT * FROM Member;
+
