@@ -34,7 +34,7 @@ public class WebConfig implements WebMvcConfigurer{
 		 */
 		//window일 때
 		registry.addResourceHandler(imgPropertyConfig.getString("file.mappingPath"))
-				.addResourceLocations(imgPropertyConfig.getString("file.locationPathFromWindow"));
+				.addResourceLocations(imgPropertyConfig.getString("file.locationImgPathFromWindow"));
 		
 		
 		//posting관련 이미지 

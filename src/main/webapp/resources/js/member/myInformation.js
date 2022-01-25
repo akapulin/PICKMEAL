@@ -13,6 +13,15 @@ $('#changePasswdBtn').on('click', function(){
 	$("#checkOriginPwWrap").show();
 })
 
+$('#originPw').focus(function(){
+	console.log(this);
+	$(this).keyup(function(key){
+		if(key.keyCode == 13){
+			$('#checkOriginPasswdBtn').trigger('click');
+		}
+	})
+})
+
 $(document).on('click', "#checkOriginPasswdBtn", function(e){
 	e.preventDefault();
 	let originPw = $('#originPw').val();

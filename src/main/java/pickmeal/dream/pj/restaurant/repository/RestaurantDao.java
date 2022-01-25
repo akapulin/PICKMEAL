@@ -9,9 +9,15 @@ public interface RestaurantDao {
 	 * @param address
 	 * @return
 	 */
-	Restaurant findRestaurantByAddress(Restaurant restaurant);
 	
-	Restaurant findRestaurantByrType(Restaurant restaurant);
+	public void insertRestaurant(Restaurant restaurant); 
 	
-	Restaurant findRestaurantById(long id);
+	public Restaurant findRestaurantByAddress(Restaurant restaurant);
+	
+	public Restaurant findRestaurantByrType(Restaurant restaurant);
+	
+	public Restaurant findRestaurantById(long id);
+	
+	public Restaurant findRestaurantbyApiId(long apiId);	
+	
 }

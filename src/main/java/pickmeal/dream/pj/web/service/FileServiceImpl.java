@@ -9,6 +9,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.configuration.PropertiesConfiguration;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -35,7 +37,13 @@ public class FileServiceImpl implements FileService{
 	
 	@Resource(name="uploadReviewBoardPath")
 	private String uploadReviewBoardPath;
+	
+	
+	//삭제할때
+	@Autowired
+	PropertiesConfiguration imgPropertyConfig;
 
+	@Override
 	public List<String> saveImgToExternal(String boardName, List<MultipartFile>files, long memberId) throws Exception{
 		
 		// 게시물 1개당 업로드한 파일들의 경로 (ex. img src에 들어갈것)
@@ -105,6 +113,32 @@ public class FileServiceImpl implements FileService{
 		String formatedNow = now.format(formatter);
 		
 		return formatedNow;
+	}
+	
+	@Override
+	public boolean removeImgFromExternal(List<String> imgSrc) {
+		
+		//파일 경로 현재 : \external_resources\board\review\1\20220124\n1_20220124152656_0.jpg
+		String externalPath = imgPropertyConfig.getString("file.locationPathFromWindow");
+		boolean removeState = false;
+		
+		for(int i=0;i<imgSrc.size();i++) {
+
+			log.info("파일 경로  : "+externalPath+imgSrc.get(i));
+			File deleteFile  = new File(externalPath+imgSrc.get(i));
+			
+			// 파일이 존재하는지 체크 존재할경우 true, 존재하지않을경우 false
+	        if(deleteFile.exists()) {
+	            // 파일을 삭제합니다.
+	            deleteFile.delete(); 
+	            removeState = true;
+	            log.info("파일을 삭제하였습니다.");
+	            
+	        } else {
+	            log.info("파일이 존재하지 않습니다.");
+	        }
+		}
+		return removeState;
 	}
 	
 
