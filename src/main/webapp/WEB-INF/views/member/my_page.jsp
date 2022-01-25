@@ -19,7 +19,7 @@
 	        <li id="myFavorite"><a href="${pageContext.request.contextPath}/member/findAllFavoriteRestaurant">찜 식당</a></li>
 	        <li id="myVisited"><a href="${pageContext.request.contextPath}/member/findAllVisitedRestaurant">내가 간 식당</a></li>
 	        <li id="myCoupon"><a href="${pageContext.request.contextPath}/member/findAllCoupon">쿠폰</a></li>
-	        <li id=""><a href="#">업적</a></li>
+	        <li id="achievment"><a href="${pageContext.request.contextPath}/member/updateAchievementInfo">업적</a></li>
 	    </ul>
 	</nav>
 </body>

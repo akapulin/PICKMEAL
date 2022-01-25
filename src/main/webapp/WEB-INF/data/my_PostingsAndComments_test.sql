@@ -1,14 +1,14 @@
 CREATE TABLE RecommendRestaurantPosting (									# 식당 추천 게시판
 	id				BIGINT			PRIMARY KEY	AUTO_INCREMENT,				# SQL 아이디
 	memberId		BIGINT			NOT NULL,								# 사용자 아이디
-	restaurantId	BIGINT			NOT NULL,								# 식당 아이디
+	address			VARCHAR(100)	NOT NULL,								# 주소
 	title			VARCHAR(100)	NOT NULL,								# 제목
 	content			MEDIUMTEXT		NOT NULL,								# 내용
 	likes			INT				NOT NULL	DEFAULT 0,					# 좋아요 수
 	views			INT				NOT NULL	DEFAULT 0,					# 조회 수
 	regDate			TIMESTAMP		NOT NULL	DEFAULT CURRENT_TIMESTAMP,	# 글 등록 날짜
-	CONSTRAINT		RecommendRestaurantPosting_memberId_FK	FOREIGN KEY(memberId)	REFERENCES Member(id) ON DELETE CASCADE,
-	CONSTRAINT		RecommendRestaurantPosting_restaurantId_FK	FOREIGN KEY(restaurantId)	REFERENCES Restaurant(id) ON DELETE CASCADE
+	CONSTRAINT		RecommendRestaurantPosting_memberId_FK	FOREIGN KEY(memberId)	REFERENCES Member(id) ON DELETE CASCADE
+	
 );
 
 CREATE TABLE RecommendRestaurantComment (									# 식당 추천 댓글
@@ -20,6 +20,7 @@ CREATE TABLE RecommendRestaurantComment (									# 식당 추천 댓글
 	CONSTRAINT	RecommendRestaurantComment_memberId_FK	FOREIGN KEY(memberId)	REFERENCES Member(id) ON DELETE CASCADE,
 	CONSTRAINT	RecommendRestaurantComment_postId_FK	FOREIGN KEY(postId)	REFERENCES RecommendRestaurantPosting(id) ON DELETE CASCADE
 );
+DROP TABLE RecommendRestaurantComment;
 
 CREATE TABLE TogetherEatingPosting (										# 밥친구 게시판
 	id				BIGINT			PRIMARY KEY	AUTO_INCREMENT,				# SQL 아이디

@@ -34,6 +34,12 @@ CREATE TABLE Attendance (														# 출석
 	CONSTRAINT	Attendance_memberId_FK	FOREIGN KEY(memberId)	REFERENCES Member(id) ON DELETE CASCADE
 );
 
+CREATE TABLE CouponCategory (
+	id			BIGINT			PRIMARY KEY AUTO_INCREMENT,
+	couponName	VARCHAR(20)		NOT NULL,
+	couponType	CHAR(1)			NOT NULL
+);
+
 CREATE TABLE Coupon(
 	id				BIGINT			PRIMARY KEY AUTO_INCREMENT,
 	memberId		BIGINT			NOT NULL,
@@ -47,12 +53,6 @@ CREATE TABLE Coupon(
 	FOREIGN KEY (restaurantId) REFERENCES Restaurant (id) ON DELETE CASCADE
 );
 
-CREATE TABLE CouponCategory (
-	id			BIGINT			PRIMARY KEY AUTO_INCREMENT,
-	couponName	VARCHAR(20)		NOT NULL,
-	couponType	CHAR(1)			NOT NULL
-);
-
 #개인채팅
 CREATE TABLE Chat(
 	id			BIGINT			PRIMARY KEY	AUTO_INCREMENT,					# sql 아이디
@@ -64,4 +64,4 @@ CREATE TABLE Chat(
 	CONSTRAINT	Chat_writerId_FK	FOREIGN KEY(writerId)	REFERENCES Member(id) ON DELETE CASCADE,
 	CONSTRAINT	Chat_commenterId_FK	FOREIGN KEY(commenterId)	REFERENCES Member(id) ON DELETE CASCADE,
 	CONSTRAINT	Chat_memberId_FK	FOREIGN KEY(memberId)	REFERENCES Member(id) ON DELETE CASCADE
-)
+);
