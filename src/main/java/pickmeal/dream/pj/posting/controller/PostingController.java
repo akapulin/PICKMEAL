@@ -1,5 +1,7 @@
 package pickmeal.dream.pj.posting.controller;
 
+import static pickmeal.dream.pj.web.constant.Constants.COMMENT_LIST;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,11 +25,14 @@ import org.springframework.web.servlet.ModelAndView;
 import lombok.extern.java.Log;
 import pickmeal.dream.pj.member.domain.Member;
 import pickmeal.dream.pj.posting.command.PostingCommand;
+import pickmeal.dream.pj.posting.domain.Comment;
 import pickmeal.dream.pj.posting.domain.Posting;
 import pickmeal.dream.pj.posting.domain.TogetherEatingPosting;
+import pickmeal.dream.pj.posting.service.CommentService;
 import pickmeal.dream.pj.posting.service.PostingService;
 import pickmeal.dream.pj.posting.util.Criteria;
 import pickmeal.dream.pj.posting.util.PageMaker;
+import pickmeal.dream.pj.web.util.Validator;
 
 /**
  * 
@@ -41,6 +46,11 @@ public class PostingController {
 	@Autowired
 	PostingService ps;
 
+	@Autowired
+	CommentService cs;
+	
+	@Autowired
+	Validator v;
 
 	/* 
 	 * 
@@ -192,6 +202,9 @@ public class PostingController {
 			mav.addObject("postings", togetherPostings);
 		}
 		
+		
+		
+		
 		mav.setViewName("/posting/post_list");
 		return mav;
 		
@@ -207,7 +220,7 @@ public class PostingController {
 	 * @return
 	 */
 	@GetMapping("/posting/{type}/{id}")
-	public ModelAndView readPostView(@PathVariable int id, @PathVariable String type) {
+	public ModelAndView readPostView(@PathVariable int id, @PathVariable String type, @RequestParam("cpageNum") int cpageNum) {
 		ModelAndView mav = new ModelAndView();
 		
 		Posting posting;
@@ -222,6 +235,39 @@ public class PostingController {
 		
 
 		mav.addObject("post", posting);
+		
+		
+		
+		
+		/*
+			
+			코멘트 - 김보령
+		
+		*/
+		// 항상 pageNum은 1이 default 이다.
+		List<Comment> comments = cs.findCommentsByPostId(posting.getId(), category, cpageNum); // 게시물 댓글 1페이지
+		int allCmtNum = cs.countCommentByPostId(posting.getId(), category); // 해당 게시글의 총 댓글 수
+		// double 형으로 캐스팅을 한 후에 나누기를 해줘야 소수점이 제대로 나온다
+		int allPageNum = (int)Math.ceil((double)allCmtNum / (int)COMMENT_LIST.getPoint()); // 페이지 개수 구하기
+	
+		if (cpageNum > allPageNum) { // 만일 사용자가 url 에 더 큰 값을 적는다면 가장 큰 페이지로 가도록 한다
+			cpageNum = allPageNum;
+		}
+		log.info(String.valueOf(cpageNum));
+	
+		mav.addObject("comments", comments);
+		mav.addObject("allPageNum", allPageNum);
+		mav.addObject("allCmtNum", allCmtNum);
+		mav.addObject("cpageNum", cpageNum);
+		mav.addObject("viewPageNum", (int)COMMENT_LIST.getPoint());
+			
+		
+		
+		
+		
+		
+		
+		
 		
 		mav.setViewName("posting/post_read");
 		return mav;
@@ -270,13 +316,13 @@ public class PostingController {
 		
 		if(pc.getCategory()=='N') {
 			Posting post = ps.addPosting(setNoticePosting(pc,memberId));
-			return ("redirect:/posting/notice/"+post.getId());
+			return ("redirect:/posting/notice/"+post.getId()+"?cpageNum=1");
 		}else if(pc.getCategory()=='R') {
 			Posting post = ps.addPosting(setRecommendPosting(pc,memberId));
-			return ("redirect:/posting/recommend/"+post.getId());
+			return ("redirect:/posting/recommend/"+post.getId()+"?cpageNum=1");
 		}else{
 			Posting post = ps.addPosting(setTogetherPosting(pc,memberId));
-			return ("redirect:/posting/together/"+post.getId());
+			return ("redirect:/posting/together/"+post.getId()+"?cpageNum=1");
 		}
 
 	}
