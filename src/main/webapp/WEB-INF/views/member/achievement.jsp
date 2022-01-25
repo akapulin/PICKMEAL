@@ -41,16 +41,18 @@
             <div id="pointProgressWrap">
                 <div id="leftBorderWrap" class="borderWrap">
                     <p id="fppMinPoint"><fmt:parseNumber value="${fppMin.getPoint()}" integerOnly="true" type="number"/></p> <!-- 값 백에서 받아야 함 -->
-                    <span>${fppMin.getImgPath()}</span><!-- level에 맞는 이미지 가져와야 함 -->
+                    <!--<span id="nowlevel">${fppMin.getImgPath()}</span>--><!-- level에 맞는 이미지 가져와야 함 -->
+                    <img alt="" src="${pageContext.request.contextPath}/resources/img/profile/${fppMin.getImgPath()}.png" width="44px" height="44px">
                 </div>
                 <!-- min이랑 max값 백에서 받아야 함 -->
                 <div id="progressPWrap">
-	                <progress id="progressForP" value="${member.getFoodPowerPoint()}" min="<fmt:parseNumber value="${fppMin.getPoint()}" integerOnly="true" type="number"/>" max="<fmt:parseNumber value="${fppMax.getPoint()}" integerOnly="true" type="number"/>"></progress>
+	                <progress id="progressForP" value=""  max="<fmt:parseNumber value="${necessaryPoint}" integerOnly="true" type="number"/>"></progress>
 	                <div id="presentP">${member.getFoodPowerPoint()}</div> <!-- 뒤에 max의 값 가져와야 함 -->
                 </div>
                 <div id="rightBorderWrap" class="borderWrap">
                     <p id="fppMaxPoint"><fmt:parseNumber value="${fppMax.getPoint()}" integerOnly="true" type="number"/></p> <!-- 값 백에서 받아야 함 -->
-                    <span>${fppMax.getImgPath()}</span><!-- level에 맞는 이미지 가져와야 함 -->
+                    <!--<span id="nextlevel">${fppMax.getImgPath()}</span> --><!-- level에 맞는 이미지 가져와야 함 -->
+                    <img alt="" src="${pageContext.request.contextPath}/resources/img/profile/${fppMax.getImgPath()}.png" width="44px" height="44px">
                 </div>
             </div>
             <div id="pointRecordWrap">

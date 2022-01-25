@@ -176,7 +176,7 @@ CREATE TABLE VisitedRestaurant(
 	FOREIGN KEY (restaurantId) REFERENCES Restaurant (id)
 )
 INSERT INTO VisitedRestaurant(memberId, restaurantId, Review) VALUES(4,7,false);
-INSERT INTO VisitedRestaurant(memberId, restaurantId, Review) VALUES(6,52,false);
+INSERT INTO VisitedRestaurant(memberId, restaurantId, Review) VALUES(4,52,false);
 SELECT EXISTS (SELECT id FROM VisitedRestaurant WHERE id = 2);
 UPDATE VisitedRestaurant SET Review = true WHERE id = 1;
 DELETE FROM VisitedRestaurant WHERE id = 10;

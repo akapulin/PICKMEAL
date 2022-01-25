@@ -56,8 +56,11 @@ public class AchievementController {
 		}else if(member.getFoodPowerPoint() <= LEVEL4.getPoint()) { // 5000 ~ 15000 
 			fppMin = LEVEL3;
 			fppMax = LEVEL4;
-		}else { // 15000 ~ 
+		}else if(member.getFoodPowerPoint() <= LEVEL5.getPoint()){ // 15000 ~ 50000
 			fppMin = LEVEL4;
+			fppMax = LEVEL5;
+		}else{//5만 이상
+			fppMin = LEVEL5;
 			fppMax = LEVEL5;
 		}
 		
@@ -65,7 +68,8 @@ public class AchievementController {
 		System.out.println(fppMin.getImgPath());
 		System.out.println(fppMax);
 		
-		
+		double necessaryPoint = fppMax.getPoint() - fppMin.getPoint();
+		System.out.println(necessaryPoint);
 		// 식력 내역 보내기
 		fppList = mas.findFoodPowerPointRecordByMemberId(member.getId());
 		
@@ -73,6 +77,7 @@ public class AchievementController {
 		
 		mav.addObject("member", member);
 		
+		mav.addObject("necessaryPoint",necessaryPoint);
 		mav.addObject("fppMin", fppMin);
 		mav.addObject("fppMax", fppMax);
 		
