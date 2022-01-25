@@ -1,12 +1,6 @@
 package pickmeal.dream.pj.member.domain;
 
-import static pickmeal.dream.pj.web.constant.Constants.LEVEL0;
-import static pickmeal.dream.pj.web.constant.Constants.LEVEL1;
-import static pickmeal.dream.pj.web.constant.Constants.LEVEL2;
-import static pickmeal.dream.pj.web.constant.Constants.LEVEL3;
-import static pickmeal.dream.pj.web.constant.Constants.LEVEL4;
-import static pickmeal.dream.pj.web.constant.Constants.LEVEL5;
-import static pickmeal.dream.pj.web.constant.Constants.SIGN_UP_MANNER;
+import static pickmeal.dream.pj.web.constant.Constants.*;
 import static pickmeal.dream.pj.web.constant.SavingPointConstants.SIGN_UP;
 
 import java.util.Date;
@@ -52,18 +46,22 @@ public class Member {
 	 * @param c
 	 */
 	public void makeProfileImgPath() {
-		if (this.foodPowerPoint >= 50000) {
-			this.profileImgPath = LEVEL5.getImgPath();	
-		} else if (this.foodPowerPoint >= 15000) {
-			this.profileImgPath = LEVEL4.getImgPath();	
-		} else if (this.foodPowerPoint >= 5000) {
-			this.profileImgPath = LEVEL3.getImgPath();	
-		} else if (this.foodPowerPoint >= 1000) {
-			this.profileImgPath = LEVEL2.getImgPath();	
-		} else if (this.foodPowerPoint >= 300) {
-			this.profileImgPath = LEVEL1.getImgPath();	
-		} else {
-			this.profileImgPath = LEVEL0.getImgPath();	
+		if (this.memberType == 'A') { // 관리자 일 경우
+			this.profileImgPath = ADMIN.getImgPath();
+		} else if (this.memberType == 'M') { // 일반 회원일 경우
+			if (this.foodPowerPoint >= 50000) {
+				this.profileImgPath = LEVEL5.getImgPath();	
+			} else if (this.foodPowerPoint >= 15000) {
+				this.profileImgPath = LEVEL4.getImgPath();	
+			} else if (this.foodPowerPoint >= 5000) {
+				this.profileImgPath = LEVEL3.getImgPath();	
+			} else if (this.foodPowerPoint >= 1000) {
+				this.profileImgPath = LEVEL2.getImgPath();	
+			} else if (this.foodPowerPoint >= 300) {
+				this.profileImgPath = LEVEL1.getImgPath();	
+			} else {
+				this.profileImgPath = LEVEL0.getImgPath();	
+			}
 		}
 		this.profileImgPath = "/resources/img/profile/" + getProfileImgPath() + ".png";
 	}

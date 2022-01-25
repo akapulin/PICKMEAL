@@ -188,7 +188,9 @@
 			
 			$('#write_msg').on("keyup", function(key) {
 				if(key.keyCode==13) {
-					sendMessage();
+					if (chatStart == "true") {
+						sendMessage();
+					}
 					$('#write_msg').val('')
 					$('#msgArea').scrollTop($('#msgArea').prop('scrollHeight'));
 				}
@@ -196,7 +198,9 @@
 			
 			//전송 버튼 누르는 이벤트
 			$("#button_send").on("click", function(e) {
-				sendMessage();
+				if (chatStart == "true") {
+					sendMessage();
+				}
 				$('#write_msg').val('')
 			});
 
