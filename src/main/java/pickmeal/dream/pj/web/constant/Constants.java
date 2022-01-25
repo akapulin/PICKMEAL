@@ -10,6 +10,7 @@ public enum Constants {
 	LEVEL3(5000, "level3User"),
 	LEVEL4(15000, "level4User"),
 	LEVEL5(50000, "level5User"),
+	ADMIN(50000, "admin"),
 	GOOD(5), // 좋아요
 	BAD(-5), // 나빴어요
 	NORMAl(0), // 보통이였어요
