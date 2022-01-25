@@ -62,3 +62,19 @@ CREATE TABLE NoticePosting (									# 식당 추천 게시판
 	CONSTRAINT		NoticePosting_memberId_FK	FOREIGN KEY(memberId)	REFERENCES Member(id) ON DELETE CASCADE
 	
 );
+
+
+DROP TABLE RecommendRestaurantComment;
+DROP TABLE TogetherEatingComment;
+DROP TABLE RecommendRestaurantPosting;
+DROP TABLE TogetherEatingPosting;
+DROP TABLE NoticePosting;
+
+
+
+SELECT * FROM RecommendRestaurantComment;
+SELECT * FROM TogetherEatingComment;
+SELECT * FROM RecommendRestaurantPosting;
+SELECT * FROM TogetherEatingPosting;
+SELECT * FROM NoticePosting;
+
