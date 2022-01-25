@@ -200,6 +200,7 @@
 
 <!-- 익명채팅방 - 김재익 -->
 <script type="text/javascript">
+console.log("${member.foodPowerPoint}")
 $('#write_msg').on("keyup", function(key) {
 	if(key.keyCode==13) {
 		sendMessage();
