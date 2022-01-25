@@ -96,6 +96,7 @@ public class SignInController {
 		enterMember.setFoodPowerPoint(member.getFoodPowerPoint());
 		enterMember.setMannerTemperature(member.getMannerTemperature());
 		enterMember.setProfileImgPath(member.getProfileImgPath());
+		enterMember.setMemberType(member.getMemberType());
 		
 		/*회원 로그인시 모든 멤버에 해당하는 coupon 보고 지워주기*/
 		cs.deleteCouponwithAllmemberByRegDate();
