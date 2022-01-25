@@ -55,6 +55,13 @@ DROP TABLE VisitedRestaurant;
 DROP TABLE FavoriteRestaurant;
 DROP TABLE Restaurant;
 
+DELETE FROM Review;
+DELETE FROM RestaurantPreference;
+DELETE FROM VisitedRestaurant;
+DELETE FROM FavoriteRestaurant;
+DELETE FROM Restaurant;
+
+
 SELECT * FROM Review;
 SELECT * FROM RestaurantPreference;
 SELECT * FROM VisitedRestaurant;

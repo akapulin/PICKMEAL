@@ -27,6 +27,10 @@ DROP TABLE AlarmRecord;
 DROP TABLE Message;
 DROP TABLE LastGameRecord;
 
+DELETE FROM where condition AlarmRecord;
+DELETE FROM Message;
+DELETE FROM LastGameRecord;
+
 SELECT * FROM AlarmRecord;
 SELECT * FROM Message;
 SELECT * FROM LastGameRecord;
