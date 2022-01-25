@@ -450,8 +450,18 @@ public class PostingController {
 		return mav;
 	}
 	
-	
+	/**
+	 * 조건연산자, 삼항연산자를 이용해 코드 줄이기!
+	 * @param type
+	 * @return
+	 */
 	public char getPostCategory(String type) {
+		
+		
+		char n =  type.equals("notice") ? 'N':type.equals("recommend") ? 'R':'E';
+		return n;
+	
+		/*
 		if(type.equals("notice")) {
 			return 'N';
 		}else if(type.equals("recommend")) {
@@ -459,6 +469,7 @@ public class PostingController {
 		}else {
 			return 'E';
 		}
+		*/
 	}
 	
 	
