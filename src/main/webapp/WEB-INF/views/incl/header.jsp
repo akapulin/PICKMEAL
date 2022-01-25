@@ -26,7 +26,7 @@
 					<div class="profileAreaWrap navAlarmTextCom">
 						<ul class="profileArea">
 							<li><a href="${pageContext.request.contextPath}/member/signOutMember">로그아웃</a></li>
-							<li><a href="${pageContext.request.contextPath}/member/myPostings">마이페이지</a></li>
+							<li><a href="${pageContext.request.contextPath}/member/updateAchievementInfo">마이페이지</a></li>
 						</ul>
 					</div>
 				</li>

@@ -33,17 +33,25 @@ $(document).ready(function(){
 		4) 식사매너온도체크를 위한 팝업창 띄우기 
 */
 //모집 토글 상태변경
-$('.rPostCheckbox').click(function(){
-	//모집완료되었다면 모집완료상태로 변환
-	if($('.rPostCheckbox').is(":checked")){
-		recruitmentOFF()
-		//ajax
-	}
-	//모집중 상태로 변환
-	else{
-		recruitmentON()
-		//ajax
-	}
+$('.rPostCheckbox').click(function(){	
+	//DB에 값 바꾸기
+	let postId =$('#postId').val();
+	$.ajax({
+		url: getContextPath()+"/posting/convertRecruitmentState",
+		type: "post",
+		data: {"postId":postId },
+		success:function(data){
+			//모집완료로 변환되었다면 상태 변환
+			if(data=='true'){
+				recruitmentON();
+			}
+			//모집중 상태로 변환
+			else{
+				recruitmentOFF();
+			}
+		}
+		
+	})
 })
 //모집완료상태 되기
 function recruitmentOFF(){
@@ -59,8 +67,11 @@ function recruitmentON(){
 	$('.rPostCheckOFF').hide();
 	$('.rPostCheckbox').removeAttr("checked");
 }
-
-
+//식사완료
+$('#rPostCompMealBtn').on('click',function(e){
+	e.prevendDefault();
+	
+})
 
 
 
@@ -166,11 +177,59 @@ function getContextPath() {
 /*
 	게시글 수정
 */
+$('#rPostModifyBtn').on('click',function(){
+	console.log('in modify?');
+	
+	let postId = $('#postId').val();
+	let category = $('.rwPostTitleWrap > h3').data('category');
+	let modifyForm = document.goModifyBoard;
+	console.log('modi>'+modifyForm)
+	if(category=='N'){
+		modifyForm.action=getContextPath()+"/posting/notice/modify/"+postId;
+	}else if(category=='R'){
+		modifyForm.action=getContextPath()+"/posting/recommend/modify/"+postId;
+	}else if(category=='E'){
+		modifyForm.action=getContextPath()+"/posting/together/modify/"+postId;
+	}
+	modifyForm.method="get";
+	modifyForm.submit();
+})
+
 
 /*
 	게시글 삭제
+		1) ajax로 삭제처리를 먼저 해준다
+		2) 게시판 목록으로 이동
 */
-	
+$('#rPostRemoveBtn').on('click',function(){
+	let postId = $('#postId').val();
+	let category = $('.rwPostTitleWrap > h3').data('category');
+	let json ={"postId":postId,"category":category };
+	$.ajax({
+		url: getContextPath()+"/posting/removePosting",
+		type: "post",
+		data: JSON.stringify(json),
+		contentType: "application/json; charset=UTF-8",
+		success:function(data){
+			//게시글 지우기 성공
+			if(data=='true'){
+				alert('게시글을 삭제 했습니다');
+				if(category=='N'){
+					$('#goNoticeBoard').submit();
+				}else if(category=='R'){
+					$('#goRecommendBoard').submit();
+				}else if(category=='E'){
+					$('#goTogetherBoard').submit();
+				}
+			}
+			//게시글 지우기 실패
+			else{
+				alert('게시글을 삭제 할 수 없습니다');
+			}
+		}
+		
+	})
+})	
 	
 	
 	

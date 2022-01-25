@@ -10,7 +10,9 @@ CREATE TABLE NoticePosting (									# 식당 추천 게시판
 );
 DROP TABLE NoticePosting;
 SELECT * FROM NoticePosting;
+DELETE FROM NoticePosting;
 
+ALTER TABLE RecommendRestaurantPosting ADD COLUMN adress VARCHAR(100) NOT NULL;
 CREATE TABLE RecommendRestaurantPosting (									# 식당 추천 게시판
 	id				BIGINT			PRIMARY KEY	AUTO_INCREMENT,				# SQL 아이디
 	memberId		BIGINT			NOT NULL,								# 사용자 아이디
@@ -23,6 +25,8 @@ CREATE TABLE RecommendRestaurantPosting (									# 식당 추천 게시판
 	CONSTRAINT		RecommendRestaurantPosting_memberId_FK	FOREIGN KEY(memberId)	REFERENCES Member(id) ON DELETE CASCADE
 	
 );
+DROP TABLE RecommendRestaurantPosting;
+SELECT * FROM RecommendRestaurantPosting;
 
 CREATE TABLE TogetherEatingPosting (										# 밥친구 게시판
 	id				BIGINT			PRIMARY KEY	AUTO_INCREMENT,				# SQL 아이디
@@ -42,50 +46,50 @@ CREATE TABLE TogetherEatingPosting (										# 밥친구 게시판
 
 DROP TABLE TogetherEatingPosting;
 SELECT * FROM TogetherEatingPosting;
-
+DELETE FROM TogetherEatingPosting;
 
 INSERT INTO NoticePosting(memberId, title, content, views)
-VALUES (1,"제목","본문",1),
-(1,"제목","본문",1),
-(1,"제목","본문",1),
-(1,"제목","본문",1),
-(1,"제목","본문",1),
-(1,"제목","본문",1),
-(1,"제목","본문",1),
-(1,"제목","본문",1),
-(1,"제목","본문",1),
-(1,"제목","본문",1);
+VALUES (4,"제목","본문",1),
+(4,"제목","본문",1),
+(4,"제목","본문",1),
+(4,"제목","본문",1),
+(4,"제목","본문",1),
+(4,"제목","본문",1),
+(4,"제목","본문",1),
+(4,"제목","본문",1),
+(4,"제목","본문",1),
+(4,"제목","본문",1);
 
 
 
 
 INSERT INTO RecommendRestaurantPosting(memberId, address, title, content, likes, views)
-VALUES (1,"제주특별자치도 제주시 첨단로 242","제목2","본문2",10,20),
-(1,"제주특별자치도 제주시 첨단로 242","제목2","본문2",10,20),
-(1,"제주특별자치도 제주시 첨단로 242","제목2","본문2",10,20),
-(1,"제주특별자치도 제주시 첨단로 242","제목2","본문2",10,20),
-(1,"제주특별자치도 제주시 첨단로 242","제목2","본문2",10,20),
-(1,"제주특별자치도 제주시 첨단로 242","제목2","본문2",10,20),
-(1,"제주특별자치도 제주시 첨단로 242","제목2","본문2",10,20),
-(1,"제주특별자치도 제주시 첨단로 242","제목2","본문2",10,20),
-(1,"제주특별자치도 제주시 첨단로 242","제목2","본문2",10,20),
-(1,"제주특별자치도 제주시 첨단로 242","제목2","본문2",10,20);
+VALUES (4,"제주특별자치도 제주시 첨단로 242","제목2","본문2",10,20),
+(4,"제주특별자치도 제주시 첨단로 242","제목2","본문2",10,20),
+(4,"제주특별자치도 제주시 첨단로 242","제목2","본문2",10,20),
+(4,"제주특별자치도 제주시 첨단로 242","제목2","본문2",10,20),
+(4,"제주특별자치도 제주시 첨단로 242","제목2","본문2",10,20),
+(4,"제주특별자치도 제주시 첨단로 242","제목2","본문2",10,20),
+(4,"제주특별자치도 제주시 첨단로 242","제목2","본문2",10,20),
+(4,"제주특별자치도 제주시 첨단로 242","제목2","본문2",10,20),
+(4,"제주특별자치도 제주시 첨단로 242","제목2","본문2",10,20),
+(4,"제주특별자치도 제주시 첨단로 242","제목2","본문2",10,20);
 
 SELECT * FROM RecommendRestaurantPosting;
 
 
 
 INSERT INTO TogetherEatingPosting(memberId, address, title, content, likes, views, mealTime, recruitment, mealChk )
-VALUES (1,"제주특별자치도 제주시 첨단로 242","제목3","본문3",11,22,'2022-01-21 00:02:11',false,false),
-(1,"제주특별자치도 제주시 첨단로 242","제목5","본문3",11,22,'2022-01-30 12:02:11',false,true),
-(1,"제주특별자치도 제주시 첨단로 242","제목5","본문3",11,22,'2022-01-25 18:55:11',true,false),
-(1,"제주특별자치도 제주시 첨단로 242","제목3","본문3",11,22,'2022-01-21 00:02:11',true,false),
-(1,"제주특별자치도 제주시 첨단로 242","제목3","본문3",11,22,'2022-01-21 00:02:11',true,false),
-(1,"제주특별자치도 제주시 첨단로 242","제목3","본문3",11,22,'2022-01-21 00:02:11',false,true),
-(1,"제주특별자치도 제주시 첨단로 242","제목3","본문3",11,22,'2022-01-21 00:02:11',false,true),
-(1,"제주특별자치도 제주시 첨단로 242","제목3","본문3",11,22,'2022-01-21 00:02:11',false,false),
-(1,"제주특별자치도 제주시 첨단로 242","제목3","본문3",11,22,'2022-01-21 00:02:11',false,false),
-(1,"제주특별자치도 제주시 첨단로 242","제목3","본문3",11,22,'2022-01-21 13:02:11',false,false);
+VALUES (4,"제주특별자치도 제주시 첨단로 242","제목3","본문3",11,22,'2022-01-21 00:02:11',false,false),
+(4,"제주특별자치도 제주시 첨단로 242","제목5","본문3",11,22,'2022-01-30 12:02:11',false,true),
+(4,"제주특별자치도 제주시 첨단로 242","제목5","본문3",11,22,'2022-01-25 18:55:11',true,false),
+(4,"제주특별자치도 제주시 첨단로 242","제목3","본문3",11,22,'2022-01-21 00:02:11',true,false),
+(4,"제주특별자치도 제주시 첨단로 242","제목3","본문3",11,22,'2022-01-21 00:02:11',true,false),
+(4,"제주특별자치도 제주시 첨단로 242","제목3","본문3",11,22,'2022-01-21 00:02:11',false,true),
+(4,"제주특별자치도 제주시 첨단로 242","제목3","본문3",11,22,'2022-01-21 00:02:11',false,true),
+(4,"제주특별자치도 제주시 첨단로 242","제목3","본문3",11,22,'2022-01-21 00:02:11',false,false),
+(4,"제주특별자치도 제주시 첨단로 242","제목3","본문3",11,22,'2022-01-21 00:02:11',false,false),
+(4,"제주특별자치도 제주시 첨단로 242","제목3","본문3",11,22,'2022-01-21 13:02:11',false,false);
 
 
 SELECT * FROM TogetherEatingPosting;

@@ -1,6 +1,6 @@
 CREATE TABLE Restaurant (
 	id			BIGINT 			PRIMARY KEY AUTO_INCREMENT,
-	apiId		BIGINT			NOT NULL, 
+	apiId		BIGINT			UNIQUE KEY, 
 	rType		BOOLEAN			DEFAULT FALSE,
 	lat			DOUBLE			NOT NULL,
 	lng			DOUBLE			NOT	NULL,
@@ -36,7 +36,7 @@ CREATE TABLE RestaurantPreference (
 CREATE TABLE Review (
 	id				BIGINT		PRIMARY KEY	AUTO_INCREMENT,
 	restaurantId	BIGINT		NOT NULL,
-	userCount		INT			NOT NULL	DEFAULT '1';
+	userCount		INT			NOT NULL	DEFAULT '1',
 	bathroom		INT			NOT NULL,
 	kind			INT			NOT NULL,
 	specialDay		INT			NOT NULL,
@@ -46,6 +46,5 @@ CREATE TABLE Review (
 	alone			INT			NOT NULL,
 	big				INT			NOT NULL,
 	interior		INT			NOT NULL,
-	
 	FOREIGN KEY (restaurantId) REFERENCES Restaurant (id)
 );

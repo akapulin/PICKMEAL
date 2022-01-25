@@ -274,6 +274,9 @@ function removeAlarm(a) {
 				$(a).parents(".questionWrap").hide();
 				$(a).parents("#checkAlarmContent").hide();
 				$("li#alarm" + alarmId).remove();
+				if ($("ul.alarmArea li").length == 0) {
+					$(".alarmMark").hide();
+				}
 			}
 		}
 	})

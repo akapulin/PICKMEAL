@@ -68,8 +68,6 @@ public class AlarmServiceImpl implements AlarmService {
 	@Override
 	public boolean deleteAlarm(Alarm alarm, String answer) {
 		Member member = alarm.getMember();
-		log.info("before member manner : " + member.getMannerTemperature());
-		log.info("before member foodpower : " + member.getFoodPowerPoint());
 		// 먹안먹
 		if (alarm.getAlarmType() == 'L') {
 			// 예 의 경우 식당 선호도 올리고, 내가 간 식당 추가
@@ -94,11 +92,10 @@ public class AlarmServiceImpl implements AlarmService {
 			// 아니요의 경우 식당에 가지 않았기 때문에 그냥 알람만 삭제
 			
 			// 식력 포인트 적립
-			member = mas.addFoodPowerPointItem(member, CHECK_MANNER);
+			member = mas.addFoodPowerPointItem(member, CHECK_VISIT);
 			
 		} else if (alarm.getAlarmType() == 'M') { // 신뢰 온도
 			// 먼저 해당 멤버의 신뢰 온도 테이블 업데이트 & session 에서 가져온 member 신뢰온도 셋팅
-			log.info("answer : " + answer);
 			if (answer.equals("good")) {
 				member = mas.updateMannerTemperature(member, GOOD);
 			} else if (answer.equals("so so")) {
@@ -106,10 +103,10 @@ public class AlarmServiceImpl implements AlarmService {
 			} else if (answer.equals("bad")) {
 				member = mas.updateMannerTemperature(member, BAD);
 			}
+			// 식력 포인트 적립
+			member = mas.addFoodPowerPointItem(member, CHECK_MANNER);
 		}
 		// 각 동작들이 완료되었다면 해당 알람은 테이블에서 삭제
-		log.info("after member manner : " + member.getMannerTemperature());
-		log.info("after member foodpower : " + member.getFoodPowerPoint());
 		ad.deleteAlarm(alarm.getId());
 		if (ad.isAlarm(alarm.getId())) { // 테이블에서 있다면 삭제가 되지 않은 것이다.
 			return false;

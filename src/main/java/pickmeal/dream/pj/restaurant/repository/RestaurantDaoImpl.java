@@ -11,6 +11,15 @@ public class RestaurantDaoImpl implements RestaurantDao {
 	
 	@Autowired
 	JdbcTemplate jt;
+	
+	@Override
+	public void insertRestaurant(Restaurant restaurant) {
+		// apiId로 비교하여 테이블에 없으면 insert, 있으면 무시.
+		String sql = "INSERT IGNORE INTO Restaurant(lat, lng, address, rName, apiId) VALUES(?, ?, ?, ?, ?)";
+		
+		jt.update(sql, restaurant.getLat(), restaurant.getLng(), restaurant.getAddress(), restaurant.getRName(), restaurant.getApiId());
+	}
+	
 	@Override
 	public Restaurant findRestaurantByAddress(Restaurant restaurant) {
 		String sql = "SELECT id, rType, lat, lng, address, rName"
@@ -35,6 +44,11 @@ public class RestaurantDaoImpl implements RestaurantDao {
 				+ " FROM Restaurant WHERE Id = ?";
 		Restaurant restaurant = jt.queryForObject(sql, new RestaurantRowMapper(), id);
 		return restaurant;
+	}
+	public Restaurant findRestaurantbyApiId(long apiId) {
+		String sql = "SELECT id, apiId, rType, lat, lng, address, rName FROM Restaurant WHERE apiId = ?";
+				
+		return jt.queryForObject(sql, new RestaurantRowMapper(), apiId);
 	}
 
 }

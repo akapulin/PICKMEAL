@@ -1,8 +1,14 @@
 package pickmeal.dream.pj.posting.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +16,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import lombok.extern.java.Log;
 import pickmeal.dream.pj.member.domain.Member;
@@ -202,13 +211,16 @@ public class PostingController {
 		ModelAndView mav = new ModelAndView();
 		
 		Posting posting;
-		if(type.equals("notice")) {
-			posting = ps.findPostingById('N', id);
-		}else if(type.equals("recommend")) {
-			posting = ps.findPostingById('R', id);
-		}else {
-			posting = ps.findPostingById('E', id);
-		}
+		char category = getPostCategory(type);		
+
+		
+		//게시글 정보 불러오기
+		posting = ps.findPostingById(category, id);
+		//조회수 업데이트해주기
+		ps.updatePostingViews(category, id);
+		posting.setViews(posting.getViews()+1);
+		
+
 		mav.addObject("post", posting);
 		
 		mav.setViewName("posting/post_read");
@@ -229,14 +241,10 @@ public class PostingController {
 	public ModelAndView writingPostMain(@PathVariable String type) {
 			
 		ModelAndView mav = new ModelAndView();
-		if(type.equals("notice")) {
-			mav.addObject("postType",'N');
-		}else if(type.equals("recommend")) {
-			mav.addObject("postType",'R');
-		}else {
-			mav.addObject("postType",'E');
-		}
+		char category = getPostCategory(type);
 		
+		mav.addObject("modifyState", false);		//수정,글쓰기가 같은 view를 이용하기 때문에 
+		mav.addObject("postType",category);
 		mav.setViewName("posting/post_write");
 		return mav;
 	}
@@ -244,20 +252,33 @@ public class PostingController {
 	/**
 	 * 글쓰기 완료
 	 * 		1) 테이블에 포스팅 정보 저장
-	 * 		2) 저장한 정보 다시 테이블에서 불러서 글 읽기 폼으로 전달
+	 * 		2) 저장한 정보 다시 테이블에서 id값 불러서 글 읽기 폼으로 전달
+	 * 
+	 * 		필요한 후처리
+	 * 		- 글쓰기 후 글읽기로가면 뒤로가기 막아야함 
 	 * @param pc
 	 * @return
 	 */
 	@PostMapping("/posting/completeWritingPost")
-	public ModelAndView completeWritingPost(@ModelAttribute PostingCommand pc) {
+	public String completeWritingPost(@ModelAttribute PostingCommand pc, HttpSession session) {
+		
+		
 		log.info("hi posting complete"+pc.toString());
+		//long memberId = ((Member)session.getAttribute("member")).getId();
+		long memberId = 4;
+	
 		
-		
-		
-		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("posting/readingPost_temp");
-		return mav;
+		if(pc.getCategory()=='N') {
+			Posting post = ps.addPosting(setNoticePosting(pc,memberId));
+			return ("redirect:/posting/notice/"+post.getId());
+		}else if(pc.getCategory()=='R') {
+			Posting post = ps.addPosting(setRecommendPosting(pc,memberId));
+			return ("redirect:/posting/recommend/"+post.getId());
+		}else{
+			Posting post = ps.addPosting(setTogetherPosting(pc,memberId));
+			return ("redirect:/posting/together/"+post.getId());
+		}
+
 	}
 	
 	/**
@@ -270,6 +291,7 @@ public class PostingController {
 	 */
 	private Posting setNoticePosting(PostingCommand pc, long memberId){
 		Posting post = new Posting();
+		post.setCategory('N');
 		post.setMember(new Member(memberId));
 		post.setTitle(pc.getTitle());
 		post.setContent(pc.getContent());
@@ -279,10 +301,118 @@ public class PostingController {
 	
 	private Posting setRecommendPosting(PostingCommand pc, long memberId) {
 		Posting post = new Posting();
+		post.setCategory('R');
 		post.setMember(new Member(memberId));
-		
+		post.setAddress(pc.getAddress());
+		post.setTitle(pc.getTitle());
+		post.setContent(pc.getContent());
+		post.setLikes(0);
+		post.setViews(1);
 		return post;
 		
+	}
+	
+	private Posting setTogetherPosting(PostingCommand pc, long memberId) {
+		TogetherEatingPosting post = new TogetherEatingPosting();
+		post.setCategory('E');
+		post.setMember(new Member(memberId));
+		post.setAddress(pc.getAddress());
+		post.setTitle(pc.getTitle());
+		post.setContent(pc.getContent());
+		post.setLikes(0);
+		post.setViews(1);
+		post.setMealTime(setMealTimeToDate(pc.getDate(),pc.getTime()));
+		post.setRecruitment(false);
+		post.setMealChk(false);
+		return post;
+	
+	}
+	
+	/**
+	 * 글쓰기에서 따로 받은 날짜와 시간을 java.util.date 로 바꿔준다.
+	 * @param date
+	 * @param time
+	 * @return
+	 */
+	private Date setMealTimeToDate(String date, String time) {
+		String totalDate = date+" "+time+":00";
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date mealTime = new Date();
+		try {
+			mealTime = transFormat.parse(totalDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return mealTime;
+	}
+	
+	/**
+	 * 비동기
+	 * 		- 밥친구 게시판의 모집상태를 변경한다
+	 * @param postId
+	 */
+	@PostMapping("/posting/convertRecruitmentState")
+	@ResponseBody
+	public String convertRecruitmentState(@RequestParam long postId) {
+		boolean state = ps.convertRecruitmentState(postId);
+		if(state) {
+			return "true";
+		}else {
+			return "false";
+		}
+	}
+	
+	@PostMapping("/posting/removePosting")
+	@ResponseBody
+	public String deletePosting(@RequestBody HashMap<String,Object> postInfo) {
+		char category = postInfo.get("category").toString().charAt(0);
+		long postId = Long.parseLong(postInfo.get("postId").toString()); 
+		int deleteCnt;
+		if(category=='E') {
+			deleteCnt = ps.deletePosting(new TogetherEatingPosting(postId,category));
+		}else {
+			deleteCnt = ps.deletePosting(new Posting(postId,category));
+		}
+		
+		if(deleteCnt>0) {
+			return "true";
+		}else {
+			return "false";
+		}
+
+	}
+	
+	/**
+	 * 게시글 수정 
+	 * @param type
+	 * @return
+	 */
+	@GetMapping("/posting/{type}/modify/{id}")
+	public ModelAndView modifyPostMain(@PathVariable String type, @PathVariable long id) {
+			
+		ModelAndView mav = new ModelAndView();
+		
+		char category = getPostCategory(type);
+	
+		
+		Posting posting = ps.findPostingById(category, id);
+		
+		mav.addObject("modifyState", true);
+		mav.addObject("postType",category);
+		mav.addObject("post",posting);
+		mav.setViewName("posting/post_write");
+		return mav;
+	}
+	
+	
+	public char getPostCategory(String type) {
+		if(type.equals("notice")) {
+			return 'N';
+		}else if(type.equals("recommend")) {
+			return 'R';
+		}else {
+			return 'E';
+		}
 	}
 	
 	

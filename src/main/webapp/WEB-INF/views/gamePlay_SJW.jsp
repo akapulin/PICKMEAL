@@ -13,18 +13,41 @@
 <script src="${pageContext.request.contextPath}/resources/js/incl/gamePlay_SJW.js" defer></script>
 </head>
 <body>
- <!-- firstGameMsg 조건을 만들어야함. 이거 안되면 diffofdate 가 0인지 아닌지 확인해서 하면 됨. num == 5 eq 5 -->
-	<c:choose>
-		<c:when test="${not empty firstGameMsg}">
-			<div class="firstMsgContent">${firstGameMsg}</div>
-		</c:when>
-		<c:otherwise>
-			<div class="firstMsgContent">하이?!</div>
-		</c:otherwise>
-	</c:choose>
+ <!-- firstGameMsg 조건을 만들어야함. 이거 안되면 diffofdate 가 0인지 아닌지 확인해서 하면 됨. num == 5 eq 5 -->		
+		<%-- <c:choose>
+			<c:when test="${not empty cntForRetry}"></c:when>
+				<c:choose>
+					<c:when test="${cntForRetry eq 1} ">
+						<c:choose>
+							<c:when test="${not empty firstGameMsg}">
+								<div class="msgContent">${firstGameMsg}</div>
+							</c:when>
+							<c:otherwise>
+								<div class="msgContent">환영합니다</div>
+							</c:otherwise>
+						</c:choose>
+					</c:when>
+					<c:when test="${cntForRetry eq 2} "><div class="msgContent">한 번 더~</div></c:when>
+					<c:when test="${cntForRetry eq 3} "><div class="msgContent">한 번 더~~~??</div></c:when>
+					<c:when test="${cntForRetry eq 4} "><div class="msgContent">설마 또 해..?</div></c:when>
+					<c:when test="${cntForRetry eq 5} "><div class="msgContent">슬슬 먹으러 가지?</div></c:when>
+					<c:when test="${cntForRetry eq 6} "><div class="msgContent">적당히 해라</div></c:when>
+					<c:otherwise>
+						<div class="msgContent">그냥 라면 먹어</div>
+					</c:otherwise>
+				</c:choose>
+				
+			<c:otherwise>
+				<div class="msgContent">환영합니다</div>
+			</c:otherwise>
+		</c:choose> --%>
+	
+	
+	
 	<input type="hidden" id="hRadius" value="${radius}">
 	<input type="hidden" id="nowLat" value="${nowLat}">
 	<input type="hidden" id="nowLng" value="${nowLng}">
+	
 	<input type="hidden" id="diffOfDate" value="${diffOfDate}">
 	<!-- 얘를 가지고 0이면 암것도 안하고 1이면 화면 띄우기. -->
 	

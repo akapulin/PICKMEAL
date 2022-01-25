@@ -4,8 +4,23 @@
 
  */
 $(document).ready(function() {
-	callCurrentMap();
+	console.log('수정상태는?'+$('#modifyState').val())
+	
+	//수정상태면 불러온 주소로 맵셋팅
+	if($('#modifyState').val()=='true'){
+		console.log('true')
+		setMap();
+	}
+	//글쓰지상태면 현재위치 기준으로 맵셋팅
+	else{
+		console.log('false')
+		callCurrentMap();
+	}
+	
+	removeImg()
+	
 })
+
 console.log('post_write in')
 
 /**
@@ -45,7 +60,7 @@ function getContextPath() {
 
 let fileBuffer = [];
 let fileBufferIndex = 0;
-
+let maxFileCnt = 10;
 //정적 이미지 파일들 경로 지정
 let wPostAttachedImgIconSrc = getContextPath() + "/resources/img/posting/attached_picture.png";
 let wPostattachedImgDelIconSrc = getContextPath() + "/resources/img/posting/close.png";
@@ -63,7 +78,7 @@ $('#multiFileInput').on('change', function() {
 	console.log('총 파일 갯수는 ?' + totalFileCnt);
 
 	//제약사항 - 파일 10개까지 등록
-	if (totalFileCnt > 10) {
+	if (totalFileCnt > maxFileCnt) {
 		alert('파일은 최대 10개까지 등록가능합니다');
 		//파일리셋
 		resetFileToPwrite();
@@ -134,7 +149,8 @@ $('#multiFileInput').on('change', function() {
 	//fileBuffer에 첨부된 파일들을 붙인다
 	//2번째 인자의 배열을 1번째 인자의 배열에 이어서 붙이기
 	Array.prototype.push.apply(fileBuffer, target[0].files);
-
+	console.log('fileBuffer?')
+	console.log(fileBuffer)
 
 	//file리셋을 해줘야 이미지 중복을 허용한다
 	resetFileToPwrite();
@@ -392,7 +408,9 @@ var marker;
 
 function callCurrentMap() {
 	navigator.geolocation.getCurrentPosition(locationLoadSuccess, locationLoadError);
+	console.log('자동실행 callCurrentMap')
 }
+
 
 function locationLoadSuccess(pos) {
 	// 현재 위치 받아오기
@@ -400,8 +418,9 @@ function locationLoadSuccess(pos) {
 
 	//주소검색했을 때, 초기값 위해서
 	initPos = currentPos;
-
-
+	console.log('자동실행 locationLoadSuccess')
+	
+	
 
 
 	mapContainer = document.getElementById('wPostMap'), // 지도를 표시할 div
@@ -437,9 +456,7 @@ function locationLoadSuccess(pos) {
 		console.log(status)
 		if (status === kakao.maps.services.Status.OK) {
 			$('#wPostDetailAddress').val(result[0].address.address_name);
-			//주소 좌표도 같이 항상 저장해두기
-			$('#wPostDetailAddressLat').val(pos.coords.latitude);
-			$('#wPostDetailAddressLng').val(pos.coords.longitude);
+			
 			console.log(result[0].address.address_name);
 		}
 		else {
@@ -460,9 +477,7 @@ function locationLoadSuccess(pos) {
 		searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
 			if (status === kakao.maps.services.Status.OK) {
 				$('#wPostDetailAddress').val(result[0].address.address_name);
-				//주소 좌표도 같이 항상 저장해두기
-				$('#wPostDetailAddressLat').val(pos.coords.latitude);
-				$('#wPostDetailAddressLng').val(pos.coords.longitude);
+				
 				// 마커를 클릭한 위치에 표시합니다
 				marker.setPosition(mouseEvent.latLng);
 				marker.setMap(map);
@@ -524,9 +539,7 @@ $('.wPostMapSetAddressBtn').click(function(e) {
 				if (status === daum.maps.services.Status.OK) {
 
 					var result = results[0]; //첫번째 결과의 값을 활용
-					//주소 좌표도 같이 항상 저장해두기
-					$('#wPostDetailAddressLat').val(result.y);
-					$('#wPostDetailAddressLng').val(result.x);
+					
 
 
 					// 해당 주소에 대한 좌표를 받아서
@@ -558,6 +571,105 @@ $('.wPostMapCurrentPlaceBtn').click(function(e) {
 	e.preventDefault();
 	callCurrentMap();
 })
+/*
+	 
+	주소로 맵설정하기
+	
+*/
+function setMap(){
+	// 식당 좌표 받아오기(좌표로)
+	//let lat = $('#addressLat').val();
+	//let lng = $('#addressLng').val();
+    //let currentPos = new kakao.maps.LatLng(lat, lng);
+
+    var mapContainer = document.getElementById('wPostMap'), // 지도를 표시할 div
+        mapOption = {
+            //enter: new daum.maps.LatLng(lat, lng), // 지도의 중심좌표
+             center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+			level: 3 // 지도의 확대 레벨
+        };
+
+    //지도를 미리 생성
+    var map = new daum.maps.Map(mapContainer, mapOption);
+
+    // 마커 생성(좌표로)
+    //let marker = new kakao.maps.Marker({
+    //    position: currentPos
+    //});
+
+    // 마커표시(좌표로)
+    //marker.setMap(map);
+
+	// 주소-좌표 변환 객체를 생성합니다
+	var geocoder = new kakao.maps.services.Geocoder();
+	
+	//맵의 주소값
+	let address = $('#wPostDetailAddress').val();
+	console.log('address'+address);
+	//let address="경북 경산시 펜타힐즈4로 1";
+	// 주소로 좌표를 검색합니다
+	geocoder.addressSearch(address, function(result, status) {
+
+	    // 정상적으로 검색이 완료됐으면 
+	     if (status === kakao.maps.services.Status.OK) {
+	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+	
+	        // 결과값으로 받은 위치를 마커로 표시합니다
+	        var marker = new kakao.maps.Marker({
+	            position: coords
+	        });
+			marker.setMap(map);
+			
+	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+	        map.setCenter(coords);
+	    } 
+	})
+	
+}
+
+/*
+
+	글 삭제할 때 외부파일 이미지 지워주기
+		- 글 작성 폼 안에 있는 img태그들 모아서 완려 버튼 누르면 파일 삭제 해준다	
+		- 최대 업로드 갯수만큼 for문 돌려서(imgList0, imgList1...)
+		  있으면 img src를 저장한다
+*/
+
+function removeImg(){
+	let rmFileBuffer = [];
+	console.log('removeImgList');
+	for(let i=0;i<maxFileCnt;i++){
+		rmFileBuffer[i]=$('.wPostContentInput').find($('.imgList'+i)).attr('src');
+	}
+	$.ajax({
+		url: "orderMenuList",
+		type: "post",
+		data: JSON.stringify(json),
+		contentType: "application/json; charset=UTF-8",
+		success: function(data) {
+			}
+		
+		
+		})
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
