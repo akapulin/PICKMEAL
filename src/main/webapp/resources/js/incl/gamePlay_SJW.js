@@ -524,7 +524,6 @@ $('.gameBtn').on('click', function(e){
 					}
 				}) */
 			})
-			
 
 		}, error: function(){
 			console.log("error");
