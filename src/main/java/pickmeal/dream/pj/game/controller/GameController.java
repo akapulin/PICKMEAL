@@ -82,17 +82,21 @@ public class GameController {
 		System.out.println("test");
 		System.out.println("radius : " + radius + " / category : " + category);
 		System.out.println("nowLat : " + nowLat + " / nowLng : " + nowLng);
-		int cntForRetry;
+		
 		
 		Member member = (Member)session.getAttribute("member");
-		//cntForRetry = (int)session.getAttribute("cntForRetry");
+		
 		
 		int diffOfDate = 0;
 		
 		if(validator.isEmpty(member)) {
 			// 비회원 일 때.
 		} else {
-			// 회원일 때.
+			// 회원일 때. cntForRetry도 무조건 있다는 말이긴 함.
+			int cntForRetry = (int)session.getAttribute("cntForRetry");
+			System.out.println("cntForRetry11 : " + cntForRetry);
+			cntForRetry++;
+			System.out.println("cntForRetry22 : " + cntForRetry);
 
 			String firstGameMsg;
 			
@@ -107,6 +111,7 @@ public class GameController {
 				System.out.println("gameCotroller : "+firstGameMsg);
 				mav.addObject("firstGameMsg", firstGameMsg); //첫 게임일 경우 안내 메세지 보냄.
 			} else {}
+			mav.addObject("cntForRetry", cntForRetry);
 		}
 		// 얘네는 로그인이 되어있을 때 실행되어야 하는데 아래 한 줄로 되나? 
 //			diffOfDate = gs.checkLastGameRecord(member.getId());
@@ -226,11 +231,11 @@ public class GameController {
 			gs.insertLastGameRecord(member.getId(), restaurant.getId());
 			member = mas.addFoodPowerPointItem(member, PLAY_GAME);
 			System.out.println(member);
-			cntForRetry = (int)session.getAttribute("cntForRetry");
-			cntForRetry++;
-			System.out.println("게임 다시하기 Cnt : " + cntForRetry);
-			session.setAttribute("cntForRetry", cntForRetry);
-			map.put("cntForRetry", String.valueOf(cntForRetry));
+//			cntForRetry = (int)session.getAttribute("cntForRetry");
+//			cntForRetry++;
+//			System.out.println("게임 다시하기 Cnt : " + cntForRetry);
+//			session.setAttribute("cntForRetry", cntForRetry);
+//			map.put("cntForRetry", String.valueOf(cntForRetry));
 		}
 		session.setAttribute("restaurant", restaurant);
 		//HashMap<String,String> map = new HashMap<String, String>();

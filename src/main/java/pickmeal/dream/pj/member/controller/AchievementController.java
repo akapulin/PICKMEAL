@@ -4,6 +4,8 @@ import static pickmeal.dream.pj.web.constant.Constants.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,14 +28,21 @@ public class AchievementController {
 	
 	@GetMapping("/member/updateAchievementInfo")
 	@ResponseBody
-	public ModelAndView updateAchievementInfo(@SessionAttribute("member") Member member) {
+	public ModelAndView updateAchievementInfo(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		System.out.println(member);
+		Member member = (Member)session.getAttribute("member");
+		
+		System.out.println(member); 
 		List<FoodPowerPointItem> fppList = new ArrayList<FoodPowerPointItem>();
 			
 		// 식력 포인트 보내기
 		Constants fppMin = null;
 		Constants fppMax = null;
+		
+		if(member == null) {
+			mav.setViewName("redirect:/member/viewSignIn");
+			return mav;
+		}
 		
 		if(member.getFoodPowerPoint() <= LEVEL1.getPoint()) { // 0 ~ 300
 			fppMin = LEVEL0;

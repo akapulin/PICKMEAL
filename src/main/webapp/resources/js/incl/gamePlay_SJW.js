@@ -47,7 +47,6 @@ let finalArr = [];
 	//	$('.firstMsgContent').fadeOut(3000);
 	//})
 
-
 	var keyword = document.getElementById('keyword').value;
 	var radius = document.getElementById('hRadius').value;
 	let nowLat = document.getElementById('nowLat').value; 
