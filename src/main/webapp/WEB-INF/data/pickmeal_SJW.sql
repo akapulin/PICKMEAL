@@ -36,7 +36,7 @@ CREATE TABLE Attendance (
 )
 
 
-
+DROP TABLE Menu;
 DROP TABLE Member;
 DROP TABLE FoodPowerPoint;
 DROP TABLE MannerTemperature;
@@ -129,7 +129,8 @@ CREATE TABLE Message (
 )
 INSERT INTO Message(messageType, content) VALUES('O', "점심 맛있게 먹어");
 INSERT INTO Message(messageType, content) VALUES('O', "또 왔네~");
-INSERT INTO Message(messageType, content) VALUES('O', "좋은 하루 보내");
+INSERT INTO Message(messageType, content) VALUES('O', "재방문 감사합니다 인사 오지게 박습니다 형님 혹은 누님!");
+INSERT INTO Message(messageType, content) VALUES('O', "오늘은 어떤 메뉴를 추천해줄까~");
 
 SELECT * FROM Message;
 SELECT * FROM LastGameRecord;

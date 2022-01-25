@@ -5,8 +5,6 @@ let ranNum;
 let ranNumArr= [];
 let categorySwitch;
 let lengthOfTotalArr;
-let cntForRetry; 
-//window.opener.$('#cntForRetry').val();
 
 let gameWrap = document.getElementById("gameWrap");
 //let cardUl = document.getElementById("cardUl");
@@ -38,7 +36,7 @@ let finalArr = [];
 	$(window).ready(function(){
 		$('#gameBtnWrap').hide();
 		$('#submitWrap').hide();
-		$('.firstMsgContent').fadeOut(2000, function(){
+		$('.msgContent').fadeOut(2000, function(){
 			$('#gameBtnWrap').fadeIn(1000); // fadeOut 이후 Fadein. 
 		});
 	})
@@ -247,8 +245,14 @@ $('.gameBtn').on('click', function(e){
 	
 	if(gameType == 'L'){
 		controllerUrl = "/bringResListForLadderGame";
+		$('body').css({background : 'url("/pickmeal/resources/img/game/ladderGameBg.jpg")'});
+		
+		
+		
+	
 	} else {
 		controllerUrl = "/bringResListForCardGame";
+		$('body').css({background : 'url("/pickmeal/resources/img/game/cargGameBg.png")'});
 	}
 	$.ajax({
 		url: getContextPath() + controllerUrl,
@@ -349,13 +353,7 @@ $('.gameBtn').on('click', function(e){
 							opener.parent.setcouponIsempty(data1);
 							opener.parent.setrestaurantIsempty(data2);
 							opener.parent.couponAndFavoriteShow();
-							/*
-							if(!data.cntForRetry){
-								$('.firstMsgContent').text('하이이이이이이이이이');
-							}else if(data.cntForRetry == 1){
-								makeRetryMsgToIndex(data.cntForRetry);	
-							}
-							*/
+							
 						}
 					})
 				}
@@ -363,7 +361,7 @@ $('.gameBtn').on('click', function(e){
 			})
 			
 			var svg2 = document.createElementNS("http://www.w3.org/2000/svg",'svg');
-            svg2.setAttribute("width","850");
+            svg2.setAttribute("width","870");
             svg2.setAttribute("height","500");
             //svg2.style.border="1px solid black";
             svg2.setAttribute("id","svg2");
@@ -375,8 +373,6 @@ $('.gameBtn').on('click', function(e){
 			let ladderBtnClickCnt = 0;
 			let ladderPick = 0;
 			$('.ladderLi').on('click', function(e){ // 사다리 버튼 클릭할 때. 
-				
-				
 				if($(this).children("button").prop("disabled")== true){
 					
 				}else {
@@ -403,7 +399,8 @@ $('.gameBtn').on('click', function(e){
 				let setOfRouteHorSize = setOfRoute[ladderIndex].length;
 				
 				console.log("ladderIndex : " + ladderIndex); //2, 3, 4가 뜸.
-				let routePath = document.createElementNS("http://www.w3.org/2000/svg",'path'); 
+				let routePath = document.createElementNS("http://www.w3.org/2000/svg",'path');
+				let routePath2 = document.createElementNS("http://www.w3.org/2000/svg",'path');
 				//let verPath = document.createElementNS("http://www.w3.org/2000/svg",'path');
 			    //$(verPath).attr('stroke-width', 5).attr('stroke', 'black').attr('d', 'm'+(i*sizeOfWidth)+',0 v600');
 				
@@ -418,13 +415,16 @@ $('.gameBtn').on('click', function(e){
 					}	
 				}
 				// 루트를 다 더해서 사다리 선택에 따른 루트 설정.
-				$(routePath).attr('fill', 'none').attr('stroke-width', 10).attr('stroke', 'red').attr('d', 'm'+ ((ladderIndex * sizeOfWidth)+5)+ ',0 '+ routeString);
+				$(routePath).attr('fill', 'none').attr('stroke-width', 10).attr('stroke', 'darkolivegreen').attr('d', 'm'+ ((ladderIndex * sizeOfWidth)+10)+ ',0 '+ routeString);
+				$(routePath2).attr('fill', 'none').attr('stroke-width', 20).attr('stroke', 'white').attr('d', 'm'+ ((ladderIndex * sizeOfWidth)+10)+ ',0 '+ routeString);
 				console.log(routeString); // 값들 잘 들어갔는지 경로 출력 값이랑 비교해볼 것. 
 				 
 				$('#gameWrap .svg2Div').append(svg2);
 				
 				let pathLength = routePath.getTotalLength();
 				console.log(pathLength);
+				//$('.ladderSvg2').append(routePath);
+				$('.ladderSvg2').append(routePath2);
 				$('.ladderSvg2').append(routePath);
 				//$(routePath).attr('stroke-dasharray', pathLength).attr('stroke-dashoffset', pathLength);
 				$("#svg2 path").not("#svg2 path.notAnimation").addClass("routeAnimation");
@@ -445,9 +445,17 @@ $('.gameBtn').on('click', function(e){
 					
 				} else{ // O 일 경우.
 				console.log(" 당첨~~~ ");
+				let answerPath1 = document.createElementNS("http://www.w3.org/2000/svg",'path');
+				let answerPath2 = document.createElementNS("http://www.w3.org/2000/svg",'path');
+				$(answerPath1).attr('fill', 'none').attr('stroke-width', 10).attr('stroke', 'red').attr('d', 'm'+ ((ladderIndex * sizeOfWidth)+10)+ ',0 '+ routeString);
+				$(answerPath2).attr('fill', 'none').attr('stroke-width', 20).attr('stroke', 'white').attr('d', 'm'+ ((ladderIndex * sizeOfWidth)+10)+ ',0 '+ routeString);
 					if(ladderPick == 0){
 						let resultResOfLadder = data.resList[ladderIndex];
 						// 결과로 보낼 레스토랑 하나를 저장해야 함
+						//$("#svg").prepend($(".svg2Div").children('path.routeAnimation').html());
+						$("#svg").append(answerPath2);
+						$("#svg").append(answerPath1);
+						
 						
 						setTimeout(function() { 
 							$(".svg2Div").hide();
@@ -483,18 +491,8 @@ $('.gameBtn').on('click', function(e){
 								// 식당 정보를 띄우기 위해서 결과 식당의 좌표를 부모 함수에 넣고 호출.
 								opener.parent.displayRestaurantInfo(resultResOfLadder.lat, resultResOfLadder.lng, resultResOfLadder.rname);
 								
-								/*
-								cntForRetry = cntForRetry + 1;
-								console.log(cntForRetry);
-								console.log(window.opener.$('#cntForRetry').val());
-								*/
 							}
-						})	
-						if(!data.cntForRetry){
-								
-						}else{
-							makeRetryMsgToIndex(data.cntForRetry);	
-						}					
+						})							
 					}
 					ladderPick = 1;
 				}
@@ -574,7 +572,7 @@ function makeLadder(data, sizeOfWidth, sizeOfHeight){
 	$("#gameWrap").append('<ul class="oxUl"></ul>');
 	
 	var svg = document.createElementNS("http://www.w3.org/2000/svg",'svg');
-            svg.setAttribute("width","850");
+            svg.setAttribute("width","870");
             svg.setAttribute("height","500");
             //svg.style.border="1px solid black";
             svg.setAttribute("id","svg");
@@ -611,7 +609,7 @@ function makeLadder(data, sizeOfWidth, sizeOfHeight){
 			
 			
 			let verPath = document.createElementNS("http://www.w3.org/2000/svg",'path');
-			$(verPath).attr('stroke-width', 10).attr('stroke', 'black').attr('d', 'm'+((i*sizeOfWidth)+5)+',0 v600');
+			$(verPath).attr('stroke-width', 20).attr('stroke', 'black').attr('d', 'm'+((i*sizeOfWidth)+10)+',0 v600');
 				
 			$('.ladderSvg').append(verPath);	
 		}
@@ -619,10 +617,10 @@ function makeLadder(data, sizeOfWidth, sizeOfHeight){
 		// 가로줄 그리기.
 		for(let j=1; j<=numOfHorLines; j++){
 			posOfHorLine = ladder[j].indexOf("1");
-			let xPos = sizeOfWidth * posOfHorLine+5;
+			let xPos = sizeOfWidth * posOfHorLine+10;
 			
 			let horPath = document.createElementNS("http://www.w3.org/2000/svg",'path');
-			$(horPath).attr('stroke-width', 10).attr('stroke', 'black').attr('d', 'm'+ xPos +','+(j * sizeOfHeight) + ' h'+ sizeOfWidth+ '');
+			$(horPath).attr('stroke-width', 20).attr('stroke', 'black').attr('d', 'm'+ xPos +','+(j * sizeOfHeight) + ' h'+ sizeOfWidth+ '');
 			
 			$('.ladderSvg').append(horPath);
 		}
@@ -734,9 +732,4 @@ function extractFiveIndex(number){
 		console.log(ranNumArr);
 //	return ranNumArr;
 			
-}
-
-function makeRetryMsgToIndex(cnt){
-	console.log("makeRetryMsgToIndex : " + cnt);
-	window.opener.makeRetryMsg(cnt);
 }

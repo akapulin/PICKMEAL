@@ -7,3 +7,4 @@
 <!-- 김보령 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/chat/chat_alarm.css" />
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
