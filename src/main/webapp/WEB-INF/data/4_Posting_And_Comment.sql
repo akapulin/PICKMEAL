@@ -68,15 +68,6 @@ DROP TABLE RecommendRestaurantPosting;
 DROP TABLE TogetherEatingPosting;
 DROP TABLE NoticePosting;
 
-<<<<<<< HEAD
-=======
-DELETE FROM RecommendRestaurantComment;
-DELETE FROM TogetherEatingComment;
-DELETE FROM RecommendRestaurantPosting;
-DELETE FROM TogetherEatingPosting;
-DELETE FROM NoticePosting;
-
->>>>>>> branch 'developer' of https://github.com/akapulin/PICKMEAL.git
 SELECT * FROM RecommendRestaurantComment;
 SELECT * FROM TogetherEatingComment;
 SELECT * FROM RecommendRestaurantPosting;
