@@ -21,14 +21,14 @@ public interface PostingDao {
 	 * 포스팅 업데이트
 	 * @param posting
 	 */
-	public void updatePosting(Posting posting);
+	public int updatePosting(Posting posting);
 	
 	/**
 	 * 포스팅 삭제
 	 * @param posting
 	 * @return
 	 */
-	public void deletePosting(Posting posting);
+	public int deletePosting(Posting posting);
 	
 	/**
 	 * 카테고리별 게시물 갯수 불러오기
@@ -62,4 +62,39 @@ public interface PostingDao {
 	 * 
 	 */
 	public List<Posting> findPostingsPerPageByMemberId(long memberId, char category, int pageStart, int pageReadCnt);
+
+
+	/**
+	 * 마지막으로 삽입한 포스팅 1개 가져오기
+	 * @param category
+	 * @return
+	 */
+	public Posting findLastPostingByCategory(char category);
+
+	/**
+	 * 조회수 업데이트
+	 * @param category
+	 * @param postId
+	 */
+	public int updatePostingViews(char category, long postId);
+
+	/**
+	 * 좋아요 업데이트
+	 * @param category
+	 * @param postId
+	 */
+	public int updatePostingLikes(char category, long postId);
+	
+	/**
+	 * 밥친구 게시판 모집중 상태 변경
+	 * @param postId
+	 */
+	public void convertRecruitmentState(long postId);
+	
+	/**
+	 * 밥친구 게시판 모집상태 불러오기
+	 * @param postId
+	 * @return
+	 */
+	public boolean getRecruitmentState(long postId);
 }

@@ -14,7 +14,8 @@ public enum SavingPointConstants {
 	CHECK_VISIT(6, "식당 방문 여부 확인 적립", 100), 
 	REVIEW(7, "리뷰 적립", 100), 
 	WRITE_POST(8, "게시글 적립", 70), 
-	WRITE_COMMENT(9, "댓글 적립", 10);
+	WRITE_COMMENT(9, "댓글 적립", 10),
+	CHECK_MANNER(10, "신뢰 온도 평가 적립", 100); 
 	
 	private final int number;
 	private final String kor;

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
@@ -37,18 +38,23 @@ public class PostingServiceImpl implements PostingService {
 	RestaurantDao rd;
 	
 	@Override
-	public void addPosting(Posting posting) {
+	@Transactional
+	public Posting addPosting(Posting posting) {
+		// 포스팅 DB에 추가하기
 		pd.addPosting(posting);
+		
+		// 마지막으로 추가한 포스팅 들고오기
+		return pd.findLastPostingByCategory(posting.getCategory());
 	}
 
 	@Override
-	public void updatePosting(Posting posting) {
-		pd.updatePosting(posting);
+	public int updatePosting(Posting posting) {
+		return pd.updatePosting(posting);
 	}
 
 	@Override
-	public void deletePosting(Posting posting) {
-		pd.deletePosting(posting);
+	public int deletePosting(Posting posting) {
+		return pd.deletePosting(posting);
 	}
 	
 	@Override
@@ -209,18 +215,25 @@ public class PostingServiceImpl implements PostingService {
 		return post;
 	}
 	
-	/**
-	 * 게시판 목록에 주소값을 띄어주기 위해서
-	 * @param postings
-	 * @return
-	 
-	public List<Posting> setAddressShortForListPost(List<Posting> postings){
-		
-		
-		return postings;
+	@Override
+	public int updatePostingViews(char category, long postId) {
+		return pd.updatePostingViews(category, postId);
 	}
-	*/
 
+	@Override
+	public int updatePostingLikes(char category, long postId) {
+		return pd.updatePostingLikes(category, postId);
+	}
+
+	/**
+	 * 		- return 값 int로 리팩토링 필요
+	 */
+	@Override
+	@Transactional
+	public boolean convertRecruitmentState(long postId) {
+		pd.convertRecruitmentState(postId);
+		return pd.getRecruitmentState(postId);
+	}
 	
 
 }

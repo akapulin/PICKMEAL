@@ -259,15 +259,8 @@ function removeAlarm(a) {
 	let alarmFriend = $(a).data("alarmmember");
 	let alarmContent = $(a).data("alarmcontent");
 	
-	let goUrl;
-	if (alarmType == 'L') {
-		goUrl = "chat/removeAlarmTypeL";
-	} else if (alarmType == 'M') {
-		goUrl = "chat/removeAlarmTypeM"; 
-	}
-	
 	$.ajax({
-		url: goUrl,
+		url: "chat/removeAlarmType",
 		type: "post",
 		data: {
 			"id": alarmId,
@@ -281,6 +274,9 @@ function removeAlarm(a) {
 				$(a).parents(".questionWrap").hide();
 				$(a).parents("#checkAlarmContent").hide();
 				$("li#alarm" + alarmId).remove();
+				if ($("ul.alarmArea li").length == 0) {
+					$(".alarmMark").hide();
+				}
 			}
 		}
 	})

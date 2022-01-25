@@ -16,15 +16,18 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/incl/header.jsp"/>
+
 <input type="hidden" value="${post.id }" id="postId"/>
 <section id="totalPostContainer">
         <h2 class="hidden">글읽기</h2>
         <div id="rwPostContainer">
             <div id="rwPostTitleContainer">
                 <div class="rwPostTitleWrap">
-               		<c:if test="${fn:contains(post.category,'N')}"><h3>공지사항</h3></c:if>
-                    <c:if test="${fn:contains(post.category,'R')}"><h3>식당추천</h3></c:if>
-                    <c:if test="${fn:contains(post.category,'E')}"><h3>밥친구</h3></c:if>
+                	  
+               		<c:if test="${fn:contains(post.category,'N')}"><h3 data-category="${post.category }">공지사항</h3></c:if>
+                    <c:if test="${fn:contains(post.category,'R')}"><h3 data-category="${post.category }">식당추천</h3></c:if>
+                    <c:if test="${fn:contains(post.category,'E')}"><h3 data-category="${post.category }">밥친구</h3></c:if>
+                	
                 </div>
             </div>
             <div id="rPostContentContainer">
@@ -55,7 +58,7 @@
 		                                
 		                            </li>
 	                            
-	                            	<li><a href="#">식사완료</a></li>
+	                            	<li><a href="#" id="rPostCompMealBtn">식사완료</a></li>
 	                            
 	                        </ul>
 	                    </div>
@@ -98,7 +101,14 @@
 	                        <div class="rPostContentMapDetails">
 	                            <table>
 	                                <tr>
-	                                    <th>식사장소</th>
+	                                <c:choose>
+	                                	<c:when test="${fn:contains(post.category,'R')}">
+	                                		<th>추천장소</th>
+	                                	</c:when>
+	                                	<c:otherwise>
+	                                		<th>식사장소</th>
+	                                	</c:otherwise>
+	                                </c:choose>
 	                                    <td id="rAddress">${post.address }</td>
 	                                    
 	                                </tr>
@@ -129,12 +139,13 @@
                             <p class="rPostCommentCountText">댓글<span>${post.commentsNumber }</span></p>
                         </li>
                     </ul>
-                    <c:if test="${member.id eq post.member.id }">
-	                    <ul class="rPostAdditioanInfoRightSide">
-	                        <li>수정</li>
-	                        <li>삭제</li>
+                     <ul class="rPostAdditioanInfoRightSide">
+	                        <li id="rPostModifyBtn">수정</li>
+	                        <li id="rPostRemoveBtn">삭제</li>
 	                    </ul>
-					</c:if>
+                    <!-- <c:if test="${member.id eq post.member.id }"> -->
+	                   
+					<!-- </c:if> -->
 
                 </div>
                 <div id="rPostCommentWrap">
@@ -143,7 +154,10 @@
             </div>
 
         </div>
-
+    <form action="" method="get" name="goModifyBoard"></form>   
+	<form action="${pageContext.request.contextPath}/posting/notice" method="get" id="goNoticeBoard"></form>
+    <form action="${pageContext.request.contextPath}/posting/recommend" method="get" id="goRecommendBoard"></form>
+    <form action="${pageContext.request.contextPath}/posting/together" method="get" id="goTogetherBoard"></form>
     </section>
 </body>
 </html>
