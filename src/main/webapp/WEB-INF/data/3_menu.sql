@@ -10,3 +10,10 @@ CREATE TABLE Menu (
 	mainFood		INT, 														#메뉴의 고기/해물/채소
 	spicy			INT															#메뉴의 맵기/안맵기
 );
+
+
+DROP TABLE Menu;
+
+DELETE TABLE Menu;
+
+SELECT * FROM Menu;

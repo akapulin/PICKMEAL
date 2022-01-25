@@ -1,8 +1,16 @@
 @charset "UTF-8";
 /* section */
-#commentsWrap {
-	width: 80%; margin: 0 auto;
+#commentsContainer {
+	width: 100%;
+	min-height: 100vh;
+	background: #fff8f8;
 }
+#commentsWrap{
+	width: 70%; margin: 0 auto;
+	padding: 0 96px;
+	box-sizing: border-box;
+}	
+
 /* 새롭게 추가된 댓글 */
 .commentWrapNew {
 	position: relative;

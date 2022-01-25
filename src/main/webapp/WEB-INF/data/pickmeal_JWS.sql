@@ -173,6 +173,9 @@ CREATE TABLE VisitedRestaurant(
 	FOREIGN KEY (memberId) REFERENCES Member (id),								#아래 쭉 포링키
 	FOREIGN KEY (restaurantId) REFERENCES Restaurant (id)
 )
+
+select * from VisitedRestaurant;
+
 INSERT INTO VisitedRestaurant(memberId, restaurantId, Review) VALUES(6,7,false);
 INSERT INTO VisitedRestaurant(memberId, restaurantId, Review) VALUES(6,52,false);
 SELECT EXISTS (SELECT id FROM VisitedRestaurant WHERE id = 2);

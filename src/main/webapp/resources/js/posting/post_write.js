@@ -3,22 +3,49 @@
 		글쓰기 JavaScript
 
  */
+let currentFileCnt = 0;		//파일 수정 시 필요
+let rmFileModiList = [];
 $(document).ready(function() {
 	console.log('수정상태는?'+$('#modifyState').val())
 	
-	//수정상태면 불러온 주소로 맵셋팅
+	//수정상태면
 	if($('#modifyState').val()=='true'){
 		console.log('true')
-		setMap();
+		setMap();		//수정상태면 불러온 주소로 맵셋팅
+		setImgList()	//수정상태면 불러온 이미지 셋팅
+		//이미지리스트 뿌려주기
+	
 	}
-	//글쓰지상태면 현재위치 기준으로 맵셋팅
+	//글쓰기상태면 현재위치 기준으로 맵셋팅
 	else{
 		console.log('false')
 		callCurrentMap();
 	}
 	
-	removeImg()
+	/*
 	
+		글 수정시 파일 처리
+		
+			1. 파일첨부할 때의 흐름은 
+					(1) 파일을 첨부한다
+					(2) 임시경로로 사용자에게 이미지를 보여준다
+					(3) 자바스크립스 상에서 존재하는 fileBuffer로 파일의 추가/삭제상태가 이루어진다
+					(4) 작성완료 시점에서 비동기식으로 fileBuffer에 있는 파일을 외부경로에 생성해준다
+			
+			1. 수정한 상태에서 불러온 이미지들은 이미 외부파일에 저장되어 있는 상태임으로 흐름이 다르다
+					(1) 불러온 게시글 안의 img 태그들을 읽어와서 파일첨부리스트에 추가시켜준다.(따로변수에저장x, 파일첨부리스트에만 추가된다)
+					(2) 삭제할 때, 삭제할 이미지들의 경로를 rmfileModiList배열에 모아둔다
+					(3) 수정완료할 때, 삭제할 이미지 경로 배열을 비동기식으로 외부경로에서 삭제시켜준다
+			
+		비고1) 새로운 파일을 첨부할 때, 이미 불러진 이미지들의 갯수를 포함하여 파일첨부 갯수 제한을둔다.
+			ex) 최대 파일첨부갯수는 10개인데 이미 2개가 있으면 새로 첨부할 수 있는 파일을 8개
+		
+		비고2) 삭제할때, 작성완료할 때 첨부한파일과 불러온파일들의 구분을 잘해줘야한다
+	
+	*/
+	
+	
+
 })
 
 console.log('post_write in')
@@ -61,6 +88,7 @@ function getContextPath() {
 let fileBuffer = [];
 let fileBufferIndex = 0;
 let maxFileCnt = 10;
+
 //정적 이미지 파일들 경로 지정
 let wPostAttachedImgIconSrc = getContextPath() + "/resources/img/posting/attached_picture.png";
 let wPostattachedImgDelIconSrc = getContextPath() + "/resources/img/posting/close.png";
@@ -75,15 +103,22 @@ $('#multiFileInput').on('change', function() {
 
 	//총 file 갯수
 	let totalFileCnt = target[0].files.length + fileBuffer.length;
+	//총 file갯수(수정용)
+	let totalFileCnt2 = target[0].files.length + fileBuffer.length + currentFileCnt;
 	console.log('총 파일 갯수는 ?' + totalFileCnt);
 
 	//제약사항 - 파일 10개까지 등록
-	if (totalFileCnt > maxFileCnt) {
+	if (totalFileCnt > maxFileCnt || totalFileCnt2 > maxFileCnt) {
 		alert('파일은 최대 10개까지 등록가능합니다');
 		//파일리셋
 		resetFileToPwrite();
 		return false;
 	}
+	
+	//수정할 때, 이미 이미지가 있다면 새로운 파일을 첨부할 때는 그 갯수부터 이미지 갯수카운트를 한다
+	fileBufferIndex = currentFileCnt;
+	
+	
 	/*
 	
 		페이지를 직접 여러번 새로 바꿔야하는 append코드는 브라우저 성능에
@@ -111,6 +146,8 @@ $('#multiFileInput').on('change', function() {
 		let imgList_html = '';
 		let content_html = '';
 
+		
+		
 
 
 		//파일 첨부 리스트에 보여주기
@@ -129,7 +166,7 @@ $('#multiFileInput').on('change', function() {
 		//글 본문에 사진 넣어주기
 		//class Name에 index 값을 부여한
 		content_html += '<br>';
-		content_html += '<img src="' + URL.createObjectURL(file) + '" alt="' + fileName + '" class="' + wPostImgName + fileBufferIndex + '">';
+		content_html += '<img src="' + URL.createObjectURL(file) + '" alt="' + fileName + '" class="' + wPostImgName + fileBufferIndex + '" data-imgsize="'+file.size+'">';
 		content_html += '<br><br>';
 		//$('.wPostContentInput').append(content_html);
 		$contentFrag.append(content_html);
@@ -229,13 +266,23 @@ $(document).on('click', '.wPostAttachImgDelIcon', function() {
 	let removeImgIndex = $(this).data('imgindex');
 	console.log("removeImgIndex is " + removeImgIndex);
 
-	//fileBuffer에서 삭제
-	let rmFileBufferIndex = $(this).parent().index();
-	fileBuffer.splice(rmFileBufferIndex, 1); //index에서 1개 값지운다 뜻
-
-	console.log('rmFileBufferIndex' + rmFileBufferIndex);
-	console.log('fileBuffer is' + fileBuffer);
-
+	//수정 상태가 아니라면 fileBuffer에서 삭제
+	if(!$(this).hasClass('wPostModifyImgDelIcon')){
+		let rmFileBufferIndex = $(this).parent().index();
+		fileBuffer.splice(rmFileBufferIndex, 1); //index에서 1개 값지운다 뜻
+	
+		console.log('rmFileBufferIndex' + rmFileBufferIndex);
+		console.log('fileBuffer is' + fileBuffer);
+	}
+	//수정 상태
+	if($(this).hasClass('wPostModifyImgDelIcon')){
+		//수정상태에서 초기에 셋팅된 이미지 카운트를 줄어둔다
+		currentFileCnt--;
+		//외부경로에 지워줄 파일리스트를 모아준다
+		let rmFileSrc = $('.imgList'+removeImgIndex).attr('src');
+		rmFileModiList.push(rmFileSrc);
+	}
+	
 
 
 	//파일첨부리스트에서 삭제
@@ -280,9 +327,15 @@ $(document).on('click', '.wPostAttachImgDelIcon', function() {
 
 $(document).on('click', '.wPostSubmitBtn', function(e) {
 	e.preventDefault();
+	
+	
+	//수정상태에서 불러온 이미지들이 삭제가 된게 있다면 외부파일에서 지워준다
+	if(rmFileModiList.length!=0){
+		removeImg(rmFileModiList);
+	}
+	
 	//파일을 미리 외부경로에 저장하고 & 본문 img src 업데이트
 	//form sumbit은 ajax가 성공한 뒤에 한다
-
 	if (fileBuffer.length!=0) {
 		if ($('#postType').val() == 'N') {
 			sendFileToSave("noticeBoard");
@@ -291,14 +344,17 @@ $(document).on('click', '.wPostSubmitBtn', function(e) {
 		}
 	}
 	else{
+		//제목과 내용이 없으면 전송x
 		let title = $('.wPostSubTitleConInput').val();
 		let content = $('.wPostContentInput').text();
 		if(title.replace(/\s| /gi, "").length == 0){
 			alert('제목을 입력해주세요');
+			return;
 		}else if(content.replace(/\s| /gi, "").length == 0){
 			alert('본문을 입력해주세요');
+			return;
 		}else{
-			//div 값 input value에 넣어주기
+			//modelAttribute로 전송하기 위해서 div 값 input value에 넣어주기
 			$('#wPostContentValue').val($('.wPostContentInput').html());
 
 			$('#wPostForm').submit();		//첨부파일없으면 바로 전송
@@ -386,9 +442,17 @@ function getContextPath() {
 
 /**
 
+
+
+
+
 		지도
 			1) 맵의 초기위치를 현재위치로 잡기 위해서는 현재위치 읽어오는 함수에
 			맵을 생성해서 만든다
+			
+			
+			
+			
 */
 
 
@@ -513,7 +577,13 @@ function locationLoadError(pos) {
 
 /*
 
+
+
+
 	주소 입력하기 버튼 누르기
+			- 우편번호서비스이용
+	
+	
 	
 */
 
@@ -635,26 +705,95 @@ function setMap(){
 		  있으면 img src를 저장한다
 */
 
-function removeImg(){
-	let rmFileBuffer = [];
+/*
+
+	글 삭제할 때 이미지 삭제
+	
+*/
+function removeAllImg(){
+	let rmFileListAll =[];
+	for(let i=0;i<maxFileCnt;i++){
+		rmFileList[i]=$('.wPostContentInput').find($('.imgList'+i)).attr('src');
+	}
+	
+	removeImg(rmFileListAll);
+}
+
+/*
+	글 수정& 글 삭제 이미지 삭제
+*/
+
+function removeImg(rmFileList){
+	/*
+	
+		RequestParam List로 받기 위해 2차원 배열생성
+		array[maxFileCnt][0]
+		=> List.getIndex(0).val() = src;
+	*/
+	
+	let rmFileBuffer = new Array(maxFileCnt);
+	//for (var i = 0; i < arr.length; i++) {
+	    
+	//}
+	
 	console.log('removeImgList');
 	for(let i=0;i<maxFileCnt;i++){
-		rmFileBuffer[i]=$('.wPostContentInput').find($('.imgList'+i)).attr('src');
+		rmFileBuffer[i] = new Array(1);
+		rmFileBuffer[i] = rmFileList[i];
+		//rmFileBuffer[i]=$('.wPostContentInput').find($('.imgList'+i)).attr('src');
 	}
+	console.log(rmFileBuffer);	
+	
+	
 	$.ajax({
-		url: "orderMenuList",
+		url: getContextPath()+"/removeImg",
 		type: "post",
-		data: JSON.stringify(json),
-		contentType: "application/json; charset=UTF-8",
+		data:{imgSrc:rmFileBuffer},
 		success: function(data) {
+			
+			},
+			error:function(){			
 			}
-		
-		
 		})
 }
 
+/**
 
+	수정하기 폼에 들어왔을 때, 이미 글작성폼에 들어가 있는 이미지들을 읽어와서
+	파일첨불 리스트에 다시 뿌려준다
 
+ */
+function setImgList(){
+	
+	var $imgListFrag = $(document.createDocumentFragment());
+	
+	for(let i=0;i<maxFileCnt;i++){
+		let imgList_html = '';
+		let imgTitle = $('.wPostContentInput').find($('.imgList'+i)).attr('alt');
+		let imgSize = $('.wPostContentInput').find($('.imgList'+i)).data('imgsize');
+		
+		if(imgTitle!=''&&imgTitle!=null){
+			//현재 이미지 파일 갯수 카운트
+			currentFileCnt++;
+			
+			//파일 첨부 리스트에 보여주기
+			imgList_html += '<li>';
+			imgList_html += '<img src="' + wPostAttachedImgIconSrc + '" class="wPostAttachImgIcon" alt="이미지파일 아이콘">';
+			imgList_html += '<p class="wPostAttachImgTitle">';
+			imgList_html += imgTitle;
+			imgList_html += '<span>("' + imgSize + '")</span></p>';
+			imgList_html += '<img src="' + wPostattachedImgDelIconSrc + '" data-imgindex="' + i + '"';
+			imgList_html += 'class="wPostAttachImgDelIcon wPostModifyImgDelIcon" alt="이미지파일 삭제아이콘">';
+			imgList_html += '</li>';
+			$imgListFrag.append(imgList_html);
+
+		}
+		$('.wPostAttachedImgList').append($imgListFrag);
+		
+	}
+
+	
+}
 
 
 

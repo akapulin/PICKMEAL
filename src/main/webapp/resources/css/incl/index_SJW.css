@@ -13,77 +13,84 @@
 	background-repeat: no-repeat;
 	display: none;
 }
-
+#gameDataForm {
+	width: 100%; height: 100%; display: flex; flex-flow: row wrap; justify-content: space-between;
+	align-items: center; position: relative;
+}
 #mapRadius{	
-	margin-left: 10px;
-    width: 190px;
+    text-align: center;
+    width: 45%;
     height: 35px;
 }
 .radiusLabel{
-	display: inline-block;
-    width: 60px;
-    height: 35px;
-    border: 1px solid #000;
-    text-align: center;
+	padding: 0 10px;
     line-height: 35px;
     border: none;
-    background: lightgrey;
+    background-color: #fff;
+    font-size: 14px;
 }
 
 #resCategory{
-	margin: 15px 0 0 10px;
-	width: 260px;
-    height: 35px;	
-    display:inline-block;
+	width: 50%;
+    height: 35px;
+    text-align: center;
 }
 .categoryLabel{
-	display: inline-block;
-    width: 60px;
-    height: 35px;
+	padding: 0 10px;
     border: 1px solid #000;
-    text-align: center;
     line-height: 35px;
     border: none;
-    background: lightgrey;
+    background: #fff;
     display: inline-block;
+    font-size: 14px;
 }
 .categoryLabel:hover, .radiusLabel:hover{
-	background: darkslateblue;
-	color:#fff;
+	font-weight: bold;
+	color: #8000ff;
+	text-decoration: underline;
 }
 .categoryOn, .radiusOn{
-	background: darkslateblue;
-	color:#fff;	
+	font-weight: bold;
+	color: #8000ff;
+	text-decoration: underline;
 }
 .radius, .category{
 	display: none;
 }
 #submitWrapForGame{
-	display: inline-block;
+	position: absolute; bottom: -50px; right: 0;
 }
 #submitWrapForGame .gamePlayBtn{
-	width: 70px;
-    height: 40px;
-    text-align: center;
-    line-height: 35px;
-    border: none;
-    background: #f23f3f;
+	padding: 0 15px; line-height: 35px;
+    font-family: 'DungGeunMo';
+    border: none; transition-duration: 0.1s;
+    background: #f23f3f; border-radius: 10px;
+	box-shadow: -3px 3px 5px #808080;
     color: #fff;   
 }
-
+#submitWrapForGame .gamePlayBtn:hover {
+	background-color: #F67E7E;
+}
+/* 메뉴 골라주기 버튼 */
 #menuGameButtonWrap {
 	position: absolute;
-    top: 0%;
-    left: 85%;
-    width: 80px;
-    height: 35px;;
+    top: 70px;
+    left: 5%;
+    height: 40px; width: 220px;
+}
+#menuGameButtonWrap form {
+	display: flex; flex-flow: row nowrap; justify-content: space-around;
+	align-items: center;
+}
+#menuGameButtonWrap label {
+	display: block; width: 34px; height: 40px; cursor: pointer;
+	background: url(/pickmeal/resources/img/map/menuPick.png) no-repeat center / 40px;
 }
 #menuGameButtonWrap .menuSubmit{
-	width: 80px;
-    height: 35px;
-    border: none;
-    background-color: burlywood;
-    color: #fff;
+    font-family: 'DungGeunMo';
+	padding: 8px;
+    border: 1px solid #BF9000;
+    border-radius: 10px;
+    background-color: #ffffb7;
     text-align: center;
-    line-height: 35px;
 }
