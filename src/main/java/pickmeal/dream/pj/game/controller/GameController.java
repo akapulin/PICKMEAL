@@ -111,6 +111,7 @@ public class GameController {
 				System.out.println("gameCotroller : "+firstGameMsg);
 				mav.addObject("firstGameMsg", firstGameMsg); //첫 게임일 경우 안내 메세지 보냄.
 			} else {}
+			session.setAttribute("cntForRetry", cntForRetry);
 			mav.addObject("cntForRetry", cntForRetry);
 		}
 		// 얘네는 로그인이 되어있을 때 실행되어야 하는데 아래 한 줄로 되나? 
@@ -119,7 +120,7 @@ public class GameController {
 //				firstGameMsg = msgs.bringFirstMsg();
 //				mav.addObject("firstGameMsg", firstGameMsg); //첫 게임일 경우 안내 메세지 보냄.
 //			} else {}
-		
+		session.removeAttribute("couponCategory");
 		mav.addObject("radius", radius);
 		mav.addObject("category", category);
 		mav.addObject("nowLat", nowLat);
