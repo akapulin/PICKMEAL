@@ -2,7 +2,7 @@
 CREATE TABLE RecommendRestaurantPosting (									# 식당 추천 게시판
 	id				BIGINT			PRIMARY KEY	AUTO_INCREMENT,				# SQL 아이디
 	memberId		BIGINT			NOT NULL,								# 사용자 아이디
-	restaurantId	BIGINT			NOT NULL,								# 식당 아이디
+	address			VARCHAR(100)	NOT NULL,								# 주소
 	title			VARCHAR(100)	NOT NULL,								# 제목
 	content			MEDIUMTEXT		NOT NULL,								# 내용
 	likes			INT				NOT NULL	DEFAULT 0,					# 좋아요 수
@@ -27,7 +27,7 @@ CREATE TABLE RecommendRestaurantComment (									# 식당 추천 댓글
 CREATE TABLE TogetherEatingPosting (										# 밥친구 게시판
 	id				BIGINT			PRIMARY KEY	AUTO_INCREMENT,				# SQL 아이디
 	memberId		BIGINT			NOT NULL,								# 사용자 아이디
-	restaurantId	BIGINT			NOT NULL,								# 식당 아이디
+	address			VARCHAR(100)	NOT NULL,								# 주소
 	title			VARCHAR(100)	NOT NULL,								# 제목
 	content			MEDIUMTEXT		NOT NULL,								# 내용
 	likes			INT				NOT NULL	DEFAULT 0,					# 좋아요 수
