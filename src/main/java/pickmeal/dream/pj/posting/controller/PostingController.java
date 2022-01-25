@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 import lombok.extern.java.Log;
 import pickmeal.dream.pj.member.domain.Member;
@@ -306,11 +307,11 @@ public class PostingController {
 	 * @return
 	 */
 	@PostMapping("/posting/completeWritingPost")
-	public String completeWritingPost(@ModelAttribute PostingCommand pc, HttpSession session) {
+	public String completeWritingPost(@ModelAttribute PostingCommand pc, @SessionAttribute("member") Member member) {
 		
 		
 		log.info("hi posting complete"+pc.toString());
-		long memberId = ((Member)session.getAttribute("member")).getId();
+		long memberId = member.getId();
 		//long memberId = 4;
 	
 		
