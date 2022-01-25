@@ -10,8 +10,6 @@ CREATE TABLE Member (															# 사용자
 	regDate			TIMESTAMP		NOT NULL	DEFAULT CURRENT_TIMESTAMP		# 회원가입 날짜
 );
 
-
-
 CREATE TABLE FoodPowerPoint (													# 식력 포인트
 	id			BIGINT		PRIMARY KEY	AUTO_INCREMENT,							# SQL 아이디
 	memberId	BIGINT		NOT NULL,											# 사용자 아이디
@@ -74,6 +72,13 @@ DROP TABLE Attendance;
 DROP TABLE MannerTemperature;
 DROP TABLE FoodPowerPoint;
 DROP TABLE Member;
+
+DELETE FROM Coupon;
+DELETE FROM CouponCategory;
+DELETE FROM Attendance;
+DELETE FROM MannerTemperature;
+DELETE FROM FoodPowerPoint;
+DELETE FROM Member;
 
 SELECT * FROM Coupon;
 SELECT * FROM CouponCategory;

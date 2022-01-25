@@ -8,8 +8,7 @@ CREATE TABLE RecommendRestaurantPosting (									# 식당 추천 게시판
 	likes			INT				NOT NULL	DEFAULT 0,					# 좋아요 수
 	views			INT				NOT NULL	DEFAULT 0,					# 조회 수
 	regDate			TIMESTAMP		NOT NULL	DEFAULT CURRENT_TIMESTAMP,	# 글 등록 날짜
-	CONSTRAINT		RecommendRestaurantPosting_memberId_FK	FOREIGN KEY(memberId)	REFERENCES Member(id) ON DELETE CASCADE,
-	CONSTRAINT		RecommendRestaurantPosting_restaurantId_FK	FOREIGN KEY(restaurantId)	REFERENCES Restaurant(id) ON DELETE CASCADE
+	CONSTRAINT		RecommendRestaurantPosting_memberId_FK	FOREIGN KEY(memberId)	REFERENCES Member(id) ON DELETE CASCADE
 );
 
 #식당추천 - 댓글
@@ -36,8 +35,7 @@ CREATE TABLE TogetherEatingPosting (										# 밥친구 게시판
 	recruitment		BOOLEAN			NOT NULL	DEFAULT	FALSE,				# 모집 완료
 	mealChk			BOOLEAN			NOT NULL	DEFAULT	FALSE,				# 식사 완료
 	regDate			TIMESTAMP		NOT NULL	DEFAULT CURRENT_TIMESTAMP,	# 게시글 등록 날짜
-	CONSTRAINT		TogetherEatingPosting_memberId_FK	FOREIGN KEY(memberId)	REFERENCES Member(id) ON DELETE CASCADE,
-	CONSTRAINT		TogetherEatingPosting_restaurantId_FK	FOREIGN KEY(restaurantId)	REFERENCES Restaurant(id) ON DELETE CASCADE
+	CONSTRAINT		TogetherEatingPosting_memberId_FK	FOREIGN KEY(memberId)	REFERENCES Member(id) ON DELETE CASCADE
 );
 
 #밥친구 - 댓글
@@ -70,6 +68,15 @@ DROP TABLE RecommendRestaurantPosting;
 DROP TABLE TogetherEatingPosting;
 DROP TABLE NoticePosting;
 
+<<<<<<< HEAD
+=======
+DELETE FROM RecommendRestaurantComment;
+DELETE FROM TogetherEatingComment;
+DELETE FROM RecommendRestaurantPosting;
+DELETE FROM TogetherEatingPosting;
+DELETE FROM NoticePosting;
+
+>>>>>>> branch 'developer' of https://github.com/akapulin/PICKMEAL.git
 SELECT * FROM RecommendRestaurantComment;
 SELECT * FROM TogetherEatingComment;
 SELECT * FROM RecommendRestaurantPosting;

@@ -55,6 +55,9 @@ public class FoodPowerPointItem {
 		case 9:
 			spc = WRITE_COMMENT;
 			break;
+		case 10:
+			spc = CHECK_MANNER;
+			break;
 		}
 		return spc;
 	}
