@@ -11,8 +11,8 @@
 <script src="${pageContext.request.contextPath}/resources/js/member/achievement.js" defer></script>
 </head>
 <body>
-	<%-- <jsp:include page="/WEB-INF/views/incl/header.jsp"/> --%>
-	<jsp:include page="/WEB-INF/views/member/my_page_SJW.jsp"/>
+	<jsp:include page="/WEB-INF/views/incl/header.jsp"/>
+	<jsp:include page="/WEB-INF/views/member/my_page.jsp"/>
 	
 	<div id="achieveWrap">
 		<h2>업적</h2>

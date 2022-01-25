@@ -15,6 +15,7 @@ import pickmeal.dream.pj.game.domain.LastGame;
 import pickmeal.dream.pj.game.repository.GameDao;
 import pickmeal.dream.pj.member.domain.Member;
 import pickmeal.dream.pj.member.service.MemberAchievementService;
+import pickmeal.dream.pj.member.service.MemberService;
 import pickmeal.dream.pj.restaurant.domain.Restaurant;
 import pickmeal.dream.pj.web.util.PresentTime;
 
@@ -30,6 +31,9 @@ public class GameServiceImpl implements GameService{
 	
 	@Autowired
 	MemberAchievementService mas;
+	
+	@Autowired
+	MemberService ms;
 
 	public void insertLastGameRecord(long memberId, long resId) {
 		// TODO Auto-generated method stub
@@ -188,7 +192,9 @@ public class GameServiceImpl implements GameService{
 
 	@Override
 	public LastGame findLastGameByMemberId(long memberId) {
-		return gd.findLastGameByMemberId(memberId);
+		LastGame lg = gd.findLastGameByMemberId(memberId);
+		lg.setMember(ms.findMemberById(memberId));
+		return lg;
 	}
 	
 }

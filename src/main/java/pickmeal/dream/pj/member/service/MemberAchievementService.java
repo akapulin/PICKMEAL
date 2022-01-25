@@ -4,6 +4,7 @@ import java.util.List;
 
 import pickmeal.dream.pj.member.domain.FoodPowerPointItem;
 import pickmeal.dream.pj.member.domain.Member;
+import pickmeal.dream.pj.web.constant.Constants;
 import pickmeal.dream.pj.web.constant.SavingPointConstants;
 
 public interface MemberAchievementService {
@@ -30,10 +31,14 @@ public interface MemberAchievementService {
 	public List<FoodPowerPointItem> findFoodPowerPointRecordByMemberId(long memberId);
 	
 	/**
-	 * 해당 멤버의 신뢰 온도 업데이트 /
-	 * 추가 시 신뢰온도인 36.5 도를 멤버에게 적용시켜서 반환
+	 * 회원가입 시 신뢰온도인 36.5 도를 멤버에게 적용시켜서 반환
 	 */
 	public void addMannerTemperature(Member member);
+	
+	/**
+	 * 해당 멤버의 신뢰 온도 업데이트
+	 */
+	public Member updateMannerTemperature(Member member, Constants c);
 
 	/**
 	 * 해당 사용자의 매너 온도 찾기

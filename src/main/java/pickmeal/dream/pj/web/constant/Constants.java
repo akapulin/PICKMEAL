@@ -18,23 +18,14 @@ public enum Constants {
 	
 	private final double point;
 	private final String imgPath;
-	private final int num;
 	
 	Constants(double point) {
 		this.point = point;
 		this.imgPath = "";
-		this.num = 0;
 	}
 	
 	Constants(double point, String imgPath){
 		this.point = point;
 		this.imgPath = imgPath;
-		this.num = 0;
-	}
-
-	Constants(int num) {
-		this.point = 0;
-		this.imgPath = "";
-		this.num = num;
 	}
 }

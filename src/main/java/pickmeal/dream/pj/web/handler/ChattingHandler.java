@@ -34,7 +34,7 @@ public class ChattingHandler extends TextWebSocketHandler {
 		 * session.sendMessage(new TextMessage("blackAddress")) 로 메세지를 날린다
 		 * 스크립트 onMessage 에서 blackAddress와 완전히일치하는 문장이 들어왔을 경우 바로 onclose를 실행시킬 수 있을까?
 		 * 
-		 * 시간없어서 못해봄 ㅋ
+		 * 시간없어서 못해봄 ㅋㅋ
 		 */
 	}
 	

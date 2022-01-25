@@ -44,7 +44,7 @@ public class CommentController {
 		List<Comment> comments = cs.findCommentsByPostId(1, 'E', cpageNum); // 게시물 댓글 1페이지
 		int allCmtNum = cs.countCommentByPostId(1, 'E'); // 해당 게시글의 총 댓글 수
 		// double 형으로 캐스팅을 한 후에 나누기를 해줘야 소수점이 제대로 나온다
-		int allPageNum = (int)Math.ceil((double)allCmtNum / COMMENT_LIST.getNum()); // 페이지 개수 구하기
+		int allPageNum = (int)Math.ceil((double)allCmtNum / (int)COMMENT_LIST.getPoint()); // 페이지 개수 구하기
 //		log.info(comments.toString());
 //		for(Comment c : comments) {
 //			log.info(c.toString());
@@ -70,7 +70,7 @@ public class CommentController {
 		mav.addObject("allPageNum", allPageNum);
 		mav.addObject("allCmtNum", allCmtNum);
 		mav.addObject("cpageNum", cpageNum);
-		mav.addObject("viewPageNum", COMMENT_LIST.getNum());
+		mav.addObject("viewPageNum", (int)COMMENT_LIST.getPoint());
 		mav.setViewName("posting/together_eating_comment");
 		return mav;
 	}

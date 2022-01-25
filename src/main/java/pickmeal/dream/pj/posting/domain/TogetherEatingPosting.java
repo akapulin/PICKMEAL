@@ -23,7 +23,9 @@ public class TogetherEatingPosting extends Posting{
 	public TogetherEatingPosting() {
 		
 	}
-	
+	public TogetherEatingPosting(long id, char category) {
+		super(id,category);
+	}
 	public TogetherEatingPosting(long id, Member member, String address, char category, String title, String content, int commentsNumber, int likes, int views, Date regDate, Date mealTime, boolean recruitment, boolean mealChk) {
 		super(id, member, address, category, title, content,commentsNumber, likes, views, regDate);
 		this.mealTime = mealTime;

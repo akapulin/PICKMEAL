@@ -78,7 +78,7 @@ public class AchievementController {
 		
 		mav.addObject("fppList", fppList);
 		
-		
+		mav.addObject("here", "achievment");
 		mav.setViewName("member/achievement");
 		return mav;
 	}

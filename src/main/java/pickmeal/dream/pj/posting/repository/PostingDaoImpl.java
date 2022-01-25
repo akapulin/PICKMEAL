@@ -37,37 +37,39 @@ public class PostingDaoImpl implements PostingDao {
 
 	}
 
+	
+	
 	@Override
-	public void updatePosting(Posting posting) {
+	public int updatePosting(Posting posting) {
 		if (posting.getCategory() == 'N') {
 			String sql ="UPDATE NoticePosting SET title=?, content=?, views=?"
 					+" WHERE id=?";
-			jt.update(sql, posting.getTitle(), posting.getContent(), posting.getViews(), posting.getId());
+			return jt.update(sql, posting.getTitle(), posting.getContent(), posting.getViews(), posting.getId());
 		} else if (posting.getCategory() == 'R') {
 			String sql ="UPDATE RecommendRestaurantPosting SET address=?, title=?, content=?, likes=?, views=?"
 					+" WHERE id=?";
-			jt.update(sql, posting.getAddress(), posting.getTitle(), posting.getContent(), posting.getLikes(), posting.getViews(), posting.getId());
+			return jt.update(sql, posting.getAddress(), posting.getTitle(), posting.getContent(), posting.getLikes(), posting.getViews(), posting.getId());
 		} else {
 			TogetherEatingPosting tep = (TogetherEatingPosting) posting;
 			String sql ="UPDATE TogetherEatingPosting SET address=?, title=?, content=?, likes=?, views=?, mealTime=?, recruitment=?, mealChk=?"
 					+" WHERE id=?";
-			jt.update(sql, tep.getAddress(), tep.getTitle(), tep.getContent(), tep.getLikes(), tep.getViews(), tep.getMealTime(), tep.isRecruitment(), tep.isMealChk(), tep.getId());
+			return jt.update(sql, tep.getAddress(), tep.getTitle(), tep.getContent(), tep.getLikes(), tep.getViews(), tep.getMealTime(), tep.isRecruitment(), tep.isMealChk(), tep.getId());
 		}
 
 	}
 
 	@Override
-	public void deletePosting(Posting posting) {
+	public int deletePosting(Posting posting) {
 		if (posting.getCategory() == 'N') {
 			String sql = "DELETE FROM NoticePosting WHERE id=?";
-			jt.update(sql, posting.getId());
+			return jt.update(sql, posting.getId());
 		} else if (posting.getCategory() == 'R') {
 			String sql = "DELETE FROM RecommendRestaurantPosting WHERE id=?";
-			jt.update(sql, posting.getId());
+			return jt.update(sql, posting.getId());
 		} else {
 			TogetherEatingPosting tep = (TogetherEatingPosting) posting;
 			String sql = "DELETE FROM TogetherEatingPosting WHERE id=?";
-			jt.update(sql, tep.getId());
+			return jt.update(sql, posting.getId());
 		}
 
 	}
@@ -87,6 +89,8 @@ public class PostingDaoImpl implements PostingDao {
 		}
 		
 	}
+	
+
 	
 	/**
 	 * 
@@ -172,12 +176,76 @@ public class PostingDaoImpl implements PostingDao {
 					+" FROM TogetherEatingPosting"
 					+" WHERE memberId = ?"
 					+" ORDER BY id DESC "
-					+" LIMIT ?,?";
+					+" LIMIT ?,? ";
 			return jt.query(sql, new TogetherEatingPostingRowMapper(),memberId,pageStart,pageReadCnt);
 		}
 	}
 
+	/**
+	 * 게시판 카테고리 별로 마지막으로 추가한 포스팅을 가져온다
+	 * @return
+	 */
+	public Posting findLastPostingByCategory(char category) {
+		if (category == 'N') {
+			String sql ="SELECT id, memberId, title, content, views, regDate "
+					+" FROM NoticePosting WHERE id=LAST_INSERT_ID()";
+			return jt.queryForObject(sql, new NoticePostingRowMapper());
+			
+		} else if (category == 'R') {
+			String sql ="SELECT id, memberId, address, title, content, likes, views, regDate "
+					+" FROM RecommendRestaurantPosting WHERE id=LAST_INSERT_ID()";
+			return jt.queryForObject(sql, new RecommendRestaurantPostingRowMapper());
+		} else {
+			String sql ="SELECT id, memberId, address, title, content, likes, views, mealTime, recruitment, mealChk, regDate "
+					+" FROM TogetherEatingPosting WHERE id=LAST_INSERT_ID()";
+			return jt.queryForObject(sql, new TogetherEatingPostingRowMapper());
+		}
+	}
 	
+	@Override
+	public int updatePostingViews(char category, long postId) {
+		if (category == 'N') {
+			String sql ="UPDATE NoticePosting SET views = views+1"
+					+" WHERE id=?";
+			return jt.update(sql, postId);
+			
+		} else if (category == 'R') {
+			String sql ="UPDATE RecommendRestaurantPosting SET views = views+1"
+					+" WHERE id=?";
+			return jt.update(sql, postId);		
+		} else {
+			String sql ="UPDATE TogetherEatingPosting SET views = views+1"
+					+" WHERE id=?";
+			return jt.update(sql, postId);		
+		}
+	}
+	
+	@Override
+	public int updatePostingLikes(char category, long postId) {
+		if (category == 'R') {
+			String sql ="UPDATE RecommendRestaurantPosting SET likes = likes+1"
+					+" WHERE id=?";
+			return jt.update(sql, postId);		
+		} else {
+			String sql ="UPDATE TogetherEatingPosting SET likes = likes+1"
+					+" WHERE id=?";
+			return jt.update(sql, postId);		
+		}
+	}
+	
+	@Override
+	public void convertRecruitmentState(long postId) {
+		String sql = "UPDATE TogetherEatingPosting SET recruitment = !recruitment"
+				+" WHERE id=?";
+		jt.update(sql, postId);
+	}
+	
+	@Override
+	public boolean getRecruitmentState(long postId) {
+		String sql = "SELECT recruitment FROM TogetherEatingPosting"
+				+" WHERE id=?";
+		return jt.queryForObject(sql, Boolean.class, postId);
+	}
 	
 	
 }

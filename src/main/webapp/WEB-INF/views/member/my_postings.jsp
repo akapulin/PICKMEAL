@@ -20,35 +20,39 @@
                 <div class="postBtnWrap">
                    	<c:if test="${postType eq 'R'.charAt(0) }">
 						<a href="${pageContext.request.contextPath}/member/myPostings/recommend" class="postBtn recommend on">식당추천</a>
-	                    <a href="${pageContext.request.contextPath}/member/myPostings/together" class="postBtn together">같이먹자</a>
+	                    <a href="${pageContext.request.contextPath}/member/myPostings/together" class="postBtn together">밥친구</a>
 					</c:if>
                    	<c:if test="${postType eq 'E'.charAt(0) }">
 						<a href="${pageContext.request.contextPath}/member/myPostings/recommend" class="postBtn recommend">식당추천</a>
-	                    <a href="${pageContext.request.contextPath}/member/myPostings/together" class="postBtn together on">같이먹자</a>
+	                    <a href="${pageContext.request.contextPath}/member/myPostings/together" class="postBtn together on">밥친구</a>
 					</c:if>
                 </div>
                 <c:forEach var="posting" items="${myPostings }">
                 	<fmt:formatDate var="postDate" pattern="yyyy-MM-dd a hh:mm" value="${posting.regDate }"/>
 	                <div class="postBox">
-	                    <span class="postType">
-	                    	<c:if test="${posting.category eq 'R'.charAt(0) }">식당추천</c:if>
-	                    	<c:if test="${posting.category eq 'E'.charAt(0) }">같이먹자</c:if>
-	                    </span>
-	                    <div class="post">
-	                        <span class="nameAndRegDate">${posting.member.nickName } . ${postDate }</span>
-		                        <c:if test="${posting.category eq 'R'.charAt(0) }">
-			                        <p class="postTitle"><a href="${pageContext.request.contextPath}/posting/recommend/${posting.id}">${posting.title }</a></p>
-		                        </c:if>
-		                    	<c:if test="${posting.category eq 'E'.charAt(0) }">
-		                    		<p class="postTitle"><a href="${pageContext.request.contextPath}/posting/together/${posting.id}">${posting.title }</a></p>
-		                    	</c:if>
-	                    </div>
-	                    <form action="#" method="post">
-	                        <input type="hidden" value="">
-	                        <input type="hidden" value="">
-	                        <input type="hidden" value="">
-	                        <input type="submit" value="삭제" class="postDelBtn">
-	                    </form>
+                    	<c:if test="${posting.category eq 'R'.charAt(0) }">
+                    		<span class="postType">식당추천</span>
+                    		<div class="post">
+	                        	<span class="nameAndRegDate">${posting.member.nickName } . ${postDate }</span>
+		                        <p class="postTitle"><a href="${pageContext.request.contextPath}/posting/recommend/${posting.id}">${posting.title }</a></p>
+	                    	</div>
+	                    	<form action="${pageContext.request.contextPath}/member/delPost/recommend" method="post">
+		                        <input type="hidden" value="${posting.id}" name="postId">
+		                        <input type="submit" value="삭제" class="postDelBtn">
+		                    </form>
+                    	</c:if>
+                    	
+                    	<c:if test="${posting.category eq 'E'.charAt(0) }">
+                    		<span class="postType">밥친구</span>
+                    		<div class="post">
+	                        	<span class="nameAndRegDate">${posting.member.nickName } . ${postDate }</span>
+		                        <p class="postTitle"><a href="${pageContext.request.contextPath}/posting/together/${posting.id}">${posting.title }</a></p>
+	                    	</div>
+	                    	<form action="${pageContext.request.contextPath}/member/delPost/together" method="post">
+		                        <input type="hidden" value="${posting.id}" name="postId">
+		                        <input type="submit" value="삭제" class="postDelBtn">
+		                    </form>
+                    	</c:if>
 	                </div>
                 </c:forEach>
             </div>
