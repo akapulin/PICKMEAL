@@ -33,4 +33,6 @@ public interface CouponService {
 	
 	int findCouponByMemberIdinToday(long memberId);
 	
+	void deleteCouponwithAllmemberByRegDate();
+	
 }

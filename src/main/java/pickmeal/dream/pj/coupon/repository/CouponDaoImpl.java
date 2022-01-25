@@ -144,7 +144,7 @@ public class CouponDaoImpl implements CouponDao{
 	@Override
 	public Integer findCouponBymemberIdinTodayMax(long memberId) {
 		String sql = "SELECT COUNT(TIMESTAMPDIFF(DAY, regDate, CURDATE()))  FROM  Coupon"
-				+ " WHERE TIMESTAMPDIFF(DAY, regDate, CURDATE())=0 GROUP BY memberId HAVING memberId = ?";
+				+ " WHERE DATEDIFF(regDate, CURDATE())=0 GROUP BY memberId HAVING memberId = ?";
 		
 		return jt.queryForObject(sql,Integer.class, memberId);
 	}
@@ -155,8 +155,15 @@ public class CouponDaoImpl implements CouponDao{
 	@Override
 	public int findCouponByMemberIdinToday(long memberId) {
 		String sql = "SELECT exists(select COUNT(regDate) FROM Coupon WHERE "
-				+ "TIMESTAMPDIFF(DAY, regDate, CURDATE())=0 GROUP BY memberId HAVING memberId = ?);";
+				+ "DATEDIFF(regDate, CURDATE())=0 GROUP BY memberId HAVING memberId = ?)";
 		return jt.queryForObject(sql, Integer.class,memberId);
+	}
+
+	@Override
+	public void deleteCouponwithAllmemberByRegDate() {
+		String sql = "DELETE FROM Coupon WHERE used=false AND DATEDIFF(regDate,CURDATE()) != 0";
+		jt.update(sql);
+		
 	}
 
 

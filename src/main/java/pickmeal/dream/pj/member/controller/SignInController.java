@@ -97,6 +97,8 @@ public class SignInController {
 		enterMember.setMannerTemperature(member.getMannerTemperature());
 		enterMember.setProfileImgPath(member.getProfileImgPath());
 		
+		/*회원 로그인시 모든 멤버에 해당하는 coupon 보고 지워주기*/
+		cs.deleteCouponwithAllmemberByRegDate();
 
 		// 업데이트 후 session 에 담아서 메인 화면으로 보낸다.
 		session.setAttribute("member", enterMember);
