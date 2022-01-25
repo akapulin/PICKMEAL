@@ -5,15 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import pickmeal.dream.pj.member.domain.Member;
 import pickmeal.dream.pj.member.service.MemberService;
 import pickmeal.dream.pj.posting.domain.Posting;
 import pickmeal.dream.pj.posting.repository.PostingDao;
 import pickmeal.dream.pj.posting.util.Criteria;
-import pickmeal.dream.pj.restaurant.domain.Restaurant;
 import pickmeal.dream.pj.restaurant.repository.RestaurantDao;
 
 /**
@@ -192,7 +189,7 @@ public class PostingServiceImpl implements PostingService {
 	 */
 	private List<Posting> setCommentCntForPostings(List<Posting> postings) {
 		
-		if(postings.get(0).getCategory()!='N') {
+		if(postings.size()!=0 && postings.get(0).getCategory()!='N') {
 			for(Posting post : postings) {
 				setCommentCntForPosting(post);
 			}
@@ -204,7 +201,7 @@ public class PostingServiceImpl implements PostingService {
 	 */
 	private Posting setCommentCntForPosting(Posting post) {
 		
-		if(post.getCategory()!='N') {
+		if(post!=null&&post.getCategory()!='N') {
 			//댓글 갯수
 			post.setCommentsNumber(cs.countCommentByPostId(post.getId(),post.getCategory()));
 			//레스토랑정보(없어짐)

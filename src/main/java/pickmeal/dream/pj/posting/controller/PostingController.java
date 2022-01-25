@@ -310,8 +310,8 @@ public class PostingController {
 		
 		
 		log.info("hi posting complete"+pc.toString());
-		//long memberId = ((Member)session.getAttribute("member")).getId();
-		long memberId = 4;
+		long memberId = ((Member)session.getAttribute("member")).getId();
+		//long memberId = 4;
 	
 		
 		if(pc.getCategory()=='N') {
@@ -368,7 +368,7 @@ public class PostingController {
 		post.setLikes(0);
 		post.setViews(1);
 		post.setMealTime(setMealTimeToDate(pc.getDate(),pc.getTime()));
-		post.setRecruitment(false);
+		post.setRecruitment(true);
 		post.setMealChk(false);
 		return post;
 	

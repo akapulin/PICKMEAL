@@ -3,6 +3,13 @@
     프로필 & 알림 영역
 
 */
+$(document).ready(function(){
+	
+	
+	
+})
+
+
 /*
     헤더 공통
 */
@@ -159,11 +166,22 @@ $('#gnb ul li a').hover(function(){
 /*
     게시판 메뉴 리스트 onclick
 */
-$('#gnb ul li a').on('click',function(){
-  console.log('hi')
-  $('#gnb ul li').removeClass('header_BoardOnclick');
-  $('#gnb ul li').css({color:'#000'});
+$('#gnb ul li a').on('click',function(e){
+  
+  
+  $('#gnb ul li a').removeClass('header_BoardOnclick');
+  $('#gnb ul li a').css({color:'#000'});
   $(this).addClass('header_BoardOnclick');
+
+  //비회원이면 클릭막기
+  if($('#headerMember').val()==null || $('#headerMember').val() ==''){
+	e.preventDefault();
+	alert('로그인 후 이용하실 수 있습니다');
+	$(this).removeClass('header_BoardOnclick')
+	$(this).css({color:'#f23f3f',cursor:'pointer'});
+	}
+
+
 
 })
 

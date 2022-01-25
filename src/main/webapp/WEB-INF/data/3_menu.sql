@@ -14,7 +14,7 @@ CREATE TABLE Menu (
 
 DROP TABLE Menu;
 
-DELETE TABLE Menu;
+DELETE FROM Menu;
 
 SELECT * FROM Menu;
 

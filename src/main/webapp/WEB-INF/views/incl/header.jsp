@@ -6,10 +6,20 @@
 	<nav id="gnb">
 		<h2 class="hidden">게시판메뉴</h2>
 		<ul>
+		 <li><a href="${pageContext.request.contextPath}/posting/notice">공지사항</a></li>
+         <li><a href="${pageContext.request.contextPath}/posting/recommend">식당추천</a></li>
+         <li><a href="${pageContext.request.contextPath}/posting/together">밥친구</a></li>
+		<!--  
+		<c:if test="${not empty member.id }">
          <li><a href="${pageContext.request.contextPath}/posting/notice">공지사항</a></li>
          <li><a href="${pageContext.request.contextPath}/posting/recommend">식당추천</a></li>
-         <!--  -->
          <li><a href="${pageContext.request.contextPath}/posting/together">밥친구</a></li>
+        </c:if>
+        <c:if test="${empty member.id }">
+         <li><a href="#">공지사항</a></li>
+         <li><a href="#">식당추천</a></li>
+         <li><a href="#">밥친구</a></li>
+        </c:if>-->
       </ul>
 	</nav>
 	<nav id="snb">

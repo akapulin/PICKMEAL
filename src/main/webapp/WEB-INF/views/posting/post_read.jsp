@@ -147,13 +147,13 @@
                             <p class="rPostCommentCountText">댓글<span>${post.commentsNumber }</span></p>
                         </li>
                     </ul>
-                     <ul class="rPostAdditioanInfoRightSide">
+                     
+                    <c:if test="${member.id eq post.member.id }"> 
+	                   <ul class="rPostAdditioanInfoRightSide">
 	                        <li id="rPostModifyBtn">수정</li>
 	                        <li id="rPostRemoveBtn">삭제</li>
 	                    </ul>
-                    <!-- <c:if test="${member.id eq post.member.id }"> -->
-	                   
-					<!-- </c:if> -->
+					</c:if> 
 
                 </div>
                 <div id="rPostCommentWrap">
