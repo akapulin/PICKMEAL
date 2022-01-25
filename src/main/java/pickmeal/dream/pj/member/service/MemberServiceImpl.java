@@ -35,7 +35,11 @@ public class MemberServiceImpl implements MemberService {
    @Transactional
    public Member addMember(Member member) {
       // 추가 전 사용자 타입 세팅
-      member.setMemberType('M');
+	  if (member.getEmail().equals("admin@pickmeal.com")) { // 관리자일 경우
+	      member.setMemberType('A');
+	  } else { // 일반 회원
+	      member.setMemberType('M');
+	  }
       // 회원가입 식력 포인트 적립
       member.saveFoodPowerPoint(SIGN_UP);
       // 식력 포인트에 따른 프로필 이미지 경로 잡기
