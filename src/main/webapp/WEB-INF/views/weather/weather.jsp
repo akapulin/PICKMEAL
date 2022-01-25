@@ -15,17 +15,20 @@
 	            		<img src="${pageContext.request.contextPath}/resources/img/weather/icons8_sun.gif"/>
         			</c:if>
         			<c:if test="${now gt 18 || now lt 6 }">
-	            		<img src="${pageContext.request.contextPath}/resources/img/weather/icons8_moon_and_stars_64.png"/>
+        				<img src="https://img.icons8.com/dusk/256/000000/bright-moon.png"/>
+	            		<%-- <img src="${pageContext.request.contextPath}/resources/img/weather/icons8_moon_and_stars_64.png"/> --%>
         			</c:if>
         		</c:when>
         		<c:when test="${weather.sky eq 2 }">
-        			<img src="${pageContext.request.contextPath}/resources/img/weather/icons8_cloud_64.png"/>
+        			<img src="https://img.icons8.com/dusk/256/000000/cloud.png"/>
+        			<%-- <img src="${pageContext.request.contextPath}/resources/img/weather/icons8_cloud_64.png"/> --%>
         		</c:when>
         		<c:when test="${weather.sky eq 3 }">
         			<img src="${pageContext.request.contextPath}/resources/img/weather/icons8_rain.gif"/>
         		</c:when>
         		<c:when test="${weather.sky eq 4 }">
-        			<img src="${pageContext.request.contextPath}/resources/img/weather/icons8_snow_64.png"/>
+        			<img src="https://img.icons8.com/dusk/256/000000/snow-storm.png"/>
+        			<%-- <img src="${pageContext.request.contextPath}/resources/img/weather/icons8_snow_64.png"/> --%>
         		</c:when>
         	</c:choose>
             <div class="temperatureWrap"><span class="temperature">${weather.temperature }</span><span class="symbol">&#8451;</span></div>

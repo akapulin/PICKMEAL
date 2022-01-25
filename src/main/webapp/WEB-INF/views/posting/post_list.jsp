@@ -109,13 +109,13 @@
               </c:if>
               <!-- 제목 & 댓글 수-->
               <c:if test="${fn:contains(postType,'N') }">
-              	  <a href="${pageContext.request.contextPath}/posting/notice/${post.id}" class="postListContentTitle">${post.title } (${post.commentsNumber})</a>
+              	  <a href="${pageContext.request.contextPath}/posting/notice/${post.id}?cpageNum=1" class="postListContentTitle">${post.title } (${post.commentsNumber})</a>
               </c:if>
               <c:if test="${fn:contains(postType,'R') }">
-              	  <a href="${pageContext.request.contextPath}/posting/recommend/${post.id}" class="postListContentTitle">${post.title } (${post.commentsNumber})</a>
+              	  <a href="${pageContext.request.contextPath}/posting/recommend/${post.id}?cpageNum=1" class="postListContentTitle">${post.title } (${post.commentsNumber})</a>
               </c:if>
               <c:if test="${fn:contains(postType,'E') }">
-              	  <a href="${pageContext.request.contextPath}/posting/together/${post.id}" class="postListContentTitle">${post.title } (${post.commentsNumber})</a>
+              	  <a href="${pageContext.request.contextPath}/posting/together/${post.id}?cpageNum=1" class="postListContentTitle">${post.title } (${post.commentsNumber})</a>
               </c:if>
               
             </td>

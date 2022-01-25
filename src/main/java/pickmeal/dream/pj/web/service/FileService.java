@@ -8,4 +8,6 @@ public interface FileService {
 
 	
 	public List<String> saveImgToExternal(String boardName, List<MultipartFile>files, long memberId) throws Exception;
+
+	public boolean removeImgFromExternal(List<String> imgSrc);
 }

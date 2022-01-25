@@ -91,9 +91,9 @@ public class MenuServiceImpl implements MenuService{
 	public Menu findMenuByWeather(PickMealWeather wc) {
 		int temperature;
 		if(wc.getTemperature() >= 25) {
-			temperature = 1;
-		}else if (wc.getTemperature() <= 10) {
 			temperature = 2;
+		}else if (wc.getTemperature() <= 10) {
+			temperature = 1;
 		}else {
 			temperature = 0;
 		}

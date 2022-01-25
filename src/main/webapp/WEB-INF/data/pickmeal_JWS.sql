@@ -175,8 +175,16 @@ CREATE TABLE VisitedRestaurant(
 	FOREIGN KEY (memberId) REFERENCES Member (id),								#아래 쭉 포링키
 	FOREIGN KEY (restaurantId) REFERENCES Restaurant (id)
 )
+<<<<<<< HEAD
 INSERT INTO VisitedRestaurant(memberId, restaurantId, Review) VALUES(4,7,false);
 INSERT INTO VisitedRestaurant(memberId, restaurantId, Review) VALUES(4,52,false);
+=======
+
+select * from VisitedRestaurant;
+
+INSERT INTO VisitedRestaurant(memberId, restaurantId, Review) VALUES(6,7,false);
+INSERT INTO VisitedRestaurant(memberId, restaurantId, Review) VALUES(6,52,false);
+>>>>>>> branch 'developer' of https://github.com/akapulin/PICKMEAL.git
 SELECT EXISTS (SELECT id FROM VisitedRestaurant WHERE id = 2);
 UPDATE VisitedRestaurant SET Review = true WHERE id = 1;
 DELETE FROM VisitedRestaurant WHERE id = 10;

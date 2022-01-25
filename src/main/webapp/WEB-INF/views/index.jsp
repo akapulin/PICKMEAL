@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
@@ -48,11 +47,12 @@
 		<!-- 정원식 메뉴게임 -->
 		<div id="menuGameButtonWrap">
 			<form name="menuGamePopup" method="GET">
-				<input class= "menuSubmit" type="submit" value="메뉴골라주기" id="menuchoicebtn">
+				<label for="menuchoicebtn"></label>
+				<input class= "menuSubmit" type="submit" value="메뉴만 고르려면 눌러줘!" id="menuchoicebtn">
 			</form>
 		</div>
 		
-		<div>
+		<div id="radiusButtonWrap">
 			<form id="gameDataForm" name="gameDataForm" method="GET">
 				<div id="mapRadius">
 					<label class="radiusLabel"><input type="radio" class="radius" name="radius" value="300"/>300m</label>
@@ -67,7 +67,7 @@
 					
 				</div>
 				<div id="submitWrapForGame">
-					<input type="submit" class="gamePlayBtn" value="게임하기">
+					<input type="submit" class="gamePlayBtn" value="게임시작">
 				</div>
 			</form>
 		</div>
@@ -199,6 +199,7 @@
 
 <!-- 익명채팅방 - 김재익 -->
 <script type="text/javascript">
+console.log("${member.foodPowerPoint}")
 $('#write_msg').on("keyup", function(key) {
 	if(key.keyCode==13) {
 		sendMessage();
@@ -324,17 +325,17 @@ $('#button_send').on('mouseenter', function() {
 });
 $('#button_send').on('mouseleave', function() {
 	$('#button_send').css({
-	    backgroundColor: '#ffecec'
+	    backgroundColor: '#F67E7E'
 	})
 });
 $('#button_send').on('mousedown', function() {
 	$('#button_send').css({
-	    backgroundColor: '#eedddd'
+	    backgroundColor: '#f7e5e5'
 	})
 });
 $('#button_send').on('mouseup', function() {
 	$('#button_send').css({
-	    backgroundColor: '#f7e5e5'
+	    backgroundColor: '#F67E7E'
 	})
 });
 

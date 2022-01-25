@@ -48,3 +48,22 @@ CREATE TABLE Review (
 	interior		INT			NOT NULL,
 	FOREIGN KEY (restaurantId) REFERENCES Restaurant (id)
 );
+
+DROP TABLE Review;
+DROP TABLE RestaurantPreference;
+DROP TABLE VisitedRestaurant;
+DROP TABLE FavoriteRestaurant;
+DROP TABLE Restaurant;
+
+DELETE FROM Review;
+DELETE FROM RestaurantPreference;
+DELETE FROM VisitedRestaurant;
+DELETE FROM FavoriteRestaurant;
+DELETE FROM Restaurant;
+
+
+SELECT * FROM Review;
+SELECT * FROM RestaurantPreference;
+SELECT * FROM VisitedRestaurant;
+SELECT * FROM FavoriteRestaurant;
+SELECT * FROM Restaurant;

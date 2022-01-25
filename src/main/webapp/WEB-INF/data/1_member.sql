@@ -65,3 +65,25 @@ CREATE TABLE Chat(
 	CONSTRAINT	Chat_commenterId_FK	FOREIGN KEY(commenterId)	REFERENCES Member(id) ON DELETE CASCADE,
 	CONSTRAINT	Chat_memberId_FK	FOREIGN KEY(memberId)	REFERENCES Member(id) ON DELETE CASCADE
 );
+
+DROP TABLE Coupon;
+DROP TABLE CouponCategory;
+DROP TABLE Attendance;
+DROP TABLE MannerTemperature;
+DROP TABLE FoodPowerPoint;
+DROP TABLE Member;
+
+DELETE FROM Coupon;
+DELETE FROM CouponCategory;
+DELETE FROM Attendance;
+DELETE FROM MannerTemperature;
+DELETE FROM FoodPowerPoint;
+DELETE FROM Member;
+
+SELECT * FROM Coupon;
+SELECT * FROM CouponCategory;
+SELECT * FROM Attendance;
+SELECT * FROM MannerTemperature;
+SELECT * FROM FoodPowerPoint;
+SELECT * FROM Member;
+

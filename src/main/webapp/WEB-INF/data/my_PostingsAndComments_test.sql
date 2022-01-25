@@ -8,7 +8,6 @@ CREATE TABLE RecommendRestaurantPosting (									# 식당 추천 게시판
 	views			INT				NOT NULL	DEFAULT 0,					# 조회 수
 	regDate			TIMESTAMP		NOT NULL	DEFAULT CURRENT_TIMESTAMP,	# 글 등록 날짜
 	CONSTRAINT		RecommendRestaurantPosting_memberId_FK	FOREIGN KEY(memberId)	REFERENCES Member(id) ON DELETE CASCADE
-	
 );
 
 CREATE TABLE RecommendRestaurantComment (									# 식당 추천 댓글
@@ -20,7 +19,6 @@ CREATE TABLE RecommendRestaurantComment (									# 식당 추천 댓글
 	CONSTRAINT	RecommendRestaurantComment_memberId_FK	FOREIGN KEY(memberId)	REFERENCES Member(id) ON DELETE CASCADE,
 	CONSTRAINT	RecommendRestaurantComment_postId_FK	FOREIGN KEY(postId)	REFERENCES RecommendRestaurantPosting(id) ON DELETE CASCADE
 );
-DROP TABLE RecommendRestaurantComment;
 
 CREATE TABLE TogetherEatingPosting (										# 밥친구 게시판
 	id				BIGINT			PRIMARY KEY	AUTO_INCREMENT,				# SQL 아이디
@@ -67,34 +65,34 @@ VALUES(1,1,"돈까스 튀기는 오빠 세트 같이 드실 분!","오늘 돈까
 , "20220115120000");
 
 INSERT INTO RecommendRestaurantComment(memberId,postId,content)
-VALUES(3,2,"도리집이 가성비 짱");
+VALUES(1,1,"도리집이 가성비 짱");
 
 INSERT INTO TogetherEatingComment(memberId,postId,content)
-VALUES(3,1,"돈튀오 맛이가 좋다");
+VALUES(1,1,"돈튀오 맛이가 좋다");
 
 INSERT INTO TogetherEatingComment(memberId,postId,content)
-VALUES(3,1,"돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다");
+VALUES(1,1,"돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다 돈튀오 맛이가 좋다");
 
 INSERT INTO RecommendRestaurantPosting(memberId, restaurantId, title, content, likes, views)
-VALUES (3,1,"제목2","본문2",10,20),
-(3,1,"제목2","본문2",10,20),
-(3,1,"제목2","본문2",10,20),
-(3,1,"제목2","본문2",10,20),
-(3,1,"제목2","본문2",10,20),
-(3,1,"제목2","본문2",10,20),
-(3,1,"제목2","본문2",10,20),
-(3,1,"제목2","본문2",10,20),
-(3,1,"제목2","본문2",10,20),
-(3,1,"제목2","본문2",10,20);
+VALUES (1,1,"제목2","본문2",10,20),
+(1,1,"제목2","본문2",10,20),
+(1,1,"제목2","본문2",10,20),
+(1,1,"제목2","본문2",10,20),
+(1,1,"제목2","본문2",10,20),
+(1,1,"제목2","본문2",10,20),
+(1,1,"제목2","본문2",10,20),
+(1,1,"제목2","본문2",10,20),
+(1,1,"제목2","본문2",10,20),
+(1,1,"제목2","본문2",10,20);
 
 INSERT INTO TogetherEatingPosting(memberId, restaurantId, title, content, likes, views, mealTime, recruitment, mealChk )
-VALUES (3,1,"제목3","본문3",11,22,'2022-01-21 00:02:11',false,false),
-(3,1,"제목5","본문3",11,22,'2022-01-30 12:02:11',false,true),
-(3,1,"제목5","본문3",11,22,'2022-01-25 18:55:11',true,false),
-(3,1,"제목3","본문3",11,22,'2022-01-21 00:02:11',true,false),
-(3,1,"제목3","본문3",11,22,'2022-01-21 00:02:11',true,false),
-(3,1,"제목3","본문3",11,22,'2022-01-21 00:02:11',false,true),
-(3,1,"제목3","본문3",11,22,'2022-01-21 00:02:11',false,true),
-(3,1,"제목3","본문3",11,22,'2022-01-21 00:02:11',false,false),
-(3,1,"제목3","본문3",11,22,'2022-01-21 00:02:11',false,false),
-(3,1,"제목3","본문3",11,22,'2022-01-21 13:02:11',false,false);
+VALUES (1,1,"제목1","본문1",11,22,'2022-01-21 00:02:11',false,false),
+(1,1,"제목5","본문1",11,22,'2022-01-10 12:02:11',false,true),
+(1,1,"제목5","본문1",11,22,'2022-01-25 18:55:11',true,false),
+(1,1,"제목1","본문1",11,22,'2022-01-21 00:02:11',true,false),
+(1,1,"제목1","본문1",11,22,'2022-01-21 00:02:11',true,false),
+(1,1,"제목1","본문1",11,22,'2022-01-21 00:02:11',false,true),
+(1,1,"제목1","본문1",11,22,'2022-01-21 00:02:11',false,true),
+(1,1,"제목1","본문1",11,22,'2022-01-21 00:02:11',false,false),
+(1,1,"제목1","본문1",11,22,'2022-01-21 00:02:11',false,false),
+(1,1,"제목1","본문1",11,22,'2022-01-21 11:02:11',false,false);

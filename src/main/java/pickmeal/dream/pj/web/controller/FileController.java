@@ -1,13 +1,18 @@
 package pickmeal.dream.pj.web.controller;
 
-import java.io.File;import java.util.List;
+import java.io.File;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -69,5 +74,35 @@ public class FileController {
 		return ResponseEntity.ok(imgSrc);
 		
 	}
+	
+	/**
+	 * 이미지 src 삭제
+	 * 		- 비동기 정보 요청/응답시 List를 인자로 받아올 때는, value="변수명[]"으로 해야한다!
+	 * 		- 이미지 경로에 설정되어 있는 contextPath를 제외시켜준다
+	 * @param imgSrc
+	 * @return
+	 */
+	@PostMapping("/removeImg")
+	@ResponseBody
+	public boolean removeImg(@RequestParam(value="imgSrc[]") List<String> imgSrc, HttpServletRequest request) {		
+		String contextPath = request.getContextPath();
+		//context path 빼주기
+		for(int i=0;i<imgSrc.size();i++) {
+			String temp[] = imgSrc.get(i).split(contextPath);
+			imgSrc.set(i,temp[1]);
+		}
+		
+		return fs.removeImgFromExternal(imgSrc);
+
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

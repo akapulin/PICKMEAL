@@ -11,6 +11,13 @@ CREATE TABLE Menu (
 	spicy			INT															#메뉴의 맵기/안맵기
 );
 
+
+DROP TABLE Menu;
+
+DELETE TABLE Menu;
+
+SELECT * FROM Menu;
+
 #한식
 
 INSERT INTO Menu(menuName,weather,temperature,imgPath,soupy,hot_ice,carbohydrate,mainFood,spicy)  
@@ -64,4 +71,4 @@ INSERT INTO Menu(menuName,weather,temperature,imgPath,soupy,hot_ice,carbohydrate
 ("맥앤치즈",1,0,"/pickmeal/resources/img/menu/맥앤치즈.jpg",1,0,1,0,1),
 ("바베큐",1,0,"/pickmeal/resources/img/menu/바베큐.jpg",1,0,1,0,1),
 ("잠발라야",1,0,"/pickmeal/resources/img/menu/잠발라야.jpg",1,0,0,0,1),
-("브리또",1,0,"/pickmeal/resources/img/menu/브리또.jpg",1,1,1,0,1)
+("브리또",1,0,"/pickmeal/resources/img/menu/브리또.jpg",1,1,1,0,1);

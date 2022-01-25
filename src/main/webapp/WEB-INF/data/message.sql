@@ -2,7 +2,7 @@ CREATE TABLE Message(
 	id				BIGINT			PRIMARY KEY AUTO_INCREMENT,
 	messageType		CHAR(1)			NOT NULL,
 	content			VARCHAR(200)	
-)
+);
 
 SELECT * FROM Message;
 DROP TABLE Message;

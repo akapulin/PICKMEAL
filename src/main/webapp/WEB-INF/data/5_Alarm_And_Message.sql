@@ -21,3 +21,16 @@ CREATE TABLE LastGameRecord (
 	memberID		BIGINT			UNIQUE KEY,
 	regDate			TIMESTAMP		DEFAULT CURRENT_TIMESTAMP	
 );
+
+
+DROP TABLE AlarmRecord;
+DROP TABLE Message;
+DROP TABLE LastGameRecord;
+
+DELETE FROM AlarmRecord;
+DELETE FROM Message;
+DELETE FROM LastGameRecord;
+
+SELECT * FROM AlarmRecord;
+SELECT * FROM Message;
+SELECT * FROM LastGameRecord;
