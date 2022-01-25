@@ -33,12 +33,12 @@
 		                            <label id="mainInlabel${vrlist.getId()}" for="mainlabel${vrlist.getId()}" class="mainInlabel"></label>
 		                        </div>
 		                        <div class="buttonWrap">
-			                        <div class="favoritebuttonWrap" id="jjimdiv${vrlist.getId()}" data-restaurantid="${vrlist.getRestaurant().getId()}">
+			                        <div class="favoritebuttonWrap favoritebutton${vrlist.getRestaurant().getId()}" id="jjimdiv${vrlist.getId()}" >
 				                        <c:choose>
 				                        	<c:when test="${flist.get(status.index) eq 'false'}">
 					                        	<input type="hidden" value="${flist.get(status.index)}">
 					                        	<div class="heart"></div>
-					                            <input type="radio" id="favoritelabel${vrlist.getId()}" class="vrfavoriteradio" name="vrfavoriteradio" value="${vrlist.getId()}" onclick="jjimrestaurant(this)">
+					                            <input type="radio" id="favoritelabel${vrlist.getId()}" class="vrfavoriteradio" name="vrfavoriteradio" value="${vrlist.getId()}" data-restaurantid="${vrlist.getRestaurant().getId()}" onclick="jjimrestaurant(this)">
 					                            <label id="favoriteInlabel${vrlist.getId()}" for="favoritelabel${vrlist.getId()}" class="favoriteInlabel"></label>
 				                        	</c:when>
 				                        </c:choose>

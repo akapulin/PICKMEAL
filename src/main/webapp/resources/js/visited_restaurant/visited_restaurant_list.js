@@ -33,7 +33,11 @@ function jjimrestaurant(){
 		contentType:'application/json; charset=utf-8',
 		
 		success: function(data){
-			$("#jjimdiv"+radiojjim).children().remove();
+			//$("#jjimdiv"+radiojjim).children().remove();
+			var restaurantid = $("#favoritelabel"+radiojjim).data("restaurantid");
+			//console.log($(".favoritebutton"+restaurantid));
+			$(".favoritebutton"+restaurantid).children().remove();
+			
 		}
 		
 	});
