@@ -12,8 +12,9 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/member/my_page_SJW.jsp"/>
-<section id="content">
+	<jsp:include page="/WEB-INF/views/incl/header.jsp"/>
+	<jsp:include page="/WEB-INF/views/member/my_page.jsp"/>
+	<section id="content">
 	<!-- <h2>내 정보</h2> -->
 	<section id="informationWrap">
 		<div class="eachInfoWrap">

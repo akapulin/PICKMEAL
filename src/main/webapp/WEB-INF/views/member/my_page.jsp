@@ -13,7 +13,7 @@
     </div>
 	<nav id="mp_nav">
 	    <ul>
-	        <li id="myInfo"><a href="#">내 정보</a></li>
+	        <li id="myInfo"><a href="${pageContext.request.contextPath}/member/myInformation">내 정보</a></li>
 	        <li id="myPostings"><a href="${pageContext.request.contextPath}/member/myPostings">내 게시글</a></li>
 	        <li id="myComments"><a href="${pageContext.request.contextPath}/member/myComments">내 댓글</a></li>
 	        <li id="myFavorite"><a href="${pageContext.request.contextPath}/member/findAllFavoriteRestaurant">찜 식당</a></li>
