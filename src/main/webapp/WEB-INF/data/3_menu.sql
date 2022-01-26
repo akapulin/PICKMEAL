@@ -95,3 +95,50 @@ INSERT INTO Menu(menuName,weather,temperature,imgPath,soupy,hot_ice,carbohydrate
 ("마파두부",3,0,"/pickmeal/resources/img/menu/마파두부.jpg",1,0,0,0,0),
 ("울면",1,0,"/pickmeal/resources/img/menu/울면.jpg",0,0,3,1,1),
 ("잡채밥",4,0,"/pickmeal/resources/img/menu/잡채밥.jpg",1,0,0,2,1)
+
+
+#일식
+INSERT INTO Menu(menuName,weather,temperature,imgPath,soupy,hot_ice,carbohydrate,mainFood,spicy)  
+ VALUES ("가츠동",1,0,"/pickmeal/resources/img/menu/가츠동.jpg",1,0,0,0,1),
+("곱창전골",3,1,"/pickmeal/resources/img/menu/곱창전골.jpg",0,0,0,0,0),
+("규동",1,0,"/pickmeal/resources/img/menu/규동.jpg",1,0,0,0,1),
+("돈까스",1,0,"/pickmeal/resources/img/menu/돈까스.jpg",1,0,0,0,0),
+("라멘",3,0,"/pickmeal/resources/img/menu/라멘.jpg",0,0,2,0,0),
+("메밀국수",2,2,"/pickmeal/resources/img/menu/메밀국수.jpg",0,1,2,2,1),
+("메밀소바",2,2,"/pickmeal/resources/img/menu/메밀소바.jpg",1,1,2,2,1),
+("밀푀유나베",4,1,"/pickmeal/resources/img/menu/밀푀유나베.jpg",0,0,0,2,1),
+("사시미",1,1,"/pickmeal/resources/img/menu/사시미.jpg",1,1,0,1,1),
+("생선구이",2,0,"/pickmeal/resources/img/menu/생선구이2.jpg",1,0,0,1,1),
+("샤브샤브",1,2,"/pickmeal/resources/img/menu/샤브샤브.jpg",0,0,0,2,1),
+("샤브샤브",1,2,"/pickmeal/resources/img/menu/샤브샤브.jpg",0,0,0,2,0),
+("샤브샤브",1,2,"/pickmeal/resources/img/menu/샤브샤브.jpg",0,0,2,2,1),
+("알밥",1,0,"/pickmeal/resources/img/menu/알밥.jpg",1,0,0,1,1),
+("오므라이스",1,0,"/pickmeal/resources/img/menu/오므라이스.jpg",1,0,0,2,1),
+("우동",4,1,"/pickmeal/resources/img/menu/우동.jpg",0,0,2,2,1),
+("일식카레",1,0,"/pickmeal/resources/img/menu/일식카레.jpg",1,0,0,0,0),
+("장어덮밥",3,2,"/pickmeal/resources/img/menu/장어덮밥.jpg",1,0,0,1,1),
+("초밥",2,0,"/pickmeal/resources/img/menu/초밥.jpg",1,1,0,1,1),
+("츠케멘",1,0,"/pickmeal/resources/img/menu/츠케멘.jpg",1,1,2,0,1),
+("연어덮밥",1,0,"/pickmeal/resources/img/menu/연어덮밥.jpg",1,1,0,1,1)
+
+INSERT INTO Menu(menuName,weather,temperature,imgPath,soupy,hot_ice,carbohydrate,mainFood,spicy)  
+ VALUES ("갈비탕",4,0,"/pickmeal/resources/img/menu/갈비탕.jpg",0,0,0,0,1),
+("김밥",1,0,"/pickmeal/resources/img/menu/김밥.jpg",1,1,0,2,1),
+("떡볶이",1,0,"/pickmeal/resources/img/menu/떡볶이.jpg",0,0,3,0,0),
+("뚝배기불고기",3,1,"/pickmeal/resources/img/menu/뚝배기불고기.jpg",0,0,0,0,1),
+("라면",1,0,"/pickmeal/resources/img/menu/라면.jpg",0,0,2,2,0),
+("물회",1,1,"/pickmeal/resources/img/menu/물회.jpg",1,1,0,1,1),
+("쌀국수",2,0,"/pickmeal/resources/img/menu/쌀국수.jpg",0,0,2,2,1),
+("월남쌈",1,0,"/pickmeal/resources/img/menu/월남쌈.jpg",1,1,0,2,1),
+("유부초밥",1,0,"/pickmeal/resources/img/menu/유부초밥.jpg",1,1,0,0,1),
+("족발",1,0,"/pickmeal/resources/img/menu/족발.jpg",1,0,0,0,1),
+("쫄면",1,0,"/pickmeal/resources/img/menu/쫄면.jpg",1,1,2,2,0),
+("커리",1,0,"/pickmeal/resources/img/menu/커리.jpg",1,0,0,2,0),
+("탄두리치킨",1,0,"/pickmeal/resources/img/menu/탄두리치킨.jpg",1,0,0,0,0),
+("팟타이",1,0,"/pickmeal/resources/img/menu/팟타이.jpg",1,0,2,2,1),
+("나시고랭",1,0,"/pickmeal/resources/img/menu/나시고랭.jpg",1,0,0,0,1),
+("똠양꿍",2,1,"/pickmeal/resources/img/menu/똠양꿍.jpg",0,0,0,2,0),
+("미고랭",1,0,"/pickmeal/resources/img/menu/미고랭.jpg",1,0,2,0,1),
+("반미",1,0,"/pickmeal/resources/img/menu/반미.jpg",0,0,1,0,1),
+("분짜",1,0,"/pickmeal/resources/img/menu/분짜.jpg",1,0,0,0,1),
+("짜조",2,0,"/pickmeal/resources/img/menu/짜조.jpg",1,0,3,2,1)
