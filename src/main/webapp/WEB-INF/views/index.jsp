@@ -136,6 +136,9 @@
 		<input type="hidden" name="restaurantId" value="" id="restaurantId">
 		
 		<div class="storeSubInfoWrap">
+			<div class="storeSubInfoBeforeWrap">
+				<div class="tenor-gif-embed" data-postid="23314276" data-share-method="host" data-aspect-ratio="0.99375" data-width="90%"><a href="https://tenor.com/view/axolittles-slot-machine-jackpot-nft-gif-23314276">Axolittles Slot Machine GIF</a>from <a href="https://tenor.com/search/axolittles-gifs">Axolittles GIFs</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+			</div>
 			<div class="ageAndGenderGraphArea">
 				<h3>연령별 / 성별 방문수</h3>
 				<div class="storeSubInfo_ageWrap storeSubInfoCom">
