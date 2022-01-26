@@ -468,6 +468,7 @@ $('.gameBtn').on('click', function(e){
 							$('.ladderLi').children("button").attr('disabled', true);
 							//$(this).addClass("ladderpick");
 							$(".ladderLi").eq(ladderIndex).children('button').addClass("ladderpick");
+							$('.ladderpick').css('background', 'red');
 							
 							
 						}, 4000) // 애니메이션 끝나고 1초 후에 바뀜 
@@ -605,9 +606,9 @@ function makeLadder(data, sizeOfWidth, sizeOfHeight){
 			
 			console.log(ladder[ladder.length-1][i]);
 			if(ladder[ladder.length-1][i] == "O"){
-				let ansBtn = $('#gameWrap .oxUl').append('<li class="oxLi">O</li>');	
+				let ansBtn = $('#gameWrap .oxUl').append('<li class="oxLi"><img width="90" height="90" src="/pickmeal/resources/img/game/O.png"></li>');	
 			}else{ // XO
-				let ansBtn = $('#gameWrap .oxUl').append('<li class="oxLi">X</li>');	
+				let ansBtn = $('#gameWrap .oxUl').append('<li class="oxLi"><img width="90" height="90" src="/pickmeal/resources/img/game/X2.png"></li>');	
 			}
 			
 			

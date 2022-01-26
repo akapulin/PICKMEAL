@@ -15,7 +15,7 @@ VALUES
 
 INSERT INTO Message(messageType, content)
 VALUES
-('O',"인사박습니다 형님 or 누"),
+('O',"인사박습니다 형님 or 누님"),
 ('O',"재방문 감사합니다 형님 or 누님"),
 ('F',"오늘은 당신에게 날씨의 행운이 깃들까?"),
 ('F',"길가다가 넘어 질 듯"),

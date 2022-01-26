@@ -105,8 +105,10 @@ li {list-style: none;}
 	width: 130px; height: 60px;
 	padding: 2px 2px;
 	/* background-color: transparent; */
-	border:0;
-	font-size: 1.3em;
+	background: darkolivegreen;
+	border: 5px solid #fff;
+	color: #fff;
+	font-size: 0.9em;
 	margin: 0 auto;
 	text-align: center;
 }
@@ -136,10 +138,9 @@ li {list-style: none;}
 }
 .ladderpick { 
 	box-sizing: border-box;
-	color: black;
-	border-radius: 5px;
+	color: #fff;
 	font-weight: 900;
-	font-size: 1.3rem;
+	font-size: 0.9rem;
 }
 
 .oxUl{ display: flex; width: 1050px; position:absolute; top: 610px;}
