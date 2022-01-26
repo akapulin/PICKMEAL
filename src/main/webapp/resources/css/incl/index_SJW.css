@@ -72,15 +72,19 @@
 	background-color: #F67E7E;
 }
 /* 메뉴 골라주기 버튼 */
+
 #menuGameButtonWrap {
 	position: absolute;
     top: 70px;
     left: 5%;
     height: 40px; width: 220px;
+    z-index:100;
 }
+
 #menuGameButtonWrap form {
 	display: flex; flex-flow: row nowrap; justify-content: space-around;
 	align-items: center;
+	width: 220px;
 }
 #menuGameButtonWrap label {
 	display: block; width: 34px; height: 40px; cursor: pointer;
