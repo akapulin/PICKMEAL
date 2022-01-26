@@ -79,9 +79,13 @@
 			<div id="map"></div>
 		</div>
 	</section>
+	
 	<section id="restaurantWrap">
 		<h3 class="hidden">식당 정보 표시</h3>
+		<img width="30" height="30" src="${pageContext.request.contextPath}/resources/img/map/presentPosition.png">
+		<div id="presentAddress"></div>
 		<div id="restaurantInfo">
+		
 			<!-- 날씨정보 - 김재익 -->
 			
 			
