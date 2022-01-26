@@ -24,7 +24,7 @@
 <body>
 <jsp:include page="/WEB-INF/views/incl/header.jsp"/>
 <section id="totalPostContainer">
-<input type="hidden" value="${modifyState }" id="modifyState">		
+		
         <h2 class="hidden">글쓰기</h2>
         <div id="rwPostContainer">
             <div id="rwPostTitleContainer">
@@ -43,6 +43,8 @@
                 </div>
             </div>
            <form action="${pageContext.request.contextPath}/posting/completeWritingPost" method="post" id="wPostForm">
+            <input type="hidden" value="${modifyState }" name = "modifyState" id="modifyState">
+            <input type="hidden" value="${postId }" name = "postId" id="postId">
             <input type="hidden" id="postType" value="${postType }" name="category"/>
             <div id="wPostContentContainer">
                 <div class="wPostSubTitleWrap wPostLineCommon">

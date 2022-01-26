@@ -74,12 +74,22 @@ function writeComment() {
 					} else {
 						moreHtml = "";
 					}
-																					//  && postMemberId != data.member.id
+					
+					//220126효심확인 i가 undefined, 제거
+						
+					/*															//  && postMemberId != data.member.id
 					if (postMemberId == memberId && memberId != 0 && postCategory == 'E' && postMemberId != data[i].member.id && data[i].member.memberType != 'D') {
 						chatHtml = '<button type="submit" class="chat" onclick="goChat(this)" value="' + data.member.id + '">채팅하기</button>';
 					} else {
 						chatHtml = "";
+					}*/
+					if (postMemberId == memberId && memberId != 0 && postCategory == 'E' && postMemberId != data.member.id && data.member.memberType != 'D') {
+						chatHtml = '<button type="submit" class="chat" onclick="goChat(this)" value="' + data.member.id + '">채팅하기</button>';
+					} else {
+						chatHtml = "";
 					}
+					
+					
 					$("form[name=viewCmtForm]").append(
 						'<div class="commentWrap commentWrapNew" id="commentWrap' + data.id + '">' + 
 						'<img alt="' + data.member.nickName + '님의 프로필 이미지" src="' + getContextPath() + data.member.profileImgPath + '">' + 

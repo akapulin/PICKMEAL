@@ -23,6 +23,9 @@ public class PostingCommand {
 	private String time;
 	private double lat;
 	private double lng;
+	
+	private long postId;
+	private boolean modifyState;
 
 	
 }

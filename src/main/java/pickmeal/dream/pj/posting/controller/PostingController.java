@@ -283,7 +283,8 @@ public class PostingController {
 	 * 글쓰기 폼으로 이동
 	 * 		- 각 게시판에서 글쓰기 버튼을 누를때, 
 	 * 		  게시판에 해당하는 글쓰기 폼으로 간
-	 * 	
+	 * 	****
+	 *  항상 수정과 글쓰기 작동이 따로 이루어진다는걸 염두하기
 	 * @param request
 	 * @return
 	 */
@@ -321,18 +322,44 @@ public class PostingController {
 		//식력포인트 올리기
 		member = mas.addFoodPowerPointItem(member, WRITE_POST);
 		
-		
-		
-		if(pc.getCategory()=='N') {
-			Posting post = ps.addPosting(setNoticePosting(pc,memberId));
-			return ("redirect:/posting/notice/"+post.getId()+"?cpageNum=1");
-		}else if(pc.getCategory()=='R') {
-			Posting post = ps.addPosting(setRecommendPosting(pc,memberId));
-			return ("redirect:/posting/recommend/"+post.getId()+"?cpageNum=1");
-		}else{
-			Posting post = ps.addPosting(setTogetherPosting(pc,memberId));
-			return ("redirect:/posting/together/"+post.getId()+"?cpageNum=1");
+		//수정상태면!!!!!!!!!!!!!!
+		if(pc.isModifyState()) {
+			if(pc.getCategory()=='N') {
+				
+				Posting post = setNoticePosting(pc,memberId);
+				post.setId(pc.getPostId());
+				ps.updatePosting(post);
+				
+				return ("redirect:/posting/notice/"+post.getId()+"?cpageNum=1");
+			}else if(pc.getCategory()=='R') {
+				Posting post = setRecommendPosting(pc,memberId);
+				post.setId(pc.getPostId());
+				ps.updatePosting(post);
+				
+				return ("redirect:/posting/recommend/"+post.getId()+"?cpageNum=1");
+			}else{
+				Posting post = setTogetherPosting(pc,memberId);
+				post.setId(pc.getPostId());
+				ps.updatePosting(post);
+				
+				return ("redirect:/posting/together/"+post.getId()+"?cpageNum=1");
+			}
 		}
+		//글쓰기상태면
+		else {
+			if(pc.getCategory()=='N') {
+				Posting post = ps.addPosting(setNoticePosting(pc,memberId));
+				return ("redirect:/posting/notice/"+post.getId()+"?cpageNum=1");
+			}else if(pc.getCategory()=='R') {
+				Posting post = ps.addPosting(setRecommendPosting(pc,memberId));
+				return ("redirect:/posting/recommend/"+post.getId()+"?cpageNum=1");
+			}else{
+				Posting post = ps.addPosting(setTogetherPosting(pc,memberId));
+				return ("redirect:/posting/together/"+post.getId()+"?cpageNum=1");
+			}
+		}
+		
+		
 		
 		
 
@@ -456,6 +483,7 @@ public class PostingController {
 		
 		mav.addObject("modifyState", true);
 		mav.addObject("postType",category);
+		mav.addObject("postId",id);
 		mav.addObject("post",posting);
 		mav.setViewName("posting/post_write");
 		return mav;
