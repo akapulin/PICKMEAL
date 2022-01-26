@@ -81,4 +81,13 @@ public interface PostingService {
 	 * @param postId
 	 */
 	public boolean convertRecruitmentState(long postId);
+
+	/**
+	 * 게시글의 제목만 불러오기
+	 * 내 댓글 - 게시글 제목에 사용
+	 * @param category
+	 * @param id
+	 * @return
+	 */
+	public String findPostingTitleById(char category, long id);
 }

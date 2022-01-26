@@ -97,4 +97,14 @@ public interface PostingDao {
 	 * @return
 	 */
 	public boolean getRecruitmentState(long postId);
+
+	
+	/**
+	 * 게시글 제목만 불러오기
+	 * 내 댓글 - 게시글제목에 사용
+	 * @param category
+	 * @param id
+	 * @return
+	 */
+	public String findPostingTitleById(char category, long id);
 }
