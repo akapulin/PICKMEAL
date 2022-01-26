@@ -103,7 +103,8 @@ public class MenuServiceImpl implements MenuService{
 		Menu menu = new Menu();
 		
 		if(menuList.size() == 0) {
-			menu.setMenuName("DB에..추천메뉴가..없어..");
+			menu.setMenuName("오마카세");
+			menu.setImgPath("오마카세.jpg");
 		} else {
 			menu = menuList.get(rand.nextInt(menuList.size()));			
 		}
