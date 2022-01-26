@@ -45,6 +45,14 @@ function writeComment() {
 		success: function(data) {
 			console.log('in comments?');
 			console.log(data);
+			console.log("현재 페이지 넘버cpageNum"+cpageNum)
+			console.log("총 댓글 수 allCmtNum"+allCmtNum)
+			console.log("현재 표시된 댓글 수 commentWrapNum"+commentWrapNum)
+			console.log("표시해야할 댓글 목록 수 viewPageNum"+viewPageNum)
+			console.log("현재 페이지 넘버cpageNum")
+			
+			
+			
 			if (cpageNum <= allPageNum && commentWrapNum < viewPageNum) {
 			console.log('첫번째 코멘트조건 in');	
 				if (data != "empty") {

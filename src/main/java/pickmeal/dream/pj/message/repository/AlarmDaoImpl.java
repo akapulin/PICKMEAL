@@ -18,7 +18,8 @@ public class AlarmDaoImpl implements AlarmDao {
 	public void addAlarm(Alarm alarm) {
 		String sql = "INSERT INTO AlarmRecord(memberId, friendId, alarmType, content)"
 				+ " VALUES (?, ?, ?, ?)";
-		jt.update(sql, alarm.getMember().getId(), alarm.getFriend().getId(), String.valueOf(alarm.getAlarmType()), alarm.getContent());
+		//220126재익수정
+		jt.update(sql, alarm.getMember().getId(), alarm.getFriend().getId()==0 ? null:alarm.getFriend().getId(), String.valueOf(alarm.getAlarmType()), alarm.getContent());
 	}
 
 	@Override
