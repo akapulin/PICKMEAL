@@ -7,8 +7,9 @@
 }
 #commentsWrap{
 	width: 70%; margin: 0 auto;
-	padding: 0 96px;
+	padding: 0 96px 50px;
 	box-sizing: border-box;
+	background:#fff;
 }	
 
 /* 새롭게 추가된 댓글 */

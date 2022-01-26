@@ -21,6 +21,8 @@ function displayUpdate(a) {
 // 댓글 쓰기
 let allCmtNum = Number($("#allCmtNum").val()); // 총 댓글 수
 let allPageNum = Number($("#allPageNum").val()); // 모든 페이지 개수
+
+
 function writeComment() {
 	let formData = $("form[name=writeCmtForm]").serialize(); // 폼 데이터
 	let memberId = $("input[name=memberId]").val(); // 로그인한 유저 아이디
@@ -35,14 +37,18 @@ function writeComment() {
 // 마지막 페이지가 아니라면 추가하면 안된다.
 // 만일 현재 페이지에 댓글이 댓글 목록 수만큼 있다면 추가하면 안된다.
 // 댓글을 쓸 때 현재 페이지가 마지막 페이지라면 밑에 추가해도 되지만
-
+ 
 	$.ajax({
 		url: getContextPath()+"/posting/addComment",
 		type: "post",
 		data: formData,
 		success: function(data) {
+			console.log('in comments?');
+			console.log(data);
 			if (cpageNum <= allPageNum && commentWrapNum < viewPageNum) {
+			console.log('첫번째 코멘트조건 in');	
 				if (data != "empty") {
+					console.log('데이터가 있어야함 in');	
 					let moreHtml;
 					let chatHtml;
 					if (memberId == data.member.id) {
@@ -136,7 +142,7 @@ function modifyComment(a) {
 	let memberId = $("#cmtMemberId" + id).val();
 	let json = {"id": id, "content": content.value, "beforeContent": beforeContent, "category": category, "postId": postId, "memberId": memberId};
 	$.ajax({
-		url: "modifyComment",
+		url: getContextPath()+"/posting/modifyComment",
 		type: "get",
 		data: json,
 		contentType : "application/json; charset:UTF-8",
@@ -163,7 +169,7 @@ function deleteComment(a) {
 	let cpageNumber = $(".cpageNum").length; // 버튼의 개수
 	let json = {"id": id, "category": category, "postId": postId, "memberId": memberId};
 	$.ajax({
-		url: "deleteComment",
+		url: getContextPath()+"/posting/deleteComment",
 		type: "get",
 		data: json,
 		contentType : "application/json; charset:UTF-8",
@@ -240,7 +246,7 @@ function moveCommentPage(a) {
 	//if (state == 0 && i == 0) {
 		//state = 1;
 			$.ajax({
-			url: "changeCommentPage",
+			url: getContextPath()+"/posting/changeCommentPage",
 			type: "get",
 			data: json,
 			success: function(data) {

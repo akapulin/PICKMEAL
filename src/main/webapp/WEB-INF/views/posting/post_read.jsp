@@ -173,7 +173,8 @@
     		코멘트 - 김보령
     
      -->
-    <section id="commentsWrap">
+    <section id="commentsContainer">
+    <div id="commentsWrap">
 		<h2 class="hidden">댓글</h2>
 		<form name="viewCmtForm" id="viewCmtForm">
 			<c:forEach var="c" items="${comments}">
@@ -250,6 +251,7 @@
 				</section>
 			</c:if>
 		</form:form>
+		</div>
 	</section>
 </body>
 </html>

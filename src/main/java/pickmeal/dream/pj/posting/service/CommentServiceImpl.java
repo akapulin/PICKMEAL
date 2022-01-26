@@ -40,14 +40,14 @@ public class CommentServiceImpl implements CommentService {
       // 위의 이유로 여기서만 셋팅을 해주면 session 내 "member" 에 업데이트 해주지 않아도 알아서 업데이트된다.
       Member member = comment.getMember();
       member = mas.addFoodPowerPointItem(member, WRITE_COMMENT);
-      
+      log.info("코멘트 서비스에서 이미지패스 확인중~~~~~~~ 디비에 넣기 바로직전"+comment.getMember().getProfileImgPath());
       // 추가 후!!!! 디비커넥션 오류로 인한 순서 바꾸기
       cd.addComment(comment);
       
       // 아이디랑 등록 날짜까지 한 것을 가져와야한다.
       log.info("와아아아아아아아ㅏ아아아아★★★★★★★★★★★★"+comment.toString());
       comment = cd.findLastAddComment(comment.getMember().getId(), comment.getPosting().getCategory());
-      
+      log.info("흐에일ㅔ에엥이이이이잉잉 코멘트 추가하고 서비에서 마지막코멘트 정보 받아옴~~");
       
       
       // 멤버 셋팅 (필요한 값만 셋팅한다)
@@ -146,6 +146,8 @@ public class CommentServiceImpl implements CommentService {
       Member enterMember = new Member();
       // 필요한 정보만 셋팅한다.
       enterMember.setId(member.getId()); // id 필수!
+      //220126효심추가멤버타입
+      enterMember.setMemberType(member.getMemberType());
       enterMember.setEmail(member.getEmail());
       enterMember.setFoodPowerPoint(member.getFoodPowerPoint()); // 식력 포인트를 받아서
       enterMember.makeProfileImgPath(); // 프로필 이미지를 셋팅해준다.

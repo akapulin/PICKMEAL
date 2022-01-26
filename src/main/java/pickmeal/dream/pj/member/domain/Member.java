@@ -63,7 +63,10 @@ public class Member {
 				this.profileImgPath = LEVEL0.getImgPath();	
 			}
 		}
-		this.profileImgPath = "/resources/img/profile/" + getProfileImgPath() + ".png";
+		
+		//220126 12:02 효심주석
+		//this.profileImgPath = "/resources/img/profile/" + getProfileImgPath() + ".png";
+		this.profileImgPath = "/resources/img/profile/" + this.profileImgPath + ".png";
 	}
 	
 	/**
