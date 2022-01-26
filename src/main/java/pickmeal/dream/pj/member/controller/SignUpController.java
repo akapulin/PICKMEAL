@@ -137,6 +137,7 @@ public class SignUpController {
 		enterMember.setFoodPowerPoint(member.getFoodPowerPoint());
 		enterMember.setMannerTemperature(member.getMannerTemperature());
 		enterMember.setProfileImgPath(member.getProfileImgPath());
+		enterMember.setMemberType(member.getMemberType());
 		
 		log.info(member.toString());
 		
