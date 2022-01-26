@@ -24,6 +24,7 @@ if (navigator.geolocation) {
 		geocoder.coord2Address(nowLng, nowLat, function(result, status) {
 			if (status === kakao.maps.services.Status.OK) {
 				nowAddress = result[0].address.address_name;
+				$('#presentAddress').text(nowAddress);
 				//$("#memberPosition").text(nowAddress);
 			}
 		});

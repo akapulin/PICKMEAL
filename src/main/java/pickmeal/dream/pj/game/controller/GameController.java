@@ -107,7 +107,7 @@ public class GameController {
 			//차이가 0이 아니면 => 즉, 오늘 첫게임이면 first msg 보낸다.
 			if(diffOfDate != 0) {
 				firstGameMsg = msgs.bringFirstMsg();
-				System.out.println("gameCotroller : "+firstGameMsg);
+				System.out.println("gameController : "+firstGameMsg);
 				mav.addObject("firstGameMsg", firstGameMsg); //첫 게임일 경우 안내 메세지 보냄.
 			} else {}
 			session.setAttribute("cntForRetry", cntForRetry);
@@ -200,7 +200,6 @@ public class GameController {
 	public ResponseEntity<?> bringResResultOfGame(@ModelAttribute RestaurantCommand rc, HttpSession session) {
 		
 		Restaurant restaurant = new Restaurant();
-		int cntForRetry = 0;
 		
 		log.info("뜨니? : " + rc.toString());
 		restaurant.setId(rc.getId());
@@ -225,6 +224,7 @@ public class GameController {
 			
 			Alarm alarm = new Alarm();
 			Member friend = new Member();
+			friend.setId(0);
 			alarm.setMember(member);
 			alarm.setFriend(friend);
 			alarm.setAlarmType('L');

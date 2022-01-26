@@ -46,10 +46,11 @@ public class SignInController {
 	
 	@GetMapping("/member/signOutMember")
 	public String signOutMember(HttpSession session) {
-		session.removeAttribute("member");
-		session.removeAttribute("writer");
-		session.removeAttribute("commenter");
-		session.removeAttribute("cntForRetry");
+//		session.removeAttribute("member");
+//		session.removeAttribute("writer");
+//		session.removeAttribute("commenter");
+//		session.removeAttribute("cntForRetry");
+		session.invalidate();
 		return "redirect:/index";
 	}
 	

@@ -29,8 +29,8 @@ $('.categoryLabel').on('click', function(){
 //button[name=radius]
 $('.gamePlayBtn').on('click', function(e){
 	e.preventDefault();
-	let popupWidth = 600;
-	let popupHeight = 600;
+	let popupWidth = 1050;
+	let popupHeight = 1000;
 	let radius = $(".radius:checked").val();
 	let category = $(".category:checked").val();
 	var input1;
@@ -43,12 +43,19 @@ $('.gamePlayBtn').on('click', function(e){
 
 	createLatLng(nowLat, input1, "nowLat");
 	createLatLng(nowLng, input2, "nowLng");
-	
-	
-	let popupX = (document.body.offsetWidth / 2) - (popupWidth / 2);
+	if(radius == null || category == null){
+		Swal.fire({
+			icon: 'error',
+			title: '입력 오류',
+			text: '반경과 식당 카테고리를 선택해주세요',
+			confirmButtonColor: '#b7cae1',
+			heightAuto: false
+		})	
+	}else{
+		let popupX = (window.screen.width / 2) - (popupWidth / 2);
 	// 만들 팝업창 width 크기의 1/2 만큼 보정값으로 빼주었음
 
-	let popupY = (document.body.offsetHeight / 2) - (popupHeight / 2);
+	let popupY = (window.screen.height / 2) - (popupHeight / 2);
 	// 만들 팝업창 height 크기의 1/2 만큼 보정값으로 빼주었음
 	
 	window.open("openGamePopUp", "게임하기", "width=1050, height = 1000, top=" + popupY + ", left=" + popupX + ""); //선언과 초기화 동시에 해도 됨
@@ -64,7 +71,7 @@ $('.gamePlayBtn').on('click', function(e){
 	gameDataForm.method = "get";
 	
 	gameDataForm.submit();
-
+	}
 
 })
 
