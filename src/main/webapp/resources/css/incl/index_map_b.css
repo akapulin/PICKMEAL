@@ -2,7 +2,7 @@
 
 /* 전체 구성*/
 #content {
-	width: 80%; min-width: 1440px; height: calc(100% - 80px);
+	width: 80%; min-width: 1440px; height: calc(100% - 83px);
 	/* background-color: #f00; */
 	display: flex; justify-content: space-between; align-items: center;
 	margin: 0 auto;
