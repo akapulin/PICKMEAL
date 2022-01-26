@@ -39,6 +39,7 @@
                 <p id="ment1" class="mentAll"><span class="menuAllspan">※</span>"발급 받기"를 누르지 않으면</p>
                 <p id="ment2" class="mentAll"><span class="menuAllspan">※</span>위 쿠폰 미발급시 한시간 뒤 자동 소멸됩니다.</p>
                 <p id="ment3" class="mentAll"><span class="menuAllspan">※</span>유효기간 : 발급 일 당일</p>
+                <p id="ment4" class="mentAll"><span class="menuAllspan">※</span>쿠폰은 1일 최대 3회 발급됩니다.</p>
             </div>
         </div>
         <c:choose>
