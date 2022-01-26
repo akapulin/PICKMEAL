@@ -1,7 +1,7 @@
 package pickmeal.dream.pj.posting.controller;
 
 import static pickmeal.dream.pj.web.constant.Constants.COMMENT_LIST;
-
+import static pickmeal.dream.pj.web.constant.SavingPointConstants.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 import lombok.extern.java.Log;
 import pickmeal.dream.pj.member.domain.Member;
+import pickmeal.dream.pj.member.service.MemberAchievementService;
 import pickmeal.dream.pj.posting.command.PostingCommand;
 import pickmeal.dream.pj.posting.domain.Comment;
 import pickmeal.dream.pj.posting.domain.Posting;
@@ -52,6 +53,9 @@ public class PostingController {
 	
 	@Autowired
 	Validator v;
+	
+	@Autowired
+	MemberAchievementService mas;
 
 	/* 
 	 * 
@@ -314,6 +318,10 @@ public class PostingController {
 		long memberId = member.getId();
 		//long memberId = 4;
 	
+		//식력포인트 올리기
+		member = mas.addFoodPowerPointItem(member, WRITE_POST);
+		
+		
 		
 		if(pc.getCategory()=='N') {
 			Posting post = ps.addPosting(setNoticePosting(pc,memberId));
@@ -325,6 +333,8 @@ public class PostingController {
 			Posting post = ps.addPosting(setTogetherPosting(pc,memberId));
 			return ("redirect:/posting/together/"+post.getId()+"?cpageNum=1");
 		}
+		
+		
 
 	}
 	

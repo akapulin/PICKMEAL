@@ -19,7 +19,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
 
 <!-- 김보령  -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=001358587c4d106ce5a3702588b8ce85&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ef48a334aefa8d6e3f9c000a120f8532&libraries=services"></script>
 <script src="${pageContext.request.contextPath}/resources/js/incl/index_map_chart.js" defer></script>
 
 <!-- 정원식 -->
@@ -138,9 +138,10 @@
 		<input type="hidden" name="restaurantId" value="" id="restaurantId">
 		
 		<div class="storeSubInfoWrap">
+		<!--  
 			<div class="storeSubInfoBeforeWrap">
 				<div class="tenor-gif-embed" data-postid="23314276" data-share-method="host" data-aspect-ratio="0.99375" data-width="90%"><a href="https://tenor.com/view/axolittles-slot-machine-jackpot-nft-gif-23314276">Axolittles Slot Machine GIF</a>from <a href="https://tenor.com/search/axolittles-gifs">Axolittles GIFs</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
-			</div>
+			</div>-->
 			<div class="ageAndGenderGraphArea">
 				<h3>연령별 / 성별 방문수</h3>
 				<div class="storeSubInfo_ageWrap storeSubInfoCom">
