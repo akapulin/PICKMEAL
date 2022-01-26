@@ -34,7 +34,7 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <!--  가게 부가 정보 - 윤효심-->
 <link href="${pageContext.request.contextPath}/resources/css/incl/chart.css" rel="stylesheet" type="text/css">
-<!--  <script src="${pageContext.request.contextPath}/resources/js/incl/chart.js" defer></script>-->
+ <script src="${pageContext.request.contextPath}/resources/js/incl/fortune.js" defer></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/incl/index_map_b.css" />
 
 

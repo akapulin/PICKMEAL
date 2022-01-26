@@ -44,7 +44,10 @@
             </div>
            <form action="${pageContext.request.contextPath}/posting/completeWritingPost" method="post" id="wPostForm">
             <input type="hidden" value="${modifyState }" name = "modifyState" id="modifyState">
-            <input type="hidden" value="${postId }" name = "postId" id="postId">
+            <c:if test="${not empty postId }">
+            	<input type="hidden" value="${postId }" name = "postId" id="postId">
+            </c:if>
+            
             <input type="hidden" id="postType" value="${postType }" name="category"/>
             <div id="wPostContentContainer">
                 <div class="wPostSubTitleWrap wPostLineCommon">
