@@ -21,7 +21,7 @@
 						<div class="commentBox">
 							<span class="nameAndRegDate">${comment.member.nickName } . ${commentDate }</span>
 							<p class="content">${comment.content }</p>
-							<span class="postTitle"><a href="#">게시글제목</a></span>
+							<span class="postTitle"><a href="${pageContext.request.contextPath}/posting/recommend/${comment.posting.id}?cpageNum=1">${comment.posting.title }</a></span>
 							<form action="${pageContext.request.contextPath}/member/delComment" method="post">
 								<input type="hidden" value="${comment.id }" name="id">
 								<input type="hidden" value="${comment.posting.id }" name="postId">
@@ -33,14 +33,14 @@
 				</div>
 			</div>
 			<div id="eComments" class="comments">
-				<h3>같이먹자</h3>
+				<h3>밥친구</h3>
 				<div class="comments_wrap">
 					<c:forEach var="comment" items="${eComments }">
 						<fmt:formatDate var="commentDate" pattern="yyyy-MM-dd a hh:mm" value="${comment.regDate }"/>
 						<div class="commentBox">
 							<span class="nameAndRegDate">${comment.member.nickName } . ${commentDate }</span> 
 							<p class="content">${comment.content }</p>
-							<span class="postTitle"><a href="#">게시글제목</a></span>
+							<span class="postTitle"><a href="${pageContext.request.contextPath}/posting/together/${comment.posting.id}?cpageNum=1">${comment.posting.getTitle() }</a></span>
 							<form action="${pageContext.request.contextPath}/member/delComment" method="post">
 								<input type="hidden" value="${comment.id }" name="id">
 								<input type="hidden" value="${comment.posting.id }" name="postId">

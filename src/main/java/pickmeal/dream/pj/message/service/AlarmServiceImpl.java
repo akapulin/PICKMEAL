@@ -52,6 +52,7 @@ public class AlarmServiceImpl implements AlarmService {
 				ad.addAlarm(alarm);
 			}
 		} else { // 채팅이 아닐 경우 무조건 추가
+			log.info(alarm.toString());
 			ad.addAlarm(alarm);
 		}
 	}

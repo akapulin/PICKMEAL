@@ -11,13 +11,13 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/coupon/coupon_list.css" />
 </head>
 <body>
-	<header>
+	
 	<jsp:include page="/WEB-INF/views/incl/header.jsp"/>
 	<jsp:include page="/WEB-INF/views/member/my_page.jsp"/>
-	</header>
+	
 	<main>
 		<section id="CouponList">
-	            <h2 id="nickName">${member.nickName}회원님 쿠폰</h2>
+	            
 	            	<div id="unusedCouponsWrap">
 	            		<form method ="get" name="usedCouponPopup">
 	                	<h3 id="divName1">미사용 쿠폰</h3>

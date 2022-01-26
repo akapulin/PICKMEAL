@@ -53,7 +53,7 @@
 }
 
 .postings_wrap .postBox:hover {
-    background-color: #f5f5f5;
+    background-color: #ffecec;
 }
 
 .postings_wrap .postBox:last-child {
@@ -73,8 +73,17 @@
 }
 
 .postings_wrap .postBox .postDelBtn {
+	width: 60px;
+    height: 40px;
     position: absolute; right: 2rem; top: 50%; transform: translateY(-50%);
-    font-size: 1.1rem; padding: 2px;
+    font-size: 1.1rem; padding: 2px; font-weight: bold;
+    color: #fff;
+    background: #f23f3f;
+    border: 0;
+}
+
+.postings_wrap .postBox .postDelBtn:hover {
+	background: #f67e7e;
 }
 
 .pageNumBox {

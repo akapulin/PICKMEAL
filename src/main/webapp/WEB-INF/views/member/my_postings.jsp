@@ -34,7 +34,7 @@
                     		<span class="postType">식당추천</span>
                     		<div class="post">
 	                        	<span class="nameAndRegDate">${posting.member.nickName } . ${postDate }</span>
-		                        <p class="postTitle"><a href="${pageContext.request.contextPath}/posting/recommend/${posting.id}">${posting.title }</a></p>
+		                        <p class="postTitle"><a href="${pageContext.request.contextPath}/posting/recommend/${posting.id}?cpageNum=1">${posting.title }</a></p>
 	                    	</div>
 	                    	<form action="${pageContext.request.contextPath}/member/delPost/recommend" method="post">
 		                        <input type="hidden" value="${posting.id}" name="postId">
@@ -46,7 +46,7 @@
                     		<span class="postType">밥친구</span>
                     		<div class="post">
 	                        	<span class="nameAndRegDate">${posting.member.nickName } . ${postDate }</span>
-		                        <p class="postTitle"><a href="${pageContext.request.contextPath}/posting/together/${posting.id}">${posting.title }</a></p>
+		                        <p class="postTitle"><a href="${pageContext.request.contextPath}/posting/together/${posting.id}?cpageNum=1">${posting.title }</a></p>
 	                    	</div>
 	                    	<form action="${pageContext.request.contextPath}/member/delPost/together" method="post">
 		                        <input type="hidden" value="${posting.id}" name="postId">
