@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
                 /*상단 유저명*/
-        #CouponList{width: 80%; height: 750px; margin: 180px auto 0; min-width: 1370px; max-width: 4470px; padding: 10px;}
+        #CouponList{width: 80%; height: 750px; margin: 20px auto 0; min-width: 1280px; max-width: 4470px; padding: 10px 0px;}
         #nickName{width: 90%; height: 50px; font-size: 35px; margin-left: 60px; min-width: 1215px; margin-bottom:30px; line-height: 50px;}
         
         /*라디오버튼*/
@@ -9,7 +9,7 @@
 
         /*미사용 쿠폰*/
         
-        #unusedCouponsWrap{width: 450px; height: 660px; float: left; padding: 30px; border: 3px solid #ffecec; margin-left:30px;
+        #unusedCouponsWrap{width: 450px; height: 660px; float: left; padding: 30px; border: 3px solid #ffecec;
         				border-radius: 10px; overflow: hidden;}
         #divName1{width:100%; font-weight: 900; font-size: 25px; border-bottom: 2px solid #f23f3f; height: 50px;}
         /*색깔 : #f23f3f (적) /  #ffecec (분) / #f5f5f5 (회)*/

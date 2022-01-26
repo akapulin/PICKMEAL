@@ -13,10 +13,8 @@
 
 </head>
 <body>
-	<header>
 	<jsp:include page="/WEB-INF/views/incl/header.jsp"/>
 	<jsp:include page="/WEB-INF/views/member/my_page.jsp"/>
-	</header>
     <main>
         <section>
             <h3 id="divName">${member.getNickName()}님 방문리스트</h3>
