@@ -124,13 +124,15 @@ DROP TABLE Coupon;
 SELECT IF(exists(select COUNT(regDate)  FROM  Coupon WHERE TIMESTAMPDIFF(DAY, regDate, CURDATE())=0 GROUP BY memberId HAVING memberId = 3),1,2) FROM Coupon
 
 /*모든 쿠폰 확인*/
-SELECT * FROM Coupon;
+SELECT * FROM Coupon ORDER BY id DESC;
+/*회원 사용쿠폰 최신순*/
+SELECT id, memberId, couponId, restaurantId, couponNumber, used, regDate FROM Coupon WHERE memberId = 4 AND used = true ORDER BY id DESC
 /*쿠폰 오늘 발급한적 있냐 없냐 확인*/
 SELECT exists(select COUNT(regDate)  FROM  Coupon WHERE TIMESTAMPDIFF(DAY, regDate, CURDATE())=0 GROUP BY memberId HAVING memberId = 3);
 /*오늘 하루 발급 개수=?*/
-SELECT COUNT(regDate)  FROM  Coupon WHERE TIMESTAMPDIFF(DAY, regDate, CURDATE())=0 GROUP BY memberId HAVING memberId = 3;
+SELECT COUNT(regDate)  FROM  Coupon WHERE DATEDIFF(regDate, CURDATE())=0 GROUP BY memberId HAVING memberId = 3;
 /*삭제 메소드*/
-delete from Coupon where used=false and TIMESTAMPDIFF(DAY,regDate,CURDATE()) != 0;
+delete from Coupon where used=false and DATEDIFF(regDate,CURDATE()) != 0;
 /*사용 SQL*/
 UPDATE Coupon SET used = true WHERE id = 34;
 
@@ -142,10 +144,10 @@ SELECT id, memberId, couponId, restaurantId, couponNumber, used, regDate FROM Co
 /*쿠폰 하나 찾아오기*/
 SELECT id, memberId, couponId, restaurantId, couponNumber, used, regDate FROM Coupon WHERE Id = 1;
 
-INSERT INTO Coupon(memberId,couponId,restaurantId,couponNumber) VALUES(4,1,1,"11111111111");
+INSERT INTO Coupon(memberId,couponId,restaurantId,couponNumber,regDate) VALUES(4,1,1,"111111112111","2022-01-24 23:18:38.0");
 INSERT INTO Coupon(memberId,couponId,restaurantId,couponNumber) VALUES(4,2,1,"11121111111");
 INSERT INTO Coupon(memberId,couponId,restaurantId,couponNumber) VALUES(4,3,1,"11211111111");
-
+SELECT COUNT(DATEDIFF(regDate, CURDATE()))  FROM  Coupon WHERE DATEDIFF(regDate, CURDATE())=0 GROUP BY memberId HAVING memberId = 4
 DELETE FROM Coupon WHERE id =14;
 SELECT id, memberId, couponId, restaurantId, couponNumber, used, regDate FROM Coupon WHERE used = false;
 SELECT id, memberId, couponId, restaurantId, couponNumber, used, regDate FROM Coupon WHERE couponNumber = 'N3O6Q05KUMT8X';
@@ -173,11 +175,16 @@ CREATE TABLE VisitedRestaurant(
 	FOREIGN KEY (memberId) REFERENCES Member (id),								#아래 쭉 포링키
 	FOREIGN KEY (restaurantId) REFERENCES Restaurant (id)
 )
+<<<<<<< HEAD
+INSERT INTO VisitedRestaurant(memberId, restaurantId, Review) VALUES(4,7,false);
+INSERT INTO VisitedRestaurant(memberId, restaurantId, Review) VALUES(4,52,false);
+=======
 
 select * from VisitedRestaurant;
 
 INSERT INTO VisitedRestaurant(memberId, restaurantId, Review) VALUES(6,7,false);
 INSERT INTO VisitedRestaurant(memberId, restaurantId, Review) VALUES(6,52,false);
+>>>>>>> branch 'developer' of https://github.com/akapulin/PICKMEAL.git
 SELECT EXISTS (SELECT id FROM VisitedRestaurant WHERE id = 2);
 UPDATE VisitedRestaurant SET Review = true WHERE id = 1;
 DELETE FROM VisitedRestaurant WHERE id = 10;

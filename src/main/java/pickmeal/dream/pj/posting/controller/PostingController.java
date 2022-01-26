@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 import lombok.extern.java.Log;
 import pickmeal.dream.pj.member.domain.Member;
@@ -306,12 +307,12 @@ public class PostingController {
 	 * @return
 	 */
 	@PostMapping("/posting/completeWritingPost")
-	public String completeWritingPost(@ModelAttribute PostingCommand pc, HttpSession session) {
+	public String completeWritingPost(@ModelAttribute PostingCommand pc, @SessionAttribute("member") Member member) {
 		
 		
 		log.info("hi posting complete"+pc.toString());
-		//long memberId = ((Member)session.getAttribute("member")).getId();
-		long memberId = 4;
+		long memberId = member.getId();
+		//long memberId = 4;
 	
 		
 		if(pc.getCategory()=='N') {
@@ -368,7 +369,7 @@ public class PostingController {
 		post.setLikes(0);
 		post.setViews(1);
 		post.setMealTime(setMealTimeToDate(pc.getDate(),pc.getTime()));
-		post.setRecruitment(false);
+		post.setRecruitment(true);
 		post.setMealChk(false);
 		return post;
 	

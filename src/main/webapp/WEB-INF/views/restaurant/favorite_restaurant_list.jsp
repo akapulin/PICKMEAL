@@ -15,6 +15,7 @@
 <body>
 
 	<header>
+	<jsp:include page="/WEB-INF/views/incl/header.jsp"/>
 	<jsp:include page="/WEB-INF/views/member/my_page.jsp"/>
 	</header>
 	<main>
@@ -35,7 +36,7 @@
 	                    <div class="deleteBtnWrap">
 	                    	<input type="radio" id="downlabel${frlist.getId()}" value="${frlist.getId()}" name="frdeleteradioBtn" class="frdeleteradioBtn" onclick="deletefavorite(this)"/>
 	                    	<label id="downinlabel${frlist.getId()}" for="downlabel${frlist.getId()}" class="fredeleteIncubate"></label>
-	                        <img class="favoriteremoveimg" src="${pageContext.request.contextPath}/resources/img/restaurant/favorite/hart.jpg">
+	                        <img class="favoriteremoveimg" src="${pageContext.request.contextPath}/resources/img/restaurant/favorite/brokenHeart.png">
 	                    </div>
 	            	</div>
 				</c:forEach>

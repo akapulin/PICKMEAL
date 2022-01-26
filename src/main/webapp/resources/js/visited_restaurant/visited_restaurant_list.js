@@ -13,13 +13,14 @@ function reviewClick(){
 	console.log("레스토랑 명 : " + restaurantName);
 	$('#explainWrap').hide();
 	$('#Reviewcheck').show();
+	$('#rightdiv').css({'border': '5px solid #ffecec'});
 	$('#reviewButtonWrap').show();
 	$("#reviewRName").val(restaurantName+" 식당리뷰!");
 	$("#submititem").val(restaurantTableId);
 	$("#visitedRestaurantId").val(reviewradio);
 	
 }
-
+/*찜 하기 */
 function jjimrestaurant(){
 	var radiojjim = $("input[name='vrfavoriteradio']:checked").val();
 	
@@ -32,7 +33,11 @@ function jjimrestaurant(){
 		contentType:'application/json; charset=utf-8',
 		
 		success: function(data){
-			$("#jjimdiv"+radiojjim).children().remove();
+			//$("#jjimdiv"+radiojjim).children().remove();
+			var restaurantid = $("#favoritelabel"+radiojjim).data("restaurantid");
+			//console.log($(".favoritebutton"+restaurantid));
+			$(".favoritebutton"+restaurantid).children().remove();
+			
 		}
 		
 	});
@@ -92,7 +97,7 @@ $(document).ready(function() {
 			if ( $(this).prop('checked') ){
 				$(this).val(1);
 				$(this).next().next().css('color','#f23f3f');
-				$(this).parent().css({'backgroundColor' : '#fff', 'border-bottom' : '3px solid #000'});
+				$(this).parent().css({'backgroundColor' : '#fff', 'border-bottom' : '1px solid #f23f3f'});
 	 		}else{
 				$(this).val(0);
 				$(this).css('border','0px');
@@ -121,6 +126,7 @@ $('#reviewButton').on('click', function(e){
 			  	confirmButtonText: '확인'
 				})
 	}else{
+		$('#rightdiv').css({'border': '0px'});
 		reviewinform.submit()
 	}
 })

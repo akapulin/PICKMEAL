@@ -29,7 +29,7 @@ public class CommentServiceImpl implements CommentService {
    private MemberAchievementService mas;
 
    @Override
-   @Transactional
+  // @Transactional
    public Comment addComment(Comment comment) {
       // 추가 후
       cd.addComment(comment);

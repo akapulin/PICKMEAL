@@ -37,7 +37,7 @@ function writeComment() {
 // 댓글을 쓸 때 현재 페이지가 마지막 페이지라면 밑에 추가해도 되지만
 
 	$.ajax({
-		url: "addComment",
+		url: getContextPath()+"/posting/addComment",
 		type: "post",
 		data: formData,
 		success: function(data) {

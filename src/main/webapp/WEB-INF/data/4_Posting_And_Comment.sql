@@ -68,6 +68,12 @@ DROP TABLE RecommendRestaurantPosting;
 DROP TABLE TogetherEatingPosting;
 DROP TABLE NoticePosting;
 
+DELETE FROM RecommendRestaurantComment;
+DELETE FROM TogetherEatingComment;
+DELETE FROM RecommendRestaurantPosting;
+DELETE FROM TogetherEatingPosting;
+DELETE FROM NoticePosting;
+
 SELECT * FROM RecommendRestaurantComment;
 SELECT * FROM TogetherEatingComment;
 SELECT * FROM RecommendRestaurantPosting;

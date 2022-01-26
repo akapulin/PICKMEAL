@@ -95,7 +95,7 @@
 				
 				
 				<!-- 정원식 쿠폰 발급 -->
-				<form method="get" id="couponPopupCreatebtn">
+				<form method="get" id="couponPopupCreatebtn" name="couponPopupCreate">
 					<div id="couponGenerateWrap">
 			     		<p id="couponGenerateName">쿠폰</p>
 			      		<input type="submit" id="couponGenerate"/>

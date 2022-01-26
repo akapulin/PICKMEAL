@@ -43,6 +43,7 @@ public interface CouponDao {
 	
 	int findCouponByMemberIdinToday(long memberId);
 	
+	void deleteCouponwithAllmemberByRegDate();
 	
 	
 	
