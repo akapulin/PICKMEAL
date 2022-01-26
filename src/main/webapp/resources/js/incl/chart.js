@@ -89,7 +89,7 @@ $(document).ready(function() {
 
 	
 
-	getStoreInfoWithChart(1);
+	//getStoreInfoWithChart(1);
 	
 	//포춘쿠키 화면에 랜덤 위치잡아주기
 	let fortune_left = Math.floor(Math.random() * (window.innerWidth-510)); 
@@ -116,10 +116,19 @@ function getStoreInfoWithChart(restaurantId){
 		//data: $('#restaurantId').serialize(),
 		data: {restaurantId:restaurantId},
 		success: function(data) {
-
+			
+			
 			//성별 데이터 받기
 			femaleCount = data["restReference"].femaleCount;
 			maleCount = data["restReference"].maleCount;
+
+			if(femaleCount == 0 && maleCount == 0){
+				$('.ageAndGenderGraphArea').hide();
+				return;
+			}
+			else{
+				$('.ageAndGenderGraphArea').show();
+			}
 
 			//연령별 데이터 받기
 			for (let i in data["restReference"].ageCount) {
@@ -141,10 +150,17 @@ function getStoreInfoWithChart(restaurantId){
 		//data: $('#restaurantId').serialize(),
 		data: {restaurantId:restaurantId},
 		success: function(data) {
-
+			
 			//리뷰 데이터 받기
 			userCount = data["review"].userCount;
-
+			
+			if(userCount==0){
+				$('.userReviewGraphArea').hide();
+				return;
+			}else{
+				$('.userReviewGraphArea').show();
+			}
+			
 			let reviewCount = data["review"].reviewItem.length;
 			//rKeyword = new Array(reviewCount);
 			//rMessage = new Array(reviewCount);

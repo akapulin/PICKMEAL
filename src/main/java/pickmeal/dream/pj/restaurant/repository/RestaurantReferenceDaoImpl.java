@@ -27,8 +27,12 @@ public class RestaurantReferenceDaoImpl implements RestaurantReferenceDao{
 				+" COUNT(CASE WHEN age>=60 AND age <70 THEN 1 ELSE NULL END) AS 60s"
 				+" FROM RestaurantPreference"
 				+" GROUP BY restaurantId HAVING restaurantId=? ";
-
-		return jt.queryForObject(sql, new RestaurantReferenceRowMapper(), restaurantId);
+		try {
+			return jt.queryForObject(sql, new RestaurantReferenceRowMapper(), restaurantId);
+		}catch(Exception e) {
+			return new RestaurantReference();
+		}
+		
 	}
 
 	@Override
