@@ -2,7 +2,7 @@
 input[type=radio]{display: none;}
 p{font-size: 20px;}
 body{width: 550px; height: 450px;}
-section{width: 550px; height: 450px; border: 3px solid #000;}
+section{width: 550px; height: 450px; border: 3px solid #ffecec;}
 h2{text-align: center; width: 200px; height: 50px; margin: 0 auto;}
 h3{text-align: center; width: 200px; height: 50px; margin: 0 auto;}
 form{width: 550px; height: 350px;}
@@ -79,7 +79,10 @@ form{width: 550px; height: 350px;}
 	border : 3px solid #f23f3f; }
 .select5-5veiw{ width: 100px; height: 50px; margin-top: 150px; margin-left: 220px;}
 .select5-5veiw:active{ margin-left: 222px; margin-top: 152px; box-shadow: none;}
-.select5veiw{width: 100px; height: 50px; margin-top: 150px; margin-left: 66px;}
+.select5veiw{width: 100px; height: 50px; margin-top: 150px; margin-left: 66px; border: 2px solid gold !important;}
 .select5veiw:active{ margin-left: 68px; margin-top: 152px; box-shadow: none;}
 .activeradio{left: 5px; top:5px; box-shadow: none; background-color: #ffecec;}
 .soupybox:hover, .hot_icebox:hover, .carbohydratebox:hover, .mainFoodbox:hover, .spicybox:hover{background-color: #e6cfcf;}
+
+.buttonbox{ background-color: #ffecec; border: 0px;}
+.btn{background-color: #ffecec; border: 2px solid #f23f3f; box-sizing: border-box;}

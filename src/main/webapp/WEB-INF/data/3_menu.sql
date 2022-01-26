@@ -21,7 +21,10 @@ SELECT * FROM Menu;
 #한식
 
 INSERT INTO Menu(menuName,weather,temperature,imgPath,soupy,hot_ice,carbohydrate,mainFood,spicy)  
- VALUES ("오마카세",1,0,"/pickmeal/resources/img/menu/오마카세.jpg",2,2,4,3,2),
+ VALUES
+("불냉면",1,2,"/pickmeal/resources/img/menu/불냉면.jpg",0,1,2,2,0),
+("오이냉국",2,0,"/pickmeal/resources/img/menu/오이냉국.jpg",0,1,0,0,1),
+("오마카세",1,0,"/pickmeal/resources/img/menu/오마카세.jpg",2,2,4,3,2),
 ("찜닭",1,0,"/pickmeal/resources/img/menu/찜닭.jpg",0,0,0,0,0),
 ("돼지국밥",2,1,"/pickmeal/resources/img/menu/돼지국밥.jpg",0,0,0,0,1),
 ("제육볶음",1,0,"/pickmeal/resources/img/menu/제육볶음.jpg",1,0,0,0,1),
@@ -94,7 +97,7 @@ INSERT INTO Menu(menuName,weather,temperature,imgPath,soupy,hot_ice,carbohydrate
 ("야끼덮밥",1,0,"/pickmeal/resources/img/menu/야끼덮밥.jpg",1,0,0,1,1),
 ("마파두부",3,0,"/pickmeal/resources/img/menu/마파두부.jpg",1,0,0,0,0),
 ("울면",1,0,"/pickmeal/resources/img/menu/울면.jpg",0,0,3,1,1),
-("잡채밥",4,0,"/pickmeal/resources/img/menu/잡채밥.jpg",1,0,0,2,1)
+("잡채밥",4,0,"/pickmeal/resources/img/menu/잡채밥.jpg",1,0,0,2,1);
 
 
 #일식
@@ -119,8 +122,10 @@ INSERT INTO Menu(menuName,weather,temperature,imgPath,soupy,hot_ice,carbohydrate
 ("장어덮밥",3,2,"/pickmeal/resources/img/menu/장어덮밥.jpg",1,0,0,1,1),
 ("초밥",2,0,"/pickmeal/resources/img/menu/초밥.jpg",1,1,0,1,1),
 ("츠케멘",1,0,"/pickmeal/resources/img/menu/츠케멘.jpg",1,1,2,0,1),
-("연어덮밥",1,0,"/pickmeal/resources/img/menu/연어덮밥.jpg",1,1,0,1,1)
+("연어덮밥",1,0,"/pickmeal/resources/img/menu/연어덮밥.jpg",1,1,0,1,1);
 
+
+#아시안
 INSERT INTO Menu(menuName,weather,temperature,imgPath,soupy,hot_ice,carbohydrate,mainFood,spicy)  
  VALUES ("갈비탕",4,0,"/pickmeal/resources/img/menu/갈비탕.jpg",0,0,0,0,1),
 ("김밥",1,0,"/pickmeal/resources/img/menu/김밥.jpg",1,1,0,2,1),
@@ -141,4 +146,4 @@ INSERT INTO Menu(menuName,weather,temperature,imgPath,soupy,hot_ice,carbohydrate
 ("미고랭",1,0,"/pickmeal/resources/img/menu/미고랭.jpg",1,0,2,0,1),
 ("반미",1,0,"/pickmeal/resources/img/menu/반미.jpg",0,0,1,0,1),
 ("분짜",1,0,"/pickmeal/resources/img/menu/분짜.jpg",1,0,0,0,1),
-("짜조",2,0,"/pickmeal/resources/img/menu/짜조.jpg",1,0,3,2,1)
+("짜조",2,0,"/pickmeal/resources/img/menu/짜조.jpg",1,0,3,2,1);

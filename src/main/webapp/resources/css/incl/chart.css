@@ -198,3 +198,26 @@
 	bottom: 20px;
 	right: 10px;
 }
+
+
+
+
+
+.storeSubInfoBeforeWrap{
+	height: 295px; 
+	overflow: hidden;
+	text-align: center;
+	background: #ffeac8;
+	
+}
+.storeSubInfoBeforeWrap > div {
+	margin:0 auto 150px;
+	width:50%;
+	
+}
+
+
+
+
+
+

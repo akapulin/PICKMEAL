@@ -33,6 +33,10 @@ function writeComment() {
 	let commentWrapNum = $(".commentWrap").length; // 현재 표시된 댓글 수
 	let viewPageNum = $("#viewPageNum").val(); // 표시해야할 댓글 목록 수
 	let cpageNumber = $(".cpageNum").length; // 버튼의 개수
+	//220126효심추가!!!!!!맨처음상태에 cpageNum이 undefined상태임
+	if(cpageNum==null){
+		cpageNum=0;
+	}
 	
 // 마지막 페이지가 아니라면 추가하면 안된다.
 // 만일 현재 페이지에 댓글이 댓글 목록 수만큼 있다면 추가하면 안된다.
@@ -46,11 +50,12 @@ function writeComment() {
 			console.log('in comments?');
 			console.log(data);
 			console.log("현재 페이지 넘버cpageNum"+cpageNum)
-			console.log("총 댓글 수 allCmtNum"+allCmtNum)
+			console.log("모든 페이지 개수 allPageNum"+allPageNum)
 			console.log("현재 표시된 댓글 수 commentWrapNum"+commentWrapNum)
 			console.log("표시해야할 댓글 목록 수 viewPageNum"+viewPageNum)
 			console.log("현재 페이지 넘버cpageNum")
-			
+			console.log("현재페이지 넘버가 모든 페이지 갯수보다 작거나 같고 ")
+			console.log("현재 표시된 댓글 수가 표시해야할 댓글 목록 수 보다 작으면 실행")
 			
 			
 			if (cpageNum <= allPageNum && commentWrapNum < viewPageNum) {
