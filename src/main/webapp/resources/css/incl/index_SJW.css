@@ -82,8 +82,10 @@
     text-align: center;
 }
 
+#presentAddressWrap{
+	display: flex;
+}
 #presentAddress {
-	display: inline-block;
-	height: 30px;
-	line-height: 30px;
+	text-indent: 10px;
+	line-height: 34px;
 }
