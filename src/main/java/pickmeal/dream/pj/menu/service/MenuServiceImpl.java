@@ -69,7 +69,7 @@ public class MenuServiceImpl implements MenuService{
 			}
 			//System.out.println(menuclassify);
 			
-			int y = 0;
+			//int y = 0;
 			menulist = md.findMenuByClassify(menuclassify);
 			if(menulist.size() == 0) {
 				while(menulist.size() == 0) {
@@ -79,20 +79,15 @@ public class MenuServiceImpl implements MenuService{
 					Random random2 = new Random();
 					int randomMenuIndex2 = random.nextInt(3);
 					menuclassify.setMainFood(randomMenuIndex2);
-					y++;
-					System.out.println("반복 횟수는 : "+y);
+					//y++;
+					//System.out.println("반복 횟수는 : "+y);
 					menulist = md.findMenuByClassify(menuclassify);
 				}
 				Random random = new Random();
 				int randomMenuIndex = random.nextInt(menulist.size());
 				
-				Menu randomMenu = menulist.get(randomMenuIndex);
-				return randomMenu;
-				/*System.out.println("0개니까 오마카세" + menulist.size());
-				menulist = md.findMenuByMenuName("오마카세");
-				Menu menu = new Menu();
-				menu = menulist.get(0);
-				return menu;*/
+				
+				return menulist.get(randomMenuIndex);
 			}else {
 				System.out.println(menulist.size());
 				Random random = new Random();
