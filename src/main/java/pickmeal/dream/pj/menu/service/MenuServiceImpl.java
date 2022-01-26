@@ -77,7 +77,7 @@ public class MenuServiceImpl implements MenuService{
 					int randomMenuIndex = random.nextInt(4);
 					menuclassify.setCarbohydrate(randomMenuIndex);
 					Random random2 = new Random();
-					int randomMenuIndex2 = random.nextInt(3);
+					int randomMenuIndex2 = random2.nextInt(3);
 					menuclassify.setMainFood(randomMenuIndex2);
 					//y++;
 					//System.out.println("반복 횟수는 : "+y);
