@@ -58,7 +58,7 @@
 			</c:choose>
 			
 		</div>
-		<div class="eachInfoWrap">
+		<div class="eachInfoWrap deleteWrap">
 			<form id="deleteForm" name="deleteForm" action="signOutMember" method="GET">
 				<button type="button" id="deleteBtn">탈퇴하기</button>
 			</form>
