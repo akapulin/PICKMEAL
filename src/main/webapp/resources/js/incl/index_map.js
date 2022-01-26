@@ -149,7 +149,7 @@ function displayStartMarker() {
 
 // 좌표를 인자로 넣어 식당 정보를 가져와 표시하는 함수
 // 이 함수를 발생시키면 된다.===============================================
-function displayRestaurantInfo(lat, lng, restaurantName) {
+function displayRestaurantInfo(lat, lng, restaurantName, restaurantId) {
 	console.log("hihihihihihihihihihihihihihihihihihihihihihi");
 	console.log("lat : " + lat);
 	console.log("lng : " + lng);
