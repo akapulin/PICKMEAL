@@ -1,3 +1,8 @@
+// ContextPath 구하는 함수
+function getContextPath() {
+    var hostIndex = location.href.indexOf(location.host) + location.host.length;
+    return location.href.substring(hostIndex, location.href.indexOf('/', hostIndex + 1));
+}
 
 $(document).ready(function(){
 	//모집중/모집완료 초기값 셋팅하기
@@ -153,20 +158,46 @@ $('.rPostLikesImg').click(function(){
 		$(this).removeClass('rPostLikesImgSelected');
 		//이미지 변경
 		$(this).attr('src',getContextPath()+'/resources/img/posting/heart.png')
+		convertPostLikes(false);
 	}
 	else{
 		$(this).addClass('rPostLikesImgSelected');
 		//이미지 변경
 		$(this).attr('src',getContextPath()+'/resources/img/posting/heart_onclick.png')
+		convertPostLikes(true);
 	}
 	
 })
 
-// ContextPath 구하는 함수
-function getContextPath() {
-    var hostIndex = location.href.indexOf(location.host) + location.host.length;
-    return location.href.substring(hostIndex, location.href.indexOf('/', hostIndex + 1));
+function convertPostLikes(likesState){
+	let postId = $('#postId').val();
+	let category = $('#postCategory').val();
+	$.ajax({
+		url: getContextPath()+"/posting/convertLikesState",
+		type: "post",
+		data: JSON.stringify({"postId":postId, "category":category, "likesState":likesState }),
+		contentType: "application/json; charset=UTF-8",
+		success:function(data){
+			//좋아요 숫자변경
+			$('.rPostLikesCnt').text(data);
+		},
+	})
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

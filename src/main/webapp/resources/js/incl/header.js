@@ -174,13 +174,14 @@ $('#gnb ul li a').on('click',function(e){
   $(this).addClass('header_BoardOnclick');
 
   //비회원이면 클릭막기
+  /*
   if($('#headerMember').val()==null || $('#headerMember').val() ==''){
 	e.preventDefault();
 	alert('로그인 후 이용하실 수 있습니다');
 	$(this).removeClass('header_BoardOnclick')
 	$(this).css({color:'#f23f3f',cursor:'pointer'});
 	}
-
+  */
 
 
 })
