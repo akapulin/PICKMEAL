@@ -72,3 +72,26 @@ INSERT INTO Menu(menuName,weather,temperature,imgPath,soupy,hot_ice,carbohydrate
 ("바베큐",1,0,"/pickmeal/resources/img/menu/바베큐.jpg",1,0,1,0,1),
 ("잠발라야",1,0,"/pickmeal/resources/img/menu/잠발라야.jpg",1,0,0,0,1),
 ("브리또",1,0,"/pickmeal/resources/img/menu/브리또.jpg",1,1,1,0,1);
+
+#중식
+INSERT INTO Menu(menuName,weather,temperature,imgPath,soupy,hot_ice,carbohydrate,mainFood,spicy)  
+ VALUES ("탕수육",1,0,"/pickmeal/resources/img/menu/탕수육.jpg",1,0,3,0,1),
+("짜장면",1,0,"/pickmeal/resources/img/menu/짜장면.jpg",1,0,3,2,1),
+("짬뽕",2,1,"/pickmeal/resources/img/menu/짬뽕.jpg",0,0,3,0,0),
+("볶음밥",1,0,"/pickmeal/resources/img/menu/볶음밥.jpg",1,0,0,0,1),
+("마라탕",,"/pickmeal/resources/img/menu/마라탕.jpg",0,0,3,0,0),
+("동파육",3,0,"/pickmeal/resources/img/menu/동파육.jpg",1,0,1,0,1),
+("우육면",4,1,"/pickmeal/resources/img/menu/우육면.jpg",0,0,0,0,1),
+("소롱포",1,1,"/pickmeal/resources/img/menu/소롱포.jpg",1,0,2,0,1),
+("훠궈",1,0,"/pickmeal/resources/img/menu/훠궈.jpg",0,0,3,0,0),
+("마라롱샤",1,0,"/pickmeal/resources/img/menu/마라롱샤.jpg",1,0,0,1,0),
+("마라샹궈",1,0,"/pickmeal/resources/img/menu/마라샹궈.jpg",1,0,0,0,0),
+("멘보샤",1,0,"/pickmeal/resources/img/menu/멘보샤.jpg",0,0,1,1,1),
+("짬뽕밥",1,1,"/pickmeal/resources/img/menu/짬뽕밥.jpg",0,0,0,0,0),
+("중화비빔밥",2,0,"/pickmeal/resources/img/menu/중화비빔밥.jpg",1,0,0,0,1),
+("탄탄면",1,1,"/pickmeal/resources/img/menu/탄탄면.jpg",0,0,3,0,1),
+("야끼우동",1,0,"/pickmeal/resources/img/menu/야끼우동.jpg",0,0,3,0,1),
+("야끼덮밥",1,0,"/pickmeal/resources/img/menu/야끼덮밥.jpg",1,0,0,1,1),
+("마파두부",3,0,"/pickmeal/resources/img/menu/마파두부.jpg",1,0,0,0,0),
+("울면",1,0,"/pickmeal/resources/img/menu/울면.jpg",0,0,3,1,1),
+("잡채밥",4,0,"/pickmeal/resources/img/menu/잡채밥.jpg",1,0,0,2,1)
