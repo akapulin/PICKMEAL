@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import lombok.extern.java.Log;
 import pickmeal.dream.pj.posting.domain.Comment;
 
 @Repository("commentDao")
+@Log
 public class CommentDaoImpl implements CommentDao {
 	
 	@Autowired
@@ -29,6 +31,7 @@ public class CommentDaoImpl implements CommentDao {
 		String tableName = decideTableName(category);
 		String sql = "SELECT id, memberId, postId, content, regDate"
 				+ " FROM " + tableName + " WHERE id=LAST_INSERT_ID() AND memberId=?";
+		//log.info(jt.queryForObject(sql, new CommentRowMapper(), memberId).toString());
 		return jt.queryForObject(sql, new CommentRowMapper(), memberId);
 	}
 

@@ -29,10 +29,10 @@ public class CommentServiceImpl implements CommentService {
    private MemberAchievementService mas;
 
    @Override
-  // @Transactional
+   @Transactional
    public Comment addComment(Comment comment) {
-      // 추가 후
-      cd.addComment(comment);
+     
+      
       
       // member 도 식력 포인트를 적립해야한다.
       // 테이블에 동시에 업데이트
@@ -41,9 +41,15 @@ public class CommentServiceImpl implements CommentService {
       Member member = comment.getMember();
       member = mas.addFoodPowerPointItem(member, WRITE_COMMENT);
       
+      // 추가 후!!!! 디비커넥션 오류로 인한 순서 바꾸기
+      cd.addComment(comment);
+      
       // 아이디랑 등록 날짜까지 한 것을 가져와야한다.
+      log.info("와아아아아아아아ㅏ아아아아★★★★★★★★★★★★"+comment.toString());
       comment = cd.findLastAddComment(comment.getMember().getId(), comment.getPosting().getCategory());
-      log.info(comment.toString());
+      
+      
+      
       // 멤버 셋팅 (필요한 값만 셋팅한다)
       comment.setMember(doSettingMemberForComment(ms.findMemberById(comment.getMember().getId())));
       // 포스팅 셋팅을 할 필요는 없다. (타입을 셋팅해야합니당.) ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
