@@ -213,26 +213,7 @@ $("#open").click(function() {
 	}
 })
 
-function makeRetryMsg(cntForRetry){
-	console.log("makeRetryMsg : " + cntForRetry);
-	if(cntForRetry == 0){
-		
-	}else if(cntForRetry == 1){
-		
-	}else if(cntForRetry == 2){
-		$("#retryMsg").text("한 번 더");
-	}else if(cntForRetry == 3){
-		$("#retryMsg").text("한 번 더어~?");
-	}else if(cntForRetry == 4){
-		$("#retryMsg").text("또..?");
-	}else if(cntForRetry == 5){
-		$("#retryMsg").text("까다로우시네");
-	}else if(cntForRetry == 6){
-		$("#retryMsg").text("곱게 먹으러 가지?");
-	}else{
-		$("#retryMsg").text("그냥 라면 먹어");	
-	}
-}
+
 /*
 $("#gameDone").click(function() {
 	displayFindWay("서울시청", "광화문");
