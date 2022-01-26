@@ -19,7 +19,12 @@ public class ReviewDaoImpl implements ReviewDao{
 				+" parking, goodgroup, alone, big, interior"
 				+" FROM Review"
 				+" WHERE restaurantId=?";
-		return jt.queryForObject(sql, new ReviewRowMapper(), restaurantId );
+		try {
+			return jt.queryForObject(sql, new ReviewRowMapper(), restaurantId );
+		}catch(Exception e) {
+			return new Review();
+		}
+		
 	}
 
 	@Override

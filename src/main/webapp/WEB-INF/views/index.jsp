@@ -6,12 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <%@ include file="/WEB-INF/views/incl/link.jsp"%>
-<!--  그래프 자료 - 윤효심-->
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<!--  가게 부가 정보 - 윤효심-->
-<link href="${pageContext.request.contextPath}/resources/css/incl/chart.css" rel="stylesheet" type="text/css">
-<script src="${pageContext.request.contextPath}/resources/js/incl/chart.js" defer></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/incl/index_map_b.css" />
+
 
 <!-- 익명채팅방, 날씨 - 김재익 -->
 <link href="${pageContext.request.contextPath}/resources/css/chat/chat.css" rel="stylesheet" type="text/css">
@@ -34,6 +29,14 @@
 <!-- 성지원 -->
 <script src="${pageContext.request.contextPath}/resources/js/incl/index_map_SJW.js" defer></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/incl/index_SJW.css" />
+
+<!--  그래프 자료 - 윤효심-->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<!--  가게 부가 정보 - 윤효심-->
+<link href="${pageContext.request.contextPath}/resources/css/incl/chart.css" rel="stylesheet" type="text/css">
+<!--  <script src="${pageContext.request.contextPath}/resources/js/incl/chart.js" defer></script>-->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/incl/index_map_b.css" />
+
 
 <title>밥찡코</title>
 </head>
@@ -125,8 +128,9 @@
 			</div>
 		</div>
 		<!-- 식당차트정보 시작 - 윤효심 -->
-		<input type="hidden" name="restaurantId" value="${restaurantId}"
-		id="restaurantId">
+		
+		<input type="hidden" name="restaurantId" value="" id="restaurantId">
+		
 		<div class="storeSubInfoWrap">
 			<div class="ageAndGenderGraphArea">
 				<h3>연령별 / 성별 방문수</h3>

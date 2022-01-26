@@ -25,9 +25,9 @@ public class DataSourceConfig {
 		ds.setUsername("root");
 		ds.setPassword("adminadmin");
 		
-		ds.setInitialSize(2);
-		ds.setMaxActive(10);
-		ds.setMaxIdle(10);
+		ds.setInitialSize(10);
+		ds.setMaxActive(50);
+		ds.setMaxIdle(50);
 		return ds;
 	}
 	
