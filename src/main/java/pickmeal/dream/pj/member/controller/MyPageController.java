@@ -54,7 +54,18 @@ public class MyPageController {
 		mav.addObject("here", "myComments");
 		
 		List<Comment> rComments = cs.findAllCommentByMemberId(member.getId(), 'R');
+		for(Comment c : rComments) {
+			Posting po = c.getPosting();
+			po.setTitle(ps.findPostingTitleById('R', po.getId()));
+			c.setPosting(po);
+		}
+		
 		List<Comment> eComments = cs.findAllCommentByMemberId(member.getId(), 'E');
+		for(Comment c : eComments) {
+			Posting po = c.getPosting();
+			po.setTitle(ps.findPostingTitleById('E', po.getId()));
+			c.setPosting(po);
+		}
 		
 		mav.addObject("rComments", rComments);
 		mav.addObject("eComments", eComments);

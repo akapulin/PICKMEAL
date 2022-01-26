@@ -92,9 +92,8 @@ public class CommentController {
 		// comment 등록
 		comment = cs.addComment(comment);
 //		log.info(comment.toString());
-		log.info("category 테스트로 넣어놓은 것 반드시 삭제할 것");
+//		log.info("category 테스트로 넣어놓은 것 반드시 삭제할 것");
 		//comment.getPosting().setCategory(cc.getCategory()); 
-
 		return ResponseEntity.ok(comment);
 	}
 	

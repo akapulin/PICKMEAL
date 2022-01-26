@@ -97,8 +97,10 @@ public class CommentDaoImpl implements CommentDao {
 	@Override
 	public int countCommentByPostId(long postId, char category) {
 		String tableName = decideTableName(category);
-		String sql = "SELECT COUNT(*) FROM " + tableName + " GROUP BY postId=?";
+		//220126효심수정
+		String sql = "SELECT COUNT(*) FROM " + tableName + " WHERE postId=? GROUP BY postId ";
 		return jt.queryForObject(sql, Integer.class, postId);
+		
 	}
 	
 	/**

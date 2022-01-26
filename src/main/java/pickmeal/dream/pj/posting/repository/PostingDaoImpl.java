@@ -145,6 +145,27 @@ public class PostingDaoImpl implements PostingDao {
 		}
 	}
 	
+	@Override
+	public String findPostingTitleById(char category, long id) {
+		if (category == 'N') {
+			String sql ="SELECT title"
+					+" FROM NoticePosting"
+					+" WHERE id=? ";
+			return jt.queryForObject(sql, String.class,id);
+			
+		} else if (category == 'R') {
+			String sql ="SELECT title"
+					+" FROM RecommendRestaurantPosting"
+					+" WHERE id=? ";
+			return jt.queryForObject(sql, String.class,id);
+		} else {
+			String sql ="SELECT title"
+					+" FROM TogetherEatingPosting"
+					+" WHERE id=? ";
+			return jt.queryForObject(sql, String.class,id);
+		}
+	}
+	
 	
 	@Override
 	public int getPostingCountByCategoryAndMemberId(long memberId, char category) {

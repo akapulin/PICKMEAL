@@ -62,7 +62,7 @@ public class RestaurantController {
 		//String fortuneMessage = ms.getMessageByType('F');
 		
 		ModelAndView mav = new ModelAndView();
-		//레스토랑 아이디 추가 - 윤효심 
+		//레스토랑 아이디 추가(임시) - 윤효심 
 		//mav.addObject("restaurantId",restaurantId);
 		//포춘메세지 추가 - 윤효심 
 		//mav.addObject("fortuneMessage",fortuneMessage);

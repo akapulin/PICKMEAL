@@ -20,7 +20,7 @@
 
 <!-- 김보령  -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=001358587c4d106ce5a3702588b8ce85&libraries=services"></script>
-<script src="${pageContext.request.contextPath}/resources/js/incl/index_map.js" defer></script>
+<script src="${pageContext.request.contextPath}/resources/js/incl/index_map_chart.js" defer></script>
 
 <!-- 정원식 -->
 <script src="${pageContext.request.contextPath}/resources/js/incl/menu_game_JWS.js" defer></script>

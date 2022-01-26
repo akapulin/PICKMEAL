@@ -68,6 +68,11 @@ public class PostingServiceImpl implements PostingService {
 	}
 	
 	@Override
+	public String findPostingTitleById(char category, long id) {
+		return pd.findPostingTitleById(category, id);
+	}
+	
+	@Override
 	public List<Posting> findPostingsPerPageByCategory(Criteria criteria) {
 		
 		/*
