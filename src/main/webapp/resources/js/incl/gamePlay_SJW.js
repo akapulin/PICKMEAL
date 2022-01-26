@@ -252,7 +252,7 @@ $('.gameBtn').on('click', function(e){
 	
 	} else {
 		controllerUrl = "/bringResListForCardGame";
-		$('body').css({background : 'url("/pickmeal/resources/img/game/cargGameBg.png")'});
+		$('body').css({background : 'url("/pickmeal/resources/img/game/cardGameBg.png")'});
 	}
 	$.ajax({
 		url: getContextPath() + controllerUrl,
@@ -281,6 +281,8 @@ $('.gameBtn').on('click', function(e){
 				makeCard(data);
 				
 			} else if(gameType == 'L'){
+				$('#submitBtn').attr("disabled", true);
+				
 				numOfHorLines = data.ladder.length - 2; // 실질 가로줄 갯수
 				numOfVerLines = data.ladder[0].length;
 				
@@ -342,8 +344,9 @@ $('.gameBtn').on('click', function(e){
 							console.log(opener.parent);
 						
 							// 식당 정보를 띄우기 위해서 결과 식당의 좌표를 부모 함수에 넣고 호출.
-							console.log("hihihihihihihihiihihihihihihi");
-							opener.parent.displayRestaurantInfo(resultRes.lat, resultRes.lng, resultRes.rname, resultRes.rid);
+							console.log(resultRes);
+							console.log(resultRes.id);
+							opener.parent.displayRestaurantInfo(resultRes.lat, resultRes.lng, resultRes.rname, resultRes.id);
 							window.opener.$('#open').show();
 							var data0 = data.rid;
 							var data1 = data.couponCategory+"1";
@@ -444,6 +447,7 @@ $('.gameBtn').on('click', function(e){
 				if(setOfRoute[ladderIndex][setOfRouteHorSize-1] == "X0"){ // X일 경우.
 					
 				} else{ // O 일 경우.
+				$('#submitBtn').attr("disabled", false);
 				console.log(" 당첨~~~ ");
 				let answerPath1 = document.createElementNS("http://www.w3.org/2000/svg",'path');
 				let answerPath2 = document.createElementNS("http://www.w3.org/2000/svg",'path');
