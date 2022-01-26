@@ -51,7 +51,7 @@
 
 .cardUl {
 	width: 700px; height: 630px;
-	margin: 55px auto; 
+	margin: 170px auto 0; 
 	display: flex; 
 	flex-flow: row wrap; 
 	justify-content: center; 

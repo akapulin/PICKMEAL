@@ -28,6 +28,8 @@ import pickmeal.dream.pj.coupon.service.CouponService;
 import pickmeal.dream.pj.game.service.GameService;
 import pickmeal.dream.pj.member.domain.Member;
 import pickmeal.dream.pj.member.service.MemberAchievementService;
+import pickmeal.dream.pj.message.domain.Alarm;
+import pickmeal.dream.pj.message.service.AlarmService;
 import pickmeal.dream.pj.message.service.MessageService;
 import pickmeal.dream.pj.restaurant.command.RestaurantCommand;
 import pickmeal.dream.pj.restaurant.domain.Restaurant;
@@ -41,11 +43,8 @@ import pickmeal.dream.pj.web.util.Validator;
 @Log
 public class GameController {
 	
-//		@GetMapping("/gamePlayForm")
-//		public String gamePlayForm() {
-//			return "gamePlay_SJW";
-//		}
-//	
+	@Autowired
+	AlarmService as;
 	
 	@Autowired
 	GameService gs;
@@ -114,12 +113,6 @@ public class GameController {
 			session.setAttribute("cntForRetry", cntForRetry);
 			mav.addObject("cntForRetry", cntForRetry);
 		}
-		// 얘네는 로그인이 되어있을 때 실행되어야 하는데 아래 한 줄로 되나? 
-//			diffOfDate = gs.checkLastGameRecord(member.getId());
-//			if(diffOfDate != 0) {
-//				firstGameMsg = msgs.bringFirstMsg();
-//				mav.addObject("firstGameMsg", firstGameMsg); //첫 게임일 경우 안내 메세지 보냄.
-//			} else {}
 		session.removeAttribute("couponCategory");
 		mav.addObject("radius", radius);
 		mav.addObject("category", category);
@@ -151,7 +144,6 @@ public class GameController {
 		System.out.println("test name : " + resultMap.get(0).get("place_name"));
 		System.out.println("=========================================");
 		
-		//resList = rcs.bringResList(resultMap); // 이미 객체가 생성되어 있어서 이렇게
 		resList = rs.bringResList(resultMap);
 		
 		log.info("gameType is : " + gameType);
@@ -181,7 +173,6 @@ public class GameController {
 		System.out.println("test name : " + resultMap.get(0).get("place_name"));
 		System.out.println("=========================================");
 		
-		//resList = rcs.bringResList(resultMap); // 이미 객체가 생성되어 있어서 이렇게
 		resList = rs.bringResList(resultMap);
 		
 		log.info("gameType is : " + gameType);
@@ -230,13 +221,18 @@ public class GameController {
 			//회원일 때 가장 최근 게임을 테이블에 넣기.
 			System.out.println("");
 			gs.insertLastGameRecord(member.getId(), restaurant.getId());
+			 
+			
+			Alarm alarm = new Alarm();
+			alarm.setMember(member);
+			alarm.setFriend(null);
+			alarm.setAlarmType('L');
+			alarm.setContent(rc.getRname());
+			
+			as.addAlarm(alarm); // 알람 레코드에 추가
+			
 			member = mas.addFoodPowerPointItem(member, PLAY_GAME);
 			System.out.println(member);
-//			cntForRetry = (int)session.getAttribute("cntForRetry");
-//			cntForRetry++;
-//			System.out.println("게임 다시하기 Cnt : " + cntForRetry);
-//			session.setAttribute("cntForRetry", cntForRetry);
-//			map.put("cntForRetry", String.valueOf(cntForRetry));
 		}
 		session.setAttribute("restaurant", restaurant);
 		//HashMap<String,String> map = new HashMap<String, String>();
@@ -356,21 +352,5 @@ public class GameController {
 		}
 		return ResponseEntity.ok(null);
 	}	
-//		왜 모델앤뷰로 안되냐고!!!!!!!!!!!
-	
-//		@GetMapping("/openGamePopUp")
-//		public String openGamePopUp(HttpServletRequest request, Model model) {
-//			System.out.println("test");
-//			
-//			String radius = request.getParameter("radius");
-//			String category = request.getParameter("category");
-//	
-//			
-//			model.addAttribute("radius", radius);
-//			model.addAttribute("category", category);
-//			
-//			return "gamePlay_SJW";
-//		}
-	
 }
 
