@@ -1,7 +1,7 @@
 package pickmeal.dream.pj.posting.controller;
 
 import static pickmeal.dream.pj.web.constant.Constants.COMMENT_LIST;
-
+import static pickmeal.dream.pj.web.constant.SavingPointConstants.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 import lombok.extern.java.Log;
 import pickmeal.dream.pj.member.domain.Member;
+import pickmeal.dream.pj.member.service.MemberAchievementService;
 import pickmeal.dream.pj.posting.command.PostingCommand;
 import pickmeal.dream.pj.posting.domain.Comment;
 import pickmeal.dream.pj.posting.domain.Posting;
@@ -52,6 +53,9 @@ public class PostingController {
 	
 	@Autowired
 	Validator v;
+	
+	@Autowired
+	MemberAchievementService mas;
 
 	/* 
 	 * 
@@ -279,7 +283,8 @@ public class PostingController {
 	 * 글쓰기 폼으로 이동
 	 * 		- 각 게시판에서 글쓰기 버튼을 누를때, 
 	 * 		  게시판에 해당하는 글쓰기 폼으로 간
-	 * 	
+	 * 	****
+	 *  항상 수정과 글쓰기 작동이 따로 이루어진다는걸 염두하기
 	 * @param request
 	 * @return
 	 */
@@ -314,17 +319,49 @@ public class PostingController {
 		long memberId = member.getId();
 		//long memberId = 4;
 	
+		//식력포인트 올리기
+		member = mas.addFoodPowerPointItem(member, WRITE_POST);
 		
-		if(pc.getCategory()=='N') {
-			Posting post = ps.addPosting(setNoticePosting(pc,memberId));
-			return ("redirect:/posting/notice/"+post.getId()+"?cpageNum=1");
-		}else if(pc.getCategory()=='R') {
-			Posting post = ps.addPosting(setRecommendPosting(pc,memberId));
-			return ("redirect:/posting/recommend/"+post.getId()+"?cpageNum=1");
-		}else{
-			Posting post = ps.addPosting(setTogetherPosting(pc,memberId));
-			return ("redirect:/posting/together/"+post.getId()+"?cpageNum=1");
+		//수정상태면!!!!!!!!!!!!!!
+		if(pc.isModifyState()) {
+			if(pc.getCategory()=='N') {
+				
+				Posting post = setNoticePosting(pc,memberId);
+				post.setId(pc.getPostId());
+				ps.updatePosting(post);
+				
+				return ("redirect:/posting/notice/"+post.getId()+"?cpageNum=1");
+			}else if(pc.getCategory()=='R') {
+				Posting post = setRecommendPosting(pc,memberId);
+				post.setId(pc.getPostId());
+				ps.updatePosting(post);
+				
+				return ("redirect:/posting/recommend/"+post.getId()+"?cpageNum=1");
+			}else{
+				Posting post = setTogetherPosting(pc,memberId);
+				post.setId(pc.getPostId());
+				ps.updatePosting(post);
+				
+				return ("redirect:/posting/together/"+post.getId()+"?cpageNum=1");
+			}
 		}
+		//글쓰기상태면
+		else {
+			if(pc.getCategory()=='N') {
+				Posting post = ps.addPosting(setNoticePosting(pc,memberId));
+				return ("redirect:/posting/notice/"+post.getId()+"?cpageNum=1");
+			}else if(pc.getCategory()=='R') {
+				Posting post = ps.addPosting(setRecommendPosting(pc,memberId));
+				return ("redirect:/posting/recommend/"+post.getId()+"?cpageNum=1");
+			}else{
+				Posting post = ps.addPosting(setTogetherPosting(pc,memberId));
+				return ("redirect:/posting/together/"+post.getId()+"?cpageNum=1");
+			}
+		}
+		
+		
+		
+		
 
 	}
 	
@@ -446,6 +483,7 @@ public class PostingController {
 		
 		mav.addObject("modifyState", true);
 		mav.addObject("postType",category);
+		mav.addObject("postId",id);
 		mav.addObject("post",posting);
 		mav.setViewName("posting/post_write");
 		return mav;
