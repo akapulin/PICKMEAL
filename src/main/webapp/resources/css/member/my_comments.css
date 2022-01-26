@@ -55,17 +55,21 @@
 
 #comments_area .comments .commentBox .nameAndRegDate{
 	font-size: 0.8rem;
-	margin-bottom: 2px;
 }
 
 #comments_area .comments .commentBox .content{
 	width: 90%;
 	word-break: break-all;
 	font-size: 1rem;
+	margin-top: 3px;
 }
 
 #comments_area .comments .commentBox .postTitle{
-	font-size: 0.7rem;
+	font-size: 0.8rem;
+}
+
+#comments_area .comments .commentBox .postTitle:hover {
+	text-decoration: underline;
 }
 
 #comments_area .comments .commentBox form .myCmtDelBtn {
@@ -73,4 +77,13 @@
 	top: 50%;
 	right: 20px;
 	transform: translateY(-50%);
+	width: 40px;
+    height: 30px;
+    border: 0;
+    background: #f23f3f;
+    color: #fff;
+}
+
+#comments_area .comments .commentBox form .myCmtDelBtn:hover {
+	background: #f67e7e;
 }
