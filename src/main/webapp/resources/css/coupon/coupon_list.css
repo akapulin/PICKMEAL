@@ -18,7 +18,7 @@
         float: left; margin: 20px 23px 0; border-top:3px solid #f23f3f; border-bottom: 3px solid #f23f3f; padding-bottom: 15px;
         	padding-top: 15px;}
         .rName{margin-left: 15px; width: 365px; height: 25px; font-size: 20px; margin-top: 5px; font-weight: 900;}
-        .cName{margin-left: 15px; width: 365px; height: 37px; font-size: 33px;  float: left;  font-weight: 900; color: #f23f3f; }
+        .cName{margin-left: 15px; width: 365px; height: 37px; font-size: 33px;  float: left;  font-weight: 900; color: #f23f3f; letter-spacing: -1px;}
         .cNumber{font-size: 14px; margin-left: 15px; margin-top: 10px; width: 365px; height: 20px;  float: left; font-family: 'Noto Sans KR', sans-serif; }
         .cLimit{text-indent: 15px; font-size: 12px; width: 165px; height: 15px; float: left; margin-top: 5px;}
         .cregDate{ text-align: right; font-size: 12px;  width: 160px; height: 15px;  float: left; color: red; margin-top: 5px;}

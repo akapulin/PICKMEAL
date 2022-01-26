@@ -17,7 +17,6 @@
 	<jsp:include page="/WEB-INF/views/member/my_page.jsp"/>
     <main>
         <section>
-            <h3 id="divName">${member.getNickName()}님 방문리스트</h3>
            	<div id="basket">
 	            <div id="leftdiv">
 	                <h3>내가 간 식당</h3>
