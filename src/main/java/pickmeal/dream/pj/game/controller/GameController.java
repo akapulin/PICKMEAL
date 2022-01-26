@@ -224,8 +224,9 @@ public class GameController {
 			 
 			
 			Alarm alarm = new Alarm();
+			Member friend = new Member();
 			alarm.setMember(member);
-			alarm.setFriend(null);
+			alarm.setFriend(friend);
 			alarm.setAlarmType('L');
 			alarm.setContent(rc.getRname());
 			
