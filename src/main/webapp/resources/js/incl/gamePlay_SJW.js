@@ -343,7 +343,7 @@ $('.gameBtn').on('click', function(e){
 						
 							// 식당 정보를 띄우기 위해서 결과 식당의 좌표를 부모 함수에 넣고 호출.
 							console.log("hihihihihihihihiihihihihihihi");
-							opener.parent.displayRestaurantInfo(resultRes.lat, resultRes.lng, resultRes.rname);
+							opener.parent.displayRestaurantInfo(resultRes.lat, resultRes.lng, resultRes.rname, resultRes.rid);
 							window.opener.$('#open').show();
 							var data0 = data.rid;
 							var data1 = data.couponCategory+"1";
@@ -489,7 +489,7 @@ $('.gameBtn').on('click', function(e){
 								opener.parent.setrestaurantIsempty(data2);
 								opener.parent.couponAndFavoriteShow();
 								// 식당 정보를 띄우기 위해서 결과 식당의 좌표를 부모 함수에 넣고 호출.
-								opener.parent.displayRestaurantInfo(resultResOfLadder.lat, resultResOfLadder.lng, resultResOfLadder.rname);
+								opener.parent.displayRestaurantInfo(resultResOfLadder.lat, resultResOfLadder.lng, resultResOfLadder.rname, resultResOfLadder.rid);
 								
 							}
 						})							
