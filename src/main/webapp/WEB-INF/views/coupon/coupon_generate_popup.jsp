@@ -86,7 +86,6 @@
     		data : JSON.stringify,
     		contentType:'application/json; charset=utf-8',
     		success: function(){
-    			//console.log("여기 들어오냐?구요");
     			opener.parent.setCafterIsempty();
     			opener.parent.removeGenerisCoupon();
     			

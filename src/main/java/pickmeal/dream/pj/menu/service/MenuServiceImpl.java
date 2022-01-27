@@ -89,7 +89,7 @@ public class MenuServiceImpl implements MenuService{
 				
 				return menulist.get(randomMenuIndex);
 			}else {
-				System.out.println(menulist.size());
+				//System.out.println(menulist.size());
 				Random random = new Random();
 				int randomMenuIndex = random.nextInt(menulist.size());
 				

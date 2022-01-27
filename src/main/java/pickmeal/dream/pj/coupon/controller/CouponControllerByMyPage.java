@@ -135,7 +135,7 @@ public class CouponControllerByMyPage {
 	 */
 	@PostMapping("/usedCoupon")
 	public ModelAndView usedCoupon(@RequestParam("couponid") long couponid, HttpSession session) {
-		System.out.println("팝업창에서 잘 보냄 : " + couponid);
+		//System.out.println("팝업창에서 잘 보냄 : " + couponid);
 		cs.changeUsedCouponById(couponid);
 		
 		ModelAndView mav = new ModelAndView();

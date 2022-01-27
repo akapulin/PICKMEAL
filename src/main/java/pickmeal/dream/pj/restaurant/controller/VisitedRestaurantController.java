@@ -152,10 +152,10 @@ public class VisitedRestaurantController {
 		System.out.println(longvrId);
 		vrs.removeVisitiedRestaurantById(longvrId);
 		if(vrd.isVisitedRestaurantById(longvrId)) {
-			System.out.println("테이블에서 안지워짐");
+			//System.out.println("테이블에서 안지워짐");
 			return ResponseEntity.ok(false);
 		}else {
-			System.out.println("테이블에서 지워짐");
+			//System.out.println("테이블에서 지워짐");
 			return ResponseEntity.ok(false);
 		}
 	}
@@ -206,15 +206,5 @@ public class VisitedRestaurantController {
 		}
 		
 	}	
-		
-		
-		
-
-	/*Review re = new Review();
-	List<ReviewItem> itemlist = new ArrayList<ReviewItem>();
-	int i = re.getReviewItem().get(0).getReviewCount();
-	int j = i + r.getBathroom();
-	itemlist = re.getReviewItem();
-	itemlist.get(0).getReviewCount();*/
 	
 }

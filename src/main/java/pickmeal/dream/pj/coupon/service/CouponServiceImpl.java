@@ -6,6 +6,7 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.java.Log;
 import pickmeal.dream.pj.coupon.domain.Coupon;
 import pickmeal.dream.pj.coupon.domain.CouponCategory;
 import pickmeal.dream.pj.coupon.repository.CouponDao;
@@ -14,6 +15,7 @@ import pickmeal.dream.pj.member.repository.MemberDao;
 import pickmeal.dream.pj.restaurant.domain.Restaurant;
 import pickmeal.dream.pj.restaurant.repository.RestaurantDao;
 
+@Log
 @Service("couponService")
 public class CouponServiceImpl implements CouponService {
 	
@@ -41,7 +43,7 @@ public class CouponServiceImpl implements CouponService {
 		/*발생확률 성공시*/
 		if(coupongenerate <=70000) {
 			char couponType;
-			System.out.println("쿠폰발생 시켜주기");
+			log.info("쿠폰발생 확률 통과");
 			/* 쿠폰 타입 랜덤으로 정해주기 */
 			Random couponTypeInt = new Random();
 			if(couponTypeInt.nextInt(3) == 0) {
@@ -52,12 +54,11 @@ public class CouponServiceImpl implements CouponService {
 				couponType = 'C';
 			}
 			/*쿠폰 타입으로 쿠폰 발행 하기*/
-			System.out.println(couponType);
+			log.info("발행 랜덤 쿠폰 타입 : "+couponType);
 			CouponCategory couponCategory = cd.generateCouponTypeByRestaurant(couponType);
 			return couponCategory;
 			}else {
-			//System.out.println(coupongenerate);
-			//System.out.println("발생이 안되썽");
+				log.info("쿠폰발생 확률 미통과");
 			return null;
 		}
 	}
@@ -73,7 +74,8 @@ public class CouponServiceImpl implements CouponService {
 		/*발생확률 성공시*/
 		if(coupongenerate <=99999) {
 			char couponType;
-			System.out.println("쿠폰발생 시켜주기");
+			log.info("쿠폰 발행 통과");
+			
 			/* 쿠폰 타입 랜덤으로 정해주기 */
 			Random couponTypeInt = new Random();
 			if(couponTypeInt.nextInt(3) == 0) {
@@ -83,13 +85,13 @@ public class CouponServiceImpl implements CouponService {
 			}else{
 				couponType = 'C';
 			}
+			
 			/*쿠폰 타입으로 쿠폰 발행 하기*/
-			System.out.println(couponType);
+			log.info("쿠폰 발행 타입 : "+couponType);
 			CouponCategory couponCategory = cd.generateCouponTypeByRestaurant(couponType);
 			return couponCategory;
 		}else {
-			//System.out.println(coupongenerate);
-			//System.out.println("발생이 안되썽");
+			log.info("쿠폰 발행 미통과");
 			return null;
 		}
 	}
@@ -167,7 +169,6 @@ public class CouponServiceImpl implements CouponService {
 		coupons.get(0).setRestaurant(restaurant);
 		CouponCategory couponCategory = cd.findCouponCategoryByid(coupons.get(0).getCouponCategory().getId());
 		coupons.get(0).setCouponCategory(couponCategory);*/
-		System.out.println("들어오냐?");
 		
 		return cd.findUsedCouponsBymemberId(memberId);
 	}

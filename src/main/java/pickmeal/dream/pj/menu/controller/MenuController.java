@@ -35,7 +35,7 @@ public class MenuController {
 		Menuclassify menuclassify = new Menuclassify(msCommand.getSoupy(),msCommand.getHot_ice()
 				,msCommand.getCarbohydrate(),msCommand.getMainFood(),msCommand.getSpicy());
 		Menu menu = ms.findMenuByClassify(menuclassify);
-		System.out.println(menu);
+		//System.out.println(menu);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("menu", menu);
 		mav.setViewName("menu/menu_game_success");

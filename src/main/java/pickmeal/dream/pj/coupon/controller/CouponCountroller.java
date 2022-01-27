@@ -78,7 +78,6 @@ public class CouponCountroller {
 	public ModelAndView CouponCategoryGeneric(HttpSession session) {
 		/*이거 나중에 게임 완료 후로 다 옴겨야해용 다 옴겨야행용*/
 		/*레스토랑이 제휴 레스토랑인지 비교 하기*/
-		System.out.println("이화면 입장 완료여");
 		Restaurant restaurant = cs.findRestaurantById(9);
 		System.out.println(restaurant);
 		System.out.println(restaurant.isRType());
@@ -89,7 +88,6 @@ public class CouponCountroller {
 			
 			/*멤버라면?*/
 			if(member !=null) {
-				System.out.println("에러 여기서나나?");
 				/*오늘 받은 쿠폰개수 확인 해주기*/
 				if(cs.findCouponByMemberIdinToday(member.getId())==1) {
 					if(cs.findCouponBymemberIdinTodayMax(member.getId())<=2) {
@@ -139,9 +137,9 @@ public class CouponCountroller {
 			else {
 				CouponCategory couponCategory = cs.findCouponCategoryGo();
 				/*쿠폰이 발급이 안되서 리턴값이 없을 경우 그냥 통과*/
-				System.out.println("트루값 받고 여기 들어옴");
+				//System.out.println("트루값 받고 여기 들어옴");
 				if(couponCategory == null) {
-				System.out.println("왜? 없는쪽임 = " + couponCategory);
+				//System.out.println("왜? 없는쪽임 = " + couponCategory);
 				}else {
 
 				session.setAttribute("couponCategory", couponCategory);
@@ -179,6 +177,11 @@ public class CouponCountroller {
 	}
 	
 	
+	/**
+	 * 팝업창에서 쿠폰 클릭하고 쿠폰 발행할 때
+	 * @param session
+	 * @return
+	 */
 	@PostMapping("/genericJincoupon")
 	@ResponseBody
 	public ResponseEntity<?> genericJinCoupon(HttpSession session){
@@ -193,12 +196,12 @@ public class CouponCountroller {
 		coupon.setRestaurant(restaurant);
 		coupon.setCouponCategory(couponCategory);
 		cs.addCoupon(coupon);
-		System.out.println("쿠폰은 어떤가요~!"+coupon);
+		//System.out.println("쿠폰은 어떤가요~!"+coupon);
 		if(cd.isCouponByCouponNumber(coupon.getCouponNumber()))
 			b = true;
 		else
 			b = false;
-		System.out.println(b+" 리턴 할게요!");
+		//System.out.println(b+" 리턴 할게요!");
 		return ResponseEntity.ok(b);
 	}
 	
