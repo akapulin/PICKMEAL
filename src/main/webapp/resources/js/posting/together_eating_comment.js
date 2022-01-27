@@ -202,6 +202,8 @@ function deleteComment(a) {
 			if (data == true) {
 				$("#commentWrap" + id).remove();
 				allCmtNum--;
+				//220127효심추가 댓글갯수 셋팅해주기
+				$('.rPostCommentCnt').text(allCmtNum);
 				console.log("현재 댓글 수 : " + allCmtNum)
 				let viewCmt = $(".commentWrap").length; // 현재 화면에 보이는 댓글 수
 				if (viewCmt == 0) {
