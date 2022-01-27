@@ -452,15 +452,20 @@ function goChat(a) {
 	
 	let input1 = document.createElement("input");
 	let input2 = document.createElement("input");
+	let input3 = document.createElement("input");
 	input1.type = "hidden";
 	input1.name = "writer";
 	input1.value = writer;
 	input2.type = "hidden";
 	input2.name = "commenter";
 	input2.value = commenter;
+	input3.type = "hidden";
+	input3.name = "chkAlarm";
+	input3.value = "comment";
 	
 	viewCmtForm.appendChild(input1);
 	viewCmtForm.appendChild(input2);
+	viewCmtForm.appendChild(input3);
 	
 	viewCmtForm.submit();
 }
