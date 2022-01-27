@@ -3,6 +3,7 @@ package pickmeal.dream.pj.posting.repository;
 import java.util.List;
 
 import pickmeal.dream.pj.posting.domain.Posting;
+import pickmeal.dream.pj.posting.util.Criteria;
 
 /**
  * 
@@ -110,4 +111,6 @@ public interface PostingDao {
 	 * @return
 	 */
 	public String findPostingTitleById(char category, long id);
+	
+	public List<Posting> findPostingsPerPageByCategoryAndBySorting(Criteria criteria ,int pageStart , int pageReadCnt, int switchNum);
 }

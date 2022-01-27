@@ -4,7 +4,7 @@
 #menu_wrap { display: none;}
 
 .msgContent{
-	width: 1050px; height: 1000px;
+	width: 1060px; height: 1000px;
 	position:absolute; top: 0; left: 0;
 	line-height: 1000px;
 	text-align: center;
@@ -47,11 +47,11 @@
 .hidden { display: none;}
 
 
-#gameWrap {margin: 0 auto; width: 1050px; height: 700px;}
+#gameWrap {margin: 0 auto; width: 1060px; height: 700px;}
 
 .cardUl {
 	width: 700px; height: 630px;
-	margin: 170px auto 0; 
+	margin: 100px auto 0; 
 	display: flex; 
 	flex-flow: row wrap; 
 	justify-content: center; 
@@ -102,13 +102,16 @@ li {list-style: none;}
 }
 
 .choice { 
-	width: 130px; height: 60px;
-	padding: 2px 2px;
+	width: 132px; height: 60px;
+	padding: 0px 0px;
 	/* background-color: transparent; */
-	border:0;
-	font-size: 1.3em;
+	background: darkolivegreen;
+	border: 5px solid #fff;
+	color: #fff;
+	font-size: 0.9em;
 	margin: 0 auto;
 	text-align: center;
+	box-sizing: border-box;
 }
 
 @keyframes moving {
@@ -122,25 +125,24 @@ li {list-style: none;}
 	position: absolute; top: 105px; left: 74px;
 }
 
-.svgDiv {width: 870px; height: 500px; margin: 0 auto;}
+.svgDiv {width: 860px; height: 500px; margin: 0 auto;}
 
 .svg2Div {
-	width: 870px; height: 500px; 
+	width: 860px; height: 500px; 
 	margin: 0 auto;
 	}
 
-.ladderUl { display: flex; width: 1050px; margin-top: 50px;}
+.ladderUl { display: flex; width: 1060px; margin-top: 50px;}
 .ladderLi { 
-	width: 130px; height: 60px; margin: 0 40px;
+	width: 136px; height: 60px; margin: 0 40px;
 	box-shadow: 0px 4px 10px 6px rgb(0 0 0 / 47%);
 }
 .ladderpick { 
 	box-sizing: border-box;
-	color: black;
-	border-radius: 5px;
+	color: #fff;
 	font-weight: 900;
-	font-size: 1.3rem;
+	font-size: 0.9rem;
 }
 
-.oxUl{ display: flex; width: 1050px; position:absolute; top: 610px;}
-.oxLi{ width: 130px; height: 60px; margin: 0 40px; text-align: center; line-height: 60px; }
+.oxUl{ display: flex; width: 1060px; position:absolute; top: 610px;}
+.oxLi{ width: 132px; height: 60px; margin: 0 40px; text-align: center; line-height: 60px; }

@@ -237,6 +237,28 @@ public class PostingServiceImpl implements PostingService {
 		pd.convertRecruitmentState(postId);
 		return pd.getRecruitmentState(postId);
 	}
+
+	@Override
+	public List<Posting> findPostingsPerPageByCategoryAndBySorting(Criteria criteria, int switchNum) {
+		
+		int pageStart = (criteria.getPage()-1)*criteria.getCntPerPage();		//0, 12, 24, 36, 48...
+		int pageReadCnt = criteria.getCntPerPage();
+		log.info("pageStart : "+pageStart);
+		
+		
+		
+		List<Posting> postings = pd.findPostingsPerPageByCategoryAndBySorting(criteria, pageStart,pageReadCnt, switchNum);
+		log.info("postingCount(default:12) : "+postings.size());
+		
+		
+		//코멘트 갯수 & 레스토랑정보 가져오기
+		postings = setCommentCntForPostings(postings);
+		//멤버정보 가져오기
+		postings = setMemberForPostings(postings);
+		
+		return postings;
+
+	}
 	
 
 }

@@ -15,8 +15,8 @@ let json;
 // 마커를 담을 배열입니다
 var markers = [];
 
-//var categoryArr = ['간식', '분식', '뷔페', '아시아음식', '양식', '일식', '중식', '패스트푸드', '패밀리레스토랑', '피자', '치킨', '한식'];
-var categoryArr = ['한식', '중식'];
+var categoryArr = ['간식', '분식', '뷔페', '아시아음식', '양식', '일식', '중식', '패스트푸드', '패밀리레스토랑', '피자', '치킨', '한식'];
+//var categoryArr = ['한식', '중식'];
 var rNameArr = ['이름'];
 var	rAddressArr = ['주소'];
 var rLatArr = []; //y;
@@ -55,6 +55,7 @@ let finalArr = [];
 	console.log(radius);
 	
 	if(keyword == "밥집"){
+		console.log("at 58 line : " + categoryArr.length);
 		for(var j=0; j< categoryArr.length; j++){
 			searchResList(radius, categoryArr[j], nowLat, nowLng);	
 		}
@@ -166,7 +167,7 @@ function searchResList(radius, keyword, lat, lng){
 					}
 				}
 				//12로 바꿔야 함.
-				if(categoryCnt == 2){
+				if(categoryCnt == 12){
 					console.log("밥집인 경우 이리로 온다.");
 					console.log(totalArr.length);
 					if(totalArr.length >= 5){
@@ -364,7 +365,7 @@ $('.gameBtn').on('click', function(e){
 			})
 			
 			var svg2 = document.createElementNS("http://www.w3.org/2000/svg",'svg');
-            svg2.setAttribute("width","870");
+            svg2.setAttribute("width","860");
             svg2.setAttribute("height","500");
             //svg2.style.border="1px solid black";
             svg2.setAttribute("id","svg2");
@@ -468,6 +469,7 @@ $('.gameBtn').on('click', function(e){
 							$('.ladderLi').children("button").attr('disabled', true);
 							//$(this).addClass("ladderpick");
 							$(".ladderLi").eq(ladderIndex).children('button').addClass("ladderpick");
+							$('.ladderpick').css('background', 'red');
 							
 							
 						}, 4000) // 애니메이션 끝나고 1초 후에 바뀜 
@@ -575,7 +577,7 @@ function makeLadder(data, sizeOfWidth, sizeOfHeight){
 	$("#gameWrap").append('<ul class="oxUl"></ul>');
 	
 	var svg = document.createElementNS("http://www.w3.org/2000/svg",'svg');
-            svg.setAttribute("width","870");
+            svg.setAttribute("width","860");
             svg.setAttribute("height","500");
             //svg.style.border="1px solid black";
             svg.setAttribute("id","svg");
@@ -605,9 +607,9 @@ function makeLadder(data, sizeOfWidth, sizeOfHeight){
 			
 			console.log(ladder[ladder.length-1][i]);
 			if(ladder[ladder.length-1][i] == "O"){
-				let ansBtn = $('#gameWrap .oxUl').append('<li class="oxLi">O</li>');	
+				let ansBtn = $('#gameWrap .oxUl').append('<li class="oxLi"><img width="90" height="90" src="/pickmeal/resources/img/game/O.png"></li>');	
 			}else{ // XO
-				let ansBtn = $('#gameWrap .oxUl').append('<li class="oxLi">X</li>');	
+				let ansBtn = $('#gameWrap .oxUl').append('<li class="oxLi"><img width="90" height="90" src="/pickmeal/resources/img/game/X2.png"></li>');	
 			}
 			
 			

@@ -189,6 +189,39 @@ public class PostingController {
 	 * @param page
 	 * @return
 	 */
+//	@GetMapping("/posting/{type}")
+//	public ModelAndView listPostView(Criteria criteria, @PathVariable String type, HttpSession session ) {
+//		ModelAndView mav = new ModelAndView();
+//		
+//		//게시판 카테고리별 셋팅 1줄로 가능!
+//		criteria.setType(type);
+//		
+//		//로그인한 상태가 아니면 로그인페이지로 보내기
+//		Member member = (Member)session.getAttribute("member");
+//		if(member==null) {
+//			mav.setViewName("redirect:/member/viewSignIn");
+//			return mav;
+//		}
+//		
+//		//게시판 페이징 처리 클래스 셋팅하기
+//		PageMaker pageMaker = new PageMaker(ps.getPostingCountByCategory(criteria.getType()),criteria);
+//		log.info("PageMaker type : "+ pageMaker.getCriteria().getType()+" page : "+pageMaker.getCriteria().getPage()+" totalCnt : "+pageMaker.getTotal());
+//		log.info("PageStartNum : "+pageMaker.getStartNum()+"PageEndNum : "+pageMaker.getEndNum());
+//		mav.addObject("pageMaker", pageMaker);
+//		
+//		//게시물 불러오기
+//		List<Posting> postings = ps.findPostingsPerPageByCategory(pageMaker.getCriteria());
+//		mav.addObject("postings", postings);
+//		
+//		//게시판이 밥친구일 경우, object로 업캐스팅 해준다
+//		if(pageMaker.getCriteria().getType()=='E') {
+//			@SuppressWarnings("unchecked")
+//			List<TogetherEatingPosting> togetherPostings = (List<TogetherEatingPosting>)(Object)postings;
+//			mav.addObject("postings", togetherPostings);
+//		}
+//		mav.setViewName("/posting/post_list");
+//		return mav;
+//	}
 	@GetMapping("/posting/{type}")
 	public ModelAndView listPostView(Criteria criteria, @PathVariable String type, HttpSession session ) {
 		ModelAndView mav = new ModelAndView();
@@ -202,6 +235,8 @@ public class PostingController {
 			mav.setViewName("redirect:/member/viewSignIn");
 			return mav;
 		}
+		//멤버가 없으면 애초에 없음.
+		int switchNum = (int)session.getAttribute("switchNum");
 		
 		//게시판 페이징 처리 클래스 셋팅하기
 		PageMaker pageMaker = new PageMaker(ps.getPostingCountByCategory(criteria.getType()),criteria);
@@ -209,9 +244,34 @@ public class PostingController {
 		log.info("PageStartNum : "+pageMaker.getStartNum()+"PageEndNum : "+pageMaker.getEndNum());
 		mav.addObject("pageMaker", pageMaker);
 		
-		//게시물 불러오기
-		List<Posting> postings = ps.findPostingsPerPageByCategory(pageMaker.getCriteria());
+		List<Posting> postings;
+		if(criteria.getSortType() == null) {
+			System.out.println("초기에 이리로 들어옴");
+			switchNum = 0;
+			criteria.setSortType("id");
+			criteria.setSort("DESC");
+			postings = ps.findPostingsPerPageByCategoryAndBySorting(pageMaker.getCriteria(), switchNum);
+			System.out.println(postings);
+		} else {	
+			System.out.println("뭔가 버튼을 클릭 했을 때 : sort : " + criteria.getSortType() + " / switchNum : " + switchNum + " / 게시판 타입 : " + criteria.getType());
+			if(switchNum == 0) {
+				criteria.setSort("DESC");
+				postings = ps.findPostingsPerPageByCategoryAndBySorting(pageMaker.getCriteria(), switchNum);
+				switchNum = 1;
+				session.setAttribute("switchNum", switchNum);
+				System.out.println("if switchNum == 0, postings is : " + postings);
+			}
+			else {
+				criteria.setSort("ASC");
+				postings = ps.findPostingsPerPageByCategoryAndBySorting(pageMaker.getCriteria(), switchNum);
+				switchNum = 0;
+				System.out.println("if switchNum == 1, postings is : " + postings);
+				session.setAttribute("switchNum", switchNum);
+			}
+		}
 		mav.addObject("postings", postings);
+		
+		//switchNum 에 대한 처리.
 		
 		//게시판이 밥친구일 경우, object로 업캐스팅 해준다
 		if(pageMaker.getCriteria().getType()=='E') {
@@ -219,14 +279,27 @@ public class PostingController {
 			List<TogetherEatingPosting> togetherPostings = (List<TogetherEatingPosting>)(Object)postings;
 			mav.addObject("postings", togetherPostings);
 		}
-		
-		
-		
-		
 		mav.setViewName("/posting/post_list");
 		return mav;
+	}
+	
+	@GetMapping("/posting/{type}/sorting")
+	public ModelAndView sorting(Criteria criteria, @PathVariable String type, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		int switchNum = 0;
+		session.setAttribute("switchNum", switchNum);
 		
+		PageMaker pageMaker = new PageMaker(ps.getPostingCountByCategory(criteria.getType()), criteria);
+		mav.addObject("pageMaker", pageMaker);
 		
+		List<Posting> postings = ps.findPostingsPerPageByCategoryAndBySorting(pageMaker.getCriteria(), switchNum);
+		
+		char category = getPostCategory(type);
+		
+		mav.addObject("modifyState", false);		//수정,글쓰기가 같은 view를 이용하기 때문에 
+		mav.addObject("postType",category);
+		mav.setViewName("posting/post_write");
+		return mav;
 	}
 	
 	
@@ -530,6 +603,32 @@ public class PostingController {
 	}
 	
 	
+
+//	
+//	@GetMapping("/posting/{type}/sortingByLatest")
+//	public ModelAndView sortingByLatest(@PathVariable String type) {
+//			
+//		ModelAndView mav = new ModelAndView();
+//		char category = getPostCategory(type);
+//		
+//		mav.addObject("modifyState", false);		//수정,글쓰기가 같은 view를 이용하기 때문에 
+//		mav.addObject("postType",category);
+//		mav.setViewName("posting/post_write");
+//		return mav;
+//	}
+//	
+//	@GetMapping("/posting/{type}/sortingByLikes")
+//	public ModelAndView sortingByLikes(@PathVariable String type) {
+//			
+//		ModelAndView mav = new ModelAndView();
+//		char category = getPostCategory(type);
+//		
+//		mav.addObject("modifyState", false);		//수정,글쓰기가 같은 view를 이용하기 때문에 
+//		mav.addObject("postType",category);
+//		mav.setViewName("posting/post_write");
+//		return mav;
+//	}
+
 	/**
 	 * 로그인한 사용자의 1개의 게시물에 대한 좋아요 상태를 바꾼다
 	 * 현재 게시물의 좋아요 갯수를 리턴해준다
