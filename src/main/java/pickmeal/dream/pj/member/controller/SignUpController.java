@@ -146,8 +146,10 @@ public class SignUpController {
 		// 완료 후 세션에 멤버를 넣어준다 (자동 로그인)
 		session.setAttribute("member", enterMember);
 		session.setAttribute("cntForRetry", cntForRetry);
+
 		session.setAttribute("switchNum", switchNum);
-		
+		// 알람을 받을 거라는 체크
+		session.setAttribute("chatCount", "true");	
 		
 		
 		/*쿠폰 자동 넣기 서비스*/

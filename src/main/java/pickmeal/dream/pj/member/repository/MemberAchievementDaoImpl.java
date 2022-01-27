@@ -29,7 +29,7 @@ public class MemberAchievementDaoImpl implements MemberAchievementDao {
 	@Override
 	public List<FoodPowerPointItem> findFoodPowerPointRecordByMemberId(long memberId) {
 		String sql = "SELECT id, point, detail, regDate"
-				+ " FROM FoodPowerPoint WHERE memberId=?";
+				+ " FROM FoodPowerPoint WHERE memberId=? ORDER BY regDate DESC";
 		return jt.query(sql, new FoodPowerPointItemRowMapper(), memberId);
 	}
 

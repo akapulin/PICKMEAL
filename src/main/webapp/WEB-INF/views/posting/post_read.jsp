@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" session="true"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -183,6 +183,7 @@
     		코멘트 - 김보령
     
      -->
+    <c:if test="${fn:contains(post.category,'E') or fn:contains(post.category,'R')}">
     <section id="commentsContainer">
     <div id="commentsWrap">
 		<h2 class="hidden">댓글</h2>
@@ -263,5 +264,6 @@
 		</form:form>
 		</div>
 	</section>
+	</c:if>
 </body>
 </html>

@@ -202,6 +202,8 @@ function deleteComment(a) {
 			if (data == true) {
 				$("#commentWrap" + id).remove();
 				allCmtNum--;
+				//220127효심추가 댓글갯수 셋팅해주기
+				$('.rPostCommentCnt').text(allCmtNum);
 				console.log("현재 댓글 수 : " + allCmtNum)
 				let viewCmt = $(".commentWrap").length; // 현재 화면에 보이는 댓글 수
 				if (viewCmt == 0) {
@@ -452,15 +454,20 @@ function goChat(a) {
 	
 	let input1 = document.createElement("input");
 	let input2 = document.createElement("input");
+	let input3 = document.createElement("input");
 	input1.type = "hidden";
 	input1.name = "writer";
 	input1.value = writer;
 	input2.type = "hidden";
 	input2.name = "commenter";
 	input2.value = commenter;
+	input3.type = "hidden";
+	input3.name = "chkAlarm";
+	input3.value = "comment";
 	
 	viewCmtForm.appendChild(input1);
 	viewCmtForm.appendChild(input2);
+	viewCmtForm.appendChild(input3);
 	
 	viewCmtForm.submit();
 }

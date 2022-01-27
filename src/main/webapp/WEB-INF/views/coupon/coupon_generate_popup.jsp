@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" session="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -24,7 +24,7 @@
                 <div id="couponPriceWrap">
                 	<input type="hidden" value="${member.id}" id="memberIdWS" name="memberIdWS">
                 	<input type="hidden" value="${restaurant.id}" id="restaurantWS" name="restaurantWS">
-                	<input type="hidden" value="${couponCategory.id}" id="couponCategoryWS" name="restaurantWS"">
+                	<input type="hidden" value="${couponCategory.id}" id="couponCategoryWS" name="restaurantWS"/>
                 	<p id="restaurantName"><span id="restaurantNameSpan">'${restaurant.RName}'</span> 쿠폰</p>
                     <p id="couponPrice"><span id="couponPriceSpan">${couponCategory.couponName}</span></p>
                     <p id="orderPrice"><span id="limitPrice">${couponCategory.limitPrice}</span> 원 이상 주문시 사용가능</p>
@@ -36,8 +36,8 @@
                 </div>
             </div>
             <div id="limitationWrap">
-                <p id="ment1" class="mentAll"><span class="menuAllspan">※</span>"발급 받기"를 누르지 않으면</p>
-                <p id="ment2" class="mentAll"><span class="menuAllspan">※</span>위 쿠폰 미발급시 한시간 뒤 자동 소멸됩니다.</p>
+                <p id="ment1" class="mentAll"><span class="menuAllspan">※</span>"발급 받기(로그인)"를(을) 누르지 않으면</p>
+                <p id="ment2" class="mentAll"><span class="menuAllspan">※</span>위 쿠폰 미발급시 30분 뒤 자동 소멸됩니다.</p>
                 <p id="ment3" class="mentAll"><span class="menuAllspan">※</span>유효기간 : 발급 일 당일</p>
                 <p id="ment4" class="mentAll"><span class="menuAllspan">※</span>쿠폰은 1일 최대 3회 발급됩니다.</p>
             </div>
