@@ -177,6 +177,8 @@ function displayRestaurantInfo(lat, lng, restaurantName, restaurantId) {
 					
 					$("#restaurantUrl").attr("src", urlArr[0] + "s:" + urlArr[1]);
 					$("#weatherWrap").hide();
+					
+					$("#open").show();
 				}
 			})
 	    }
@@ -204,12 +206,12 @@ function displayRestaurantInfo(lat, lng, restaurantName, restaurantId) {
 // 보기 버튼 클릭 시 식당 정보 표시 section 커지기
 $("#open").click(function() {
 	if ($(this).val() == "open"){
-		$("#restaurantWrap").css({"width":"calc(100% - 10px)", left: "0"});
-		$("#restaurantUrl").css({"transform":"translateX(0%)"});
+		$("#restaurantWrap").css({"width":"55%"});
+		$("#restaurantUrl").css({"transform":"translateX(-20%)"});
 		$(this).val("close");
 		$(this).text("닫기");
 	} else {
-		$("#restaurantWrap").css({"width":"375px", left: "627.5px"});
+		$("#restaurantWrap").css({"width":"375px"});
 		$("#restaurantUrl").css({"transform":"translateX(-36.5%)"});
 		$(this).val("open");
 		$(this).text("펼치기");
