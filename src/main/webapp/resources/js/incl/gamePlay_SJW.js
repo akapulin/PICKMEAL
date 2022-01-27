@@ -364,7 +364,7 @@ $('.gameBtn').on('click', function(e){
 			})
 			
 			var svg2 = document.createElementNS("http://www.w3.org/2000/svg",'svg');
-            svg2.setAttribute("width","870");
+            svg2.setAttribute("width","860");
             svg2.setAttribute("height","500");
             //svg2.style.border="1px solid black";
             svg2.setAttribute("id","svg2");
@@ -576,7 +576,7 @@ function makeLadder(data, sizeOfWidth, sizeOfHeight){
 	$("#gameWrap").append('<ul class="oxUl"></ul>');
 	
 	var svg = document.createElementNS("http://www.w3.org/2000/svg",'svg');
-            svg.setAttribute("width","870");
+            svg.setAttribute("width","860");
             svg.setAttribute("height","500");
             //svg.style.border="1px solid black";
             svg.setAttribute("id","svg");

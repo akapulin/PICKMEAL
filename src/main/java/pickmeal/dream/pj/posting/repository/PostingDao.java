@@ -107,4 +107,6 @@ public interface PostingDao {
 	 * @return
 	 */
 	public String findPostingTitleById(char category, long id);
+	
+	public List<Posting> findPostingsPerPageByCategoryAndByView(char category ,int pageStart , int pageReadCnt, int switchNum);
 }

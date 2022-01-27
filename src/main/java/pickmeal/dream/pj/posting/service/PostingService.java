@@ -90,4 +90,12 @@ public interface PostingService {
 	 * @return
 	 */
 	public String findPostingTitleById(char category, long id);
+	
+	/**
+	 * 조회순으로 불러오기
+	 * @param criteria
+	 * @return
+	 */
+	public List<Posting> findPostingsPerPageByCategoryAndByView(Criteria criteria, int switchNum);
+	
 }

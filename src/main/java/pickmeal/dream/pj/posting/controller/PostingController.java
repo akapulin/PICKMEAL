@@ -206,14 +206,27 @@ public class PostingController {
 			List<TogetherEatingPosting> togetherPostings = (List<TogetherEatingPosting>)(Object)postings;
 			mav.addObject("postings", togetherPostings);
 		}
-		
-		
-		
-		
 		mav.setViewName("/posting/post_list");
 		return mav;
+	}
+	
+	@GetMapping("/posting/{type}/sortingByView")
+	public ModelAndView sortingByView(Criteria criteria, @PathVariable String type, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		int switchNum = 0;
+		session.setAttribute("switchNum", switchNum);
 		
+		PageMaker pageMaker = new PageMaker(ps.getPostingCountByCategory(criteria.getType()), criteria);
+		mav.addObject("pageMaker", pageMaker);
 		
+		//List<Posting> postings = ps.findPostingsPerPageByCategoryAndByView(pageMaker.getCriteria());
+		
+		char category = getPostCategory(type);
+		
+		mav.addObject("modifyState", false);		//수정,글쓰기가 같은 view를 이용하기 때문에 
+		mav.addObject("postType",category);
+		mav.setViewName("posting/post_write");
+		return mav;
 	}
 	
 	
@@ -510,6 +523,32 @@ public class PostingController {
 		}
 		*/
 	}
+	
+	
+//	
+//	@GetMapping("/posting/{type}/sortingByLatest")
+//	public ModelAndView sortingByLatest(@PathVariable String type) {
+//			
+//		ModelAndView mav = new ModelAndView();
+//		char category = getPostCategory(type);
+//		
+//		mav.addObject("modifyState", false);		//수정,글쓰기가 같은 view를 이용하기 때문에 
+//		mav.addObject("postType",category);
+//		mav.setViewName("posting/post_write");
+//		return mav;
+//	}
+//	
+//	@GetMapping("/posting/{type}/sortingByLikes")
+//	public ModelAndView sortingByLikes(@PathVariable String type) {
+//			
+//		ModelAndView mav = new ModelAndView();
+//		char category = getPostCategory(type);
+//		
+//		mav.addObject("modifyState", false);		//수정,글쓰기가 같은 view를 이용하기 때문에 
+//		mav.addObject("postType",category);
+//		mav.setViewName("posting/post_write");
+//		return mav;
+//	}
 	
 	
 }
