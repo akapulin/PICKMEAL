@@ -4,6 +4,7 @@ import static pickmeal.dream.pj.web.constant.Constants.COMMENT_LIST;
 import static pickmeal.dream.pj.web.constant.SavingPointConstants.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -250,8 +251,12 @@ public class PostingController {
 		
 		*/
 		// 항상 pageNum은 1이 default 이다.
-		List<Comment> comments = cs.findCommentsByPostId(posting.getId(), category, cpageNum); // 게시물 댓글 1페이지
-		int allCmtNum = cs.countCommentByPostId(posting.getId(), category); // 해당 게시글의 총 댓글 수
+		List<Comment> comments = new ArrayList<>();
+		int allCmtNum = 0;
+		if(category != 'N') {
+			comments = cs.findCommentsByPostId(posting.getId(), category, cpageNum); // 게시물 댓글 1페이지
+			allCmtNum = cs.countCommentByPostId(posting.getId(), category); // 해당 게시글의 총 댓글 수
+		}
 		// double 형으로 캐스팅을 한 후에 나누기를 해줘야 소수점이 제대로 나온다
 		int allPageNum = (int)Math.ceil((double)allCmtNum / (int)COMMENT_LIST.getPoint()); // 페이지 개수 구하기
 	

@@ -24,8 +24,6 @@
     top: -30px;
     left: 0;
     display: flex;
-    width: 200px;
-    justify-content: space-evenly;
 }
 
 .postings_wrap .postBtnWrap .postBtn.on {
@@ -35,6 +33,7 @@
 
 .postings_wrap .postBtnWrap .postBtn {
     height: 20px;
+    margin-right: 20px;
 }
 
 .postings_wrap .postBtnWrap .postBtn:hover {

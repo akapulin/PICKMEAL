@@ -63,7 +63,9 @@ public class PostingServiceImpl implements PostingService {
 	public Posting findPostingById(char category, long id) {
 		Posting post = pd.findPostingById(category, id);
 		post = setMemberForPosting(post);
-		post = setCommentCntForPosting(post);
+		if(category != 'N') {
+			post = setCommentCntForPosting(post);
+		}
 		return post;
 	}
 	
