@@ -31,7 +31,9 @@
     <c:if test="${not empty postType }">
     <div id="postListContainer">
     <c:if test="${fn:contains(postType,'N')}">
-    	<a href="${pageContext.request.contextPath}/posting/notice/write" class="postListWriteBtn">글쓰기</a>
+    	<c:if test="${fn:contains(member.memberType,'A') }">
+    		<a href="${pageContext.request.contextPath}/posting/notice/write" class="postListWriteBtn">글쓰기</a>
+    	</c:if>
     </c:if>
    <c:if test="${fn:contains(postType,'R')}">
     	<a href="${pageContext.request.contextPath}/posting/recommend/write" class="postListWriteBtn">글쓰기</a>

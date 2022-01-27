@@ -50,7 +50,7 @@ CREATE TABLE TogetherEatingComment (										# 밥친구 댓글
 );
 
 #공지사항
-CREATE TABLE NoticePosting (									# 식당 추천 게시판
+CREATE TABLE NoticePosting (												# 식당 추천 게시판
 	id				BIGINT			PRIMARY KEY	AUTO_INCREMENT,				# SQL 아이디
 	memberId		BIGINT			NOT NULL,								# 사용자 아이디							# 식당 아이디
 	title			VARCHAR(100)	NOT NULL,								# 제목
@@ -61,19 +61,59 @@ CREATE TABLE NoticePosting (									# 식당 추천 게시판
 	
 );
 
+#공지사항 게시글 좋아요 
+CREATE TABLE NoticePostingLikes(
+	id				BIGINT			PRIMARY KEY	AUTO_INCREMENT,				# SQL 아이디
+	postingId		BIGINT			NOT NULL,								# 게시글 아이디
+	memberId		BIGINT			NOT NULL,								# 좋아요 누른 사용자 아이디
+	CONSTRAINT		NoticePostingLikes_postingId_FK	FOREIGN KEY(postingId)	REFERENCES NoticePosting(id) ON DELETE CASCADE,
+	CONSTRAINT		NoticePostingLikes_memberId_FK	FOREIGN KEY(memberId)	REFERENCES Member(id)
+);
 
+#식당추천 게시글 좋아요 
+CREATE TABLE RecommendRestaurantPostingLikes(
+	id				BIGINT			PRIMARY KEY	AUTO_INCREMENT,				# SQL 아이디
+	postingId		BIGINT			NOT NULL,								# 게시글 아이디
+	memberId		BIGINT			NOT NULL,								# 좋아요 누른 사용자 아이디
+	CONSTRAINT		RecommendRestaurantPostingLikes_postingId_FK	FOREIGN KEY(postingId)	REFERENCES RecommendRestaurantPosting(id) ON DELETE CASCADE,
+	CONSTRAINT		RecommendRestaurantPostingLikes_memberId_FK		FOREIGN KEY(memberId)	REFERENCES Member(id)
+);
+
+#밥친구 게시글 좋아요 
+CREATE TABLE TogetherEatingPostingLikes(
+	id				BIGINT			PRIMARY KEY	AUTO_INCREMENT,				# SQL 아이디
+	postingId		BIGINT			NOT NULL,								# 게시글 아이디
+	memberId		BIGINT			NOT NULL,								# 좋아요 누른 사용자 아이디
+	CONSTRAINT		TogetherEatingPostingLikes_postingId_FK	FOREIGN KEY(postingId)	REFERENCES TogetherEatingPosting(id) ON DELETE CASCADE,
+	CONSTRAINT		TogetherEatingPostingLikes_memberId_FK	FOREIGN KEY(memberId)	REFERENCES Member(id)
+);
+
+
+
+
+
+
+DROP TABLE NoticePostingLikes;
+DROP TABLE RecommendRestaurantPostingLikes;
+DROP TABLE TogetherEatingPostingLikes;
 DROP TABLE RecommendRestaurantComment;
 DROP TABLE TogetherEatingComment;
 DROP TABLE RecommendRestaurantPosting;
 DROP TABLE TogetherEatingPosting;
 DROP TABLE NoticePosting;
 
+DELETE FROM NoticePostingLikes;
+DELETE FROM RecommendRestaurantPostingLikes;
+DELETE FROM TogetherEatingPostingLikes;
 DELETE FROM RecommendRestaurantComment;
 DELETE FROM TogetherEatingComment;
 DELETE FROM RecommendRestaurantPosting;
 DELETE FROM TogetherEatingPosting;
 DELETE FROM NoticePosting;
 
+SELECT * FROM NoticePostingLikes;
+SELECT * FROM RecommendRestaurantPostingLikes;
+SELECT * FROM TogetherEatingPostingLikes;
 SELECT * FROM RecommendRestaurantComment;
 SELECT * FROM TogetherEatingComment;
 SELECT * FROM RecommendRestaurantPosting;
