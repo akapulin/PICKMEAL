@@ -39,6 +39,9 @@ CREATE TABLE CouponCategory (
 	couponName	VARCHAR(20)		NOT NULL,
 	couponType	CHAR(1)			NOT NULL
 );
+INSERT INTO CouponCategory(couponName,couponType,limitPrice) VALUES("2,000원",'A',"10,000");
+INSERT INTO CouponCategory(couponName,couponType,limitPrice) VALUES("3,000원",'B',"20,000");
+INSERT INTO CouponCategory(couponName,couponType,limitPrice) VALUES("5,000원",'C',"25,000");
 
 CREATE TABLE Coupon(
 	id				BIGINT			PRIMARY KEY AUTO_INCREMENT,
