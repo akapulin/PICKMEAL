@@ -79,6 +79,7 @@ DELETE FROM Attendance;
 DELETE FROM MannerTemperature;
 DELETE FROM FoodPowerPoint;
 DELETE FROM Member;
+delete from Chat;
 
 SELECT * FROM Coupon;
 SELECT * FROM CouponCategory;
@@ -86,4 +87,5 @@ SELECT * FROM Attendance;
 SELECT * FROM MannerTemperature;
 SELECT * FROM FoodPowerPoint;
 SELECT * FROM Member;
+SELECT * from Chat;
 

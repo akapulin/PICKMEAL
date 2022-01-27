@@ -165,8 +165,7 @@ public class PostingDaoImpl implements PostingDao {
 			return jt.queryForObject(sql, String.class,id);
 		}
 	}
-	
-	
+
 	@Override
 	public int getPostingCountByCategoryAndMemberId(long memberId, char category) {
 		if (category == 'N') {
@@ -182,7 +181,6 @@ public class PostingDaoImpl implements PostingDao {
 		
 	}
 
-	
 	@Override
 	public List<Posting> findPostingsPerPageByMemberId(long memberId, char category, int pageStart, int pageReadCnt) {
 		if (category == 'R') {
@@ -192,13 +190,21 @@ public class PostingDaoImpl implements PostingDao {
 					+" ORDER BY id DESC "
 					+" LIMIT ?,?";
 			return jt.query(sql, new RecommendRestaurantPostingRowMapper(),memberId,pageStart,pageReadCnt);
-		} else {
+		} else if (category == 'E') {
 			String sql ="SELECT id, memberId, address, title, content, likes, views, mealTime, recruitment, mealChk, regDate "
 					+" FROM TogetherEatingPosting"
 					+" WHERE memberId = ?"
 					+" ORDER BY id DESC "
 					+" LIMIT ?,? ";
 			return jt.query(sql, new TogetherEatingPostingRowMapper(),memberId,pageStart,pageReadCnt);
+		} else {
+			String sql ="SELECT id, memberId, title, content, views, regDate "
+					+" FROM NoticePosting"
+					+" WHERE memberId = ?"
+					+" ORDER BY id DESC "
+					+" LIMIT ?,?";
+			return jt.query(sql, new NoticePostingRowMapper(),memberId,pageStart,pageReadCnt);
+			
 		}
 	}
 
@@ -242,15 +248,17 @@ public class PostingDaoImpl implements PostingDao {
 	}
 	
 	@Override
-	public int updatePostingLikes(char category, long postId) {
-		if (category == 'R') {
-			String sql ="UPDATE RecommendRestaurantPosting SET likes = likes+1"
-					+" WHERE id=?";
-			return jt.update(sql, postId);		
+	public int updatePostingLikes(Posting posting, boolean likesState) {
+		if (posting.getCategory() == 'N') {
+			String sql ="UPDATE NoticePosting SET "+queryForLikesByState(likesState)+" WHERE id=?";
+			return jt.update(sql, posting.getId());
+		}
+		else if (posting.getCategory() == 'R') {
+			String sql ="UPDATE RecommendRestaurantPosting SET "+queryForLikesByState(likesState)+" WHERE id=?";
+			return jt.update(sql, posting.getId());
 		} else {
-			String sql ="UPDATE TogetherEatingPosting SET likes = likes+1"
-					+" WHERE id=?";
-			return jt.update(sql, postId);		
+			String sql ="UPDATE TogetherEatingPosting SET "+queryForLikesByState(likesState)+" WHERE id=?";
+			return jt.update(sql, posting.getId());
 		}
 	}
 	
@@ -268,5 +276,12 @@ public class PostingDaoImpl implements PostingDao {
 		return jt.queryForObject(sql, Boolean.class, postId);
 	}
 	
+	public String queryForLikesByState(boolean state) {
+		if(state) {
+			return "likes = likes +1";
+		}else {
+			return "likes = likes -1";
+		}
+	}
 	
 }

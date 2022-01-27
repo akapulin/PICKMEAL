@@ -5,7 +5,7 @@
 	width: 80%; min-width: 1440px; height: calc(100% - 83px);
 	/* background-color: #f00; */
 	display: flex; justify-content: space-between; align-items: center;
-	margin: 0 auto;
+	margin: 0 auto; position: relative;
 } 
 /* 지도 */
 #mapWrap {
@@ -40,8 +40,8 @@
 /* 날씨 / 식당 표시 */
 #restaurantWrap {
 	width: 375px; height: 95%;
-	/* position: absolute; left: 627.5px; top: 50%; transform: translateY(-50%); */
-	transition-duration: 0.5s; z-index: 1000;
+	position: absolute; left: 52%; top: 50%; transform: translateY(-50%);
+	transition-duration: 0.5s; z-index: 1000; background-color: #fff;
 }
 #restaurantInfo {
 	width: 100%; height: 65%; min-height: 550px; overflow: hidden;
@@ -57,7 +57,7 @@
 #open {
 	width: 70px; height: 30px; outline: none; border: 0;  font-weight: bold;
 	background-color: #ffecec; color: #000; border-radius: 10px; cursor: pointer;
-	position: absolute; right: 0; top: -5%; transition-duration: 0.3s;
+	position: absolute; left: 0; top: 0; transition-duration: 0.3s;
 	display: none;
 }
 #open:hover {

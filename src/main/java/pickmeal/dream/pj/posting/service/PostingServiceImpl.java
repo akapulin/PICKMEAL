@@ -63,7 +63,9 @@ public class PostingServiceImpl implements PostingService {
 	public Posting findPostingById(char category, long id) {
 		Posting post = pd.findPostingById(category, id);
 		post = setMemberForPosting(post);
-		post = setCommentCntForPosting(post);
+		if(category != 'N') {
+			post = setCommentCntForPosting(post);
+		}
 		return post;
 	}
 	
@@ -222,8 +224,8 @@ public class PostingServiceImpl implements PostingService {
 	}
 
 	@Override
-	public int updatePostingLikes(char category, long postId) {
-		return pd.updatePostingLikes(category, postId);
+	public int updatePostingLikes(Posting posting, boolean likesState) {
+		return pd.updatePostingLikes(posting,likesState);
 	}
 
 	/**

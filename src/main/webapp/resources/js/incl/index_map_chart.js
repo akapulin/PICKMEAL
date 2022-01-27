@@ -50,7 +50,7 @@ if (navigator.geolocation) {
 		
 		circle.setMap(map);
 */    
-
+		/*
 		// 지도에 클릭 이벤트를 등록합니다
 		// 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
 		kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
@@ -59,7 +59,8 @@ if (navigator.geolocation) {
 
 			// 실제 동작 시에는 클릭이벤트 대신 여기다가 좌표값을 넣어서 팝업이 닫힐 때 동작시키면 된다*****************
 			displayRestaurantInfo(latlng.getLat(), latlng.getLng());
-		});
+		
+		});*/
 	});
 } else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
     
@@ -173,8 +174,12 @@ function displayRestaurantInfo(lat, lng, restaurantName, restaurantId) {
 				headers: {"Authorization" : "KakaoAK f3ae310b0340ac2069e5e0685938a62b"},
 				dataType: "json",
 				success: function(data){
-					$("#restaurantUrl").attr("src", data["documents"][0].place_url);
+					let urlArr = data["documents"][0].place_url.split(":");
+					
+					$("#restaurantUrl").attr("src", urlArr[0] + "s:" + urlArr[1]);
 					$("#weatherWrap").hide();
+					
+					$("#open").show();
 				}
 			})
 	    }
@@ -202,12 +207,12 @@ function displayRestaurantInfo(lat, lng, restaurantName, restaurantId) {
 // 보기 버튼 클릭 시 식당 정보 표시 section 커지기
 $("#open").click(function() {
 	if ($(this).val() == "open"){
-		$("#restaurantWrap").css({"width":"calc(100% - 10px)", left: "0"});
-		$("#restaurantUrl").css({"transform":"translateX(0%)"});
+		$("#restaurantWrap").css({"width":"55%"});
+		$("#restaurantUrl").css({"transform":"translateX(-20%)"});
 		$(this).val("close");
 		$(this).text("닫기");
 	} else {
-		$("#restaurantWrap").css({"width":"375px", left: "627.5px"});
+		$("#restaurantWrap").css({"width":"375px"});
 		$("#restaurantUrl").css({"transform":"translateX(-36.5%)"});
 		$(this).val("open");
 		$(this).text("펼치기");
@@ -365,6 +370,12 @@ $(document).ready(function() {
 })
 
 function getStoreInfoWithChart(restaurantId){
+	//메인에 gif지워주기
+	$('.storeSubInfoBeforeWrap').hide();
+	
+	
+	
+	
 	/*
 		RestaurantReference & RestaurantReview
 		ModelAndView 값(서버측)이 JSP 단에 뿌려주고 JS(클라이언트측)에서 그 값을 끌어 사용해야한다
@@ -372,6 +383,8 @@ function getStoreInfoWithChart(restaurantId){
 		그래프 그리기에 필요한 값들을 셋팅해본다
 	*/
 	//let restaurantId=1;
+	
+	
 	
 	//연령별/성별 선호도불러오기
 	
@@ -502,7 +515,8 @@ function setReviewVariable() {
 
 function drawReviews() {
 	//리뷰그리기
-	for (let i = 0; i < reviews.length; i++) {
+	if(reviews!=null){
+		for (let i = 0; i < reviews.length; i++) {
 		if (reviews[i].rCount != '' && reviews != null && reviews[i].rCount > 0) {
 			$('.userReviewGraph ul').append(
 				'<li>'
@@ -516,6 +530,8 @@ function drawReviews() {
 			)
 		}
 	}
+	}
+	
 
 }
 
