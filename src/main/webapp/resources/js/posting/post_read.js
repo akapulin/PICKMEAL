@@ -74,7 +74,7 @@ function recruitmentON(){
 }
 //식사완료
 $('#rPostCompMealBtn').on('click',function(e){
-	e.prevendDefault();
+	e.preventDefault();
 	
 })
 

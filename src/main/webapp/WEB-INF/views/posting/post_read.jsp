@@ -139,7 +139,7 @@
                 <div id="rPostAdditionalInfoWrap">
 
                     <ul class="rPostAdditioanInfoLeftSide">
-                    	 <c:if test="${fn:contains(postType,'R') or fn:contains(postType,'E')}">
+                    	 <c:if test="${fn:contains(post.category,'E') or fn:contains(post.category,'R')}">
                     	 	<li>
 	                        	<c:if test="${memberLikeState eq true }">
 	                        		<img class="rPostLikesImg rPostLikesImgSelected" src="${pageContext.request.contextPath}/resources/img/posting/heart_onclick.png" alt="좋아요아이콘">

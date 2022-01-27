@@ -142,7 +142,9 @@
           	 </c:if>
             <li><a href="#">최신순</a></li>
             <li><a href="#">조회순</a></li>
-            <li><a href="#">좋아요순</a></li>
+            <c:if test="${fn:contains(postType,'R') or fn:contains(postType,'E')}">
+            	<li><a href="#">좋아요순</a></li>
+            </c:if>
           </ul>
         </div>
         <div class="postListSearchWrap">
