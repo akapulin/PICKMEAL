@@ -86,7 +86,7 @@ public interface PostingDao {
 	 * @param category
 	 * @param postId
 	 */
-	public int updatePostingLikes(char category, long postId);
+	public int updatePostingLikes(Posting posting, boolean likesState);
 	
 	/**
 	 * 밥친구 게시판 모집중 상태 변경

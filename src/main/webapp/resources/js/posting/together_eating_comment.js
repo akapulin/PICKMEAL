@@ -56,7 +56,7 @@ function writeComment() {
 			console.log("현재 페이지 넘버cpageNum")
 			console.log("현재페이지 넘버가 모든 페이지 갯수보다 작거나 같고 ")
 			console.log("현재 표시된 댓글 수가 표시해야할 댓글 목록 수 보다 작으면 실행")
-			
+			console.log("모든 댓글수 allCmtNum"+allCmtNum);
 			
 			if (cpageNum <= allPageNum && commentWrapNum < viewPageNum) {
 			console.log('첫번째 코멘트조건 in');	
@@ -127,6 +127,8 @@ function writeComment() {
 				}
 			}
 			allCmtNum++;
+			//220127효심추가 댓글갯수 셋팅해주기
+			$('.rPostCommentCnt').text(allCmtNum);
 			
 			$("#writeCmt").val("");
 		}

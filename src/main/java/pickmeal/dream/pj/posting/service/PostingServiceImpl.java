@@ -224,8 +224,8 @@ public class PostingServiceImpl implements PostingService {
 	}
 
 	@Override
-	public int updatePostingLikes(char category, long postId) {
-		return pd.updatePostingLikes(category, postId);
+	public int updatePostingLikes(Posting posting, boolean likesState) {
+		return pd.updatePostingLikes(posting,likesState);
 	}
 
 	/**

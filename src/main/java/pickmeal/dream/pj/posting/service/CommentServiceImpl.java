@@ -11,6 +11,7 @@ import pickmeal.dream.pj.member.domain.Member;
 import pickmeal.dream.pj.member.service.MemberAchievementService;
 import pickmeal.dream.pj.member.service.MemberService;
 import pickmeal.dream.pj.posting.domain.Comment;
+import pickmeal.dream.pj.posting.domain.Posting;
 import pickmeal.dream.pj.posting.repository.CommentDao;
 import static pickmeal.dream.pj.web.constant.Constants.*;
 import static pickmeal.dream.pj.web.constant.SavingPointConstants.*;
@@ -28,6 +29,7 @@ public class CommentServiceImpl implements CommentService {
    @Autowired
    private MemberAchievementService mas;
 
+   
    @Override
    @Transactional
    public Comment addComment(Comment comment) {
@@ -53,6 +55,8 @@ public class CommentServiceImpl implements CommentService {
       // 멤버 셋팅 (필요한 값만 셋팅한다)
       comment.setMember(doSettingMemberForComment(ms.findMemberById(comment.getMember().getId())));
       // 포스팅 셋팅을 할 필요는 없다. (타입을 셋팅해야합니당.) ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+      
+
       
       return comment;
    }

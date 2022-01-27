@@ -26,6 +26,7 @@
 <jsp:include page="/WEB-INF/views/incl/header.jsp"/>
 
 <input type="hidden" value="${post.id }" id="postId"/>
+<input type="hidden" value="${post.category }" id="postCategory"/>
 <section id="totalPostContainer">
         <h2 class="hidden">글읽기</h2>
         <div id="rwPostContainer">
@@ -139,16 +140,22 @@
 
                     <ul class="rPostAdditioanInfoLeftSide">
                         <li>
-                            <img class="rPostLikesImg" src="${pageContext.request.contextPath}/resources/img/posting/heart.png" alt="좋아요아이콘">
-                            <p class="rPostLikesText">좋아요<span>${post.likes }</span></p>
+                        	<c:if test="${memberLikeState eq true }">
+                        		<img class="rPostLikesImg rPostLikesImgSelected" src="${pageContext.request.contextPath}/resources/img/posting/heart_onclick.png" alt="좋아요아이콘">
+                        	</c:if>
+                        	<c:if test="${memberLikeState eq false }">
+                        		<img class="rPostLikesImg" src="${pageContext.request.contextPath}/resources/img/posting/heart.png" alt="좋아요아이콘">
+                        	</c:if>
+                            
+                            <p class="rPostLikesText">좋아요<span class="rPostLikesCnt">${post.likes }</span></p>
                         </li>
                         <li>
                             <img class="rPostCommentCountImg" src="${pageContext.request.contextPath}/resources/img/posting/bubble-chat.png" alt="댓글아이콘">
-                            <p class="rPostCommentCountText">댓글<span>${post.commentsNumber }</span></p>
+                            <p class="rPostCommentCountText">댓글<span class="rPostCommentCnt">${post.commentsNumber }</span></p>
                         </li>
                     </ul>
                      
-                    <c:if test="${member.id eq post.member.id }"> 
+                    <c:if test="${member.id eq post.member.id or fn:contains(member.memberType,'A')}"> 
 	                   <ul class="rPostAdditioanInfoRightSide">
 	                        <li id="rPostModifyBtn">수정</li>
 	                        <li id="rPostRemoveBtn">삭제</li>
