@@ -23,7 +23,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/incl/index_map_chart.js" defer></script>
 
 <!-- 정원식 -->
-<script src="${pageContext.request.contextPath}/resources/js/incl/menu_game_JWS.js" defer></script>
+<script src="${pageContext.request.contextPath}/resources/js/incl/menu_game.js" defer></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/incl/index_JWS.css" />
 
 <!-- 성지원 -->

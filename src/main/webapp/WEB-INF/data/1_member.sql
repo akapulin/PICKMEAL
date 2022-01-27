@@ -35,10 +35,11 @@ CREATE TABLE Attendance (														# 출석
 );
 
 CREATE TABLE CouponCategory (
-	id			BIGINT			PRIMARY KEY AUTO_INCREMENT,
-	couponName	VARCHAR(20)		NOT NULL,
-	couponType	CHAR(1)			NOT NULL
-);
+   id         BIGINT         PRIMARY KEY AUTO_INCREMENT,                  #SQL 아이디
+   couponName   VARCHAR(20)      NOT NULL,                              #쿠폰 카테고리 네임
+   couponType   CHAR(1)         NOT NULL,                              #쿠폰 카테고리 타입
+   limitPrice   VARCHAR(20)      NOT NULL                              #쿠폰 최소 사용금액#
+)
 INSERT INTO CouponCategory(couponName,couponType,limitPrice) VALUES("2,000원",'A',"10,000");
 INSERT INTO CouponCategory(couponName,couponType,limitPrice) VALUES("3,000원",'B',"20,000");
 INSERT INTO CouponCategory(couponName,couponType,limitPrice) VALUES("5,000원",'C',"25,000");
