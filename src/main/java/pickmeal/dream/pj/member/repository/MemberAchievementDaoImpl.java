@@ -70,8 +70,9 @@ public class MemberAchievementDaoImpl implements MemberAchievementDao {
 
 	@Override
 	public int checkAttendance(long memberId) {
-		String sql = "SELECT TIMESTAMPDIFF(DAY, a.regDate, CURDATE()) AS DIFF_DAY"
-				+ " FROM Attendance AS a WHERE memberId=?";
+		//String sql = "SELECT TIMESTAMPDIFF(DAY, a.regDate, CURDATE()) AS DIFF_DAY FROM Attendance AS a WHERE memberId=?";
+		String sql = "SELECT DATEDIFF(regDate,CURDATE()) FROM Attendance WHERE memberId=?";
+		
 		return jt.queryForObject(sql, Integer.class, memberId);
 	}
 

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import pickmeal.dream.pj.posting.domain.Posting;
 import pickmeal.dream.pj.posting.domain.TogetherEatingPosting;
+import pickmeal.dream.pj.posting.util.Criteria;
 
 @Repository("postingDao")
 public class PostingDaoImpl implements PostingDao {
@@ -274,6 +275,32 @@ public class PostingDaoImpl implements PostingDao {
 		String sql = "SELECT recruitment FROM TogetherEatingPosting"
 				+" WHERE id=?";
 		return jt.queryForObject(sql, Boolean.class, postId);
+	}
+
+
+	@Override
+	public List<Posting> findPostingsPerPageByCategoryAndBySorting(Criteria criteria, int pageStart, int pageReadCnt, int switchNum) {
+		if (criteria.getType() == 'N') {
+			String sql ="SELECT id, memberId, title, content, views, regDate "
+					+" FROM NoticePosting"
+					+" ORDER BY "+ criteria.getSortType() + " " + criteria.getSort()
+					+" LIMIT ?,?";
+			return jt.query(sql, new NoticePostingRowMapper(), pageStart, pageReadCnt);
+			
+		} else if (criteria.getType() == 'R') {
+				String sql ="SELECT id, memberId, address, title, content, likes, views, regDate "
+						+" FROM RecommendRestaurantPosting"
+						+" ORDER BY "+ criteria.getSortType() + " " + criteria.getSort()
+						+" LIMIT ?,?";
+				System.out.println("here is PostingDaoImpl : SortType is : " + criteria.getSortType() + " / Sort is : " + criteria.getSort());
+				return jt.query(sql, new RecommendRestaurantPostingRowMapper(), pageStart, pageReadCnt);
+		} else {
+			String sql ="SELECT id, memberId, address, title, content, likes, views, mealTime, recruitment, mealChk, regDate "
+					+" FROM TogetherEatingPosting"
+					+" ORDER BY "+ criteria.getSortType() + " " + criteria.getSort()
+					+" LIMIT ?,?";
+			return jt.query(sql, new TogetherEatingPostingRowMapper(), pageStart, pageReadCnt);
+		}
 	}
 	
 	public String queryForLikesByState(boolean state) {

@@ -114,7 +114,7 @@ public class MenuServiceImpl implements MenuService{
 		
 		if(menuList.size() == 0) {
 			menu.setMenuName("오마카세");
-			menu.setImgPath("오마카세.jpg");
+			menu.setImgPath("/pickmeal/resources/img/menu/오마카세.jpg");
 		} else {
 			menu = menuList.get(rand.nextInt(menuList.size()));			
 		}

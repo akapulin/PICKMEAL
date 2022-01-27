@@ -27,8 +27,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/incl/index_JWS.css" />
 
 <!-- 성지원 -->
-<script src="${pageContext.request.contextPath}/resources/js/incl/index_map_SJW.js" defer></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/incl/index_SJW.css" />
+<script src="${pageContext.request.contextPath}/resources/js/incl/index_map_forPopUp.js" defer></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/incl/index_forPopUp.css" />
 
 <!--  그래프 자료 - 윤효심-->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

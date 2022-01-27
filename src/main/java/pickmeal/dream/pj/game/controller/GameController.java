@@ -70,7 +70,7 @@ public class GameController {
 	
 	@GetMapping("/openGamePopUp")
 	public String openGamePopUp() {
-		return "gamePlay_SJW";
+		return "gamePlay";
 	}
 	
 	@GetMapping("/sendDataToPopUp")
@@ -120,7 +120,7 @@ public class GameController {
 		mav.addObject("nowLng", nowLng);
 		mav.addObject("diffOfDate", diffOfDate); // 얘는 첫 겜인지 아닌지 js에서 조건 줄 때 쓰려고 보냄.
 		
-		mav.setViewName("gamePlay_SJW");
+		mav.setViewName("game/gamePlay");
 		
 		return mav;
 	}

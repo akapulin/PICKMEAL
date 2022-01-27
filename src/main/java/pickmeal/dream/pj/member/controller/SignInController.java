@@ -46,10 +46,6 @@ public class SignInController {
 	
 	@GetMapping("/member/signOutMember")
 	public String signOutMember(HttpSession session) {
-//		session.removeAttribute("member");
-//		session.removeAttribute("writer");
-//		session.removeAttribute("commenter");
-//		session.removeAttribute("cntForRetry");
 		session.invalidate();
 		return "redirect:/index";
 	}
@@ -108,6 +104,9 @@ public class SignInController {
 		int cntForRetry = 0;
 		session.setAttribute("cntForRetry", cntForRetry);
 		// 로그아웃할 때 얘도 세션에서 지워줘야 한다.
+		
+		int switchNum = 0;
+		session.setAttribute("switchNum", switchNum);
 		
 		/*쿠폰 서비스 추가*/	
 

@@ -6,17 +6,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link  rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/incl/gamePlay_SJW.css" />
+<link  rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/game/gamePlay.css" />
 <%@ include file="/WEB-INF/views/incl/link.jsp" %>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=001358587c4d106ce5a3702588b8ce85&libraries=services"></script>
 
-<script src="${pageContext.request.contextPath}/resources/js/incl/gamePlay_SJW.js" defer></script>
+<script src="${pageContext.request.contextPath}/resources/js/game/gamePlay.js" defer></script>
 </head>
 <body>
  <!-- firstGameMsg 조건을 만들어야함. 이거 안되면 diffofdate 가 0인지 아닌지 확인해서 하면 됨. num == 5 eq 5 -->		
 		 <c:choose>
 			<c:when test="${not empty cntForRetry}">
 				<c:choose>
+					<c:when test="${cntForRetry eq 0}">
+						<div class="msgContent">환영합니다</div>
+					</c:when>
 					<c:when test="${cntForRetry eq 1}">
 						<c:choose>
 							<c:when test="${not empty firstGameMsg}">
@@ -33,7 +36,7 @@
 					<c:when test="${cntForRetry eq 5}"><div class="msgContent">슬슬 먹으러 가지?</div></c:when>
 					<c:when test="${cntForRetry eq 6}"><div class="msgContent">적당히 해라</div></c:when>
 					<c:otherwise>
-						<div class="msgContent">그냥 라면 먹어</div>
+						<div class="msgContent">${cntForRetry} 그냥 라면 먹어</div>
 					</c:otherwise>
 				</c:choose>
 			</c:when>

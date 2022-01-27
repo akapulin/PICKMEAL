@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" session="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -24,7 +24,7 @@
                 <div id="couponPriceWrap">
                 	<input type="hidden" value="${member.id}" id="memberIdWS" name="memberIdWS">
                 	<input type="hidden" value="${restaurant.id}" id="restaurantWS" name="restaurantWS">
-                	<input type="hidden" value="${couponCategory.id}" id="couponCategoryWS" name="restaurantWS"">
+                	<input type="hidden" value="${couponCategory.id}" id="couponCategoryWS" name="restaurantWS"/>
                 	<p id="restaurantName"><span id="restaurantNameSpan">'${restaurant.RName}'</span> 쿠폰</p>
                     <p id="couponPrice"><span id="couponPriceSpan">${couponCategory.couponName}</span></p>
                     <p id="orderPrice"><span id="limitPrice">${couponCategory.limitPrice}</span> 원 이상 주문시 사용가능</p>

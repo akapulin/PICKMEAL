@@ -10,6 +10,7 @@
 			</p>
 			<form action="${pageContext.request.contextPath}/chat/chatListByComment" method="get" id="goChatForm">
 				<input type="hidden" id="chatCount" value="${chatCount}" />
+				<input type="hidden" name="chkAlarm" value="alarm" />
 				<input type="hidden" name="commenter" id="commenter" data-nickname="" value="${commenter.id}" />
 				<input type="hidden" name="writer" id="writer" data-nickname="" value="${writer.id}" />
 				<input type="submit" name="goChatting" onclick="acceptChat();" id="goChatting" value="채팅 바로가기" />
