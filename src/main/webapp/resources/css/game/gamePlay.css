@@ -3,15 +3,40 @@
 
 #menu_wrap { display: none;}
 
+html, body{
+	height: 100%;
+}
+
 .msgContent{
-	width: 1060px; height: 1000px;
+	width: 100%; height: 100%;
 	position:absolute; top: 0; left: 0;
-	line-height: 1000px;
 	text-align: center;
+	display: flex; flex-flow: row nowrap; 
+	justify-content: center; align-items: center;
+	
 	box-sizing: border-box;
 	background: beige;
-	
+	font-weight:800;
+	font-size: 150px;
+	color:#f23f3f;
+	font-family: 'DungGeunMo';
+	animation-duration: 3s; 
+	animation-name: rainbowLink; 
+	animation-iteration-count: infinite;
 }
+
+@keyframes rainbowLink {     
+ 0% { color: #ff2a2a; }
+ 15% { color: #ff7a2a; }
+ 30% { color: #ffc52a; }
+ 45% { color: #43ff2a; }
+ 60% { color: #2a89ff; }
+ 75% { color: #202082; }
+ 90% { color: #6b2aff; } 
+ 100% { color: #e82aff; }
+
+}
+
 #gameBtnWrap{
 	position: absolute; top:50%; left:50%;
 	transform: translate(-50%, -50%);
@@ -31,6 +56,8 @@
 	width:300px; height: 500px;
 	border-radius: 2em;
 	font-weight: bold;
+	cursor: pointer;
+	box-shadow: 0 0 20px #4e4f4d;
 }
 .ladderBtn{
 	background-image: url("/pickmeal/resources/img/game/ladderImg.png");
