@@ -6,9 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <%-- <%@ include file="/WEB-INF/views/incl/link.jsp"%> --%>
-<link  rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member/myInformation.css" />
+<link  rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member/my_information.css" />
 <title>Insert title here</title>
-<script src="${pageContext.request.contextPath}/resources/js/member/myInformation.js" defer></script>
+<script src="${pageContext.request.contextPath}/resources/js/member/my_information.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 <body>
