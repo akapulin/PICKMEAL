@@ -41,14 +41,17 @@ public class ReviewDaoImpl implements ReviewDao{
 	}
 	
 	/**
-	 * 레스토랑 유무 체크
+	 * 리뷰테이블에 레스토랑 유무 체크하깅
 	 */
 	@Override
 	public boolean isReviewByRestaurantId(long restaurantId) {
 		String sql = "SELECT EXISTS (SELECT id FROM Review WHERE restaurantId = ?)";
 		return jt.queryForObject(sql, Boolean.class,restaurantId);
 	}
-
+	
+	/**
+	 * 리뷰테이블에 레스토랑이 없다면 새로 만들어주깅
+	 */
 	@Override
 	public void addReview(Review r) {
 		String sql = "INSERT INTO Review(restaurantId, bathroom, kind, specialDay, clean, parking, goodgroup, alone, big, interior, usercount)"

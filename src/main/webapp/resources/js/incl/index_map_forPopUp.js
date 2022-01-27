@@ -1,22 +1,5 @@
 let gameDataForm = document.gameDataForm;
 	
-function searchResList(radius, keword){				
-	$.ajax({
-		url: "https://dapi.kakao.com/v2/local/search/keyword.json?query="
-		 + keword,
-		x: nowLat,
-		y: nowLng,
-		radius: radius,
-		type: "get",
-		headers: {"Authorization" : "KakaoAK f3ae310b0340ac2069e5e0685938a62b"},
-		dataType: "json",
-		success: function(data){
-			for(let m=0; m<data["documents"].length; m++){
-				totalArr.push(data["documents"][i]);
-			}
-		}
-	})
-}
 $('.radiusLabel').on('click',function(){
 	$(this).siblings().removeClass('radiusOn');
 	$(this).addClass('radiusOn');
@@ -26,7 +9,6 @@ $('.categoryLabel').on('click', function(){
 	$(this).addClass('categoryOn');	
 })
 
-//button[name=radius]
 $('.gamePlayBtn').on('click', function(e){
 	e.preventDefault();
 	let popupWidth = 1050;
@@ -35,11 +17,6 @@ $('.gamePlayBtn').on('click', function(e){
 	let category = $(".category:checked").val();
 	var input1;
 	var input2;
-	
-	/*
-	var inputForLat = document.createElement('input');
-	div.createTextNode('This is div');
-	*/
 
 	createLatLng(nowLat, input1, "nowLat");
 	createLatLng(nowLng, input2, "nowLng");
@@ -65,7 +42,6 @@ $('.gamePlayBtn').on('click', function(e){
 	console.log(category);
 	let popUpUrl = getContextPath() + "/sendDataToPopUp";
 	
-	//let gameDataForm = document.gameDataForm;
 	gameDataForm.action = popUpUrl;
 	gameDataForm.target = "게임하기";
 	gameDataForm.method = "get";
@@ -86,19 +62,5 @@ function createLatLng(data, input, name){
 	
 	gameDataForm.appendChild(input);
 }
-
-/*
-	let json = { "radius": radius, "category": category};
-	$.ajax({
-		url: getContextPath() + "/sendDataToPopUp",
-		type: "get",
-		data: json,
-		dataType: 'json',
-		success: function(){
-			console.log("successssssssssssss")
-			window.open("openGamePopUp", "게임하기", "width=600, height = 600, top=" + popupY + ", left=" + popupX + ""); //선언과 초기화 동시에 해도 됨
-		}	
-	}) */	
-	
 	
 	 

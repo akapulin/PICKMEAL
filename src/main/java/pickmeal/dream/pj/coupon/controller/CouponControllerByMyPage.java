@@ -107,9 +107,13 @@ public class CouponControllerByMyPage {
 		mav.addObject("coupons" ,coupons);
 		mav.setViewName("마이페이지/미사용쿠폰조회.jsp");
 		return mav;
-	}
+	}*/
+	
+	
+	
 	/**
-	 * 쿠폰 목록에서 쿠폰 하나 클릭 했을 때
+	 * 쿠폰리스트에서 하나하나 클릭
+	 * @param couponId
 	 * @return
 	 */
 	@GetMapping("/usedCouponPopup")
@@ -130,12 +134,12 @@ public class CouponControllerByMyPage {
 	}
 	
 	/**
-	 * 
+	 * 쿠폰팝업창에서 사용버튼 클릭
 	 * @return
 	 */
 	@PostMapping("/usedCoupon")
 	public ModelAndView usedCoupon(@RequestParam("couponid") long couponid, HttpSession session) {
-		System.out.println("팝업창에서 잘 보냄 : " + couponid);
+		//System.out.println("팝업창에서 잘 보냄 : " + couponid);
 		cs.changeUsedCouponById(couponid);
 		
 		ModelAndView mav = new ModelAndView();
