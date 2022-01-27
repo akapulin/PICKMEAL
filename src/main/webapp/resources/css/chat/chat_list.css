@@ -1,6 +1,10 @@
 @charset "UTF-8";
 #chatContentWrap {
-	width: 80%; height: calc(100% - 90px); margin: 0 auto; min-width: 1200px;
+	width: 100%; height: calc(100% - 90px); background-color: #ffecec;
+	
+}
+#chatListWrapDiv {
+	width: 80%; height: 100%; margin: 0 auto; min-width: 1200px; background-color: #fff;
 	box-sizing: border-box; padding: 10px 0;
 	display: flex; flex-flow: row wrap; justify-content: center; align-items: center;
 }

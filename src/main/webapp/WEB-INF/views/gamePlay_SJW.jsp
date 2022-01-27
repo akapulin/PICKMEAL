@@ -17,6 +17,9 @@
 		 <c:choose>
 			<c:when test="${not empty cntForRetry}">
 				<c:choose>
+					<c:when test="${cntForRetry eq 0}">
+						<div class="msgContent">환영합니다</div>
+					</c:when>
 					<c:when test="${cntForRetry eq 1}">
 						<c:choose>
 							<c:when test="${not empty firstGameMsg}">
@@ -33,7 +36,7 @@
 					<c:when test="${cntForRetry eq 5}"><div class="msgContent">슬슬 먹으러 가지?</div></c:when>
 					<c:when test="${cntForRetry eq 6}"><div class="msgContent">적당히 해라</div></c:when>
 					<c:otherwise>
-						<div class="msgContent">그냥 라면 먹어</div>
+						<div class="msgContent">${cntForRetry} 그냥 라면 먹어</div>
 					</c:otherwise>
 				</c:choose>
 			</c:when>

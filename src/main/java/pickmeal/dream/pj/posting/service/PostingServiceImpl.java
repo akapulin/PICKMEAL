@@ -63,7 +63,9 @@ public class PostingServiceImpl implements PostingService {
 	public Posting findPostingById(char category, long id) {
 		Posting post = pd.findPostingById(category, id);
 		post = setMemberForPosting(post);
-		post = setCommentCntForPosting(post);
+		if(category != 'N') {
+			post = setCommentCntForPosting(post);
+		}
 		return post;
 	}
 	
@@ -222,8 +224,8 @@ public class PostingServiceImpl implements PostingService {
 	}
 
 	@Override
-	public int updatePostingLikes(char category, long postId) {
-		return pd.updatePostingLikes(category, postId);
+	public int updatePostingLikes(Posting posting, boolean likesState) {
+		return pd.updatePostingLikes(posting,likesState);
 	}
 
 	/**
@@ -237,7 +239,7 @@ public class PostingServiceImpl implements PostingService {
 	}
 
 	@Override
-	public List<Posting> findPostingsPerPageByCategoryAndByView(Criteria criteria, int switchNum) {
+	public List<Posting> findPostingsPerPageByCategoryAndBySorting(Criteria criteria, int switchNum) {
 		
 		int pageStart = (criteria.getPage()-1)*criteria.getCntPerPage();		//0, 12, 24, 36, 48...
 		int pageReadCnt = criteria.getCntPerPage();
@@ -245,7 +247,7 @@ public class PostingServiceImpl implements PostingService {
 		
 		
 		
-		List<Posting> postings = pd.findPostingsPerPageByCategoryAndByView(criteria.getType(),pageStart,pageReadCnt, switchNum);
+		List<Posting> postings = pd.findPostingsPerPageByCategoryAndBySorting(criteria, pageStart,pageReadCnt, switchNum);
 		log.info("postingCount(default:12) : "+postings.size());
 		
 		

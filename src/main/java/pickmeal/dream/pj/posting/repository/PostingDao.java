@@ -3,6 +3,7 @@ package pickmeal.dream.pj.posting.repository;
 import java.util.List;
 
 import pickmeal.dream.pj.posting.domain.Posting;
+import pickmeal.dream.pj.posting.util.Criteria;
 
 /**
  * 
@@ -55,7 +56,10 @@ public interface PostingDao {
 	public Posting findPostingById(char category, long id);
 	
 	
-	
+	/**
+	 * 마이페이지 - 내 게시글
+	 * 해당 멤버가 쓴 게시글 개수 반환
+	 */
 	public int getPostingCountByCategoryAndMemberId(long memberId, char category);
 	/**
 	 * 카테고리별 해당 유저의 게시글 불러오기
@@ -83,7 +87,7 @@ public interface PostingDao {
 	 * @param category
 	 * @param postId
 	 */
-	public int updatePostingLikes(char category, long postId);
+	public int updatePostingLikes(Posting posting, boolean likesState);
 	
 	/**
 	 * 밥친구 게시판 모집중 상태 변경
@@ -108,5 +112,5 @@ public interface PostingDao {
 	 */
 	public String findPostingTitleById(char category, long id);
 	
-	public List<Posting> findPostingsPerPageByCategoryAndByView(char category ,int pageStart , int pageReadCnt, int switchNum);
+	public List<Posting> findPostingsPerPageByCategoryAndBySorting(Criteria criteria ,int pageStart , int pageReadCnt, int switchNum);
 }

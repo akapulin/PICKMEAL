@@ -31,7 +31,9 @@
     <c:if test="${not empty postType }">
     <div id="postListContainer">
     <c:if test="${fn:contains(postType,'N')}">
-    	<a href="${pageContext.request.contextPath}/posting/notice/write" class="postListWriteBtn">글쓰기</a>
+    	<c:if test="${fn:contains(member.memberType,'A') }">
+    		<a href="${pageContext.request.contextPath}/posting/notice/write" class="postListWriteBtn">글쓰기</a>
+    	</c:if>
     </c:if>
    <c:if test="${fn:contains(postType,'R')}">
     	<a href="${pageContext.request.contextPath}/posting/recommend/write" class="postListWriteBtn">글쓰기</a>
@@ -72,7 +74,9 @@
             <th>작성자</th>
             <th>작성일</th>
             <th>조회</th>
-            <th>좋아요</th>
+            <c:if test="${fn:contains(postType,'R') or fn:contains(postType,'E')}">
+           		<th>좋아요</th>
+            </c:if>
           </tr>
           <c:forEach var="post" items="${postings }">
             <tr>
@@ -123,7 +127,9 @@
             <fmt:formatDate var="postDate" pattern="yy-MM-dd" value="${post.regDate }"/>
             <td>${postDate }</td>
             <td>${post.views }</td>
-            <td>${post.likes }</td>
+            <c:if test="${fn:contains(postType,'R') or fn:contains(postType,'E')}">
+            	<td>${post.likes }</td>
+            </c:if>
           </tr>
           </c:forEach>
         </table>
@@ -131,10 +137,24 @@
       <div id="postListSubInfoContainer">
         <div class="postListSortWrap">
           <ul>
-            <li><a href="#" class="postListSortOn">모집중</a></li>
-            <li><a href="#">최신순</a></li>
-            <li><a href="#">조회순</a></li>
-            <li><a href="#">좋아요순</a></li>
+          	
+          	 <c:choose>
+          	 	<c:when test="${fn:contains(postType, 'N')}">
+          	 		<li><a href="${pageContext.request.contextPath}/posting/notice?sortType=regDate">최신순</a></li>
+            		<li><a href="${pageContext.request.contextPath}/posting/notice?sortType=views">조회순</a></li>
+          	 	</c:when>
+          	 	<c:when test="${fn:contains(postType, 'R')}">
+          	 		<li><a href="${pageContext.request.contextPath}/posting/recommend?sortType=regDate">최신순</a></li>
+		            <li><a href="${pageContext.request.contextPath}/posting/recommend?sortType=views">조회순</a></li>
+		            <li><a href="${pageContext.request.contextPath}/posting/recommend?sortType=likes">좋아요순</a></li>
+          	 	</c:when>
+          	 	<c:otherwise>
+          	 		<li><a href="${pageContext.request.contextPath}/posting/together?sortType=recruitment" class="postListSortOn">모집중</a></li>
+          	 		<li><a href="${pageContext.request.contextPath}/posting/together?sortType=regDate">최신순</a></li>
+		            <li><a href="${pageContext.request.contextPath}/posting/together?sortType=views">조회순</a></li>
+		            <li><a href="${pageContext.request.contextPath}/posting/together?sortType=likes">좋아요순</a></li>
+          	 	</c:otherwise>
+          	 </c:choose>
           </ul>
         </div>
         <div class="postListSearchWrap">

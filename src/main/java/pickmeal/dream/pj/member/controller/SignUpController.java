@@ -141,11 +141,12 @@ public class SignUpController {
 		
 		log.info(member.toString());
 		
-		
+		int switchNum =0;
 		int cntForRetry = 0;
 		// 완료 후 세션에 멤버를 넣어준다 (자동 로그인)
 		session.setAttribute("member", enterMember);
 		session.setAttribute("cntForRetry", cntForRetry);
+		session.setAttribute("switchNum", switchNum);
 		
 		
 		

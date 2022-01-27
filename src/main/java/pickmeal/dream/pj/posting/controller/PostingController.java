@@ -4,10 +4,10 @@ import static pickmeal.dream.pj.web.constant.Constants.COMMENT_LIST;
 import static pickmeal.dream.pj.web.constant.SavingPointConstants.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -31,6 +31,7 @@ import pickmeal.dream.pj.posting.domain.Comment;
 import pickmeal.dream.pj.posting.domain.Posting;
 import pickmeal.dream.pj.posting.domain.TogetherEatingPosting;
 import pickmeal.dream.pj.posting.service.CommentService;
+import pickmeal.dream.pj.posting.service.PostingLikesService;
 import pickmeal.dream.pj.posting.service.PostingService;
 import pickmeal.dream.pj.posting.util.Criteria;
 import pickmeal.dream.pj.posting.util.PageMaker;
@@ -56,10 +57,15 @@ public class PostingController {
 	
 	@Autowired
 	MemberAchievementService mas;
+	
+	@Autowired
+	PostingLikesService pls;
 
 	/* 
 	 * 
 	 * 이슈1) 
+	 * 게시판은 총 3개의 종류가 있고, 하나의 Posting class에 type변수를 두어 게시판을 구별해둔다
+	 * 여기서 생기는 문제~~ 
 	 * 게시판별 변수 2개만 셋팅해줬을 뿐인데 이런 코드 길이가~~?
 	 * !!!! 이렇게는 만들지 말자~! => 다중매핑사용
 	 * 
@@ -183,12 +189,54 @@ public class PostingController {
 	 * @param page
 	 * @return
 	 */
+//	@GetMapping("/posting/{type}")
+//	public ModelAndView listPostView(Criteria criteria, @PathVariable String type, HttpSession session ) {
+//		ModelAndView mav = new ModelAndView();
+//		
+//		//게시판 카테고리별 셋팅 1줄로 가능!
+//		criteria.setType(type);
+//		
+//		//로그인한 상태가 아니면 로그인페이지로 보내기
+//		Member member = (Member)session.getAttribute("member");
+//		if(member==null) {
+//			mav.setViewName("redirect:/member/viewSignIn");
+//			return mav;
+//		}
+//		
+//		//게시판 페이징 처리 클래스 셋팅하기
+//		PageMaker pageMaker = new PageMaker(ps.getPostingCountByCategory(criteria.getType()),criteria);
+//		log.info("PageMaker type : "+ pageMaker.getCriteria().getType()+" page : "+pageMaker.getCriteria().getPage()+" totalCnt : "+pageMaker.getTotal());
+//		log.info("PageStartNum : "+pageMaker.getStartNum()+"PageEndNum : "+pageMaker.getEndNum());
+//		mav.addObject("pageMaker", pageMaker);
+//		
+//		//게시물 불러오기
+//		List<Posting> postings = ps.findPostingsPerPageByCategory(pageMaker.getCriteria());
+//		mav.addObject("postings", postings);
+//		
+//		//게시판이 밥친구일 경우, object로 업캐스팅 해준다
+//		if(pageMaker.getCriteria().getType()=='E') {
+//			@SuppressWarnings("unchecked")
+//			List<TogetherEatingPosting> togetherPostings = (List<TogetherEatingPosting>)(Object)postings;
+//			mav.addObject("postings", togetherPostings);
+//		}
+//		mav.setViewName("/posting/post_list");
+//		return mav;
+//	}
 	@GetMapping("/posting/{type}")
-	public ModelAndView listPostView(Criteria criteria, @PathVariable String type ) {
+	public ModelAndView listPostView(Criteria criteria, @PathVariable String type, HttpSession session ) {
 		ModelAndView mav = new ModelAndView();
 		
 		//게시판 카테고리별 셋팅 1줄로 가능!
 		criteria.setType(type);
+		
+		//로그인한 상태가 아니면 로그인페이지로 보내기
+		Member member = (Member)session.getAttribute("member");
+		if(member==null) {
+			mav.setViewName("redirect:/member/viewSignIn");
+			return mav;
+		}
+		//멤버가 없으면 애초에 없음.
+		int switchNum = (int)session.getAttribute("switchNum");
 		
 		//게시판 페이징 처리 클래스 셋팅하기
 		PageMaker pageMaker = new PageMaker(ps.getPostingCountByCategory(criteria.getType()),criteria);
@@ -196,9 +244,34 @@ public class PostingController {
 		log.info("PageStartNum : "+pageMaker.getStartNum()+"PageEndNum : "+pageMaker.getEndNum());
 		mav.addObject("pageMaker", pageMaker);
 		
-		//게시물 불러오기
-		List<Posting> postings = ps.findPostingsPerPageByCategory(pageMaker.getCriteria());
+		List<Posting> postings;
+		if(criteria.getSortType() == null) {
+			System.out.println("초기에 이리로 들어옴");
+			switchNum = 0;
+			criteria.setSortType("id");
+			criteria.setSort("DESC");
+			postings = ps.findPostingsPerPageByCategoryAndBySorting(pageMaker.getCriteria(), switchNum);
+			System.out.println(postings);
+		} else {	
+			System.out.println("뭔가 버튼을 클릭 했을 때 : sort : " + criteria.getSortType() + " / switchNum : " + switchNum + " / 게시판 타입 : " + criteria.getType());
+			if(switchNum == 0) {
+				criteria.setSort("DESC");
+				postings = ps.findPostingsPerPageByCategoryAndBySorting(pageMaker.getCriteria(), switchNum);
+				switchNum = 1;
+				session.setAttribute("switchNum", switchNum);
+				System.out.println("if switchNum == 0, postings is : " + postings);
+			}
+			else {
+				criteria.setSort("ASC");
+				postings = ps.findPostingsPerPageByCategoryAndBySorting(pageMaker.getCriteria(), switchNum);
+				switchNum = 0;
+				System.out.println("if switchNum == 1, postings is : " + postings);
+				session.setAttribute("switchNum", switchNum);
+			}
+		}
 		mav.addObject("postings", postings);
+		
+		//switchNum 에 대한 처리.
 		
 		//게시판이 밥친구일 경우, object로 업캐스팅 해준다
 		if(pageMaker.getCriteria().getType()=='E') {
@@ -210,8 +283,8 @@ public class PostingController {
 		return mav;
 	}
 	
-	@GetMapping("/posting/{type}/sortingByView")
-	public ModelAndView sortingByView(Criteria criteria, @PathVariable String type, HttpSession session) {
+	@GetMapping("/posting/{type}/sorting")
+	public ModelAndView sorting(Criteria criteria, @PathVariable String type, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		int switchNum = 0;
 		session.setAttribute("switchNum", switchNum);
@@ -219,7 +292,7 @@ public class PostingController {
 		PageMaker pageMaker = new PageMaker(ps.getPostingCountByCategory(criteria.getType()), criteria);
 		mav.addObject("pageMaker", pageMaker);
 		
-		//List<Posting> postings = ps.findPostingsPerPageByCategoryAndByView(pageMaker.getCriteria());
+		List<Posting> postings = ps.findPostingsPerPageByCategoryAndBySorting(pageMaker.getCriteria(), switchNum);
 		
 		char category = getPostCategory(type);
 		
@@ -238,7 +311,7 @@ public class PostingController {
 	 * @return
 	 */
 	@GetMapping("/posting/{type}/{id}")
-	public ModelAndView readPostView(@PathVariable int id, @PathVariable String type, @RequestParam("cpageNum") int cpageNum) {
+	public ModelAndView readPostView(@PathVariable int id, @PathVariable String type, @RequestParam("cpageNum") int cpageNum, @SessionAttribute("member") Member member) {
 		ModelAndView mav = new ModelAndView();
 		
 		Posting posting;
@@ -250,8 +323,9 @@ public class PostingController {
 		//조회수 업데이트해주기
 		ps.updatePostingViews(category, id);
 		posting.setViews(posting.getViews()+1);
-		
-
+		//(로그인한사람의)게시글 좋아요 상태 받아오기
+		boolean likeState = pls.isPostingLikes(posting,member);
+		mav.addObject("memberLikeState", likeState);
 		mav.addObject("post", posting);
 		
 		
@@ -263,8 +337,12 @@ public class PostingController {
 		
 		*/
 		// 항상 pageNum은 1이 default 이다.
-		List<Comment> comments = cs.findCommentsByPostId(posting.getId(), category, cpageNum); // 게시물 댓글 1페이지
-		int allCmtNum = cs.countCommentByPostId(posting.getId(), category); // 해당 게시글의 총 댓글 수
+		List<Comment> comments = new ArrayList<>();
+		int allCmtNum = 0;
+		if(category != 'N') {
+			comments = cs.findCommentsByPostId(posting.getId(), category, cpageNum); // 게시물 댓글 1페이지
+			allCmtNum = cs.countCommentByPostId(posting.getId(), category); // 해당 게시글의 총 댓글 수
+		}
 		// double 형으로 캐스팅을 한 후에 나누기를 해줘야 소수점이 제대로 나온다
 		int allPageNum = (int)Math.ceil((double)allCmtNum / (int)COMMENT_LIST.getPoint()); // 페이지 개수 구하기
 	
@@ -525,6 +603,7 @@ public class PostingController {
 	}
 	
 	
+
 //	
 //	@GetMapping("/posting/{type}/sortingByLatest")
 //	public ModelAndView sortingByLatest(@PathVariable String type) {
@@ -549,6 +628,33 @@ public class PostingController {
 //		mav.setViewName("posting/post_write");
 //		return mav;
 //	}
+
+	/**
+	 * 로그인한 사용자의 1개의 게시물에 대한 좋아요 상태를 바꾼다
+	 * 현재 게시물의 좋아요 갯수를 리턴해준다
+	 * @param data
+	 * @return
+	 */
+	@PostMapping("/posting/convertLikesState")
+	@ResponseBody
+	public int convertLikesState(@RequestBody HashMap<String,Object> data, @SessionAttribute("member") Member member) {
+		long postId = Long.parseLong(data.get("postId").toString());
+		char category = data.get("category").toString().charAt(0);   
+		boolean likesState = Boolean.parseBoolean(data.get("likesState").toString());
+		int likes=0;
+		//좋아요를 한 상태라면
+		if(likesState) {
+			pls.addPostingLikes(new Posting(postId,category), member);
+			likes = pls.getPostingLikes(new Posting(postId,category));
+		}
+		//좋아요 취소를 한 상태라면
+		else {
+			pls.deletePostingLikes(new Posting(postId,category), member);
+			likes = pls.getPostingLikes(new Posting(postId,category));
+		}
+			
+		return likes;
+	}
 	
 	
 }

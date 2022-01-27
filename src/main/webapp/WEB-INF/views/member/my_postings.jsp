@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -21,10 +21,21 @@
                    	<c:if test="${postType eq 'R'.charAt(0) }">
 						<a href="${pageContext.request.contextPath}/member/myPostings/recommend" class="postBtn recommend on">식당추천</a>
 	                    <a href="${pageContext.request.contextPath}/member/myPostings/together" class="postBtn together">밥친구</a>
+	                    <c:if test="${member.memberType eq 'A'.charAt(0) }">
+	                    	<a href="${pageContext.request.contextPath}/member/myPostings/notice" class="postBtn notice">공지사항</a>
+	                    </c:if>
 					</c:if>
                    	<c:if test="${postType eq 'E'.charAt(0) }">
 						<a href="${pageContext.request.contextPath}/member/myPostings/recommend" class="postBtn recommend">식당추천</a>
 	                    <a href="${pageContext.request.contextPath}/member/myPostings/together" class="postBtn together on">밥친구</a>
+	                    <c:if test="${member.memberType eq 'A'.charAt(0) }">
+	                    	<a href="${pageContext.request.contextPath}/member/myPostings/notice" class="postBtn notice">공지사항</a>
+	                    </c:if>
+					</c:if>
+					<c:if test="${postType eq 'N'.charAt(0) }">
+						<a href="${pageContext.request.contextPath}/member/myPostings/recommend" class="postBtn recommend">식당추천</a>
+	                    <a href="${pageContext.request.contextPath}/member/myPostings/together" class="postBtn together">밥친구</a>
+	                    <a href="${pageContext.request.contextPath}/member/myPostings/notice" class="postBtn notice on">공지사항</a>
 					</c:if>
                 </div>
                 <c:forEach var="posting" items="${myPostings }">
@@ -49,6 +60,17 @@
 		                        <p class="postTitle"><a href="${pageContext.request.contextPath}/posting/together/${posting.id}?cpageNum=1">${posting.title }</a></p>
 	                    	</div>
 	                    	<form action="${pageContext.request.contextPath}/member/delPost/together" method="post">
+		                        <input type="hidden" value="${posting.id}" name="postId">
+		                        <input type="submit" value="삭제" class="postDelBtn">
+		                    </form>
+                    	</c:if>
+                    	<c:if test="${posting.category eq 'N'.charAt(0) }">
+                    		<span class="postType">공지사항</span>
+                    		<div class="post">
+	                        	<span class="nameAndRegDate">${posting.member.nickName } . ${postDate }</span>
+		                        <p class="postTitle"><a href="${pageContext.request.contextPath}/posting/notice/${posting.id}?cpageNum=1">${posting.title }</a></p>
+	                    	</div>
+	                    	<form action="${pageContext.request.contextPath}/member/delPost/notice" method="post">
 		                        <input type="hidden" value="${posting.id}" name="postId">
 		                        <input type="submit" value="삭제" class="postDelBtn">
 		                    </form>

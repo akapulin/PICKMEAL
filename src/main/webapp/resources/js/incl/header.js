@@ -174,131 +174,19 @@ $('#gnb ul li a').on('click',function(e){
   $(this).addClass('header_BoardOnclick');
 
   //비회원이면 클릭막기
+  /*
   if($('#headerMember').val()==null || $('#headerMember').val() ==''){
 	e.preventDefault();
 	alert('로그인 후 이용하실 수 있습니다');
 	$(this).removeClass('header_BoardOnclick')
 	$(this).css({color:'#f23f3f',cursor:'pointer'});
 	}
-
+  */
 
 
 })
 
-function createAlarm(data) {
-	if (data.length == 0) {
-		return;
-	}
-	for(let i=0; i<data.length; i++) {
-		let type = data[i].alarmType;
-		if (type == 'C') { // type 이 C 인 경우 채팅
-			$(".chatAlarmMark").show();
-		} else {
-			$(".alarmMark").show();
-			let imgTag;
-			let contentTag;
-			let timeTag;
-			let timeHD = Date.parse(new Date()) - Date.parse(data[i].regDate);
-			
-			if (timeHD > 3600000) { // 1시간 보다 클 경우
-				let hourHD = parseInt(timeHD / 3600000); // 시간으로 나누기
-				timeTag = hourHD + " 시간 전"
-			} else if (timeHD > 60000) { // 1분 보다 클 경우
-				let minuteHD = parseInt(timeHD / 60000); // 분으로 나누기
-				timeTag = minuteHD + " 분 전"
-			} else {
-				timeTag = "방금 전"
-			}
-			
-			if (data[i].alarmType == 'L') {
-				imgTag = '<img src="' + getContextPath() + '/resources/img/header/store.png" alt="프로필사진" class="alarmProfileImg">';
-				contentTag = '식당에서 식사는 맛있으셨나요?';
-			} else {
-				imgTag = '<img src="' + getContextPath() + '/resources/img/header/store.png" alt="프로필사진" class="alarmProfileImg">';
-				contentTag = '님과의 식사는 어떠셨나요?';
-			}
-			// 알람 메시지를 넣어줘야한다.
-			if ($("#alarm" + data[i].id).length == 0) { // 해당 알람이 없을 경우
-				$("ul.alarmArea").append(
-						'<li onclick="popAlarmChkContent(this)" data-friend="' + data[i].friend.id + '" data-member="' + data[i].member.id + 
-						'" data-alarmtype="' + data[i].alarmType + '" data-alarmid="' + data[i].id + '" data-alarmcontent="' + data[i].content + 
-						'" id="alarm' + data[i].id + '">' + imgTag + 
-							'<span class="alarmTextBold">[' + data[i].content + '] </span>' + contentTag + 
-							'<span class="alarmTextClock">' + timeTag + '</span>' + 
-						'</li>'
-				)
-			}
-		}
-	}
-}
 
-function popAlarmChkContent(a) {
-	let alarmId = $(a).data("alarmid");
-	let alarmType = $(a).data("alarmtype");
-	let alarmMember = $(a).data("member");
-	let alarmFriend = $(a).data("friend");
-	let alarmContent = $(a).data("alarmcontent");
-	
-	// 둘 다 공통적으로 실행을 완료한 후 table 에서 레코드를 지워야한다.
-	
-	// alarmType == 'L' 인 경우에는 last game record 를 보고 식당 id 를 얻어와서
-	// 내가 간 식당이랑 식당 선호도에 추가로 올려줘야한다.
-	$("#checkAlarmContent").fadeIn(); // 팝업 표시
-	// 먹?안먹 체크
-	if (alarmType == 'L') {
-		$(".questionTypeL").fadeIn(); // 먹?안먹? 표시
-		$(".alarmContentInputL").html(alarmContent); // 해당 알람 내용 표시 (식당 이름)
-		$(".chkAlarmBtn[name=chkAlarmBtnL]").data("alarmid", alarmId);
-		$(".chkAlarmBtn[name=chkAlarmBtnL]").data("alarmtype", alarmType);
-		$(".chkAlarmBtn[name=chkAlarmBtnL]").data("alarmmember", alarmMember);
-		$(".chkAlarmBtn[name=chkAlarmBtnL]").data("alarmfriend", alarmFriend);
-		$(".chkAlarmBtn[name=chkAlarmBtnL]").data("alarmcontent", alarmContent);
-	}
-	// 신뢰 온도 평가
-	else if (alarmType == 'M') {
-		$(".questionTypeM").fadeIn(); // 먹?안먹? 표시
-		$(".alarmContentInputM").html(alarmContent); // 해당 알람 내용 표시 (식당 이름)
-		$(".chkAlarmBtn[name=chkAlarmBtnM]").data("alarmid", alarmId);
-		$(".chkAlarmBtn[name=chkAlarmBtnM]").data("alarmtype", alarmType);
-		$(".chkAlarmBtn[name=chkAlarmBtnM]").data("alarmmember", alarmMember);
-		$(".chkAlarmBtn[name=chkAlarmBtnM]").data("alarmfriend", alarmFriend);
-		$(".chkAlarmBtn[name=chkAlarmBtnM]").data("alarmcontent", alarmContent);
-	}
-	
-	// alarmType == 'M' 인 경우 > 매너 온도를 평가하는 것이다.
-	// 좋아요 / 보통이에요 / 나빠요 이렇게 세가지가 있고 
-	// 평가를 할 경우 상대방의 매너온도가 업데이트 되어야한다.
-}
-
-function removeAlarm(a) {
-	let alarmId = $(a).data("alarmid");
-	let alarmType = $(a).data("alarmtype");
-	let alarmMember = $(a).data("alarmmember");
-	let alarmFriend = $(a).data("alarmmember");
-	let alarmContent = $(a).data("alarmcontent");
-	
-	$.ajax({
-		url: "chat/removeAlarmType",
-		type: "post",
-		data: {
-			"id": alarmId,
-			"alarmType": alarmType,
-			"memberId": alarmMember,
-			"friendId": alarmFriend,
-			"content": alarmContent,
-			"answer": $(a).val()
-		}, success: function(data) {
-			if (data == true) {
-				$(a).parents(".questionWrap").hide();
-				$(a).parents("#checkAlarmContent").hide();
-				$("li#alarm" + alarmId).remove();
-				if ($("ul.alarmArea li").length == 0) {
-					$(".alarmMark").hide();
-				}
-			}
-		}
-	})
-}
 
 
 

@@ -15,8 +15,8 @@ let json;
 // 마커를 담을 배열입니다
 var markers = [];
 
-//var categoryArr = ['간식', '분식', '뷔페', '아시아음식', '양식', '일식', '중식', '패스트푸드', '패밀리레스토랑', '피자', '치킨', '한식'];
-var categoryArr = ['한식', '중식'];
+var categoryArr = ['간식', '분식', '뷔페', '아시아음식', '양식', '일식', '중식', '패스트푸드', '패밀리레스토랑', '피자', '치킨', '한식'];
+//var categoryArr = ['한식', '중식'];
 var rNameArr = ['이름'];
 var	rAddressArr = ['주소'];
 var rLatArr = []; //y;
@@ -55,6 +55,7 @@ let finalArr = [];
 	console.log(radius);
 	
 	if(keyword == "밥집"){
+		console.log("at 58 line : " + categoryArr.length);
 		for(var j=0; j< categoryArr.length; j++){
 			searchResList(radius, categoryArr[j], nowLat, nowLng);	
 		}
@@ -166,7 +167,7 @@ function searchResList(radius, keyword, lat, lng){
 					}
 				}
 				//12로 바꿔야 함.
-				if(categoryCnt == 2){
+				if(categoryCnt == 12){
 					console.log("밥집인 경우 이리로 온다.");
 					console.log(totalArr.length);
 					if(totalArr.length >= 5){

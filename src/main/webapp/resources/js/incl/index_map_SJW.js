@@ -98,4 +98,7 @@ function createLatLng(data, input, name){
 			console.log("successssssssssssss")
 			window.open("openGamePopUp", "게임하기", "width=600, height = 600, top=" + popupY + ", left=" + popupX + ""); //선언과 초기화 동시에 해도 됨
 		}	
-	}) */	 
+	}) */	
+	
+	
+	 
