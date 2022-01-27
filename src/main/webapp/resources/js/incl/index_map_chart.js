@@ -514,6 +514,8 @@ function setReviewVariable() {
 
 
 function drawReviews() {
+	//이전에 있던 리뷰 기록들 지워주기
+	$('.userReviewGraph ul li').remove();
 	//리뷰그리기
 	if(reviews!=null){
 		for (let i = 0; i < reviews.length; i++) {
