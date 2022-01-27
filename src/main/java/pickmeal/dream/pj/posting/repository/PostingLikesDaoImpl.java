@@ -16,11 +16,7 @@ public class PostingLikesDaoImpl implements PostingLikesDao {
 	@Override
 	public int getPostingLikes(Posting posting) {
 		try {
-			if (posting.getCategory() == 'N') {
-				String sql = "SELECT COUNT(id) as LikesCnt FROM NoticePostingLikes"
-							+" WHERE postingId=?";
-				return jt.queryForObject(sql, Integer.class,posting.getId());
-			} else if (posting.getCategory() == 'R') {
+			if (posting.getCategory() == 'R') {
 				String sql = "SELECT COUNT(id) as LikesCnt FROM RecommendRestaurantPostingLikes"
 							+" WHERE postingId=?";
 				return jt.queryForObject(sql, Integer.class,posting.getId());
@@ -37,11 +33,7 @@ public class PostingLikesDaoImpl implements PostingLikesDao {
 
 	@Override
 	public void addPostingLikes(Posting posting, Member member) {
-		if (posting.getCategory() == 'N') {
-			String sql = "INSERT INTO NoticePostingLikes(postingId, memberId)"
-					+" VALUES(?,?)";
-			jt.update(sql,posting.getId(),member.getId());
-		}else if(posting.getCategory() == 'R'){
+		if(posting.getCategory() == 'R'){
 			String sql = "INSERT INTO RecommendRestaurantPostingLikes(postingId, memberId)"
 					+" VALUES(?,?)";
 			jt.update(sql,posting.getId(),member.getId());
@@ -55,10 +47,7 @@ public class PostingLikesDaoImpl implements PostingLikesDao {
 
 	@Override
 	public void deletePostingLikes(Posting posting, Member member) {
-		if (posting.getCategory() == 'N') {
-			String sql = "DELETE FROM NoticePostingLikes WHERE postingId=? AND memberId=?";
-			jt.update(sql,posting.getId(),member.getId());
-		}else if(posting.getCategory() == 'R'){
+		if(posting.getCategory() == 'R'){
 			String sql = "DELETE FROM RecommendRestaurantPostingLikes WHERE postingId=? AND memberId=?";
 			jt.update(sql,posting.getId(),member.getId());
 		}else {
@@ -72,10 +61,7 @@ public class PostingLikesDaoImpl implements PostingLikesDao {
 	public boolean isPostingLikes(Posting posting, Member member) {
 
 		try {
-			if (posting.getCategory() == 'N') {
-				String sql = "SELECT EXISTS(SELECT id FROM NoticePostingLikes WHERE postingId=? AND memberId=?) as likeState";
-				return jt.queryForObject(sql,Boolean.class,posting.getId(),member.getId());
-			}else if(posting.getCategory() == 'R'){
+			if(posting.getCategory() == 'R'){
 				String sql = "SELECT EXISTS(SELECT id FROM RecommendRestaurantPostingLikes WHERE postingId=? AND memberId=?) as likeState";
 				return jt.queryForObject(sql,Boolean.class,posting.getId(),member.getId());
 			}else {

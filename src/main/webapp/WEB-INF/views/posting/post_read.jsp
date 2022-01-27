@@ -139,16 +139,19 @@
                 <div id="rPostAdditionalInfoWrap">
 
                     <ul class="rPostAdditioanInfoLeftSide">
-                        <li>
-                        	<c:if test="${memberLikeState eq true }">
-                        		<img class="rPostLikesImg rPostLikesImgSelected" src="${pageContext.request.contextPath}/resources/img/posting/heart_onclick.png" alt="좋아요아이콘">
-                        	</c:if>
-                        	<c:if test="${memberLikeState eq false }">
-                        		<img class="rPostLikesImg" src="${pageContext.request.contextPath}/resources/img/posting/heart.png" alt="좋아요아이콘">
-                        	</c:if>
-                            
-                            <p class="rPostLikesText">좋아요<span class="rPostLikesCnt">${post.likes }</span></p>
-                        </li>
+                    	 <c:if test="${fn:contains(post.category,'E') or fn:contains(post.category,'R')}">
+                    	 	<li>
+	                        	<c:if test="${memberLikeState eq true }">
+	                        		<img class="rPostLikesImg rPostLikesImgSelected" src="${pageContext.request.contextPath}/resources/img/posting/heart_onclick.png" alt="좋아요아이콘">
+	                        	</c:if>
+	                        	<c:if test="${memberLikeState eq false }">
+	                        		<img class="rPostLikesImg" src="${pageContext.request.contextPath}/resources/img/posting/heart.png" alt="좋아요아이콘">
+	                        	</c:if>
+	                            
+	                            <p class="rPostLikesText">좋아요<span class="rPostLikesCnt">${post.likes }</span></p>
+                        	</li>
+                    	 </c:if>
+                        
                         <li>
                             <img class="rPostCommentCountImg" src="${pageContext.request.contextPath}/resources/img/posting/bubble-chat.png" alt="댓글아이콘">
                             <p class="rPostCommentCountText">댓글<span class="rPostCommentCnt">${post.commentsNumber }</span></p>

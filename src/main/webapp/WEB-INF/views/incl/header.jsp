@@ -227,7 +227,7 @@
 		let alarmContent = $(a).data("alarmcontent");
 		
 		$.ajax({
-			url: "chat/removeAlarmType",
+			url: "${pageContext.request.contextPath}/chat/removeAlarmType",
 			type: "post",
 			data: {
 				"id": alarmId,
