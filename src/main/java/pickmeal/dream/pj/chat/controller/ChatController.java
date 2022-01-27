@@ -47,7 +47,7 @@ public class ChatController {
 	 */
 	@GetMapping("/chat/chatListByComment")
 	public ModelAndView chatList(@RequestParam("writer") String writer, @RequestParam("commenter") String commenter,
-			HttpSession session) {
+			HttpSession session, @RequestParam("chkAlarm") String chkAlarm) {
 		ModelAndView mav = new ModelAndView();
 		// 좌측에 해당 사용자의 채팅 목록을 불러온다.
 		Member member = (Member)session.getAttribute("member");
@@ -68,7 +68,7 @@ public class ChatController {
 		
 		// 채팅이 시작한다는 표시
 		mav.addObject("chatStart", "true");
-		mav.addObject("chkAlarm", "comment");
+		mav.addObject("chkAlarm", chkAlarm);
 		
 		Chat chat = new Chat();
 		chat.setWriter(enterWriter);
@@ -79,42 +79,6 @@ public class ChatController {
 		mav.setViewName("chat/chat_list");
 		return mav;
 	}
-
-	@GetMapping("/chat/chatListByAlarm")
-	public ModelAndView goChatListByAlarm(@RequestParam("writer") String writer, @RequestParam("commenter") String commenter,
-			HttpSession session) {
-		ModelAndView mav = new ModelAndView();
-		// 좌측에 해당 사용자의 채팅 목록을 불러온다.
-		Member member = (Member)session.getAttribute("member");
-		List<Chat> chats = new ArrayList<>();
-		try {
-			chats = cs.findAllChatsByMemberId(member.getId());
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 
-		mav.addObject("chats", chats);
-		// 우측에 이번에 새롭게 시작할 채팅 화면을 띄워야한다.
-		// writer와 commenter 모두를 session 에 넣어줘야한다.
-		Member enterWriter = cs.makeChatter(Long.parseLong(writer));
-		Member enterCommenter = cs.makeChatter(Long.parseLong(commenter));
-		// handler에서 사용
-		session.setAttribute("writer", enterWriter);
-		session.setAttribute("commenter", enterCommenter);
-		
-		// 채팅이 시작한다는 표시
-		mav.addObject("chatStart", "true");
-		mav.addObject("chkAlarm", "alarm");
-		
-		Chat chat = new Chat();
-		chat.setWriter(enterWriter);
-		chat.setCommenter(enterCommenter);
-		chat.setMember(member);
-		mav.addObject("chat", cs.findChatByWriterIdAndCommenterId(chat));
-		
-		mav.setViewName("chat/chat_list");
-		return mav;
-	}
-	
 	
 	/**
 	 * 헤더의 아이콘을 눌러서 들어온다.

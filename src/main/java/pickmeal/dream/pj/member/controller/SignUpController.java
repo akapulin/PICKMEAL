@@ -134,6 +134,7 @@ public class SignUpController {
 		enterMember.setId(member.getId());
 		enterMember.setEmail(member.getEmail());
 		enterMember.setNickName(member.getNickName());
+		enterMember.setAttendance(member.getAttendance());
 		enterMember.setFoodPowerPoint(member.getFoodPowerPoint());
 		enterMember.setMannerTemperature(member.getMannerTemperature());
 		enterMember.setProfileImgPath(member.getProfileImgPath());

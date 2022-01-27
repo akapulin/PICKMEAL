@@ -16,9 +16,10 @@ public class ChatDaoImpl implements ChatDao {
 
 	@Override
 	public void addChat(Chat chat) {
-		String sql = "INSERT INTO Chat(writerId, commenterId, memberId, readType)"
+		String sql = "INSERT IGNORE INTO Chat(writerId, commenterId, memberId, readType)"
 				+ " VALUES (?, ?, ?, ?)";
-		jt.update(sql, chat.getWriter().getId(), chat.getCommenter().getId(), chat.getMember().getId(), String.valueOf(chat.getReadType()));
+		jt.update(sql, chat.getWriter().getId(), chat.getCommenter().getId(), chat.getMember().getId()
+				, String.valueOf(chat.getReadType()));
 	}
 
 	@Override

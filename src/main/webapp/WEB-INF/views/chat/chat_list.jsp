@@ -40,10 +40,7 @@
 						 id="choiceChatter_${c.id}" value="${c.id}" onclick="downloadFile(this); removeChatListAlarm(this);">채팅</button>
 					</c:when>
 					<c:otherwise>
-						<button type="button" name="goChatting" class="choiceChatter" 
-						data-writernick="${c.writer.nickName}" data-commenternick="${c.commenter.nickName}"
-						 data-writer="${c.writer.id}" data-commenter="${c.commenter.id}" data-member="${member.id}" 
-						 id="choiceChatter_${c.id}" value="${c.id}" onclick="downloadFile(this); removeChatListAlarm(this);" disabled>채팅</button>
+						<button type="button" name="goChatting" class="choiceChatter" id="choiceChatter_${c.id}" value="${c.id}" disabled>채팅</button>
 					</c:otherwise>
 				</c:choose>
 				</div>
@@ -104,20 +101,16 @@
 			
 			let writerId = "${writer.id}";
 			let commenterId = "${commenter.id}";
-			// 상대방이 채팅에 참가했는지 표시
-			let participation = false;
+
+			let readType = 'N'; // 상대방이 있는지 없는지
 			
 			// 기존의 파일 다운로드 해서 태그 생성
 			function downloadFile(a) {
 				$(".choiceChatter").removeClass("on");
 				
-				//writerNick = $(a).data("writernick")
 				writerNick = a.dataset.writernick;
-				//commenterNick = $(a).data("commenternick")
 				commenterNick = a.dataset.commenternick;
-				//writerId = $(a).data("writer")
 				writerId = a.dataset.writer;
-				//commenterId = $(a).data("commenter")
 				commenterId = a.dataset.commenter;
 				
 				$(a).addClass("on");
@@ -243,7 +236,6 @@
 				var data = msg.data;
 				var sessionId = null; //데이터를 보낸 사람
 				var message = null;
-				let readType = 'R'; // 상대방이 있을 경우
 				
 				var name = data.substring(0, data.indexOf(":"));
 				message = data.substring(data.indexOf(":")+1, data.length);
@@ -301,23 +293,28 @@
 				
 				
 				let fileText = tagToFileText();
+				let status = 0;
 				
-				$.ajax({
-					url: "uploadFile",
-					type: "post",
-					contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-					data: {
-						"writerId" : writerId,
-						"commenterId": commenterId,
-						"readType": readType,
-						"fileText": fileText
-					}, success: function(data) {
-						console.log("success")
-						uploadCount = 0;
-					}, error: function(data) {
-						console.log("error")
-					}
-				})
+				do {
+
+					$.ajax({
+						url: "uploadFile",
+						type: "post",
+						contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+						data: {
+							"writerId" : writerId,
+							"commenterId": commenterId,
+							"readType": readType,
+							"fileText": fileText
+						}, success: function(data) {
+							console.log("success")
+						}, error: function(data) {
+							console.log("error")
+						}
+					})
+				} while (status == 1);
+				
+				
 			}
 			let addChat = 0;
 			
