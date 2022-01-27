@@ -61,14 +61,6 @@ CREATE TABLE NoticePosting (												# 식당 추천 게시판
 	
 );
 
-#공지사항 게시글 좋아요 
-CREATE TABLE NoticePostingLikes(
-	id				BIGINT			PRIMARY KEY	AUTO_INCREMENT,				# SQL 아이디
-	postingId		BIGINT			NOT NULL,								# 게시글 아이디
-	memberId		BIGINT			NOT NULL,								# 좋아요 누른 사용자 아이디
-	CONSTRAINT		NoticePostingLikes_postingId_FK	FOREIGN KEY(postingId)	REFERENCES NoticePosting(id) ON DELETE CASCADE,
-	CONSTRAINT		NoticePostingLikes_memberId_FK	FOREIGN KEY(memberId)	REFERENCES Member(id)
-);
 
 #식당추천 게시글 좋아요 
 CREATE TABLE RecommendRestaurantPostingLikes(
@@ -93,7 +85,7 @@ CREATE TABLE TogetherEatingPostingLikes(
 
 
 
-DROP TABLE NoticePostingLikes;
+
 DROP TABLE RecommendRestaurantPostingLikes;
 DROP TABLE TogetherEatingPostingLikes;
 DROP TABLE RecommendRestaurantComment;
@@ -102,7 +94,7 @@ DROP TABLE RecommendRestaurantPosting;
 DROP TABLE TogetherEatingPosting;
 DROP TABLE NoticePosting;
 
-DELETE FROM NoticePostingLikes;
+
 DELETE FROM RecommendRestaurantPostingLikes;
 DELETE FROM TogetherEatingPostingLikes;
 DELETE FROM RecommendRestaurantComment;
@@ -111,7 +103,7 @@ DELETE FROM RecommendRestaurantPosting;
 DELETE FROM TogetherEatingPosting;
 DELETE FROM NoticePosting;
 
-SELECT * FROM NoticePostingLikes;
+
 SELECT * FROM RecommendRestaurantPostingLikes;
 SELECT * FROM TogetherEatingPostingLikes;
 SELECT * FROM RecommendRestaurantComment;
