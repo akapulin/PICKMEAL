@@ -51,6 +51,10 @@
     padding: 20px 0;
 }
 
+.postings_wrap .postBox .post {
+    width: 90%;
+}
+
 .postings_wrap .postBox:hover {
     background-color: #ffecec;
 }

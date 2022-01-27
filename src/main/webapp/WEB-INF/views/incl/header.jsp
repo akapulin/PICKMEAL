@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="true"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <header>
 	<h1><a class="logo" href="${pageContext.request.contextPath}/index">밥찡코</a></h1>
 	<nav id="gnb">
