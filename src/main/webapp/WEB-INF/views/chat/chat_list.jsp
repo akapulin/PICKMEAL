@@ -69,8 +69,10 @@
 			
 			function removeChatListAlarm(a) {
 				$(a).parent().children(".non_read").remove();
-				writerId = $(a).data("writer")
-				commenterId = $(a).data("commenter")
+				//writerId = $(a).data("writer")
+				writerId = a.dataset.writer;
+				//commenterId = $(a).data("commenter")
+				commenterId = a.dataset.commenter;
 				$.ajax({
 					url: "updateChatType",
 					type: "get",
@@ -108,10 +110,14 @@
 			function downloadFile(a) {
 				$(".choiceChatter").removeClass("on");
 				
-				writerNick = $(a).data("writernick")
-				commenterNick = $(a).data("commenternick")
-				writerId = $(a).data("writer")
-				commenterId = $(a).data("commenter")
+				//writerNick = $(a).data("writernick")
+				writerNick = a.dataset.writernick;
+				//commenterNick = $(a).data("commenternick")
+				commenterNick = a.dataset.commenternick;
+				//writerId = $(a).data("writer")
+				writerId = a.dataset.writer;
+				//commenterId = $(a).data("commenter")
+				commenterId = a.dataset.commenter;
 				
 				$(a).addClass("on");
 				$.ajax({
@@ -122,6 +128,7 @@
 						"commenterId": commenterId
 					},
 					success: function(data) {
+						chatStart = "true";
 						$("#msgWrap").html("");
 						//$("#chatStart").val("true"); // 채팅을 누르면 한다는 뜻이므로 값을 true 로 준다
 						connectSockJs();
@@ -235,9 +242,13 @@
 				var data = msg.data;
 				var sessionId = null; //데이터를 보낸 사람
 				var message = null;
+				let readType = 'R'; // 상대방이 있을 경우
 				
 				var name = data.substring(0, data.indexOf(":"));
 				message = data.substring(data.indexOf(":")+1, data.length);
+				
+				console.log("name : "+ name)
+				console.log("message : " + message)
 				
 				message = message.replace(/\s+$/,'').replace(/\s/g, "&nbsp;");
 				
@@ -252,7 +263,7 @@
 					$("#msgWrap").append("<p class='removeMsg'>" + message + "</p>");
 					$('#msgArea').scrollTop($('#msgArea').prop('scrollHeight'));
 					if (message.includes("님&nbsp;비로그인&nbsp;중")) {
-						participation = false;
+						readType = 'N';
 					}
 					return;
 				}
@@ -269,7 +280,7 @@
 				if (message.includes("]님이&nbsp;입장했습니다.")) {
 					$("#msgWrap").append("<p class='removeMsg'>" + message + "</p>");
 					$('#msgArea').scrollTop($('#msgArea').prop('scrollHeight'));
-					participation = true;
+					readType = 'R';
 					return;
 				}
 				
@@ -278,7 +289,7 @@
 				$(".removeMsg").remove();
 				if (message.includes("]님은&nbsp;시간이&nbsp;부족하네요ㅠㅠ")){
 					makeOpponentTag(commenterNick, time, message);
-					participation = false;
+					readType = 'N';
 					return;
 				}
 				if(sessionId == cur_session){
@@ -289,12 +300,7 @@
 				
 				
 				let fileText = tagToFileText();
-				let readType = 'R'; // 상대방이 있을 경우
-
-				// 시작 전 현재 상대방이 비로인일 경우 내역을 남겨야한다.
-				if (participation == false) {
-					readType = 'N';
-				}
+				
 				$.ajax({
 					url: "uploadFile",
 					type: "post",
@@ -306,6 +312,7 @@
 						"fileText": fileText
 					}, success: function(data) {
 						console.log("success")
+						uploadCount = 0;
 					}, error: function(data) {
 						console.log("error")
 					}
@@ -343,18 +350,19 @@
 				var str = '채팅창에 입장했습니다 [' + user + ']';
 				
 				let memberNick = "${member.nickName}";
-				
-				if (writerNick == memberNick) {
+				if ("${chkAlarm}" != "alarm") {
 					if (writerNick == memberNick) {
-						sock.send("first send:" + commenterNick);
+						if (writerNick == memberNick) {
+							sock.send("first send:" + commenterNick);
+						} else if (commenterNick == memberNick) {
+							sock.send("${member.nickName}:[${member.nickName}]님이 입장했습니다.")
+						}
 					} else if (commenterNick == memberNick) {
-						sock.send("${member.nickName}:[${member.nickName}]님이 입장했습니다.")
-					}
-				} else if (commenterNick == memberNick) {
-					if (commenterNick == memberNick) {
-						sock.send("first send:" + writerNick);
-					} else if (writerNick == memberNick) {
-						sock.send("${member.nickName}:[${member.nickName}]님이 입장했습니다.")
+						if (commenterNick == memberNick) {
+							sock.send("first send:" + writerNick);
+						} else if (writerNick == memberNick) {
+							sock.send("${member.nickName}:[${member.nickName}]님이 입장했습니다.")
+						}
 					}
 				}
 				

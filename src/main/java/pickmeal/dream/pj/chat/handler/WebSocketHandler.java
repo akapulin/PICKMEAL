@@ -2,6 +2,7 @@ package pickmeal.dream.pj.chat.handler;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,7 +63,13 @@ public class WebSocketHandler extends TextWebSocketHandler {
 		if (line.contains("first send")) {
 			String[] lines = line.split(":");
 			WebSocketSession recipient = loginMemberMap.get(lines[1]);
-			if (v.isEmpty(recipient)) {
+			boolean recipientChk = false;
+			try {
+				recipientChk = !recipient.isOpen();
+			} catch (NullPointerException e) {
+				e.printStackTrace();
+			}
+			if (recipientChk || recipient == null) {
 				session.sendMessage(new TextMessage(lines[1] + "님 비로그인 중"));
 			} else {
 				session.sendMessage(new TextMessage(lines[1] + "님 로그인 중"));
@@ -97,6 +104,9 @@ public class WebSocketHandler extends TextWebSocketHandler {
 			return;
 		}
 		
+		log.info("왜 안되는거지 ");
+		log.info("" + loginMemberMap.keySet().toString());
+		
 		// 작성자와 댓글을 적은 사람에게만 보낸다.
 		for (String nickName : loginMemberMap.keySet()) {
 			log.info("nickName : " + nickName);
@@ -104,7 +114,15 @@ public class WebSocketHandler extends TextWebSocketHandler {
 			log.info("commenter nickName : " + commenter.getNickName());
 			if (nickName.equals(writer.getNickName()) || nickName.equals(commenter.getNickName())) {
 				WebSocketSession s = loginMemberMap.get(nickName);
-				s.sendMessage(new TextMessage(name + ":" + message));
+				boolean recipientChk = false;
+				try {
+					recipientChk = s.isOpen();
+				} catch (NullPointerException e) {
+					e.printStackTrace();
+				}
+				if (recipientChk) {
+					s.sendMessage(new TextMessage(name + ":" + message));
+				}
 			}
 		}
 	}
@@ -116,8 +134,8 @@ public class WebSocketHandler extends TextWebSocketHandler {
 		map.remove("writer");
 		map.remove("commenter");
 		
-		Member member = (Member)map.get("member");
-		loginMemberMap.remove(member.getNickName());
+		//Member member = (Member)map.get("member");
+		//loginMemberMap.remove(member.getNickName());
 		log.info("#WebSocketHandler, afterConnectionClosed");
 	}
 }
