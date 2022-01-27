@@ -124,7 +124,6 @@
 					success: function(data) {
 						chatStart = "true";
 						$("#msgWrap").html("");
-						//$("#chatStart").val("true"); // 채팅을 누르면 한다는 뜻이므로 값을 true 로 준다
 						connectSockJs();
 						let typeArr = data[0].split("[LI_PICKMEAL_PI]")
 						let writer = typeArr[0].substring(typeArr[0].indexOf(":")+1, typeArr[0].length); // writer nickName
