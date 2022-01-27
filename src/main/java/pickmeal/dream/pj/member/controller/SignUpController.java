@@ -134,6 +134,7 @@ public class SignUpController {
 		enterMember.setId(member.getId());
 		enterMember.setEmail(member.getEmail());
 		enterMember.setNickName(member.getNickName());
+		enterMember.setAttendance(member.getAttendance());
 		enterMember.setFoodPowerPoint(member.getFoodPowerPoint());
 		enterMember.setMannerTemperature(member.getMannerTemperature());
 		enterMember.setProfileImgPath(member.getProfileImgPath());
@@ -146,6 +147,7 @@ public class SignUpController {
 		// 완료 후 세션에 멤버를 넣어준다 (자동 로그인)
 		session.setAttribute("member", enterMember);
 		session.setAttribute("cntForRetry", cntForRetry);
+		
 		// 알람을 받을 거라는 체크
 		session.setAttribute("chatCount", "true");
 		

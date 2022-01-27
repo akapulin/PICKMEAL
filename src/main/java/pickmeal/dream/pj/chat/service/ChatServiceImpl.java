@@ -38,6 +38,9 @@ public class ChatServiceImpl implements ChatService {
 		// 현재 읽지 않는 경우라면 무조건 alarm 추가
 		if (chat.getReadType() =='N') {
 			Alarm alarm = new Alarm();
+			log.info("member nick : " + chat.getMember().getNickName());
+			log.info("commenter nick : " + chat.getCommenter().getNickName());
+			log.info("writer nick : " + chat.getWriter().getNickName());
 			if (chat.getWriter().getId() == chat.getMember().getId()) {
 				// 채팅의 경우 내가 보냈는데 상대방이 못 보는 것이기 때문에 상대방 기준으로 셋팅해준다.
 				alarm.setMember(chat.getCommenter());
