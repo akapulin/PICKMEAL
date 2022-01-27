@@ -13,6 +13,7 @@
 	<%@ include file="/WEB-INF/views/incl/header.jsp"%>
 	<section id="chatContentWrap">
 		<h2 class="hidden">채팅 목록 화면</h2>
+		<div id="chatListWrapDiv">
 		<section id="chatListWrap">
 			<h3 class="hidden">채팅 목록</h3>
 			<c:forEach var="c" items="${chats}"> 
@@ -426,6 +427,7 @@
 			}
 			</script>
 		</section>
+		</div>
 	</section>
 </body>
 </html>
