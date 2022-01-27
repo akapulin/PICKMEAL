@@ -173,7 +173,9 @@ function displayRestaurantInfo(lat, lng, restaurantName, restaurantId) {
 				headers: {"Authorization" : "KakaoAK f3ae310b0340ac2069e5e0685938a62b"},
 				dataType: "json",
 				success: function(data){
-					$("#restaurantUrl").attr("src", data["documents"][0].place_url);
+					let urlArr = data["documents"][0].place_url.split(":");
+					
+					$("#restaurantUrl").attr("src", urlArr[0] + "s:" + urlArr[1]);
 					$("#weatherWrap").hide();
 				}
 			})
