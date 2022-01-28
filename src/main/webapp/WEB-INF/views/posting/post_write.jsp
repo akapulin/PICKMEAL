@@ -10,13 +10,13 @@
 <meta charset="UTF-8">
 <%@ include file="/WEB-INF/views/incl/link.jsp"%>
 <!-- 우편번호서비스 -->
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" ></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ef48a334aefa8d6e3f9c000a120f8532&libraries=services"></script>
 
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/resources/js/posting/post_write.js" defer></script>
 
+ <!--<script src="https://malsup.github.com/jquery.form.js" type="text/javascript"></script>-->
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/posting/post.css" />
 <title>게시글쓰기</title>

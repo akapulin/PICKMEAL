@@ -110,6 +110,7 @@ public class MyPageController {
 			return mav;
 		}
 		
+		
 		mav = myPostings(session, "recommend", new Criteria());
 		
 		mav.setViewName("member/my_postings");
@@ -124,6 +125,8 @@ public class MyPageController {
 			mav.setViewName("redirect:/member/viewSignIn");
 			return mav;
 		}
+		
+		mav.addObject("postType", type.equals("recommend")? 'R':(type.equals("together")? 'E':'N'));
 
 		criteria.setType(type);
 		int postTotalCnt = ps.getPostingCountByCategoryAndMemberId(member.getId(), criteria.getType());

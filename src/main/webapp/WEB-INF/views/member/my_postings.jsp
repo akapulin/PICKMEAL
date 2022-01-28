@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>내 게시글</title>
 <link href="${pageContext.request.contextPath}/resources/css/member/my_postings.css" rel="stylesheet" type="text/css">
-<c:set var="postType" value="${pageMaker.criteria.type }"/>
+<%-- <c:set var="postType" value="${pageMaker.criteria.type }"/> --%>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/incl/header.jsp"/>
