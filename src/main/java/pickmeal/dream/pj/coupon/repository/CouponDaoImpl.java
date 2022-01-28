@@ -158,7 +158,9 @@ public class CouponDaoImpl implements CouponDao{
 				+ "DATEDIFF(regDate, CURDATE())=0 GROUP BY memberId HAVING memberId = ?)";
 		return jt.queryForObject(sql, Integer.class,memberId);
 	}
-
+	/**
+	 * 쿠폰의 생성일자가 오늘이 아닌것 다 지우기
+	 */
 	@Override
 	public void deleteCouponwithAllmemberByRegDate() {
 		String sql = "DELETE FROM Coupon WHERE used=false AND DATEDIFF(regDate,CURDATE()) != 0";

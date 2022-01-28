@@ -68,55 +68,55 @@
 	                    	<input type="hidden" id="submititem" name="restaurantId" value=""/>
 	                        <input type="text" id="reviewRName" value="" disabled/>
 	                        <div id="bathroomWrap" class= "checkboxWrap">
-	                            <img src="/pickmeal/resources/img/restaurant/review/icon_heart.png" alt="" class="reviewImg">
+	                            <img src="/pickmeal/resources/img/restaurant/review/bathroom.png" alt="" class="reviewImg">
 	                            <input type="checkbox" id="bathroomBtn" class="reviewCheckbox" name="bathroom" value="0" />
 	                            <label id="bathroomin" for="bathroomBtn" class="checklabel"></label>
 	                            <p class="reviewMessage">3시간에 한 번씩 화장실 청소하는 듯</p>
 	                        </div>
 	                        <div id="kindWrap" class= "checkboxWrap">
-	                            <img src="/pickmeal/resources/img/restaurant/review/icon_heart.png" alt="" class="reviewImg">
+	                            <img src="/pickmeal/resources/img/restaurant/review/kind.png" alt="" class="reviewImg">
 	                            <input type="checkbox" id="kindBtn" class="reviewCheckbox" name="kind" value="0" />
 	                            <label id="kindin" for="kindBtn" class="checklabel"></label>
 	                            <p class="reviewMessage">너무너무 친절해서 부담스러움</p>
 	                        </div>
 	                        <div id="specialdayWrap" class= "checkboxWrap">
-	                            <img src="/pickmeal/resources/img/restaurant/review/icon_heart.png" alt="" class="reviewImg">
+	                            <img src="/pickmeal/resources/img/restaurant/review/specialday.png" alt="" class="reviewImg">
 	                            <input type="checkbox" id="specialdayBtn" class="reviewCheckbox" name="specialDay" value="0" />
 	                            <label id="specialdayin" for="specialdayBtn" class="checklabel"></label>
 	                            <p class="reviewMessage">너와 나의 특별한 날에</p>
 	                        </div>
 	                        <div id="cleanWrap" class= "checkboxWrap">
-	                            <img src="/pickmeal/resources/img/restaurant/review/icon_heart.png" alt="" class="reviewImg">
+	                            <img src="/pickmeal/resources/img/restaurant/review/clean.png" alt="" class="reviewImg">
 	                            <input type="checkbox" id="cleanBtn" class="reviewCheckbox" name="clean" value="0" />
 	                            <label id="cleanin" for="cleanBtn" class="checklabel"></label>
 	                            <p class="reviewMessage">걍 먼지 한톨 없음ㅇㅇ</p>
 	                        </div>
 	                        <div id="parkingWrap" class= "checkboxWrap">
-	                            <img src="/pickmeal/resources/img/restaurant/review/icon_heart.png" alt="" class="reviewImg">
+	                            <img src="/pickmeal/resources/img/restaurant/review/parking.png" alt="" class="reviewImg">
 	                            <input type="checkbox" id="parkingBtn" class="reviewCheckbox" name="parking" value="0" />
 	                            <label id="parkingin" for="parkingBtn" class="checklabel"></label>
 	                            <p class="reviewMessage">초보운전 주차 쌉가능</p>
 	                        </div>
 	                        <div id="goodgroupWrap" class= "checkboxWrap">
-	                            <img src="/pickmeal/resources/img/restaurant/review/icon_heart.png" alt="" class="reviewImg">
+	                            <img src="/pickmeal/resources/img/restaurant/review/goodgroup.png" alt="" class="reviewImg">
 	                            <input type="checkbox" id="goodgroupBtn" class="reviewCheckbox" name="goodgroup" value="0"/>
 	                            <label id="goodgroupin" for="goodgroupBtn" class="checklabel"></label>
 	                            <p class="reviewMessage">친구들끼리 단체로 수다떨기 좋아요</p>
 	                        </div>
 	                        <div id="aloneWrap" class= "checkboxWrap">
-	                            <img src="/pickmeal/resources/img/restaurant/review/icon_heart.png" alt="" class="reviewImg">
+	                            <img src="/pickmeal/resources/img/restaurant/review/alone.png" alt="" class="reviewImg">
 	                            <input type="checkbox" id="aloneBtn" class="reviewCheckbox" name="alone" value="0" "/>
 	                            <label id="alonein" for="aloneBtn" class="checklabel"></label>
 	                            <p class="reviewMessage">혼자가서 둘이 나올 수 있어요</p>
 	                        </div>
 	                        <div id="bigWrap" class= "checkboxWrap">
-	                            <img src="/pickmeal/resources/img/restaurant/review/icon_heart.png" alt="" class="reviewImg">
+	                            <img src="/pickmeal/resources/img/restaurant/review/big.png" alt="" class="reviewImg">
 	                            <input type="checkbox" id="bigBtn" class="reviewCheckbox" name="big" value="0" />
 	                            <label id="bigin" for="bigBtn" class="checklabel"></label>
 	                            <p class="reviewMessage">직원이 날 못찾을 정도의 크기</p>
 	                        </div>
 	                        <div id="interiorWrap" class= "checkboxWrap">
-	                            <img src="/pickmeal/resources/img/restaurant/review/icon_heart.png" alt="" class="reviewImg">
+	                            <img src="/pickmeal/resources/img/restaurant/review/interior.png" alt="" class="reviewImg">
 	                            <input type="checkbox" id="interiorBtn" class="reviewCheckbox" name="interior" value="0"/>
 	                            <label id="interiorin" for="interiorBtn" class="checklabel"></label>
 	                            <p class="reviewMessage">사진찍기 조아욤</p>
