@@ -56,8 +56,6 @@ public class WebSocketHandler extends TextWebSocketHandler {
 		Member writer = (Member)map.get("writer");
 		Member member = (Member)map.get("member");
 		
-		log.info(line);
-		
 		// 화면에 처음 들어왔다면
 		// 글쓴이와 댓글 작성자 구분
 		if (line.contains("first send")) {
@@ -104,14 +102,8 @@ public class WebSocketHandler extends TextWebSocketHandler {
 			return;
 		}
 		
-		log.info("왜 안되는거지 ");
-		log.info("" + loginMemberMap.keySet().toString());
-		
 		// 작성자와 댓글을 적은 사람에게만 보낸다.
 		for (String nickName : loginMemberMap.keySet()) {
-			log.info("nickName : " + nickName);
-			log.info("writer nickName : " + writer.getNickName());
-			log.info("commenter nickName : " + commenter.getNickName());
 			if (nickName.equals(writer.getNickName()) || nickName.equals(commenter.getNickName())) {
 				WebSocketSession s = loginMemberMap.get(nickName);
 				boolean recipientChk = false;

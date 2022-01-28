@@ -126,7 +126,7 @@
 			})
 		}, 1)
 		// 알람 레코드 불러서 있으면 추가해야한다.
-		/* alarmTimer = setInterval(function() {
+		alarmTimer = setInterval(function() {
 			$.ajax({
 				url: getContextPath() + "/chat/viewAlarmRecord",
 				type: "get",
@@ -134,7 +134,7 @@
 					createAlarm(data);
 				}
 			})
-		}, 5000) // 60000 : 1분 */
+		}, 5000) // 60000 : 1분
 	}
 	function createAlarm(data) {
 		if (data.length == 0) {

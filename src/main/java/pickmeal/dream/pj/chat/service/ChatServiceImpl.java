@@ -193,12 +193,8 @@ public class ChatServiceImpl implements ChatService {
 
 		if (os.contains("win")) {
 			rootPath = "C:/";
-		} else if (os.contains("mac")) { // 이 아래 부분 수정 좀 해주세욤
+		} else if (os.contains("mac")) {
 			rootPath = "/Users/";
-		} else if (os.contains("uix")) {
-			rootPath = "~/";
-		} else if (os.contains("linux")) {
-			rootPath = "~/";
 		}
 		String directoryPath = rootPath + "external_resources/one_on_one_chatting";
 		
@@ -232,7 +228,16 @@ public class ChatServiceImpl implements ChatService {
 
 	@Override
 	public List<String> downloadChatContent(Chat chat) {
-		String filePath = "C:/external_resources/one_on_one_chatting/" + chat.getWriter().getNickName()
+		String rootPath = null;
+		// 운영체제 별 폴더 경로 설정
+		String os = System.getProperty("os.name").toLowerCase();
+
+		if (os.contains("win")) {
+			rootPath = "C:/";
+		} else if (os.contains("mac")) {
+			rootPath = "/Users/";
+		}
+		String filePath = rootPath + "external_resources/one_on_one_chatting/" + chat.getWriter().getNickName()
 				+ "_" + chat.getCommenter().getNickName() + ".txt";
 		List<String> fileText = new ArrayList<>(); // 파일 내용 전체가 들어갈 부분
 		try {
