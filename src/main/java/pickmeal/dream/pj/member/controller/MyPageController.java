@@ -110,6 +110,7 @@ public class MyPageController {
 			return mav;
 		}
 		
+		
 		mav = myPostings(session, "recommend", new Criteria());
 		
 		mav.setViewName("member/my_postings");
