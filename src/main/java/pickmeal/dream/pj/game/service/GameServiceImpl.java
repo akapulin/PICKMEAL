@@ -4,6 +4,7 @@ import static pickmeal.dream.pj.web.constant.SavingPointConstants.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -58,8 +59,7 @@ public class GameServiceImpl implements GameService{
 		int numOfVerticalLines = resList.size(); // 세로줄
 		int finalDepth = 0;
 		
-		System.out.println("가로줄 갯수 : " + numOfHorizonLines);
-		
+		Collections.shuffle(resList);		
 		
 		if(numOfVerticalLines == 0) {
 			System.out.println("no result : error"); // 0이면 안넘기기 때문에 출력이 되면 안됨. 
