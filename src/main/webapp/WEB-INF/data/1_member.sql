@@ -39,7 +39,8 @@ CREATE TABLE CouponCategory (
    couponName   VARCHAR(20)      NOT NULL,                              #쿠폰 카테고리 네임
    couponType   CHAR(1)         NOT NULL,                              #쿠폰 카테고리 타입
    limitPrice   VARCHAR(20)      NOT NULL                              #쿠폰 최소 사용금액#
-)
+);
+
 INSERT INTO CouponCategory(couponName,couponType,limitPrice) VALUES("2,000원",'A',"10,000");
 INSERT INTO CouponCategory(couponName,couponType,limitPrice) VALUES("3,000원",'B',"20,000");
 INSERT INTO CouponCategory(couponName,couponType,limitPrice) VALUES("5,000원",'C',"25,000");
@@ -76,6 +77,7 @@ DROP TABLE Attendance;
 DROP TABLE MannerTemperature;
 DROP TABLE FoodPowerPoint;
 DROP TABLE Member;
+DROP TABLE Chat;
 
 DELETE FROM Coupon;
 DELETE FROM CouponCategory;
@@ -83,7 +85,7 @@ DELETE FROM Attendance;
 DELETE FROM MannerTemperature;
 DELETE FROM FoodPowerPoint;
 DELETE FROM Member;
-delete from Chat;
+DELETE FROM Chat;
 
 SELECT * FROM Coupon;
 SELECT * FROM CouponCategory;

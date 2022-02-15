@@ -5,6 +5,12 @@ function getContextPath() {
 }
 
 $(document).ready(function(){
+	
+	//본문 img 태그에 contextPath 추가시키기	- 이렇게 해줘야 리소스매핑이 된다
+	addContextPathToImgTag();
+	
+	
+	
 	//모집중/모집완료 초기값 셋팅하기
 	if($('#postRecruitment').val()=='true'){
 		recruitmentON()
@@ -17,7 +23,21 @@ $(document).ready(function(){
 	setMap();
 	
 	
-})
+});
+
+/* 이미지를 불러올 때 contextPath를 붙여서 불러온다.*/
+
+function addContextPathToImgTag(){
+
+	
+	$('.rPostContentBody').find('img').each(function(index,item){
+		console.log('change contextPath');
+		$(this).attr('src',getContextPath()+$(this).attr('src'));
+	})
+	
+	
+}
+
 
 /**
 

@@ -55,6 +55,7 @@
 	                            <fmt:formatDate var="mealTime" pattern="MM월dd일 HH:mm" value="${post.mealTime }"/>
 	                            <li>${mealTime }</li>
 	                        </ul>
+	                        <c:if test="${member.id eq post.member.id }">
 	                        <ul class="rPostTagDynamicWrap">
 	                        	
 		                            <li>
@@ -70,6 +71,7 @@
 	                            	<li><a href="#" id="rPostCompMealBtn">식사완료</a></li>
 	                            
 	                        </ul>
+	                        </c:if>
 	                    </div>
                     </c:if>
                     <div class="rPostTitleWrap">
@@ -134,6 +136,9 @@
                     </c:if>
                     <div class="rPostContentBody">
                         ${post.content }
+                    </div>
+                    <div class="temp">
+                    	<img src="/external_resources/img.png" alt="ㅎㅇ">
                     </div>
                 </div>
                 <div id="rPostAdditionalInfoWrap">

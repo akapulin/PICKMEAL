@@ -29,12 +29,22 @@ public class WebConfig implements WebMvcConfigurer{
 		/*
 		 * 
 		 * 게시판 파일 업로드 매핑
-		 * 
+		 * 	- 서버 운영체제별 외부 파일 경로를 지정해준다.
+		 *
+		 * ex) 
+		 * 		/external_resources/**
+		 * 		위와 같은 경로는 
+		 * 		/Users/external_resources/로 변경해준다.
 		 * 
 		 */
-		//window일 때
+		/*
 		registry.addResourceHandler(imgPropertyConfig.getString("file.mappingPath"))
-				.addResourceLocations(imgPropertyConfig.getString("file.locationImgPathFromWindow"));
+				.addResourceLocations("file://"+imgPropertyConfig.getString("file.locationRootPath")+imgPropertyConfig.getString("file.uploadPath")+"/");
+		*/
+		
+		
+		registry.addResourceHandler("/external_resources/**")
+		.addResourceLocations("file:///Users/external_resources/");
 		
 		
 		//posting관련 이미지 

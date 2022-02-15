@@ -31,6 +31,12 @@ public class FileConfig {
 		return imgPropertyConfig.getString("file.uploadPath");
 	}
 	
+	//서버운영체제별 루트경로
+	@Bean
+	public String rootPath() {
+		return imgPropertyConfig.getString("file.locationRootPath");
+	}
+	
 	//공지사항 게시판 관련 파일
 	@Bean
 	public String uploadNoticeBoardPath() {

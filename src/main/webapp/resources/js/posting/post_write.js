@@ -11,6 +11,7 @@ $(document).ready(function() {
 	//수정상태면
 	if($('#modifyState').val()=='true'){
 		console.log('true')
+		addContextPathToImgTag()	//본문에 있는 이미지태그 src에 리소스 매핑을 위하여 contextPath를 붙인다 
 		setMap();		//수정상태면 불러온 주소로 맵셋팅
 		setImgList()	//수정상태면 불러온 이미지 셋팅
 		//이미지리스트 뿌려주기
@@ -47,6 +48,30 @@ $(document).ready(function() {
 	
 
 })
+/* (수정)이미지를 불러올 때 contextPath를 붙여서 불러온다.*/
+
+function addContextPathToImgTag(){
+
+	
+	$('.postInputTCom').find('img').each(function(index,item){
+		console.log('add contextPath To Img');
+		$(this).attr('src',getContextPath()+$(this).attr('src'));
+	})
+	
+	
+}
+/*	(수정)수정완료전 본문 안에있는 기존 이미지 태그들에 추가한 contextPath를 지워줘야 한다 */
+function removeContextPathToImgTag(){
+	$('.postInputTCom').find('img').each(function(index,item){
+		console.log('remove contextPath To Img');
+		let temp = $(this).attr('src');
+		if(temp.includes(getContextPath())){
+			temp = temp.split(getContextPath())[1];
+			$(this).attr('src',temp);
+		}
+		
+	})
+}
 
 console.log('post_write in')
 
@@ -327,7 +352,8 @@ $(document).on('click', '.wPostAttachImgDelIcon', function() {
 
 $(document).on('click', '.wPostSubmitBtn', function(e) {
 	e.preventDefault();
-	
+	//수정시 불러온 이미지들에 추가한 contextPath를 지워준다
+	removeContextPathToImgTag();
 	
 	//수정상태에서 불러온 이미지들이 삭제가 된게 있다면 외부파일에서 지워준다
 	if(rmFileModiList.length!=0){
@@ -409,7 +435,8 @@ function sendFileToSave(board_name) {
 		success: function(data) {
 			//글쓰기 폼에 있는 이미지들의 임시경로를 외부경로로 바꿔준다
 			for (let i = 0; i < data.length; i++) {
-				$('.imgList' + i).attr('src', getContextPath() + data[i]);
+				//$('.imgList' + i).attr('src', getContextPath() + data[i]);
+				$('.imgList' + i).attr('src', data[i]);
 			}
 
 			//div 값 input value에 넣어주기

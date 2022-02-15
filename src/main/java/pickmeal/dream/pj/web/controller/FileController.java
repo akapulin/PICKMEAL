@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-
+import pickmeal.dream.pj.member.domain.Member;
 import pickmeal.dream.pj.web.service.FileService;
 
 /**
@@ -66,9 +67,11 @@ public class FileController {
 	 */
 	@PostMapping("/saveImgToReviewBoard")
 	@ResponseBody
-	public ResponseEntity<?> saveImgToReviewBoard(List<MultipartFile> files) throws Exception{
+	public ResponseEntity<?> saveImgToReviewBoard(List<MultipartFile> files,HttpSession session) throws Exception{
 		//추후변경
-		long memberId=1;
+		//long memberId=1;
+		Member member = (Member)session.getAttribute("member");
+		long memberId = member.getId();
 		
 		List<String> imgSrc = fs.saveImgToExternal("REVIEW",files, memberId);
 		return ResponseEntity.ok(imgSrc);
