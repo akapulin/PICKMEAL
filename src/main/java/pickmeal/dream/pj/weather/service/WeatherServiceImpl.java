@@ -170,7 +170,7 @@ public class WeatherServiceImpl implements WeatherService {
 		 * ex) 현재시간 14시46분 : 14시00분 입력 14시30분에 측정된 실황 출력
 		 */
 		
-		if(cm < 30) {
+		if(cm <= 30) {
 			hour = toStringHour(hour, -1);
 			if(ch == 0) {
 				date = Integer.toString(cd-1);

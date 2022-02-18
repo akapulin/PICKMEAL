@@ -36,7 +36,7 @@
 				<li><span class="navi_nickname">${member.nickName }님 맛점하세요:)</span></li>
 				<li class="snbProfileLine">
 					<div class="profileImgWrap">
-						<img src="/pickmeal/resources/img/profile/nonUser.png"
+						<img src="${pageContext.request.contextPath}/resources/img/profile/nonUser.png"
 							alt="프로필아이콘" class="profileImg">
 					</div>
 					<div class="profileAreaWrap navAlarmTextCom">
@@ -48,7 +48,7 @@
 				</li>
 				<li>
 					<div class="alarmIconWrap comIconWrap">
-						<img src="/pickmeal/resources/img/header/bell_alarm.png"
+						<img src="${pageContext.request.contextPath}/resources/img/header/bell_alarm.png"
 							alt="알림아이콘" class="alarmImg comIconImg">
 						<div class="alarmMark comIconMark">!</div>
 					</div>
@@ -62,7 +62,7 @@
 				<li>
 					<div class="chatIconWrap comIconWrap">
 						<a href="${pageContext.request.contextPath}/chat/chatListByIcon" onclick="removeChatAlarmMark(this);">
-							<img src="/pickmeal/resources/img/header/chat_alarm.png"
+							<img src="${pageContext.request.contextPath}/resources/img/header/chat_alarm.png"
 								alt="알림아이콘" class="chatImg comIconImg">
 						</a>
 						<div class="chatAlarmMark comIconMark">!</div>
@@ -75,7 +75,7 @@
 				<li><span class="navi_nickname">오늘은 뭐 먹지?</span></li>
 				<li class="snbProfileLine">
 					<div class="profileImgWrap">
-						<img src="/pickmeal/resources/img/profile/nonUser.png"
+						<img src="${pageContext.request.contextPath}/resources/img/profile/nonUser.png"
 							alt="프로필아이콘" class="profileImg">
 					</div>
 					<div class="profileAreaWrap navAlarmTextCom">
