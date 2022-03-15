@@ -13,7 +13,8 @@ $("#menuchoicebtn").click(function(e){
         let popupX = (windowWidth/2) - 550;
         let popupY = (windowHeight/2) -225;
         
-        let popUpdateUrl = "http://localhost:8080/pickmeal/" + Url;
+		//let popUpdateUrl = "http://localhost:8080/pickmeal/" + Url;
+        let popUpdateUrl = getContextPath() + "/" + Url;
         let popUpdateOption = "width=570px, height=470px, top=" + popupY + "px, left=" + popupX + "px";
         let popUpdateTitle = "메뉴 게임"
         

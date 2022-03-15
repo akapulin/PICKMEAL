@@ -81,7 +81,8 @@
             let popupX = (windowWidth/2) - 420;
             let popupY = (windowHeight/2) -269;
             
-            let popUpdateUrl = "http://localhost:8080/pickmeal/" + Url;
+            //let popUpdateUrl = "http://localhost:8080/pickmeal/" + Url;
+            let popUpdateUrl = getContextPath() + "/" + Url;
             let popUpdateOption = "width=420px, height=538px, top=" + popupY + "px, left=" + popupX + "px";
             let popUpdateTitle = "쿠폰 사용"
             	

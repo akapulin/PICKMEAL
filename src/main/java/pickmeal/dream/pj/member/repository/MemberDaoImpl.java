@@ -35,6 +35,7 @@ public class MemberDaoImpl implements MemberDao {
       return jt.queryForObject(sql, new MemberRowMapper(), email);
    }
 
+
    @Override
    public List<Member> findAllMembers() {
       String sql = "SELECT id, memberType, email, passwd, nickName, birth, gender, profileImgPath, regDate"
