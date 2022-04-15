@@ -71,62 +71,9 @@ public class PostingController {
 	 * 
 	 * 
 	 * 
-	@GetMapping("/post_list/notice")
-	public ModelAndView listPostNotice(@RequestParam int page) {
-		ModelAndView mav = new ModelAndView();
-		int postCnt=0;
-		
-		//총 게시물 수 ( 페이징 관련 )
-		postCnt = ps.getPostingCountByCategory('N');
-		
-		//1page당 보여질 게시물
-		List<Posting> listPost = ps.findPostingsPerPageByCategory('N', page);
-		
-		mav.addObject("postCnt", postCnt);
-		mav.addObject("listPost", listPost);
-		mav.setViewName("posting/post_list");
-		return mav;
-	}
-	@GetMapping("/post_list/recommend")
-	public ModelAndView listPostRecommendRestaurant(@RequestParam int page) {
-		ModelAndView mav = new ModelAndView();
-		int postCnt=0;
-		
-		//총 게시물 수 ( 페이징 관련 )
-		postCnt = ps.getPostingCountByCategory('R');
-		
-		//1page당 보여질 게시물
-		List<Posting> listPost = ps.findPostingsPerPageByCategory('R', page);
-		
-		mav.addObject("postCnt", postCnt);
-		mav.addObject("listPost", listPost);
-		mav.setViewName("posting/post_list");
-		return mav;
-	}
 	
-	@SuppressWarnings("unchecked")
-	@GetMapping("/post_list/together")
-	public ModelAndView listPostTogetherEating(@RequestParam int page) {
-		ModelAndView mav = new ModelAndView();
-		int postCnt=0;
-		
-		//총 게시물 수 ( 페이징 관련 )
-		postCnt = ps.getPostingCountByCategory('E');
-		
-		//1page당 보여질 게시물
-		List<Posting> listPostT = ps.findPostingsPerPageByCategory('E', page);
-		//List 업캐스팅
-		List<TogetherEatingPosting> listPost = (List<TogetherEatingPosting>)(Object)listPostT;
-		
-		mav.addObject("postCnt", postCnt);
-		mav.addObject("listPost", listPost);
-		mav.setViewName("posting/post_list");
-		return mav;
-	}
 	*/
-	
-	
-	
+
 	/*
 	 * 
 	 * 다중매핑으로 한개의 함수로 사용하는건 좋았으나...
@@ -144,37 +91,7 @@ public class PostingController {
 	 * 		원래방법2) URL에 Criteria 클래스 안에 있는 type을 지정
 	 * 				 http://localhost:8080/pickmeal/posting/notice?type=N&page=1
 	 *				-> 게시판 카테고리 정보가 2번이나 들어가서 참을 수가 없음
-	 
-		//@GetMapping(value = {"/posting/notice", "/posting/recommend", "/posting/together"})
-		public ModelAndView listPostView(HttpServletRequest request,Criteria criteria  ) {
-			/*
-			 * 게시판 카테고리별 셋팅해주기
-			 */
-			/*
-			//현재 페이지 URI 불러오기( ex. /pickmeal/post_list/notice ) 
-			String currentURI = request.getRequestURI();
-			currentURI = currentURI.split("/")[3];
-			
-					
-			if(currentURI.equals("notice")) {
-				criteria.setType('N');
-			}
-			else if(currentURI.equals("recommend")){
-				criteria.setType('R');
-			}else {
-				criteria.setType('E');
-			}
-		
-	
-			PageMaker pageMaker = new PageMaker(ps.getPostingCountByCategory(criteria.getType()),criteria);
-			ModelAndView mav = new ModelAndView();
-			mav.setViewName("/posting/post_list");
-			return mav;
-			
-			
-			
-		}
-		
+
 		*/
 		
 		
@@ -449,10 +366,6 @@ public class PostingController {
 				return ("redirect:/posting/together/"+post.getId()+"?cpageNum=1");
 			}
 		}
-		
-		
-		
-		
 
 	}
 	
@@ -470,7 +383,7 @@ public class PostingController {
 		post.setMember(new Member(memberId));
 		post.setTitle(pc.getTitle());
 		post.setContent(pc.getContent());
-		post.setViews(1);
+		post.setViews(0);
 		return post;
 	}
 	
@@ -482,7 +395,7 @@ public class PostingController {
 		post.setTitle(pc.getTitle());
 		post.setContent(pc.getContent());
 		post.setLikes(0);
-		post.setViews(1);
+		post.setViews(0);
 		return post;
 		
 	}
@@ -495,7 +408,7 @@ public class PostingController {
 		post.setTitle(pc.getTitle());
 		post.setContent(pc.getContent());
 		post.setLikes(0);
-		post.setViews(1);
+		post.setViews(0);
 		post.setMealTime(setMealTimeToDate(pc.getDate(),pc.getTime()));
 		post.setRecruitment(true);
 		post.setMealChk(false);

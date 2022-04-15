@@ -6,6 +6,7 @@
 let currentFileCnt = 0;		//파일 수정 시 필요
 let rmFileModiList = [];
 $(document).ready(function() {
+	console.log('글쓰기 폼 진입')
 	console.log('수정상태는?'+$('#modifyState').val())
 	
 	//수정상태면
@@ -73,7 +74,7 @@ function removeContextPathToImgTag(){
 	})
 }
 
-console.log('post_write in')
+
 
 /**
 		이미지 첨부
@@ -112,14 +113,14 @@ function getContextPath() {
 
 let fileBuffer = [];
 let fileBufferIndex = 0;
-let maxFileCnt = 10;
+const maxFileCnt = 10;
 
 //정적 이미지 파일들 경로 지정
-let wPostAttachedImgIconSrc = getContextPath() + "/resources/img/posting/attached_picture.png";
-let wPostattachedImgDelIconSrc = getContextPath() + "/resources/img/posting/close.png";
-let wPostattachedImgDelOnclickIconSrc = getContextPath() + "/resources/img/posting/close_onclick.png";
+const wPostAttachedImgIconSrc = getContextPath() + "/resources/img/posting/attached_picture.png";
+const wPostattachedImgDelIconSrc = getContextPath() + "/resources/img/posting/close.png";
+const wPostattachedImgDelOnclickIconSrc = getContextPath() + "/resources/img/posting/close_onclick.png";
 //본문에 들어가는 클래스 이름 지정
-let wPostImgName = "imgList"
+const wPostImgName = "imgList"
 
 //파일 첨부하면
 $('#multiFileInput').on('change', function() {
@@ -141,7 +142,7 @@ $('#multiFileInput').on('change', function() {
 	}
 	
 	//수정할 때, 이미 이미지가 있다면 새로운 파일을 첨부할 때는 그 갯수부터 이미지 갯수카운트를 한다
-	fileBufferIndex = currentFileCnt;
+	fileBufferIndex += currentFileCnt;
 	
 	
 	/*
@@ -189,10 +190,21 @@ $('#multiFileInput').on('change', function() {
 		$imgListFrag.append(imgList_html);
 
 		//글 본문에 사진 넣어주기
-		//class Name에 index 값을 부여한
-		content_html += '<br>';
-		content_html += '<img src="' + URL.createObjectURL(file) + '" alt="' + fileName + '" class="' + wPostImgName + fileBufferIndex + '" data-imgsize="'+file.size+'">';
-		content_html += '<br><br>';
+		//class Name에 index 값을 부여한다
+		//수정상태면 추가로 class 상태 업데이트 		
+		if($('#modifyState').val()=='true'){
+			content_html += '<br>';
+			content_html += '<img src="' + URL.createObjectURL(file) + '" alt="' + fileName + '" class="' + wPostImgName + fileBufferIndex +' modifyImg wPostImg' +'" data-imgsize="'+file.size+'">';
+			content_html += '<br><br>';
+		}
+		else{
+			content_html += '<br>';
+			content_html += '<img src="' + URL.createObjectURL(file) + '" alt="' + fileName + '" class="' + wPostImgName + fileBufferIndex +  ' wPostImg' +'" data-imgsize="'+file.size+'">';
+			content_html += '<br><br>';
+			
+		}
+		
+		
 		//$('.wPostContentInput').append(content_html);
 		$contentFrag.append(content_html);
 
@@ -419,9 +431,9 @@ function sendFileToSave(board_name) {
 					data.push(obj);
 				}
 			}
-			console.log('beforeSubmit');
-			console.log('data');
-			console.log(data);
+			//console.log('beforeSubmit');
+			//console.log('data');
+			//console.log(data);
 
 		},
 		//일반으로 보냈을 때랑 값비교
@@ -434,10 +446,27 @@ function sendFileToSave(board_name) {
 
 		success: function(data) {
 			//글쓰기 폼에 있는 이미지들의 임시경로를 외부경로로 바꿔준다
-			for (let i = 0; i < data.length; i++) {
-				//$('.imgList' + i).attr('src', getContextPath() + data[i]);
-				$('.imgList' + i).attr('src', data[i]);
-			}
+			let i = 0;
+			//for (let i = 0; i < fileBufferIndex; i++) {
+			$('.wPostImg').each(function(){
+				
+				//수정상태면, 수정된 이미지만 업데이트
+				if($('#modifyState').val()=='true'){
+					 if($(this).hasClass('modifyImg')){
+						console.log("수정된 이미지 src 업데이트");
+						$(this).attr('src', data[i]);
+						i++;
+						
+						//수정상태 지워주기
+						$(this).removeClass('modifyImg');
+					}
+				}else{
+					$(this).attr('src', data[i]);
+					i++;
+				}
+				
+			})		
+		
 
 			//div 값 input value에 넣어주기
 			$('#wPostContentValue').val($('.wPostContentInput').html());
@@ -793,12 +822,15 @@ function removeImg(rmFileList){
 function setImgList(){
 	
 	var $imgListFrag = $(document.createDocumentFragment());
-	
-	for(let i=0;i<maxFileCnt;i++){
+
+	$('.wPostContentInput').find($('.wPostImg')).each(function(){
 		let imgList_html = '';
-		let imgTitle = $('.wPostContentInput').find($('.imgList'+i)).attr('alt');
-		let imgSize = $('.wPostContentInput').find($('.imgList'+i)).data('imgsize');
 		
+		let imgTitle = $(this).attr('alt');
+		let imgSize = $(this).data('imgsize');
+		//이렇게까지해야하나...싶다 
+		let i = $(this).attr('class').replace(/[^0-9]/g,'');
+
 		if(imgTitle!=''&&imgTitle!=null){
 			//현재 이미지 파일 갯수 카운트
 			currentFileCnt++;
@@ -816,10 +848,10 @@ function setImgList(){
 
 		}
 		$('.wPostAttachedImgList').append($imgListFrag);
-		
-	}
 
-	
+	})	
+		
+
 }
 
 

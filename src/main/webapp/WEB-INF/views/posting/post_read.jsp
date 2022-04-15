@@ -137,9 +137,7 @@
                     <div class="rPostContentBody">
                         ${post.content }
                     </div>
-                    <div class="temp">
-                    	<img src="/external_resources/img.png" alt="ㅎㅇ">
-                    </div>
+                  
                 </div>
                 <div id="rPostAdditionalInfoWrap">
 

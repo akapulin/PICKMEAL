@@ -1,4 +1,5 @@
 package pickmeal.dream.pj.config;
+import javax.annotation.Resource;
 import javax.servlet.ServletContext;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ import lombok.extern.slf4j.Slf4j;
 @EnableWebMvc
 @Configuration
 public class WebConfig implements WebMvcConfigurer{
+	@Resource(name="rootPath")
+	private String rootPath;
 	
 	@Autowired
 	PropertiesConfiguration imgPropertyConfig;
@@ -37,21 +40,11 @@ public class WebConfig implements WebMvcConfigurer{
 		 * 		/Users/external_resources/로 변경해준다.
 		 * 
 		 */
-		/*
-		registry.addResourceHandler(imgPropertyConfig.getString("file.mappingPath"))
-				.addResourceLocations("file://"+imgPropertyConfig.getString("file.locationRootPath")+imgPropertyConfig.getString("file.uploadPath")+"/");
-		*/
-		
-		
+	
 		registry.addResourceHandler("/external_resources/**")
-		.addResourceLocations("file:///Users/external_resources/");
-		
-		
-		//posting관련 이미지 
-		//registry.addResourceHandler("/posting/**")
-		//.addResourceLocations("/pickmeal/resources/img/posting/");
-
-		
+		//.addResourceLocations("file:///Users/external_resources/");
+		//.addResourceLocations("file:///C:/external_resources/");
+		.addResourceLocations("file://"+rootPath+"/external_resources/");
 
 	}
 

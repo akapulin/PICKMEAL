@@ -88,6 +88,8 @@ public class FileServiceImpl implements FileService{
 	    	 * 5. img src 경로 반환 
 	    	 * 		- img 태그의 src에는 서버 루트 제외한 경로가 들어간다 
 	    	 */
+	    	log.info("직접 설정한 현재 이미지 경로 "+imgPath+imgName);
+	    	log.info("현재 이미지 경로 "+imgTarget.toString());
 	    	imgSrc.add(getExternalImgPathSubRootPath(imgTarget.toString()));
 	    	log.info("이미지 src 경로 : "+getExternalImgPathSubRootPath(imgTarget.toString()));
 	    
@@ -99,8 +101,10 @@ public class FileServiceImpl implements FileService{
 	
 	//서버 루트 경로 제외한 폴더 경로
 	private String getExternalImgPathSubRootPath(String imgPath) {
-		log.info("context path?"+new File("").getAbsolutePath());
-		String tempImgPath =imgPath.split(rootPath)[1];
+		int index = imgPath.indexOf(":");
+		
+		String tempImgPath = imgPath.substring(index+1, imgPath.length());
+		
 		return tempImgPath;
 	}
 	
