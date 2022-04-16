@@ -55,8 +55,8 @@ public class PostingServiceImpl implements PostingService {
 	}
 	
 	@Override
-	public int getPostingCountByCategory(char category) {
-		return pd.getPostingCountByCategory(category);
+	public int getPostingCountByCategory(Criteria criteria) {
+		return pd.getPostingCountByCategory(criteria);
 	}
 	
 	@Override
@@ -90,7 +90,7 @@ public class PostingServiceImpl implements PostingService {
 		int pageReadCnt = criteria.getCntPerPage();
 		log.info("pageStart : "+pageStart);
 		
-		List<Posting> postings = pd.findPostingsPerPageByCategory(criteria.getType(),pageStart,pageReadCnt);
+		List<Posting> postings = pd.findPostingsPerPageByCategory(criteria,pageStart,pageReadCnt);
 		log.info("postingCount(default:12) : "+postings.size());
 		
 		
@@ -237,7 +237,8 @@ public class PostingServiceImpl implements PostingService {
 		pd.convertRecruitmentState(postId);
 		return pd.getRecruitmentState(postId);
 	}
-
+	
+	/*
 	@Override
 	public List<Posting> findPostingsPerPageByCategoryAndBySorting(Criteria criteria, int switchNum) {
 		
@@ -259,6 +260,6 @@ public class PostingServiceImpl implements PostingService {
 		return postings;
 
 	}
-	
+	*/
 
 }

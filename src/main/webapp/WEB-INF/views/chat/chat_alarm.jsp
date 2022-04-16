@@ -19,7 +19,7 @@
 	</div>
 <script>
 
-
+ 
 	/* 김보령 - 1대1 채팅방을 위한 사용자 추가 */
 	let check = "<c:out value='${member.id}'/>";
 	let urlChk = window.location.href;

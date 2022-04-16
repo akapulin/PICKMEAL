@@ -77,15 +77,21 @@ public class PostingDaoImpl implements PostingDao {
 	
 	
 	@Override
-	public int getPostingCountByCategory(char category) {
-		if (category == 'N') {
-			String sql = "SELECT COUNT(id) as NoticeCnt FROM NoticePosting";
+	public int getPostingCountByCategory(Criteria criteria) {
+		if (criteria.getType() == 'N') {
+			String sql = "SELECT COUNT(np.id) as NoticeCnt" 
+						+ getFromSQL(criteria)
+						+ getSearchSQL(criteria);
 			return jt.queryForObject(sql, Integer.class);
-		} else if (category == 'R') {
-			String sql = "SELECT COUNT(id) as RecommendRestaurantCnt FROM RecommendRestaurantPosting";
+		} else if (criteria.getType() == 'R') {
+			String sql = "SELECT COUNT(rrp.id) as RecommendRestaurantCnt" 
+						+ getFromSQL(criteria)
+						+ getSearchSQL(criteria);
 			return jt.queryForObject(sql, Integer.class);
 		} else {
-			String sql = "SELECT COUNT(id) as TogetherEatingCnt FROM TogetherEatingPosting";
+			String sql = "SELECT COUNT(tep.id) as TogetherEatingCnt "
+						+ getFromSQL(criteria)
+						+ getSearchSQL(criteria);
 			return jt.queryForObject(sql, Integer.class);
 		}
 		
@@ -101,28 +107,112 @@ public class PostingDaoImpl implements PostingDao {
 	 * 
 	 */
 	@Override
-	public List<Posting> findPostingsPerPageByCategory(char category, int pageStart, int pageReadCnt) {
-		if (category == 'N') {
-			String sql ="SELECT id, memberId, title, content, views, regDate "
-					+" FROM NoticePosting"
-					+" ORDER BY id DESC "
+	public List<Posting> findPostingsPerPageByCategory(Criteria criteria, int pageStart, int pageReadCnt) {
+		if (criteria.getType() == 'N') {
+			String sql ="SELECT np.id, np.memberId, np.title, np.content, np.views, np.regDate "
+					+ getFromSQL(criteria)
+					+ getSearchSQL(criteria)
+					+ getOrderSQL(criteria)
 					+" LIMIT ?,?";
 			return jt.query(sql, new NoticePostingRowMapper(),pageStart,pageReadCnt);
 			
-		} else if (category == 'R') {
-			String sql ="SELECT id, memberId, address, title, content, likes, views, regDate "
-					+" FROM RecommendRestaurantPosting"
-					+" ORDER BY id DESC "
+		} else if (criteria.getType() == 'R') {
+			String sql ="SELECT rrp.id, rrp.memberId, rrp.address, rrp.title, rrp.content, rrp.likes, rrp.views, rrp.regDate "
+					+ getFromSQL(criteria)
+					+ getSearchSQL(criteria)
+					+ getOrderSQL(criteria)
 					+" LIMIT ?,?";
 			return jt.query(sql, new RecommendRestaurantPostingRowMapper(),pageStart,pageReadCnt);
 		} else {
-			String sql ="SELECT id, memberId, address, title, content, likes, views, mealTime, recruitment, mealChk, regDate "
-					+" FROM TogetherEatingPosting"
-					+" ORDER BY id DESC "
+			String sql ="SELECT tep.id, tep.memberId, tep.address, tep.title, tep.content, tep.likes, tep.views, tep.mealTime, tep.recruitment, tep.mealChk, tep.regDate "
+					+ getFromSQL(criteria)
+					+ getSearchSQL(criteria)
+					+ getOrderSQL(criteria)
 					+" LIMIT ?,?";
 			return jt.query(sql, new TogetherEatingPostingRowMapper(),pageStart,pageReadCnt);
 		}
 
+	}
+	
+	private String getFromSQL(Criteria criteria) {
+		String sql="";
+		if(criteria.getType() == 'N') {
+			sql =" FROM NoticePosting np";
+			if(criteria.getSearch().length()!=0 && criteria.getSearchType().equals("writer")) {
+				sql += " INNER JOIN Member member ON np.memberId = member.id";
+			}
+		}
+		else if(criteria.getType() == 'R') {
+			sql =" FROM RecommendRestaurantPosting rrp";
+			if(criteria.getSearch().length()!=0 && criteria.getSearchType().equals("writer")) {
+				sql += " INNER JOIN Member member ON rrp.memberId = member.id";
+			}
+		}
+		else {
+			sql =" FROM TogetherEatingPosting tep";
+			if(criteria.getSearch().length()!=0 && criteria.getSearchType().equals("writer")) {
+				sql += " INNER JOIN Member member ON tep.memberId = member.id";
+			}
+		}
+
+		return sql;
+	}
+	
+	/**
+	 * 검색어 찾기
+	 * @param searchType
+	 * @param search
+	 * @return
+	 */
+	private String getSearchSQL(Criteria criteria) {
+		String sql="";
+		StringBuffer searchBuf = new StringBuffer();
+		if(criteria.getSearchType().equals("writer")) {
+			searchBuf.append(" WHERE member.nickName='"+criteria.getSearch()+"'");
+		}
+		else if(criteria.getSearchType().equals("title")){
+			searchBuf.append(" WHERE title LIKE '%"+criteria.getSearch()+"%'");
+		}
+
+		sql = searchBuf.toString();
+		return sql;
+	}
+	
+	/**
+	 * 
+	 * 정렬 SQL문 찾기 
+	 * @param sortType
+	 * @param sort
+	 * @return
+	 */
+	private String getOrderSQL(Criteria criteria) {
+		String sql ="";
+		StringBuffer orderBuf = new StringBuffer();
+		//최신순
+		if(criteria.getSortType().equals("regDate")) {
+			orderBuf.append(" ORDER BY id");
+		}
+		//조회순
+		else if(criteria.getSortType().equals("views")) {
+			orderBuf.append(" ORDER BY views");
+		}
+		//좋아요순
+		else if(criteria.getSortType().equals("likes")) {
+			orderBuf.append(" ORDER BY likes");
+		}
+		//모집중
+		else if(criteria.getSortType().equals("recruitment")) {
+			orderBuf.append(" ORDER BY recruitment");
+		}
+		
+		if(criteria.getSort().equals("desc")) {
+			orderBuf.append(" DESC");
+		}
+		else if(criteria.getSort().equals("asc")){
+			orderBuf.append(" ASC");
+		}
+		sql = orderBuf.toString();
+		return sql;
 	}
 	
 	@Override
@@ -277,7 +367,7 @@ public class PostingDaoImpl implements PostingDao {
 		return jt.queryForObject(sql, Boolean.class, postId);
 	}
 
-
+	/*
 	@Override
 	public List<Posting> findPostingsPerPageByCategoryAndBySorting(Criteria criteria, int pageStart, int pageReadCnt, int switchNum) {
 		if (criteria.getType() == 'N') {
@@ -302,6 +392,7 @@ public class PostingDaoImpl implements PostingDao {
 			return jt.query(sql, new TogetherEatingPostingRowMapper(), pageStart, pageReadCnt);
 		}
 	}
+	*/
 	
 	public String queryForLikesByState(boolean state) {
 		if(state) {

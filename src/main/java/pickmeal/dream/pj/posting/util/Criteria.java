@@ -55,8 +55,14 @@ public class Criteria {
 	private String searchType;	//검색타입
 	private String search;		//검색어
 	
+	
 	public Criteria() {
 		this.page=1;
+		this.sortType ="regDate";
+		this.sort="desc";
+		this.searchType="";
+		this.search = "";
+
 	}
 	
 	public void setType(String type) {
@@ -68,7 +74,7 @@ public class Criteria {
 			this.type = 'E';	//togher
 		}
 	}
-
+	
 
 
 }

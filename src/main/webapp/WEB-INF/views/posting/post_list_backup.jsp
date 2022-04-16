@@ -149,34 +149,13 @@
       <div id="postListSubInfoContainer">
         <div class="postListSortWrap">
           <ul>
-          		<c:if test="${fn:contains(postType, 'E')}">
-          			<c:if test="${pageMaker.criteria.sortType eq 'recruitment' }">
-          				<li><a href="${pageContext.request.contextPath}/posting/${category }?sortType=recruitment" class="postListOnSort">모집중</a></li>
-          			</c:if>
-          			<c:if test="${pageMaker.criteria.sortType ne 'recruitment' }">
-          				<li><a href="${pageContext.request.contextPath}/posting/${category }?sortType=recruitment">모집중</a></li>
-          			</c:if>
+          		<c:if test="${fn:contains(postType, 'T')}">
+          			<li><a href="${pageContext.request.contextPath}/posting/${category }?sortType=mealChk" class="postListOnSort">모집중</a></li>
           		</c:if>
-          			<c:if test="${pageMaker.criteria.sortType eq 'regDate' }">
-          				<li><a href="${pageContext.request.contextPath}/posting/${category }?sortType=regDate" class="postListOnSort">최신순</a></li>
-          			</c:if>
-          			<c:if test="${pageMaker.criteria.sortType ne 'regDate' }">
-          				<li><a href="${pageContext.request.contextPath}/posting/${category }?sortType=regDate">최신순</a></li>
-          			</c:if>
-          			<c:if test="${pageMaker.criteria.sortType eq 'views' }">
-          				<li><a href="${pageContext.request.contextPath}/posting/${category }?sortType=views" class="postListOnSort">조회순</a></li>
-          			</c:if>
-          			<c:if test="${pageMaker.criteria.sortType ne 'views' }">
-          				<li><a href="${pageContext.request.contextPath}/posting/${category }?sortType=views">조회순</a></li>
-          			</c:if>
-
-          	 	<c:if test="${fn:contains(postType, 'R') || fn:contains(postType, 'E')}">
-          	 		<c:if test="${pageMaker.criteria.sortType eq 'likes' }">
-          				<li><a href="${pageContext.request.contextPath}/posting/${category }?sortType=likes" class="postListOnSort">좋아요순</a></li>
-          			</c:if>
-          			<c:if test="${pageMaker.criteria.sortType ne 'likes' }">
-          				<li><a href="${pageContext.request.contextPath}/posting/${category }?sortType=likes">좋아요순</a></li>
-          			</c:if>
+          			<li><a href="${pageContext.request.contextPath}/posting/${category }?sortType=regDate">최신순</a></li>
+            		<li><a href="${pageContext.request.contextPath}/posting/${category }?sortType=views">조회순</a></li>
+          	 	<c:if test="${fn:contains(postType, 'R') || fn:contains(postType, 'T')}">
+          			<li><a href="${pageContext.request.contextPath}/posting/${category }?sortType=likes">좋아요순</a></li>
           	 	</c:if>
           </ul>
         </div>
@@ -202,50 +181,63 @@
       <div id="postListNaviContainer">
         <div class="postListNaviWrap">
           <ul>
-          	<!--  정렬 순 페이징 -->
-			<c:if test="${empty pageMaker.criteria.search }">
-	         	<!-- 이전버튼 여부 -->
+            <!-- 공지사항게시판 페이징 -->
+          	<c:if test="${fn:contains(postType,'N') }">
+          		<!-- 이전버튼 여부 -->
 	          	<c:if test="${pageMaker.prevBtn eq true }">
-	            	<li><a href="${pageContext.request.contextPath}/posting/${category }?page=${pageMaker.startNum - 1 }&sortType=${pageMaker.criteria.sortType}&sort=${pageMaker.criteria.sort}">&lt;</a></li>
+	            	<li><a href="${pageContext.request.contextPath}/posting/notice?page=${pageMaker.startNum - 1 }">&lt;</a></li>
 	            </c:if>
 	            <!-- 페이징 숫자 -->
 	            <c:forEach var="i" begin="${pageMaker.startNum }" end="${pageMaker.endNum }">
 	 					<!-- 현재 선택된 페이지 색찐하게 표현 -->
 	 					<c:if test="${pageMaker.criteria.page eq i }">
-	 						<li><a href="${pageContext.request.contextPath}/posting/${category }?page=${i }&sortType=${pageMaker.criteria.sortType}&sort=${pageMaker.criteria.sort}" class="postListNaviSelected">${i }</a></li>
+	 						<li><a href="${pageContext.request.contextPath}/posting/notice?page=${i }" class="postListNaviSelected">${i }</a></li>
 	 					</c:if>
 	 					<!-- 현재 비선택된 페이지들 -->
 						<c:if test="${pageMaker.criteria.page ne i }">
-	 						<li><a href="${pageContext.request.contextPath}/posting/${category }?page=${i }&sortType=${pageMaker.criteria.sortType}&sort=${pageMaker.criteria.sort}">${i }</a></li>
+	 						<li><a href="${pageContext.request.contextPath}/posting/notice?page=${i }">${i }</a></li>
 	 					</c:if>
 				</c:forEach>
 				<!-- 이후버튼 여부ㅡ -->
 				<c:if test="${pageMaker.nextBtn eq true }">
-	            	<li><a href="${pageContext.request.contextPath}/posting/${category }?page=${pageMaker.endNum + 1 }&sortType=${pageMaker.criteria.sortType}&sort=${pageMaker.criteria.sort}">&gt;</a></li>
+	            	<li><a href="${pageContext.request.contextPath}/posting/notice?page=${pageMaker.endNum + 1 }">&gt;</a></li>
 	            </c:if>
-			</c:if>
-			<!--  검색 순 페이징 -->
-			<c:if test="${not empty pageMaker.criteria.search  }">
-	         	<!-- 이전버튼 여부 -->
+            </c:if>
+            <!-- 식당추천 게시판 페이징 -->
+          	<c:if test="${fn:contains(postType,'R') }">
 	          	<c:if test="${pageMaker.prevBtn eq true }">
-	            	<li><a href="${pageContext.request.contextPath}/posting/${category }?page=${pageMaker.startNum - 1 }&searchType=${pageMaker.criteria.searchType }&search=${pageMaker.criteria.search }">&lt;</a></li>
+	            	<li><a href="${pageContext.request.contextPath}/posting/recommend?page=${pageMaker.startNum - 1 }">&lt;</a></li>
 	            </c:if>
-	            <!-- 페이징 숫자 -->
 	            <c:forEach var="i" begin="${pageMaker.startNum }" end="${pageMaker.endNum }">
-	 					<!-- 현재 선택된 페이지 색찐하게 표현 -->
 	 					<c:if test="${pageMaker.criteria.page eq i }">
-	 						<li><a href="${pageContext.request.contextPath}/posting/${category }?page=${i }&searchType=${pageMaker.criteria.searchType }&search=${pageMaker.criteria.search }" class="postListNaviSelected">${i }</a></li>
+	 						<li><a href="${pageContext.request.contextPath}/posting/recommend?page=${i }" class="postListNaviSelected">${i }</a></li>
 	 					</c:if>
-	 					<!-- 현재 비선택된 페이지들 -->
 						<c:if test="${pageMaker.criteria.page ne i }">
-	 						<li><a href="${pageContext.request.contextPath}/posting/${category }?page=${i }&searchType=${pageMaker.criteria.searchType }&search=${pageMaker.criteria.search }">${i }</a></li>
+	 						<li><a href="${pageContext.request.contextPath}/posting/recommend?page=${i }">${i }</a></li>
 	 					</c:if>
 				</c:forEach>
-				<!-- 이후버튼 여부ㅡ -->
 				<c:if test="${pageMaker.nextBtn eq true }">
-	            	<li><a href="${pageContext.request.contextPath}/posting/${category }?page=${pageMaker.endNum + 1 }&searchType=${pageMaker.criteria.searchType }&search=${pageMaker.criteria.search }">&gt;</a></li>
+	            	<li><a href="${pageContext.request.contextPath}/posting/recommend?page=${pageMaker.endNum + 1 }">&gt;</a></li>
 	            </c:if>
-			</c:if>
+            </c:if>
+            <!-- 밥친구 게시판 페이징 -->
+          	<c:if test="${fn:contains(postType,'E') }">
+	          	<c:if test="${pageMaker.prevBtn eq true }">
+	            	<li><a href="${pageContext.request.contextPath}/posting/together?page=${pageMaker.startNum - 1 }">&lt;</a></li>
+	            </c:if>
+	            <c:forEach var="i" begin="${pageMaker.startNum }" end="${pageMaker.endNum }">	 					
+	 					<c:if test="${pageMaker.criteria.page eq i }">
+	 						<li><a href="${pageContext.request.contextPath}/posting/together?page=${i }" class="postListNaviSelected">${i }</a></li>
+	 					</c:if>	 				
+						<c:if test="${pageMaker.criteria.page ne i }">
+	 						<li><a href="${pageContext.request.contextPath}/posting/together?page=${i }">${i }</a></li>
+	 					</c:if>
+				</c:forEach>
+				<c:if test="${pageMaker.nextBtn eq true }">
+	            	<li><a href="${pageContext.request.contextPath}/posting/together?page=${pageMaker.endNum + 1 }">&gt;</a></li>
+	            </c:if>
+            </c:if>
+			
           </ul>
         </div>
       </div>

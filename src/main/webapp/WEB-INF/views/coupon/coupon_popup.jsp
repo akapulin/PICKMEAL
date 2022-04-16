@@ -17,7 +17,7 @@
 	#submitBtn{background-color: #fff; border: 1px solid #000; width:100px; height: 40px;}
 	#submitBtn:hover {background-color: #ffecec; cursor: pointer; }
 </style>
-</head>
+</head> 
 <body>
 	<section>
         <div id="coupondiv">

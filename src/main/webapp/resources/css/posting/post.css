@@ -981,20 +981,19 @@ progress {
 	font-weight: 600;
 	font-size: 0.9em;
 }
-
-.postListSortWrap ul li a:hover::before {
+.postListSortWrap ul li a:hover, .postListOnSort{
+	color: #ed7672 !important;
+}
+.postListSortWrap ul li a:hover::before, .postListOnSort::before{
 	content: "";
 	position: absolute;
 	bottom: -5px;
 	left: 0;
 	width: 100%;
 	height: 2px;
-	background: #f9cfc9;
+	background: #ed7672;
 }
 
-.postListSortOn {
-	color: #ed7672 !important;
-}
 
 .postListSortOn:hover::before {
 	content: "";

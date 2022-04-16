@@ -36,7 +36,7 @@ public interface PostingService {
 	 * @param category
 	 * @return
 	 */
-	public int getPostingCountByCategory(char category);
+	public int getPostingCountByCategory(Criteria criteria);
 	
 	/**
 	 * 카테고리별 포스팅 불러오기
@@ -96,6 +96,6 @@ public interface PostingService {
 	 * @param criteria
 	 * @return
 	 */
-	public List<Posting> findPostingsPerPageByCategoryAndBySorting(Criteria criteria, int switchNum);
+	//public List<Posting> findPostingsPerPageByCategoryAndBySorting(Criteria criteria, int switchNum);
 	
 }

@@ -36,7 +36,7 @@ public interface PostingDao {
 	 * @param category
 	 * @return
 	 */
-	public int getPostingCountByCategory(char category);
+	public int getPostingCountByCategory(Criteria criteria);
 	
 	/**
 	 * 카테고리별 포스팅 불러오기
@@ -45,7 +45,7 @@ public interface PostingDao {
 	 * @param category
 	 * @return
 	 */
-	public List<Posting> findPostingsPerPageByCategory(char category, int pageStart, int pageEnd);
+	public List<Posting> findPostingsPerPageByCategory(Criteria criteria, int pageStart, int pageEnd);
 	
 	/**
 	 * 포스팅 정보 1개 불러오기
@@ -112,5 +112,5 @@ public interface PostingDao {
 	 */
 	public String findPostingTitleById(char category, long id);
 	
-	public List<Posting> findPostingsPerPageByCategoryAndBySorting(Criteria criteria ,int pageStart , int pageReadCnt, int switchNum);
+	//public List<Posting> findPostingsPerPageByCategoryAndBySorting(Criteria criteria ,int pageStart , int pageReadCnt, int switchNum);
 }

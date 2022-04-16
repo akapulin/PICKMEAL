@@ -8,7 +8,7 @@
 <title>쿠폰 발급 회원/비회원</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/coupon/coupon_generate_popup.css"/>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
+</head> 
 <body>
 <!-- 3번
 	쿠폰 카테고리 발급 후 생기는 상자를 클릭 했을 때 뜨는 창

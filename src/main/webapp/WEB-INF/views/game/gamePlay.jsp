@@ -12,7 +12,7 @@
 
 <script src="${pageContext.request.contextPath}/resources/js/game/gamePlay.js" defer></script>
 </head>
-<body>
+<body> 
  <!-- firstGameMsg 조건을 만들어야함. 이거 안되면 diffofdate 가 0인지 아닌지 확인해서 하면 됨. num == 5 eq 5 -->		
 		 <c:choose>
 			<c:when test="${not empty cntForRetry}">
